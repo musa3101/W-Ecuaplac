@@ -18,9 +18,14 @@
 - [x] **Erradicación Definitiva de `#hand-loader`**: Supresión de todo el código de precarga y CSS residual en los 6 archivos HTML.
 - [x] **Optimización de Recursos del Hero**: Sustitución de dependencias externas por WebP locales de alta resolución (`1.webp`, `2.webp`, `3.webp`).
 - [x] **Optimización de Red y DNS**: Configuración de Cloudflare DNS (`1.1.1.1`) y Google DNS (`8.8.8.8`) para tiempos de carga < 0.2s.
+- [x] **Creación y despliegue del Favicon Oficial**: Paquete multiformato (ICO, SVG, PNG 48x48, Apple Touch Icon, Manifest) generado desde `Logofotter.svg`.
+- [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
+- [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
+- [x] **Auditoría de Ciberseguridad**: Verificación de ausencia de credenciales maestras y blindaje de `.gitignore`.
 
 ## Tareas en Progreso
-- Ninguna. El proyecto se encuentra 100% finalizado, optimizado, probado y documentado.
+- Ninguna.
 
 ## Próximas Mejoras Prioritarias
+- [ ] Envío del sitemap y solicitud de indexación en Google Search Console para refresco del buscador.
 - [ ] Monitoreo continuo de analíticas y conversiones en Microsoft Clarity.

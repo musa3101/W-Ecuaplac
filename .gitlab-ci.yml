@@ -1,0 +1,19 @@
+keep_alive:
+  stage: deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl
+    - |
+      URL="${SUPABASE_URL}"
+      KEY="${SUPABASE_ANON_KEY}"
+      if [ -z "$URL" ]; then
+        URL="https://wkfddccsantywcrsxpox.supabase.co"
+      fi
+      if [ -z "$KEY" ]; then
+        KEY="sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI"
+      fi
+      echo "Pinging Supabase at $URL..."
+      curl --fail -s -X GET "$URL/auth/v1/health"         -H "apikey: $KEY" > /dev/null
+      echo "Ping successful!"

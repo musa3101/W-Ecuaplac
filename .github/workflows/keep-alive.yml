@@ -1,0 +1,25 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Se ejecuta a las 00:00 cada martes y viernes (dos veces por semana)
+    - cron: '0 0 * * 2,5'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Health Endpoint
+        run: |
+          URL="${{ secrets.SUPABASE_URL }}"
+          KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+          if [ -z "$URL" ]; then
+            URL="https://wkfddccsantywcrsxpox.supabase.co"
+          fi
+          if [ -z "$KEY" ]; then
+            KEY="sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI"
+          fi
+          echo "Pinging Supabase at $URL..."
+          curl --fail -s -X GET "$URL/auth/v1/health"             -H "apikey: $KEY" > /dev/null
+          echo "Ping successful!"

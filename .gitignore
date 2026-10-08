@@ -1,10 +1,18 @@
 .DS_Store
 node_modules/
 .env
-# Carpeta de fotos originales del cliente (privadas, no desplegar)
-fots del cliente. no tocar/
-# Documentos internos de diseño (no necesarios en producción)
-DESIGN.md
 venv/
-# Script local con tokens MCP (no subir a repos)
+
+# Carpetas de recursos originales y scratch (privadas / locales)
+fots del cliente. no tocar/
+FOTOS NUEVAS/
+new hero fotos ecuaplac/
+scratch/
+convert_webp.py
+convert_map.txt
+
+# Documentos internos de diseño
+DESIGN.md
+
+# Script local
 setup.sh

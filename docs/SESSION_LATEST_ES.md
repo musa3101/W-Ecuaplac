@@ -1,36 +1,47 @@
-# Resumen de Sesión - 20 de Septiembre de 2026
+# Resumen de Sesión - 8 de Octubre de 2026
 
 ### ¿Qué se ha hecho hoy?
-1. **Auditoría y Corrección de Warning de Seguridad en Supabase:**
-   - Se analizó el aviso de *Security Advisor* (`RLS Policy Always True`) en la tabla `public.ecuaplac_leads`.
-   - Se reforzó la política RLS en `supabase_schema.sql` con validación estricta de campos obligatorios (nombre y teléfono/email) y bloqueo total de lectura pública (`SELECT`) para proteger la privacidad de los clientes.
-2. **Erradicación Total y Definitiva del Componente `#hand-loader`:**
-   - Se eliminaron por completo las más de 1.800 líneas de código HTML, SVG y estilos CSS (`.hand-loader-overlay`, `.pencil`, keyframes y scripts de transición) en los 6 archivos web (`index.html`, `index-en.html`, `reformas.html`, `reformas-en.html`, `aviso-legal.html`, `legal-notice.html`).
-   - Se eliminó cualquier posibilidad física de bloqueo visual o pantalla negra en cualquier dispositivo.
-3. **Optimización de Assets del Hero (Desktop e Imágenes Locales):**
-   - Se sustituyeron los enlaces externos a Unsplash en la cabecera por los archivos locales de alto rendimiento WebP (`./assets/img/hero/1.webp`, `2.webp`, `3.webp`) con `loading="eager"`, eliminando cuellos de botella en ordenadores.
-4. **Diagnóstico y Corrección de Red / DNS en macOS:**
-   - Se identificó el bloqueo de operadores locales en ciertas IPs de Cloudflare y se configuraron automáticamente los servidores DNS seguros de Cloudflare (`1.1.1.1`) y Google (`8.8.8.8`) en el sistema, logrando tiempos de respuesta de 0.19 segundos.
-5. **Despliegue y Validación:**
-   - Commits (`6595f64` y `8c6e4a0`) subidos y sincronizados en GitHub (`origin/main`) y GitLab (`gitlab/main`).
-   - Validación completa y confirmada en dispositivos móviles y ordenadores.
+1. **Generación e Integración Completa del Favicon Oficial de Ecuaplac:**
+   - Se procesó el logotipo vectorial `Logofotter.svg` para extraer y maquetar el isotipo en resolución ultra-nítida.
+   - Se generó el paquete integral de favicons: `favicon.ico` (16x16, 32x32, 48x48, 64x64), `favicon.svg`, `favicon-48x48.png` (formato exigido por el bot de Google Search), `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180x180) y `site.webmanifest` para dispositivos móviles y PWA.
+   - Se vincularon correctamente en los 6 archivos HTML del proyecto.
 
-### Archivos Modificados
+2. **Optimización de Snippets y SEO para Google Search:**
+   - **Nombre de Marca:** Se implementó `Schema.org WebSite` en JSON-LD para que Google muestre oficialmente "Ecuaplac" en lugar del dominio en bruto `ecuaplac.com`.
+   - **Títulos sin cortes:** Se redujeron los títulos a menos de 55 caracteres (`Ecuaplac | Reformas Integrales en Palma de Mallorca`) evitando el truncamiento con `...` en pantallas móviles y de sobremesa.
+   - **Meta Descripciones y Rich Snippets:** Descripciones comerciales de 154 caracteres orientadas a conversión + esquema `GeneralContractor / LocalBusiness` con geolocalización de Palma de Mallorca.
+
+3. **Creación de Archivos de Rastreo e Indexación:**
+   - Creación de `robots.txt` estándar con referencia directa al mapa del sitio.
+   - Creación de `sitemap.xml` con todas las rutas canónicas, prioridades y equivalencias multiidioma (`hreflang` español e inglés).
+
+4. **Auditoría Integral de Ciberseguridad:**
+   - Escaneo de secretos, tokens y claves de administración: repositorio 100% limpio.
+   - Verificación de políticas RLS en PostgreSQL: `SELECT` restringido en `ecuaplac_leads` para proteger la privacidad de los presupuestos y clientes.
+   - Configuración reforzada de `.gitignore` para aislar carpetas de fotos originales del cliente, scripts locales y temporales.
+
+### Archivos Modificados / Creados
 - `index.html`
 - `index-en.html`
 - `reformas.html`
 - `reformas-en.html`
 - `aviso-legal.html`
 - `legal-notice.html`
-- `supabase_schema.sql`
+- `.gitignore`
+- `robots.txt`
+- `sitemap.xml`
+- `site.webmanifest`
+- `.github/workflows/keep-alive.yml`
+- `.gitlab-ci.yml`
+- `assets/img/logos/favicon.*` y favicons en raíz (`favicon.ico`, `favicon.png`, `apple-touch-icon.png`, etc.)
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
 ### Problemas Solucionados
-- Resuelto el warning de seguridad RLS de Supabase.
-- Eliminación absoluta del riesgo de pantalla negra al quitar el overlay del loader.
-- Carga instantánea de la cabecera en ordenadores de sobremesa.
-- Conectividad ultra-rápida en Mac mediante DNS de Cloudflare/Google.
+- Solucionado el icono genérico (globo) en búsquedas de Google mediante la creación del favicon multiformato.
+- Eliminado el corte de título y el texto aleatorio en los resultados de búsqueda.
+- Integrado Schema.org estructurado para reconocimiento oficial del nombre de marca.
+- Carpetas de trabajo locales aisladas de forma segura en `.gitignore`.
 
 ### Qué queda pendiente
-- Ninguno. La web está 100% operativa, probada en móvil y ordenador, blindada y desplegada en producción.
+- Enviar `sitemap.xml` y solicitar indexación de la URL principal en Google Search Console para acelerar el refresco del snippet y favicon en Google.
