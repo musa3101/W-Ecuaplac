@@ -1,47 +1,63 @@
-# Resumen de Sesión - 8 de Octubre de 2026
+# Resumen de Sesión - 7 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
 
 ### ¿Qué se ha hecho hoy?
-1. **Generación e Integración Completa del Favicon Oficial de Ecuaplac:**
-   - Se procesó el logotipo vectorial `Logofotter.svg` para extraer y maquetar el isotipo en resolución ultra-nítida.
-   - Se generó el paquete integral de favicons: `favicon.ico` (16x16, 32x32, 48x48, 64x64), `favicon.svg`, `favicon-48x48.png` (formato exigido por el bot de Google Search), `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180x180) y `site.webmanifest` para dispositivos móviles y PWA.
-   - Se vincularon correctamente en los 6 archivos HTML del proyecto.
+1. **Creación y Lanzamiento de la Aplicación Web Oficial (`appweb/`)**:
+   - Se diseñó y construyó la Progressive Web App (PWA) de gestión interna para José Rivadeneira alojada en la ruta `/appweb/`.
+   - **Estética de Alta Gama Arquitectónica (Mallorca Luxury Bento Grid)**: Paleta noble en Deep Navy (`#0B1523`), oro artesano (`#D49B0B`), fondo chalk/tiza (`#F6F5F2`) y tarjetas Bento con efecto *double-bezel*.
+   - **Autenticación Directa**: Acceso mediante correo corporativo (`ecuaplacbyjyg@gmail.com`) y contraseña administradora (`admin`), con opción de recordar sesión localmente.
+   - **Blindaje Anti-Zoom en iOS Safari**: Se bloqueó el molesto zoom automático al tocar inputs o botones mediante `touch-action: manipulation`, tamaños mínimos de 16px en inputs, y bloqueo de eventos `gesturestart` y `dblclick`.
+   - **Compresión Automática en el Cliente**: Conversión nativa mediante HTML5 Canvas de cualquier fotografía que suba José (JPG/PNG desde móvil o cámara) a formato `.webp` optimizado antes de enviarlo a Supabase Storage.
+   - **Vínculo Oficial del Logotipo sin Fondo**: Integración del isotipo oficial transparente extraído de `fav-sin-fondo.svg` con calibración milimétrica de viewBox (`355 265 810 805`), luciendo nítido sobre el header Deep Noble Navy.
 
-2. **Optimización de Snippets y SEO para Google Search:**
-   - **Nombre de Marca:** Se implementó `Schema.org WebSite` en JSON-LD para que Google muestre oficialmente "Ecuaplac" en lugar del dominio en bruto `ecuaplac.com`.
-   - **Títulos sin cortes:** Se redujeron los títulos a menos de 55 caracteres (`Ecuaplac | Reformas Integrales en Palma de Mallorca`) evitando el truncamiento con `...` en pantallas móviles y de sobremesa.
-   - **Meta Descripciones y Rich Snippets:** Descripciones comerciales de 154 caracteres orientadas a conversión + esquema `GeneralContractor / LocalBusiness` con geolocalización de Palma de Mallorca.
+2. **Estructuración de las 4 Pestañas en el Dock Flotante**:
+   - **Obras**: Gestión del carrusel de obras principales de la portada web. Permite subir nuevas fotos, editar título, ubicación y cambiar visibilidad/orden.
+   - **+ Proj**: Gestión de las 11 reformas secundarias de la galería desplegable en `reformas.html`.
+   - **Leads (Presupuestos)**: Sección preparada con diseño *"Próximamente"*, informando de la seguridad actual (notificación a `ecuaplac.jyg.sl@gmail.com` y registro en la tabla `ecuaplac_leads`).
+   - **Ajustes**: Panel de perfil con avatar personalizable, cambio de contraseña y cierre de sesión.
 
-3. **Creación de Archivos de Rastreo e Indexación:**
-   - Creación de `robots.txt` estándar con referencia directa al mapa del sitio.
-   - Creación de `sitemap.xml` con todas las rutas canónicas, prioridades y equivalencias multiidioma (`hreflang` español e inglés).
+3. **Sincronización Dinámica con Supabase en la Web Pública**:
+   - `reformas.html` y `reformas-en.html` ahora leen dinámicamente en tiempo real las reformas activas de la tabla `ecuaplac_more_projects`, manteniendo fallback estático de seguridad si no hay red.
+   - Creación de los scripts SQL de soporte: `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql`.
 
-4. **Auditoría Integral de Ciberseguridad:**
-   - Escaneo de secretos, tokens y claves de administración: repositorio 100% limpio.
-   - Verificación de políticas RLS en PostgreSQL: `SELECT` restringido en `ecuaplac_leads` para proteger la privacidad de los presupuestos y clientes.
-   - Configuración reforzada de `.gitignore` para aislar carpetas de fotos originales del cliente, scripts locales y temporales.
+4. **Mini-Merge a Producción y Despliegue en Cloudflare**:
+   - **Mini-merge ejecutado con éxito**: Registro `2026-11-07T15:37:58 | merge completo | all | push=1`.
+   - Fusión limpia en `main` sin alterar el entorno local `dev` gracias al uso del `git worktree` temporal.
+   - Push exitoso a `origin main`, activando el despliegue automático en Cloudflare Pages.
+
+---
 
 ### Archivos Modificados / Creados
-- `index.html`
-- `index-en.html`
-- `reformas.html`
-- `reformas-en.html`
-- `aviso-legal.html`
-- `legal-notice.html`
-- `.gitignore`
-- `robots.txt`
-- `sitemap.xml`
-- `site.webmanifest`
-- `.github/workflows/keep-alive.yml`
-- `.gitlab-ci.yml`
-- `assets/img/logos/favicon.*` y favicons en raíz (`favicon.ico`, `favicon.png`, `apple-touch-icon.png`, etc.)
-- `docs/SESSION_LATEST_ES.md`
-- `docs/ROADMAP.md`
+- `appweb/index.html` (Aplicación PWA completa)
+- `appweb/sw.js` (Service Worker v8 con estrategia Network-First)
+- `appweb/manifest.webmanifest` (Instalación PWA móvil)
+- `appweb/README.md` (Documentación técnica del gestor)
+- `appweb/assets/` (`fav-sin-fondo.svg`, iconos PWA 192px/512px, logos y portfolio)
+- `reformas.html` & `reformas-en.html` (Carga dinámica de `ecuaplac_more_projects`)
+- `supabase_admin_setup.sql` (Esquema SQL para credenciales y perfil)
+- `supabase_more_projects_setup.sql` (Esquema SQL para las 11 reformas secundarias)
+- `assets/img/portfolio/` (Imágenes optimizadas de obras)
+- `.musa/merges.log` & `.musa/session.json` (Registro de sesión y mini-merges)
+- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación actualizada)
+
+---
 
 ### Problemas Solucionados
-- Solucionado el icono genérico (globo) en búsquedas de Google mediante la creación del favicon multiformato.
-- Eliminado el corte de título y el texto aleatorio en los resultados de búsqueda.
-- Integrado Schema.org estructurado para reconocimiento oficial del nombre de marca.
-- Carpetas de trabajo locales aisladas de forma segura en `.gitignore`.
+- **Zoom molesto en iPhone**: Resuelto al 100% con directivas de viewport, inputs a 16px y listeners táctiles.
+- **Formato pesado de fotos de clientes**: Conversión instantánea a WebP directamente en el navegador del móvil antes de subir a la nube.
+- **Header blanco plano**: Sustituido por Deep Noble Navy satinado con borde en oro artesano y logotipo oficial transparente.
+- **Acceso seguro**: Se eliminó el sistema rudimentario de PIN y se adoptó el login por correo y contraseña.
+
+---
 
 ### Qué queda pendiente
-- Enviar `sitemap.xml` y solicitar indexación de la URL principal en Google Search Console para acelerar el refresco del snippet y favicon en Google.
+- Ejecutar los scripts SQL `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql` en el SQL Editor del dashboard de Supabase para habilitar las nuevas tablas si se requiere persistencia cloud total.
+
+---
+
+### Qué se recomienda hacer en la próxima sesión
+1. **Desarrollar la sección de "Leads" en la App**:
+   - Conectar la pestaña `Leads` a la tabla `ecuaplac_leads` de Supabase para listar en vivo los presupuestos que solicitan los clientes desde el formulario web.
+   - Añadir botones de llamada rápida (`tel:`) y chat directo de WhatsApp (`https://wa.me/`) junto a cada lead.
+   - Incluir selector de estado para cada presupuesto (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
+2. **Revisión en vivo de la PWA**:
+   - Acceder desde el móvil a `https://ecuaplac.com/appweb/` y probar la subida de una obra real desde la cámara del cliente.
