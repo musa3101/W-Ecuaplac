@@ -1,18 +1,17 @@
+# Sistema y dependencias
 .DS_Store
+Thumbs.db
 node_modules/
 .env
 venv/
 
-# Carpetas de recursos originales y scratch (privadas / locales)
-fots del cliente. no tocar/
-FOTOS NUEVAS/
-new hero fotos ecuaplac/
-scratch/
-convert_webp.py
+# Archivos temporales de herramientas
 convert_map.txt
+*.pyc
+__pycache__/
 
-# Documentos internos de diseño
-DESIGN.md
+# Scratch local
+scratch/
 
 # Script local
 setup.sh

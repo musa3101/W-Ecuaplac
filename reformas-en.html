@@ -4,6 +4,9 @@
 <title>Ecuaplac | Renovation Projects in Palma de Mallorca</title>
 <meta name="description" content="Explore our portfolio of comprehensive renovations, bathrooms, dressing rooms and drywall in Palma de Mallorca. Premium finishes by Ecuaplac.">
 <meta name="keywords" content="renovation projects Palma de Mallorca, comprehensive renovations Palma, premium finishes, luxury bathrooms Palma, custom dressing rooms Mallorca, Ecuaplac">
+<meta name="robots" content="index, follow">
+<meta name="application-name" content="Ecuaplac">
+<meta name="apple-mobile-web-app-title" content="Ecuaplac">
 
 <!-- Geo Tags Local SEO -->
 <meta name="geo.region" content="ES-IB">
@@ -13,9 +16,8 @@
 
 <!-- Favicon & Icons -->
 <link rel="icon" type="image/svg+xml" href="./assets/img/logos/favicon.svg">
-<link rel="icon" type="image/png" sizes="48x48" href="./assets/img/logos/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./assets/img/logos/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/img/logos/favicon-512x512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/img/logos/android-chrome-192x192.png">
 <link rel="shortcut icon" href="./favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/logos/apple-touch-icon.png">
 <link rel="manifest" href="./site.webmanifest">
@@ -25,21 +27,24 @@
 <link rel="canonical" href="https://ecuaplac.com/reformas-en.html">
 <link rel="alternate" hreflang="es" href="https://ecuaplac.com/reformas.html">
 <link rel="alternate" hreflang="en" href="https://ecuaplac.com/reformas-en.html">
-<link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/reformas-en.html">
+<link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/reformas.html">
 
-<!-- Open Graph / Facebook -->
+<!-- Open Graph / Facebook / WhatsApp -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ecuaplac">
 <meta property="og:title" content="Ecuaplac | Renovation Projects in Palma de Mallorca">
 <meta property="og:description" content="Explore our portfolio of comprehensive renovations, bathrooms, dressing rooms and drywall in Palma de Mallorca.">
-<meta property="og:image" content="https://ecuaplac.com/assets/img/logos/LogoHedder.webp">
+<meta property="og:image" content="https://ecuaplac.com/assets/img/logos/favicon-512x512.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
 <meta property="og:url" content="https://ecuaplac.com/reformas-en.html">
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ecuaplac | Renovation Projects in Palma de Mallorca">
 <meta name="twitter:description" content="Explore our portfolio of comprehensive renovations, bathrooms, dressing rooms and drywall in Palma de Mallorca.">
-<meta name="twitter:image" content="https://ecuaplac.com/assets/img/logos/LogoHedder.webp">
+<meta name="twitter:image" content="https://ecuaplac.com/assets/img/logos/favicon-512x512.png">
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
@@ -1224,6 +1229,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       } catch (err) {
         console.warn('Supabase fetch failed for gallery, using fallback static content:', err);
+      }
+    }
+
+    // Dynamic loading of "More Projects" gallery from Supabase
+    if (window.supabase) {
+      try {
+        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+        const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const { data: moreProjData, error: moreProjErr } = await client
+          .from('ecuaplac_more_projects')
+          .select('*')
+          .eq('active', true)
+          .order('sort_order', { ascending: true });
+
+        if (!moreProjErr && moreProjData && moreProjData.length > 0) {
+          const swiperWrapper = document.querySelector('.gallery-swiper .swiper-wrapper');
+          if (swiperWrapper) {
+            swiperWrapper.innerHTML = moreProjData.map(item => `
+              <div class="swiper-slide">
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
+                  <div class="aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" src="${item.image_url}" alt="${item.title_en || item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop()">
+                  </div>
+                  <div class="px-4 py-3">
+                    <p class="text-white/90 font-medium text-xs md:text-sm">${item.title_en || item.title_es}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('');
+
+            if (window.gallerySwiperInstance) {
+              window.gallerySwiperInstance.destroy(true, true);
+              window.gallerySwiperInstance = null;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Fallback to static gallery for more projects:', e);
       }
     }
   });
