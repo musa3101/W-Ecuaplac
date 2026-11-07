@@ -1232,6 +1232,45 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('Supabase fetch failed for gallery, using fallback static content:', err);
       }
     }
+
+    // Carga dinámica de la galería "Más Proyectos Realizados" desde Supabase
+    if (window.supabase) {
+      try {
+        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+        const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const { data: moreProjData, error: moreProjErr } = await client
+          .from('ecuaplac_more_projects')
+          .select('*')
+          .eq('active', true)
+          .order('sort_order', { ascending: true });
+
+        if (!moreProjErr && moreProjData && moreProjData.length > 0) {
+          const swiperWrapper = document.querySelector('.gallery-swiper .swiper-wrapper');
+          if (swiperWrapper) {
+            swiperWrapper.innerHTML = moreProjData.map(item => `
+              <div class="swiper-slide">
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
+                  <div class="aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop()">
+                  </div>
+                  <div class="px-4 py-3">
+                    <p class="text-white/90 font-medium text-xs md:text-sm">${item.title_es}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('');
+
+            if (window.gallerySwiperInstance) {
+              window.gallerySwiperInstance.destroy(true, true);
+              window.gallerySwiperInstance = null;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Fallback a galería estática de más proyectos:', e);
+      }
+    }
   });
 </script>
 
