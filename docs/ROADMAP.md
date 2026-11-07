@@ -21,11 +21,17 @@
 - [x] **Creación y despliegue del Favicon Oficial**: Paquete multiformato (ICO, SVG, PNG 48x48, Apple Touch Icon, Manifest) generado desde `Logofotter.svg`.
 - [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
 - [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
-- [x] **Auditoría de Ciberseguridad**: Verificación de ausencia de credenciales maestras y blindaje de `.gitignore`.
+- [x] **Desarrollo de la App Web Gestor (`appweb/`)**: PWA móvil con diseño Bento Luxury, login con email y contraseña, conversión client-side a WebP, bloqueo de zoom en iOS, header Deep Navy y logo sin fondo oficial.
+- [x] **Dock de 4 Secciones en la App**: Pestañas de *Obras*, *+ Proj*, *Leads (Próximamente)* y *Ajustes*.
+- [x] **Sincronización Dinámica de Galería Secundaria**: Conexión de `reformas.html` y `reformas-en.html` con la tabla `ecuaplac_more_projects` de Supabase.
+- [x] **Despliegue a Producción en Cloudflare**: Mini-merge realizado y cambios sincronizados en `main` y Cloudflare Pages.
 
 ## Tareas en Progreso
 - Ninguna.
 
 ## Próximas Mejoras Prioritarias
+- [ ] Conectar la pestaña de **Leads** en la app web con la tabla `ecuaplac_leads` de Supabase para visualización en tiempo real de presupuestos.
+- [ ] Implementar botones de llamada telefónica y chat de WhatsApp con un toque desde las fichas de los clientes en la app web.
+- [ ] Añadir selector de estados de gestión a cada presupuesto (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
+- [ ] Ejecución de scripts SQL en el panel de Supabase para activar las tablas auxiliares si no se han cargado previamente.
 - [ ] Envío del sitemap y solicitud de indexación en Google Search Console para refresco del buscador.
-- [ ] Monitoreo continuo de analíticas y conversiones en Microsoft Clarity.
