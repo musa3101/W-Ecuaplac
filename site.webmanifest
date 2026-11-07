@@ -13,11 +13,6 @@
       "type": "image/png"
     },
     {
-      "src": "/assets/img/logos/favicon-48x48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
       "src": "/assets/img/logos/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"

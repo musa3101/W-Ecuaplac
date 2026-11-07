@@ -21,9 +21,8 @@
 
   <!-- Favicon & Icons -->
   <link rel="icon" type="image/svg+xml" href="./assets/img/logos/favicon.svg">
-  <link rel="icon" type="image/png" sizes="48x48" href="./assets/img/logos/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/logos/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/logos/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/img/logos/android-chrome-192x192.png">
   <link rel="shortcut icon" href="./favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/logos/apple-touch-icon.png">
   <link rel="manifest" href="./site.webmanifest">
@@ -1844,7 +1843,8 @@
                     }
                     return item;
                   });
-                  track.innerHTML = processedData.map(item => `
+                  if (track) {
+                    track.innerHTML = processedData.map(item => `
             <div class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
               <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
                 <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
@@ -1855,6 +1855,26 @@
               </div>
             </div>
           `).join('');
+                  }
+
+                  // Actualizar también el carrusel Swiper móvil
+                  const mobileWrapper = document.querySelector('.portfolio-swiper .swiper-wrapper');
+                  if (mobileWrapper) {
+                    mobileWrapper.innerHTML = processedData.map(item => `
+            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
+              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
+                <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+              </div>
+              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
+                <span class="location-badge">${item.location_es}</span>
+                <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_es}</h3>
+              </div>
+            </div>
+          `).join('');
+                    if (typeof window.initPortfolioSwiper === 'function') {
+                      window.initPortfolioSwiper();
+                    }
+                  }
                 }
 
                 // Fetch Contact Info
@@ -3657,9 +3677,12 @@
   <!-- Swiper JS Integration -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    window.initPortfolioSwiper = function () {
       if (typeof Swiper !== 'undefined') {
-        const swiper = new Swiper('.portfolio-swiper', {
+        if (window.portfolioSwiperInstance) {
+          try { window.portfolioSwiperInstance.destroy(true, true); } catch (e) {}
+        }
+        window.portfolioSwiperInstance = new Swiper('.portfolio-swiper', {
           slidesPerView: 'auto',
           centeredSlides: true,
           grabCursor: true,
@@ -3682,7 +3705,8 @@
           }
         });
       }
-    });
+    };
+    document.addEventListener('DOMContentLoaded', window.initPortfolioSwiper);
   </script>
 
 </body>
