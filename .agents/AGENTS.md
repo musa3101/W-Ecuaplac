@@ -12,7 +12,7 @@ Estas claves están configuradas en los archivos HTML:
 - `reformas-en.html`
 
 ## Estructura de la Base de Datos
-La estructura de tablas y las filas iniciales se definen en el archivo [supabase_schema.sql](../supabase_schema.sql) en la raíz del proyecto. Si es necesario restablecer o sincronizar la base de datos, ejecuta ese script completo en el SQL Editor de Supabase.
+La estructura de tablas y las filas iniciales se definen en el archivo [supabase_schema.sql](../docs/database/supabase_schema.sql). Si es necesario restablecer o sincronizar la base de datos, ejecuta ese script completo en el SQL Editor de Supabase.
 
 ## Envío de Formularios y Gestión de Leads
 El formulario de la web cuenta con un sistema de **guardado dual**:
