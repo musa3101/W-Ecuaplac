@@ -511,10 +511,10 @@
 </ul>
 <!-- Trailing Action -->
 <div class="hidden lg:block">
-<a class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block" onclick="openPresupuestoModal()">PRESUPUESTO</a>
+<a role="button" tabindex="0" class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block" onclick="openPresupuestoModal()">PRESUPUESTO</a>
 </div>
 <!-- Mobile Menu Icon (Functional) -->
-<div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()">
+<div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()" aria-label="Abrir menú" role="button" tabindex="0">
 <span class="material-symbols-outlined text-white">menu</span>
 </div>
 </div>
@@ -534,48 +534,48 @@
 
   <!-- Gallery Projects Stack -->
   <section class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-    <div id="gallery-container" class="space-y-32">
+    <div id="gallery-container" class="space-y-16 md:space-y-32">
 
       <!-- PROYECTO 1: Baño Minimalista (Completo) -->
-      <div class="border-b border-outline-variant pb-24 relative">
-        <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+      <div class="border-b border-outline-variant pb-14 md:pb-24 relative">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto I</span>
-            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Reforma Integral de Baño</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Reforma Integral de Baño</h2>
           </div>
-          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+          <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Sustitución completa de revestimientos por gres porcelánico beige texturizado, plato de ducha a ras de suelo, grifería empotrada negra mate y mueble de roble natural con espejo retroiluminado.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
           <!-- Antes -->
-          <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
               <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
               Estado Inicial
             </div>
-            <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+            <div class="w-full aspect-[16/10] sm:aspect-[4/3] md:aspect-[2/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
               <img loading="lazy" alt="Baño antes de reformar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/antes.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                 Instalaciones antiguas y revestimientos obsoletos previos a la demolición.
               </p>
             </div>
           </div>
           
           <!-- Después -->
-          <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-              <span class="material-symbols-outlined text-[16px]">verified</span>
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+              <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
               Resultado Final
             </div>
-            <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+            <div class="w-full aspect-[16/10] sm:aspect-[4/3] md:aspect-[2/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
               <img loading="lazy" alt="Baño después de reformar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/despues.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                 Acabados en porcelánico premium, plato de resina y grifería de alta gama.
               </p>
             </div>
@@ -584,45 +584,45 @@
       </div>
 
       <!-- PROYECTO 2: Lavabo Flotante a Medida -->
-      <div class="border-b border-outline-variant pb-24 relative">
-        <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+      <div class="border-b border-outline-variant pb-14 md:pb-24 relative">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto II</span>
-            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Lavabo Flotante a Medida</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Lavabo Flotante a Medida</h2>
           </div>
-          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+          <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Diseño e instalación de encimera volada de piedra tecnológica en tonos neutros, con lavabo cerámico sobre encimera en color negro mate, grifería mural empotrada e instalaciones totalmente ocultas.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
           <!-- Antes -->
-          <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
               <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
               Fase Estructural
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
               <img loading="lazy" alt="Encimera en fase de instalación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/antes2.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                 Preparación de soportes ocultos e instalaciones empotradas en pared.
               </p>
             </div>
           </div>
           
           <!-- Después -->
-          <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-              <span class="material-symbols-outlined text-[16px]">verified</span>
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+              <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
               Ejecución Terminada
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
               <img loading="lazy" alt="Encimera terminada con lavabo negro" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/despues2.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                 Encimera de piedra volada con seno cerámico negro y grifería mural minimalista.
               </p>
             </div>
@@ -631,45 +631,45 @@
       </div>
 
       <!-- PROYECTO 3: Vestidor de Pladur y Roble -->
-      <div class="border-b border-outline-variant pb-24 relative">
-        <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+      <div class="border-b border-outline-variant pb-14 md:pb-24 relative">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto III</span>
-            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Vestidor de Pladur y Roble</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Vestidor de Pladur y Roble</h2>
           </div>
-          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+          <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Construcción a medida de vestidor y estanterías integradas en pladur con acabados en blanco satinado, cajoneras suspendidas en madera de roble natural y cestas metálicas deslizantes, realzado por iluminación LED cálida indirecta.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
           <!-- Antes -->
-          <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
               <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
               Proceso Constructivo
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
               <img loading="lazy" alt="Estructura de pladur del vestidor en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/antes3.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                 Montaje de tabiquería en seco y nivelación de estructuras interiores.
               </p>
             </div>
           </div>
           
           <!-- Después -->
-          <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-              <span class="material-symbols-outlined text-[16px]">verified</span>
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+              <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
               Entrega Final
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
               <img loading="lazy" alt="Vestidor terminado con cajones de roble e iluminación LED" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/despues3.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                 Vestidor iluminado con carpintería a medida y perfiles LED integrados sin juntas visibles.
               </p>
             </div>
@@ -678,45 +678,45 @@
       </div>
 
       <!-- PROYECTO 4: Escalera y Distribuidor de Roble -->
-      <div class="pb-16 relative">
-        <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+      <div class="pb-8 md:pb-16 relative">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto IV</span>
-            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Escalera y Distribuidor de Roble</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Escalera y Distribuidor de Roble</h2>
           </div>
-          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+          <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Instalación de peldaños y revestimiento de escalera en madera de roble natural, enmarcado por paredes lisas blancas con puertas empotradas sin marco y luminarias lineales LED de cortesía en los laterales.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
           <!-- Antes -->
-          <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
               <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
               Obra Bruta
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
               <img loading="lazy" alt="Peldaños de hormigón en fase de nivelación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/antes4.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                 Peldaños de hormigón en fase de nivelación con láser y replanteo de iluminación.
               </p>
             </div>
           </div>
           
           <!-- Después -->
-          <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-            <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-              <span class="material-symbols-outlined text-[16px]">verified</span>
+          <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+            <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+              <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
               Acabado Premium
             </div>
-            <div class="w-full aspect-[4/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+            <div class="w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
               <img loading="lazy" alt="Escalera terminada en madera con luces LED empotradas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="./assets/img/portfolio/despues4.webp">
             </div>
-            <div class="mt-6 flex-grow flex items-start">
-              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+            <div class="mt-3 md:mt-6 flex-grow flex items-start">
+              <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                 Escalera revestida en roble natural masivo con rodapié oculto iluminado.
               </p>
             </div>
@@ -1013,8 +1013,8 @@
           <!-- Google Maps -->
           <a href="https://maps.app.goo.gl/5Fr819Bsh6AkjQKd8" target="_blank"
             rel="noopener noreferrer" aria-label="Ubicación en Google Maps"
-            class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
-            <svg class="w-4 h-4" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
+            class="w-8 h-8 relative flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
+            <svg class="w-6 h-8 absolute top-[1px]" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
               <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
               <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/>
               <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
@@ -1063,41 +1063,43 @@
       <span class="font-body text-[11px] md:text-xs text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Solicitud de Presupuesto</span>
       <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[46px] font-semibold text-white mb-6 leading-tight tracking-[-0.02em]">Cuéntanos tu proyecto.</h2>
       
-      <form onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
+      <form id="presupuestoForm" onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Nombre Completo</label>
-            <input type="text" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Juan Pérez">
+            <input type="text" name="nombre" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Juan Pérez">
           </div>
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Correo Electrónico</label>
-            <input type="email" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. juan@correo.com">
+            <input type="email" name="email" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. juan@correo.com">
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-2">Tipo de Proyecto</label>
-            <select class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
-              <option class="bg-[#0C0C0C] text-white" value="reforma-integral" class="bg-surface text-white">Reforma Integral</option>
-              <option class="bg-[#0C0C0C] text-white" value="reforma-cocina" class="bg-surface text-white">Reforma de Cocina</option>
-              <option class="bg-[#0C0C0C] text-white" value="reforma-bano" class="bg-surface text-white">Reforma de Baño</option>
-              <option class="bg-[#0C0C0C] text-white" value="arquitectura" class="bg-surface text-white">Diseño & Arquitectura</option>
-              <option class="bg-[#0C0C0C] text-white" value="otro" class="bg-surface text-white">Otro</option>
+            <select name="tipo_proyecto" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
+              <option class="bg-[#0C0C0C] text-white" value="" disabled selected>Selecciona una opción</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma Integral">Reforma Integral</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma de Cocina">Reforma de Cocina</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma de Baño">Reforma de Baño</option>
+              <option class="bg-[#0C0C0C] text-white" value="Diseño & Arquitectura">Diseño & Arquitectura</option>
+              <option class="bg-[#0C0C0C] text-white" value="Otro">Otro</option>
             </select>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Superficie aprox. (m²)</label>
-              <input type="number" min="1" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md" placeholder="Ej. 90">
+              <input type="number" min="1" name="metros" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md" placeholder="Ej. 90">
             </div>
             <div>
               <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-2">Presupuesto Estimado</label>
-              <select class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
-                <option class="bg-[#0C0C0C] text-white" value="rango-1" class="bg-surface text-white">&lt; 15.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-2" class="bg-surface text-white">15.000 € - 45.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-3" class="bg-surface text-white">45.000 € - 90.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-4" class="bg-surface text-white">&gt; 90.000 €</option>
+              <select name="presupuesto" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
+                <option class="bg-[#0C0C0C] text-white" value="" disabled selected>Rango estimado</option>
+                <option class="bg-[#0C0C0C] text-white" value="< 15.000 €">&lt; 15.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="15.000 € - 45.000 €">15.000 € - 45.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="45.000 € - 90.000 €">45.000 € - 90.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="> 90.000 €">&gt; 90.000 €</option>
               </select>
             </div>
           </div>
@@ -1106,11 +1108,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Localización de la Obra</label>
-            <input type="text" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Palma de Mallorca">
+            <input type="text" name="ubicacion" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Palma de Mallorca">
           </div>
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Descripción del Proyecto</label>
-            <input type="text" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Reforma completa de piso con acabados limpios y de alta calidad">
+            <input type="text" name="mensaje" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Reforma completa de piso con acabados limpios y de alta calidad">
           </div>
         </div>
 
@@ -1133,10 +1135,10 @@
 </div>
 
 <!-- Mobile Side Navigation Drawer (Functional) -->
-<div id="mobileMenu" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end">
+<div id="mobileMenu" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end" onclick="if(event.target === this) toggleMobileMenu()">
   <div class="bg-black w-[280px] h-full p-8 flex flex-col justify-between border-l border-white/10 animate-slide-up relative">
     <div class="ecuador-divider absolute top-0 left-0 w-full"></div>
-    <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
+    <button class="absolute top-6 right-6 text-white" aria-label="Cerrar menú" onclick="toggleMobileMenu()">
       <span class="material-symbols-outlined text-3xl">close</span>
     </button>
     <div class="mt-12 flex flex-col gap-6 font-headline text-2xl font-semibold uppercase tracking-wider">
@@ -1144,7 +1146,7 @@
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#reformas">REFORMAS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#servicios">SERVICIOS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#contacto">CONTACTO</a>
-      <a class="font-bold text-secondary text-[14px] font-label-caps tracking-widest" onclick="openPresupuestoModalFromMobile()">Solicitar Presupuesto</a>
+      <a class="font-bold text-secondary text-[14px] font-label-caps tracking-widest cursor-pointer" onclick="openPresupuestoModalFromMobile()">Solicitar Presupuesto</a>
     </div>
     <div class="text-xs text-white/50">
       <!-- Language Selector Mobile -->
@@ -1185,14 +1187,66 @@
     openPresupuestoModal();
   }
 
-  function submitPresupuesto(event) {
+  async function submitPresupuesto(event) {
     event.preventDefault();
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.innerText : '';
+    
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'ENVIANDO...';
+    }
+    
+    const formData = new FormData(form);
+
+    // 1. Guardar copia del Lead en Supabase (ecuaplac_leads)
+    try {
+      if (window.supabase && typeof window.supabase.createClient === 'function') {
+        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+        const sbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const nameVal = formData.get('nombre') || '';
+        const phoneVal = formData.get('telefono') || '';
+        const emailVal = formData.get('email') || '';
+        const projectTypeVal = formData.get('tipo_proyecto') || '';
+        const messageVal = `Metros: ${formData.get('metros') || '-'} m² | Presupuesto: ${formData.get('presupuesto') || '-'} | Ubicación: ${formData.get('ubicacion') || '-'} | Mensaje: ${formData.get('mensaje') || '-'}`;
+
+        await sbClient.from('ecuaplac_leads').insert([{
+          name: String(nameVal),
+          phone: String(phoneVal),
+          email: String(emailVal),
+          project_type: String(projectTypeVal),
+          message: String(messageVal),
+          source_page: 'reformas.html',
+          status: 'nuevo'
+        }]);
+      }
+    } catch (sbErr) {
+      console.warn('Supabase Lead insert notice:', sbErr);
+    }
+
+    // 2. Enviar correo via FormSubmit.co
+    try {
+      await fetch("https://formsubmit.co/ajax/ecuaplac.jyg.sl@gmail.com", {
+        method: "POST",
+        body: formData
+      });
+    } catch(err) {
+      console.error('FormSubmit fetch error:', err);
+    }
+    
     const formContent = document.getElementById('modalFormContent');
     const successContent = document.getElementById('modalSuccessContent');
     
-    // Hide form & show beautiful check success page
     formContent.classList.add('hidden');
     successContent.classList.remove('hidden');
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalText;
+    }
   }
 
   // Mobile drawer controls
@@ -1200,8 +1254,10 @@
     const drawer = document.getElementById('mobileMenu');
     if (drawer.classList.contains('hidden')) {
       drawer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     } else {
       drawer.classList.add('hidden');
+      document.body.style.overflow = '';
     }
   }
 
@@ -1470,46 +1526,49 @@ document.addEventListener('DOMContentLoaded', function() {
           });
           container.innerHTML = processedData.map((item, index) => {
             const indexRoman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][index] || (index + 1);
+            const aspectClass = index === 0 
+              ? 'aspect-[16/10] sm:aspect-[4/3] md:aspect-[2/3]' 
+              : 'aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3]';
             return `
-              <div class="border-b border-outline-variant pb-24 relative">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+              <div class="border-b border-outline-variant pb-14 md:pb-24 relative">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
                   <div>
                     <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
-                    <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
+                    <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
                   </div>
-                  <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+                  <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
                     ${item.description_es || ''}
                   </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
                   <!-- Antes -->
-                  <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-                    <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+                  <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+                    <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
                       <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
                       ${item.caption_before_es || 'Estado Inicial'}
                     </div>
-                    <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+                    <div class="w-full ${aspectClass} overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
                       <img loading="lazy" alt="${item.title_es} antes" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${item.image_before}">
                     </div>
-                    <div class="mt-6 flex-grow flex items-start">
-                      <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+                    <div class="mt-3 md:mt-6 flex-grow flex items-start">
+                      <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                         ${item.description_before_es || ''}
                       </p>
                     </div>
                   </div>
                   
                   <!-- Después -->
-                  <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-                    <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-                      <span class="material-symbols-outlined text-[16px]">verified</span>
+                  <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+                    <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+                      <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
                       ${item.caption_after_es || 'Resultado Final'}
                     </div>
-                    <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+                    <div class="w-full ${aspectClass} overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
                       <img loading="lazy" alt="${item.title_es} después" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${item.image_after}">
                     </div>
-                    <div class="mt-6 flex-grow flex items-start">
-                      <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+                    <div class="mt-3 md:mt-6 flex-grow flex items-start">
+                      <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                         ${item.description_after_es || ''}
                       </p>
                     </div>
