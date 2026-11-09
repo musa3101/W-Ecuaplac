@@ -1137,7 +1137,7 @@
 
 
   <style>
-    /* Real Transformations Custom Card */
+    /* Real Transformations Custom Card - Limestone / Warm Mallorca Plaster */
     .transform-card-wrapper {
       position: relative;
       width: 100%;
@@ -1145,47 +1145,35 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 6rem;
-      border-radius: 14px;
+      border-radius: 24px;
       z-index: 10;
       overflow: hidden;
-      box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+      border: 1px solid #E5E0D6;
+      box-shadow: 0 20px 45px -12px rgba(60, 48, 36, 0.08), 0 4px 16px -4px rgba(60, 48, 36, 0.04);
+      background: #F7F5F0;
     }
 
     .dark .transform-card-wrapper {
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5), -10px -10px 30px rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.6);
+      background: #181715;
     }
 
     .transform-card-bg {
       position: relative;
-      margin: 5px;
-      width: calc(100% - 10px);
+      width: 100%;
       z-index: 2;
-      background: rgba(255, 255, 255, .95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 10px;
-      overflow: hidden;
-      outline: 2px solid white;
+      background: transparent;
+      border-radius: 24px;
     }
 
     .dark .transform-card-bg {
-      background: rgba(22, 20, 19, .95);
-      outline: 2px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      outline: none;
     }
 
     .transform-card-blob {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background-color: #ff0000;
-      opacity: 1;
-      filter: blur(24px);
-      animation: blob-bounce 5s infinite ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     @keyframes blob-bounce {
@@ -2122,14 +2110,13 @@
           <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
             <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Real Transformations</h2>
           </div>
-          <!-- Interactive Slider (Reveal1 21st.dev luxury style) -->
+          <!-- Interactive Slider (Reveal1 21st.dev luxury style - Limestone) -->
           <div class="transform-card-wrapper group">
-            <div class="transform-card-blob"></div>
-            <div class="transform-card-bg p-3.5 sm:p-6 md:p-8">
+            <div class="transform-card-bg p-4 sm:p-7 md:p-9">
               <div class="mb-5 md:mb-8">
-                <span class="font-label-caps text-label-caps uppercase tracking-widest text-primary block mb-2">Custom
+                <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Custom
                   Dressing Room</span>
-                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                <p class="font-body-lg text-body-lg text-[#403B37] dark:text-neutral-300 max-w-2xl leading-relaxed">
                   We make the most of every corner to design a highly functional custom dressing room. The integrated
                   LED lighting gives it that warm and modern touch, ideal for organizing everyday life with comfort.
                 </p>
@@ -2189,8 +2176,8 @@
               </div>
 
               <!-- Discrete Luxury Legend underneath the photo -->
-              <div class="flex items-center justify-center gap-2 mt-4 text-on-surface-variant/75 text-[11px] md:text-xs tracking-widest uppercase font-medium">
-                <span class="material-symbols-outlined text-[15px] text-secondary">drag_indicator</span>
+              <div class="flex items-center justify-center gap-2 mt-4 text-[#736B63] dark:text-neutral-400 text-[11px] md:text-xs tracking-widest uppercase font-medium">
+                <span class="material-symbols-outlined text-[16px] text-[#C49320]">drag_indicator</span>
                 <span>Drag to compare before and after</span>
               </div>
             </div>

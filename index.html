@@ -1136,7 +1136,7 @@
 
 
   <style>
-    /* Transformaciones Reales Custom Card */
+    /* Transformaciones Reales Custom Card - Tono Piedra Caliza / Yeso Mallorquín */
     .transform-card-wrapper {
       position: relative;
       width: 100%;
@@ -1144,47 +1144,35 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 6rem;
-      border-radius: 14px;
+      border-radius: 24px;
       z-index: 10;
       overflow: hidden;
-      box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+      border: 1px solid #E5E0D6;
+      box-shadow: 0 20px 45px -12px rgba(60, 48, 36, 0.08), 0 4px 16px -4px rgba(60, 48, 36, 0.04);
+      background: #F7F5F0;
     }
 
     .dark .transform-card-wrapper {
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5), -10px -10px 30px rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.6);
+      background: #181715;
     }
 
     .transform-card-bg {
       position: relative;
-      margin: 5px;
-      width: calc(100% - 10px);
+      width: 100%;
       z-index: 2;
-      background: rgba(255, 255, 255, .95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 10px;
-      overflow: hidden;
-      outline: 2px solid white;
+      background: transparent;
+      border-radius: 24px;
     }
 
     .dark .transform-card-bg {
-      background: rgba(22, 20, 19, .95);
-      outline: 2px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      outline: none;
     }
 
     .transform-card-blob {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background-color: #ff0000;
-      opacity: 1;
-      filter: blur(24px);
-      animation: blob-bounce 5s infinite ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     @keyframes blob-bounce {
@@ -1519,595 +1507,777 @@
       <!-- Portfolio Card Carousel -->
       <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 
-        <div class="text-center mb-12">
-          <span class="font-label-caps text-xs md:text-sm tracking-[0.3em] text-[#795746] uppercase font-bold">Nuestros
-            Últimos Trabajos</span>
+        <div class="text-center mb-8 md:mb-12">
+          <span class="font-label-caps text-xs md:text-sm tracking-[0.3em] text-[#795746] dark:text-[#C5A880] uppercase font-bold">Nuestro Trabajo</span>
+          <h2 class="font-['Montserrat'] text-2xl md:text-4xl font-bold text-[#161413] dark:text-white mt-2">
+            Proyectos y Acabados de Alta Gama
+          </h2>
+          <p class="text-sm md:text-base text-neutral-500 dark:text-neutral-400 mt-2 max-w-xl mx-auto">
+            Desliza para explorar nuestras reformas y diseños más representativos en Mallorca
+          </p>
         </div>
 
-        <!-- Outer wrapper (relative, no overflow-hidden so buttons don't get cut off) -->
-
-        <!-- Mobile Swiper Carousel -->
-        <div class="block lg:hidden w-full swiper portfolio-swiper">
-          <div class="swiper-wrapper">
-            <!-- Card 1 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2131.webp" alt="Baño de diseño con bañera exenta"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Andratx</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Reforma de Baño Minimalista con Bañera Exenta</h3>
-              </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2135.webp" alt="Escalera helicoidal de yeso pulido"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Escalera de Diseño Escultural en Yeso Pulido</h3>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2134.webp" alt="Ducha de obra con hornacinas iluminadas"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Sóller</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Ducha Revestida en Piedra con Iluminación LED Integrada</h3>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2119.webp" alt="Cocina moderna integrada y minimalista"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Cocina Minimalista Totalmente Integrada</h3>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2129.webp" alt="Terraza exterior y solárium"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy" style="object-position: 80% center;">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Santanyí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Terraza Rústica con Cocina de Obra y Solárium</h3>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2132.webp" alt="Aseo minimalista de cortesía"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Marratxí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Aseo de Cortesía con Acabados en Microcemento</h3>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2133.webp" alt="Distribuidor con iluminación indirecta"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Distribuidor Moderno con Líneas de Luz LED</h3>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2136.webp" alt="Nicho iluminado para coleccionismo"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Hornacinas de Obra Iluminadas para Decoración</h3>
-              </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2138.webp" alt="Detalle de escalera helicoidal"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Perspectiva y Acabados de la Escalera Helicoidal</h3>
-              </div>
-            </div>
-
-
+        <!-- Circular Gallery 2 (WebGL 3D Curved Experience) -->
+        <div id="circular-gallery-wrapper" class="relative w-full max-w-[1400px] mx-auto select-none my-2">
+          <!-- WebGL Canvas Container -->
+          <div id="circular-gallery-canvas"
+            class="relative w-full h-[520px] sm:h-[580px] md:h-[650px] cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
+            style="touch-action: pan-y;">
           </div>
-          <div class="swiper-button-prev" style="color: #FCD116;"></div>
-          <div class="swiper-button-next" style="color: #FCD116;"></div>
+
+          <!-- Luxury Navigation Buttons -->
+          <button id="cg-btn-prev" aria-label="Anterior"
+            class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="cg-btn-next" aria-label="Siguiente"
+            class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- Interactive Swipe Hint -->
+          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-neutral-400 dark:text-neutral-500 uppercase font-medium">
+            <svg class="w-4 h-4 text-[#795746] dark:text-[#C5A880] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+            <span>Arrastra o desliza para navegar</span>
+          </div>
         </div>
-
-        <!-- Desktop Original Carousel Wrapper -->
-        <div class="hidden lg:block">
-          <div class="relative px-2 md:px-4" id="portfolio-carousel-wrapper">
-
-            <!-- Inner wrapper (overflow-hidden to clip track) -->
-            <div class="overflow-hidden" id="portfolio-carousel">
-              <!-- Track: all 9 cards in a flex row -->
-              <div id="carousel-track" class="flex gap-8 transition-transform duration-500 ease-in-out py-4">
-
-                <!-- Card 1 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2131.webp" alt="Baño de diseño con bañera exenta"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Andratx</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Reforma de Baño Minimalista con Bañera Exenta</h3>
-                  </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2135.webp" alt="Escalera helicoidal de yeso pulido"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Escalera de Diseño Escultural en Yeso Pulido</h3>
-                  </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2134.webp" alt="Ducha de obra con hornacinas iluminadas"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Sóller</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Ducha Revestida en Piedra con Iluminación LED Integrada</h3>
-                  </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2119.webp" alt="Cocina moderna integrada y minimalista"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Cocina Minimalista Totalmente Integrada</h3>
-                  </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2129.webp" alt="Terraza exterior y solárium"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy" style="object-position: 80% center;">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Santanyí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Terraza Rústica con Cocina de Obra y Solárium</h3>
-                  </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2132.webp" alt="Aseo minimalista de cortesía"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Marratxí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Aseo de Cortesía con Acabados en Microcemento</h3>
-                  </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2133.webp" alt="Distribuidor con iluminación indirecta"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Distribuidor Moderno con Líneas de Luz LED</h3>
-                  </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2136.webp" alt="Nicho iluminado para coleccionismo"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Hornacinas de Obra Iluminadas para Decoración</h3>
-                  </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2138.webp" alt="Detalle de escalera helicoidal"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Perspectiva y Acabados de la Escalera Helicoidal</h3>
-                  </div>
-                </div>
-
-              </div><!-- end track -->
-            </div><!-- end inner wrapper -->
-
-            <!-- Prev / Next arrows (positioned relative to outer wrapper, outside the inner clip area) -->
-            <button id="carousel-prev" aria-label="Anterior"
-              class="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_left</span>
-            </button>
-            <button id="carousel-next" aria-label="Siguiente"
-              class="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_right</span>
-            </button>
-
-          </div><!-- end relative wrapper -->
-
-          <!-- Dot indicators -->
-          <div id="carousel-dots" class="flex justify-center gap-2 mt-8"></div>
-        </div><!-- end desktop wrapper -->
 
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script>
-          (async function () {
-            const track = document.getElementById('carousel-track');
+        <script type="module">
+          import {
+            Renderer,
+            Camera,
+            Transform,
+            Plane,
+            Mesh,
+            Program,
+            Texture,
+          } from "https://cdn.jsdelivr.net/npm/ogl/+esm";
 
-            // Supabase Dynamic Fetch
-            if (window.supabase) {
-              try {
-                const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
-                const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
-                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
-                const { data, error } = await client
-                  .from('ecuaplac_galeria_1')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
+          // Items iniciales con fotos originales de alta resolución y aspecto vertical natural
+          const initialGalleryItems = [
+            {
+              image: "./assets/img/portfolio/IMG_2131.webp",
+              location: "Andratx",
+              title: "Reforma de Baño Minimalista con Bañera Exenta",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2135.webp",
+              location: "Calvià",
+              title: "Escalera de Diseño Escultural en Yeso Pulido",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2134.webp",
+              location: "Sóller",
+              title: "Ducha de Obra con Hornacinas Iluminadas",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2119.webp",
+              location: "Palma de Mallorca",
+              title: "Cocina Moderna Integrada y Minimalista",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2129.webp",
+              location: "Santanyí",
+              title: "Terraza Exterior y Solárium de Diseño",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2132.webp",
+              location: "Marratxí",
+              title: "Aseo Minimalista de Cortesía",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2133.webp",
+              location: "Palma de Mallorca",
+              title: "Distribuidor con Iluminación Indirecta",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2136.webp",
+              location: "Palma de Mallorca",
+              title: "Nicho Iluminado para Coleccionismo",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2138.webp",
+              location: "Calvià",
+              title: "Perspectiva y Acabados de la Escalera Helicoidal",
+            },
+          ];
 
-                if (!error && data && data.length > 0) {
-                  const processedData = data.map(item => {
-                    if (item.image_url) item.image_url = item.image_url.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-                    if (item.title_es === 'Baño de Diseño con Bañera Exenta') {
-                      item.title_es = 'Reforma Integral de Baño con Bañera Exenta';
-                    }
-                    return item;
-                  });
-                  if (track) {
-                    track.innerHTML = processedData.map(item => `
-            <div class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">${item.location_es}</span>
-                <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_es}</h3>
-              </div>
-            </div>
-          `).join('');
-                  }
+          function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+          }
 
-                  // Actualizar también el carrusel Swiper móvil
-                  const mobileWrapper = document.querySelector('.portfolio-swiper .swiper-wrapper');
-                  if (mobileWrapper) {
-                    mobileWrapper.innerHTML = processedData.map(item => `
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">${item.location_es}</span>
-                <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_es}</h3>
-              </div>
-            </div>
-          `).join('');
-                    if (typeof window.initPortfolioSwiper === 'function') {
-                      window.initPortfolioSwiper();
-                    }
-                  }
-                }
+          function lerp(p1, p2, t) {
+            return p1 + (p2 - p1) * t;
+          }
 
-                // Fetch Contact Info
-                const { data: contactData, error: contactError } = await client
-                  .from('ecuaplac_contact')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
-
-                if (!contactError && contactData && contactData.length > 0) {
-                  const listContainer = document.getElementById('contact-info-list');
-                  const addressEl = document.getElementById('contact-address');
-
-                  const addressItem = contactData.find(item => item.key === 'address');
-                  if (addressItem && addressEl) {
-                    addressEl.textContent = addressItem.value_es;
-                  }
-
-                  const listItems = contactData.filter(item => item.key !== 'address');
-                  if (listItems.length > 0 && listContainer) {
-                    listContainer.innerHTML = listItems.map(item => {
-                      const name = item.name_es;
-                      const val = item.value_es;
-                      const isEmail = item.icon === 'mail';
-                      const href = isEmail ? `mailto:${val}` : `tel:${val.replace(/\s+/g, '')}`;
-
-                      const svgIcon = isEmail
-                        ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
-                        : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
-
-                      return `
-                <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                      ${svgIcon}
-                    </div>
-                    <span class="font-bold text-primary text-[14px]">${name}</span>
-                  </div>
-                  <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${isEmail ? 'break-all text-[13px]' : ''}">${val}</span>
-                </a>
-              `;
-                    }).join('');
-                  }
-                }
-              } catch (err) {
-                console.warn('Supabase fetch failed, using fallback static content:', err);
+          function autoBind(instance) {
+            const proto = Object.getPrototypeOf(instance);
+            Object.getOwnPropertyNames(proto).forEach((key) => {
+              if (key !== "constructor" && typeof instance[key] === "function") {
+                instance[key] = instance[key].bind(instance);
               }
+            });
+          }
+
+          // Generador de textura 2D nítida con badge de ubicación dorada y título blanco
+          function createCardCaptionTexture(gl, location, title) {
+            const dpr = 2; // Forzar 2x DPR para nitidez perfecta en 3D
+            const w = 500;
+            const h = 140;
+            const canvas = document.createElement("canvas");
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            const ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+            ctx.clearRect(0, 0, w, h);
+
+            // 1. Badge / Píldora de Ubicación
+            if (location) {
+              const locText = location.toUpperCase();
+              ctx.font = "bold 11px 'Montserrat', sans-serif";
+              const metrics = ctx.measureText(locText);
+              const pillPad = 14;
+              const pillH = 22;
+              const pillW = Math.max(metrics.width + pillPad * 2, 70);
+              const pillX = (w - pillW) / 2;
+              const pillY = 8;
+              const pillR = 11;
+
+              ctx.beginPath();
+              ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+              ctx.fillStyle = "rgba(18, 16, 15, 0.92)";
+              ctx.fill();
+              ctx.lineWidth = 1;
+              ctx.strokeStyle = "rgba(212, 175, 55, 0.5)"; // Dorado suave
+              ctx.stroke();
+
+              ctx.fillStyle = "#E5B869"; // Dorado premium
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText(locText, w / 2, pillY + pillH / 2 + 0.5);
             }
 
-            // Now initialize the infinite loop carousel
-            const originalCards = Array.from(track.querySelectorAll('.carousel-card'));
-            const total = originalCards.length;
-            if (total === 0) return;
+            // 2. Título de la obra en blanco con sombra suave
+            if (title) {
+              ctx.font = "bold 16px 'Montserrat', sans-serif";
+              ctx.fillStyle = "#FFFFFF";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "top";
+              ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+              ctx.shadowBlur = 6;
+              ctx.shadowOffsetY = 2;
 
-            const dotsEl = document.getElementById('carousel-dots');
-            const prevBtn = document.getElementById('carousel-prev');
-            const nextBtn = document.getElementById('carousel-next');
-            const numClones = 3;
-
-            // Clone first 3 cards and append
-            for (let i = 0; i < numClones; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.appendChild(clone);
-            }
-            // Clone last 3 cards and prepend
-            for (let i = total - numClones; i < total; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.insertBefore(clone, track.firstChild);
-            }
-
-            let current = 0;
-            let isTransitioning = false;
-
-            function getCardWidth() {
-              const firstCard = track.querySelector('.carousel-card');
-              if (!firstCard) return 0;
-              const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-              return firstCard.getBoundingClientRect().width + gap;
-            }
-
-            function setPositionWithoutAnimation(position) {
-              track.style.transition = 'none';
-              track.style.transform = `translateX(${-position}px)`;
-              // force repaint
-              track.offsetHeight;
-            }
-
-            function goTo(index, animate = true) {
-              if (isTransitioning && animate) return;
-              if (animate) {
-                isTransitioning = true;
-                track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              } else {
-                track.style.transition = 'none';
+              const maxLineW = w - 40;
+              const words = title.split(" ");
+              let line = "";
+              const lines = [];
+              for (let i = 0; i < words.length; i++) {
+                const test = line + words[i] + " ";
+                if (ctx.measureText(test).width > maxLineW && i > 0) {
+                  lines.push(line.trim());
+                  line = words[i] + " ";
+                } else {
+                  line = test;
+                }
               }
+              lines.push(line.trim());
 
-              const targetPos = (numClones + index) * getCardWidth();
-              track.style.transform = `translateX(${-targetPos}px)`;
-              current = index;
-              updateDots();
-            }
-
-            function updateDots() {
-              dotsEl.querySelectorAll('button').forEach((d, i) => {
-                let dotIndex = current;
-                if (dotIndex >= total) dotIndex = 0;
-                if (dotIndex < 0) dotIndex = total - 1;
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === dotIndex ? 'bg-primary scale-125' : 'bg-primary/25');
+              const startY = location ? 40 : 22;
+              const lineH = 22;
+              lines.slice(0, 2).forEach((l, idx) => {
+                ctx.fillText(l, w / 2, startY + idx * lineH);
               });
             }
 
-            function buildDots() {
-              dotsEl.innerHTML = '';
-              for (let i = 0; i < total; i++) {
-                const d = document.createElement('button');
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-primary scale-125' : 'bg-primary/25');
-                d.setAttribute('aria-label', 'Página ' + (i + 1));
-                d.addEventListener('click', () => {
-                  goTo(i);
-                  resetTimer();
-                });
-                dotsEl.appendChild(d);
-              }
+            const texture = new Texture(gl, { generateMipmaps: false });
+            texture.image = canvas;
+            return { texture, width: w, height: h };
+          }
+
+          class CaptionTitle {
+            constructor({ gl, plane, location, title }) {
+              autoBind(this);
+              this.gl = gl;
+              this.plane = plane;
+              this.location = location;
+              this.title = title;
+              this.createMesh();
             }
 
-            track.addEventListener('transitionend', () => {
-              isTransitioning = false;
-              if (current >= total) {
-                setPositionWithoutAnimation(numClones * getCardWidth());
-                current = 0;
-                updateDots();
-              } else if (current < 0) {
-                setPositionWithoutAnimation((numClones + total - 1) * getCardWidth());
-                current = total - 1;
-                updateDots();
-              }
-            });
+            createMesh() {
+              const { texture } = createCardCaptionTexture(
+                this.gl,
+                this.location,
+                this.title
+              );
+              const geometry = new Plane(this.gl);
+              const program = new Program(this.gl, {
+                vertex: `
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform sampler2D tMap;
+                  varying vec2 vUv;
+                  void main() {
+                    vec4 color = texture2D(tMap, vUv);
+                    if (color.a < 0.05) discard;
+                    gl_FragColor = color;
+                  }
+                `,
+                uniforms: { tMap: { value: texture } },
+                transparent: true,
+                depthTest: false,
+                depthWrite: false,
+              });
 
-            function next() {
-              goTo(current + 1);
+              this.mesh = new Mesh(this.gl, { geometry, program });
+              const capHeightRatio = 0.24;
+              this.mesh.scale.set(1.0, capHeightRatio, 1.0);
+              this.mesh.position.y = -0.5 - capHeightRatio * 0.5 - 0.04;
+              this.mesh.position.z = 0.02;
+              this.mesh.setParent(this.plane);
             }
-            function prev() {
-              goTo(current - 1);
+          }
+
+          class Media {
+            constructor({
+              geometry,
+              gl,
+              image,
+              index,
+              length,
+              renderer,
+              scene,
+              screen,
+              location,
+              title,
+              viewport,
+              bend,
+              borderRadius = 0.05,
+            }) {
+              this.geometry = geometry;
+              this.gl = gl;
+              this.image = image;
+              this.index = index;
+              this.length = length;
+              this.renderer = renderer;
+              this.scene = scene;
+              this.screen = screen;
+              this.location = location;
+              this.title = title;
+              this.viewport = viewport;
+              this.bend = bend;
+              this.borderRadius = borderRadius;
+
+              this.extra = 0;
+              this.widthTotal = 0;
+              this.width = 0;
+              this.x = 0;
+              this.speed = 0;
+              this.isBefore = false;
+              this.isAfter = false;
+
+              this.createShader();
+              this.createMesh();
+              this.createCaption();
+              this.onResize();
             }
 
-            nextBtn.addEventListener('click', () => { next(); resetTimer(); });
-            prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+            createShader() {
+              const texture = new Texture(this.gl, {
+                generateMipmaps: true,
+              });
+              this.program = new Program(this.gl, {
+                depthTest: false,
+                depthWrite: false,
+                vertex: `
+                  precision highp float;
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  uniform float uTime;
+                  uniform float uSpeed;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    vec3 p = position;
+                    // Inercia sutil de curvatura al arrastrar
+                    p.z = (sin(p.x * 3.0 + uTime) * 0.6 + cos(p.y * 2.0 + uTime) * 0.6) * (0.02 + min(abs(uSpeed) * 0.05, 0.08));
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform vec2 uImageSizes;
+                  uniform vec2 uPlaneSizes;
+                  uniform sampler2D tMap;
+                  uniform float uBorderRadius;
+                  varying vec2 vUv;
 
-            // Touch swipe with live dragging
-            let startX = 0;
-            let isDragging = false;
+                  float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                    vec2 d = abs(p) - b;
+                    return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                  }
 
-            track.addEventListener('touchstart', e => {
-              startX = e.touches[0].clientX;
-              isDragging = true;
-              isTransitioning = false; // allow interrupting transition
-              track.style.transition = 'none';
-              clearInterval(timer);
-            }, { passive: true });
+                  void main() {
+                    // Object-cover perfecto sin deformación ni recorte excesivo
+                    vec2 ratio = vec2(
+                      min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
+                      min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+                    );
+                    vec2 uv = vec2(
+                      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                    );
+                    vec4 color = texture2D(tMap, uv);
 
-            track.addEventListener('touchmove', e => {
-              if (!isDragging) return;
-              const currentX = e.touches[0].clientX;
-              const dx = currentX - startX;
-              const basePos = (numClones + current) * getCardWidth();
-              track.style.transform = `translateX(${-basePos + dx}px)`;
-            }, { passive: true });
+                    float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                    float edgeSmooth = 0.003;
+                    float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
 
-            track.addEventListener('touchend', e => {
-              if (!isDragging) return;
-              isDragging = false;
-              const dx = e.changedTouches[0].clientX - startX;
+                    if (alpha < 0.01) discard;
 
-              if (Math.abs(dx) > 50) {
-                if (dx < 0) {
-                  next();
-                } else {
-                  prev();
-                }
+                    // COLOR 100% ORIGINAL (Sin blanco y negro, colores vivos y reales)
+                    gl_FragColor = vec4(color.rgb, color.a * alpha);
+                  }
+                `,
+                uniforms: {
+                  tMap: { value: texture },
+                  uPlaneSizes: { value: [0, 0] },
+                  uImageSizes: { value: [0, 0] },
+                  uSpeed: { value: 0 },
+                  uTime: { value: 100 * Math.random() },
+                  uBorderRadius: { value: this.borderRadius },
+                },
+                transparent: true,
+              });
+
+              const img = new Image();
+              img.crossOrigin = "anonymous";
+              img.src = this.image;
+              img.onload = () => {
+                texture.image = img;
+                this.program.uniforms.uImageSizes.value = [
+                  img.naturalWidth || img.width,
+                  img.naturalHeight || img.height,
+                ];
+              };
+            }
+
+            createMesh() {
+              this.plane = new Mesh(this.gl, {
+                geometry: this.geometry,
+                program: this.program,
+              });
+              this.plane.setParent(this.scene);
+            }
+
+            createCaption() {
+              this.caption = new CaptionTitle({
+                gl: this.gl,
+                plane: this.plane,
+                location: this.location,
+                title: this.title,
+              });
+            }
+
+            update(scroll, direction) {
+              this.plane.position.x = this.x - scroll.current - this.extra;
+
+              const x = this.plane.position.x;
+              const H = this.viewport.width / 2;
+
+              if (this.bend === 0) {
+                this.plane.position.y = 0;
+                this.plane.rotation.z = 0;
+                this.plane.rotation.y = 0;
               } else {
-                goTo(current);
+                const B_abs = Math.abs(this.bend);
+                const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+                const effectiveX = Math.min(Math.abs(x), H);
+                const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
+
+                if (this.bend > 0) {
+                  this.plane.position.y = -arc;
+                  this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.55;
+                } else {
+                  this.plane.position.y = arc;
+                  this.plane.rotation.z = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.55;
+                }
               }
-              resetTimer();
-            }, { passive: true });
 
-            // Auto-advance
-            let timer;
-            function startTimer() { timer = setInterval(next, 4000); }
-            function resetTimer() { clearInterval(timer); startTimer(); }
+              this.speed = scroll.current - scroll.last;
+              this.program.uniforms.uTime.value += 0.02;
+              this.program.uniforms.uSpeed.value = this.speed;
 
-            // Pause on hover
-            const wrapper = document.getElementById('portfolio-carousel');
-            wrapper.addEventListener('mouseenter', () => clearInterval(timer));
-            wrapper.addEventListener('mouseleave', startTimer);
+              const planeOffset = this.plane.scale.x / 2;
+              const viewportOffset = this.viewport.width / 2;
+              this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
+              this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
 
-            // Recalculate on resize
-            window.addEventListener('resize', () => {
-              setPositionWithoutAnimation((numClones + current) * getCardWidth());
-            });
+              if (direction === "right" && this.isBefore) {
+                this.extra -= this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+              if (direction === "left" && this.isAfter) {
+                this.extra += this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+            }
 
-            // Initial position setup
-            setTimeout(() => {
-              setPositionWithoutAnimation(numClones * getCardWidth());
-              buildDots();
-              startTimer();
-            }, 50);
-          })();
+            onResize({ screen, viewport } = {}) {
+              if (screen) this.screen = screen;
+              if (viewport) this.viewport = viewport;
+
+              const isMobile = this.screen.width < 768;
+              const cardScale = isMobile ? 0.64 : 0.58;
+
+              this.plane.scale.y = this.viewport.height * cardScale;
+              this.plane.scale.x = this.plane.scale.y * 0.74; // Relación vertical proporcional perfecta
+
+              this.program.uniforms.uPlaneSizes.value = [
+                this.plane.scale.x,
+                this.plane.scale.y,
+              ];
+              this.padding = isMobile ? 0.9 : 1.6;
+              this.width = this.plane.scale.x + this.padding;
+              this.widthTotal = this.width * this.length;
+              this.x = this.width * this.index;
+            }
+          }
+
+          class CircularGalleryApp {
+            constructor(container, options = {}) {
+              this.container = container;
+              this.items = options.items || initialGalleryItems;
+              this.scrollSpeed = options.scrollSpeed || 1.3;
+              this.scroll = { ease: options.scrollEase || 0.035, current: 0, target: 0, last: 0 };
+              this.borderRadius = options.borderRadius || 0.05;
+
+              this.isDown = false;
+              this.start = 0;
+              this.startY = 0;
+              this.onCheckDebounce = debounce(this.onCheck.bind(this), 180);
+
+              autoBind(this);
+
+              this.createRenderer();
+              this.createCamera();
+              this.createScene();
+              this.onResize();
+              this.createGeometry();
+              this.createMedias();
+              this.update();
+              this.addEventListeners();
+            }
+
+            createRenderer() {
+              this.renderer = new Renderer({
+                alpha: true,
+                antialias: true,
+                dpr: Math.min(window.devicePixelRatio || 1, 2),
+              });
+              this.gl = this.renderer.gl;
+              this.gl.clearColor(0, 0, 0, 0);
+              this.container.appendChild(this.gl.canvas);
+            }
+
+            createCamera() {
+              this.camera = new Camera(this.gl);
+              this.camera.fov = 45;
+              this.camera.position.z = 20;
+            }
+
+            createScene() {
+              this.scene = new Transform();
+            }
+
+            createGeometry() {
+              this.planeGeometry = new Plane(this.gl, {
+                heightSegments: 40,
+                widthSegments: 70,
+              });
+            }
+
+            createMedias() {
+              // Duplicar items para loop infinito fluido
+              this.mediasImages = [...this.items, ...this.items];
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+
+              this.medias = this.mediasImages.map((data, index) => {
+                return new Media({
+                  geometry: this.planeGeometry,
+                  gl: this.gl,
+                  image: data.image,
+                  index,
+                  length: this.mediasImages.length,
+                  renderer: this.renderer,
+                  scene: this.scene,
+                  screen: this.screen,
+                  location: data.location,
+                  title: data.title,
+                  viewport: this.viewport,
+                  bend,
+                  borderRadius: this.borderRadius,
+                });
+              });
+            }
+
+            onTouchDown(e) {
+              this.isDown = true;
+              this.scroll.position = this.scroll.current;
+              this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
+              this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
+            }
+
+            onTouchMove(e) {
+              if (!this.isDown) return;
+              const x = "touches" in e ? e.touches[0].clientX : e.clientX;
+              const y = "touches" in e ? e.touches[0].clientY : e.clientY;
+              const dx = this.start - x;
+              const dy = this.startY - y;
+
+              if (Math.abs(dx) > Math.abs(dy) && e.cancelable) {
+                e.preventDefault();
+              }
+
+              const distance = dx * (this.scrollSpeed * 0.024);
+              this.scroll.target = this.scroll.position + distance;
+            }
+
+            onTouchUp() {
+              this.isDown = false;
+              this.onCheck();
+            }
+
+            onWheel(e) {
+              const delta =
+                e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)
+                  ? e.deltaX
+                  : e.deltaY || (e.wheelDelta ? -e.wheelDelta : 0);
+              this.scroll.target += Math.sign(delta) * (this.scrollSpeed * 0.45);
+              this.onCheckDebounce();
+            }
+
+            onCheck() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const itemIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = itemIndex * width;
+            }
+
+            next() {
+              if (!this.medias || !this.medias[0]) return;
+              this.scroll.target += this.medias[0].width;
+            }
+
+            prev() {
+              if (!this.medias || !this.medias[0]) return;
+              this.scroll.target -= this.medias[0].width;
+            }
+
+            onResize() {
+              const rect = this.container.getBoundingClientRect();
+              this.screen = {
+                width: rect.width || window.innerWidth,
+                height: rect.height || 600,
+              };
+              this.renderer.setSize(this.screen.width, this.screen.height);
+              this.camera.perspective({
+                aspect: this.screen.width / this.screen.height,
+              });
+              const fov = (this.camera.fov * Math.PI) / 180;
+              const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+              const width = height * this.camera.aspect;
+              this.viewport = { width, height };
+
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+
+              if (this.medias) {
+                this.medias.forEach((media) => {
+                  media.bend = bend;
+                  media.onResize({ screen: this.screen, viewport: this.viewport });
+                });
+              }
+            }
+
+            update() {
+              this.scroll.current = lerp(
+                this.scroll.current,
+                this.scroll.target,
+                this.scroll.ease
+              );
+              const direction =
+                this.scroll.current > this.scroll.last ? "right" : "left";
+              if (this.medias) {
+                this.medias.forEach((media) =>
+                  media.update(this.scroll, direction)
+                );
+              }
+              this.renderer.render({ scene: this.scene, camera: this.camera });
+              this.scroll.last = this.scroll.current;
+              this.raf = window.requestAnimationFrame(this.update);
+            }
+
+            addEventListeners() {
+              window.addEventListener("resize", this.onResize);
+              this.container.addEventListener("wheel", this.onWheel, { passive: true });
+              this.container.addEventListener("mousedown", this.onTouchDown);
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("mouseup", this.onTouchUp);
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
+            }
+
+            destroy() {
+              window.cancelAnimationFrame(this.raf);
+              window.removeEventListener("resize", this.onResize);
+              this.container.removeEventListener("wheel", this.onWheel);
+              this.container.removeEventListener("mousedown", this.onTouchDown);
+              window.removeEventListener("mousemove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
+              this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("touchend", this.onTouchUp);
+
+              if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
+                this.gl.canvas.parentNode.removeChild(this.gl.canvas);
+              }
+            }
+          }
+
+          // Inicializar y conectar con Supabase
+          document.addEventListener("DOMContentLoaded", async () => {
+            const container = document.getElementById("circular-gallery-canvas");
+            if (!container) return;
+
+            let currentItems = initialGalleryItems;
+            let galleryApp = null;
+
+            try {
+              galleryApp = new CircularGalleryApp(container, {
+                items: currentItems,
+                scrollEase: 0.035, // Deslizamiento suave, fluido y lento
+                scrollSpeed: 1.3,
+                borderRadius: 0.05,
+              });
+
+              // Controles de navegación
+              const btnPrev = document.getElementById("cg-btn-prev");
+              const btnNext = document.getElementById("cg-btn-next");
+              if (btnPrev) btnPrev.addEventListener("click", () => galleryApp.prev());
+              if (btnNext) btnNext.addEventListener("click", () => galleryApp.next());
+            } catch (err) {
+              console.warn("Error al inicializar CircularGallery WebGL:", err);
+            }
+
+            // Integración Supabase para Galería y Contacto
+            if (window.supabase) {
+              try {
+                const supabaseUrl = "https://wkfddccsantywcrsxpox.supabase.co";
+                const supabaseKey = "sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI";
+                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+                // 1. Cargar Proyectos dinámicos si existen en Supabase
+                const { data: galleryData, error: galleryError } = await client
+                  .from("ecuaplac_galeria_1")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!galleryError && galleryData && galleryData.length > 0) {
+                  const dbItems = galleryData.map((item) => ({
+                    image: item.image_url ? item.image_url.replace(/\.(jpg|jpeg|png)$/i, ".webp") : "",
+                    location: item.location_es || "Mallorca",
+                    title: item.title_es || "Proyecto de Reforma",
+                  }));
+
+                  if (galleryApp) {
+                    galleryApp.destroy();
+                    galleryApp = new CircularGalleryApp(container, {
+                      items: dbItems,
+                      scrollEase: 0.035,
+                      scrollSpeed: 1.3,
+                      borderRadius: 0.05,
+                    });
+                    const btnPrev = document.getElementById("cg-btn-prev");
+                    const btnNext = document.getElementById("cg-btn-next");
+                    if (btnPrev) btnPrev.onclick = () => galleryApp.prev();
+                    if (btnNext) btnNext.onclick = () => galleryApp.next();
+                  }
+                }
+
+                // 2. Mantener carga de información de Contacto para el footer
+                const { data: contactData, error: contactError } = await client
+                  .from("ecuaplac_contact")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!contactError && contactData && contactData.length > 0) {
+                  const listContainer = document.getElementById("contact-info-list");
+                  const addressEl = document.getElementById("contact-address");
+                  const addressItem = contactData.find((item) => item.key === "address");
+                  if (addressItem && addressEl) {
+                    addressEl.textContent = addressItem.value_es;
+                  }
+                  const listItems = contactData.filter((item) => item.key !== "address");
+                  if (listItems.length > 0 && listContainer) {
+                    listContainer.innerHTML = listItems
+                      .map((item) => {
+                        const name = item.name_es;
+                        const val = item.value_es;
+                        const isEmail = item.icon === "mail";
+                        const href = isEmail
+                          ? `mailto:${val}`
+                          : `tel:${val.replace(/\s+/g, "")}`;
+                        const svgIcon = isEmail
+                          ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+                          : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
+                        return `
+                        <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
+                          <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
+                              ${svgIcon}
+                            </div>
+                            <span class="font-bold text-primary text-[14px]">${name}</span>
+                          </div>
+                          <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${
+                            isEmail ? "break-all text-[13px]" : ""
+                          }">${val}</span>
+                        </a>
+                      `;
+                      })
+                      .join("");
+                  }
+                }
+              } catch (err) {
+                console.warn("Supabase fetch failed, using fallback content:", err);
+              }
+            }
+          });
         </script>
 
       </div>
@@ -2121,15 +2291,14 @@
           <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
             <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Transformaciones Reales</h2>
           </div>
-          <!-- Interactive Slider (Reveal1 21st.dev luxury style) -->
+          <!-- Interactive Slider (Reveal1 21st.dev luxury style - Piedra Caliza) -->
           <div class="transform-card-wrapper group">
-            <div class="transform-card-blob"></div>
-            <div class="transform-card-bg p-3.5 sm:p-6 md:p-8">
+            <div class="transform-card-bg p-4 sm:p-7 md:p-9">
               <div class="mb-5 md:mb-8">
                 <span
-                  class="font-label-caps text-label-caps uppercase tracking-widest text-primary block mb-2">Vestidor a
+                  class="font-label-caps text-label-caps uppercase tracking-widest text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Vestidor a
                   Medida</span>
-                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                <p class="font-body-lg text-body-lg text-[#403B37] dark:text-neutral-300 max-w-2xl leading-relaxed">
                   Aprovechamos al máximo cada rincón para diseñar un vestidor a medida súper funcional. La iluminación
                   LED integrada le da ese toque cálido y moderno, ideal para organizar el día a día con comodidad.
                 </p>
@@ -2188,8 +2357,8 @@
               </div>
 
               <!-- Discrete Luxury Legend underneath the photo -->
-              <div class="flex items-center justify-center gap-2 mt-4 text-on-surface-variant/75 text-[11px] md:text-xs tracking-widest uppercase font-medium">
-                <span class="material-symbols-outlined text-[15px] text-secondary">drag_indicator</span>
+              <div class="flex items-center justify-center gap-2 mt-4 text-[#736B63] dark:text-neutral-400 text-[11px] md:text-xs tracking-widest uppercase font-medium">
+                <span class="material-symbols-outlined text-[16px] text-[#C49320]">drag_indicator</span>
                 <span>Desliza para comparar el antes y después</span>
               </div>
             </div>
