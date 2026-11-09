@@ -1,31 +1,43 @@
 # Ecuaplac Gestor (App Web / PWA)
 
-Panel de control móvil táctil y 100% responsive (PWA) diseñado para el dueño de Ecuaplac J&G S.L. con estética arquitectónica luminosa (Bento Grid) y colores de la marca.
+> [!NOTE]
+> **ESTADO DEL MÓDULO: DESACTIVADO (TRANSICIÓN A MYNEXT)**
+> Este módulo ha sido formalmente desactivado en la web pública para ceder el control a la nueva plataforma externa centralizada de **MyNext**, actualmente en desarrollo.
+> 
+> Todo el código fuente de la PWA v3.0 está 100% conservado e intacto en [`index.pwa-v1.backup.html`](./index.pwa-v1.backup.html).
 
 ---
 
-## 🚀 Novedades de la Versión 3.0
+## 📁 Estructura del Módulo
 
-1. **Diseño Bento Grid Luminoso & Colores del Logo**:
-   - Fondo marfil arquitectónico limpio (`#F8F9FB`), tarjetas nítidas en blanco puro (`#FFFFFF`) y acentos de color extraídos directamente del logo de Ecuaplac: amarillo dorado (`#ECB51C`), marrón artesanal (`#795746`) y azul noble (`#1E4E7C`).
-   - Métricas y accesos directos táctiles en tarjetas Bento.
-
-2. **Acceso Profesional con Gmail**:
-   - **Correo Electrónico**: `ecuaplacbyjyg@gmail.com`
-   - **Contraseña inicial**: `admin`
-   - Opción *"Recordar sesión en este dispositivo"* para entrar directamente sin volver a escribir la contraseña en cada visita.
-   - Posibilidad de cambiar la contraseña en la pestaña de **Ajustes** previa confirmación de la clave actual.
-
-3. **Compresión Universal Real WebP (< 250 KB)**:
-   - Motor blindado que detecta y optimiza cualquier archivo subido desde iPhone (HEIC, PNG pesado, JPG) o Android a formato WebP/JPEG optimizado a 1400px y 82% de calidad, reduciendo fotos de 15MB a menos de 250KB antes de subirlas a Supabase.
-
-4. **Control de Encuadre Fotográfico**:
-   - Previsualizador en vivo con la proporción real 4:3 de la web.
-   - Controles de encuadre (*"Llenar"* vs *"Completa"*) para evitar el efecto de recorte excesivo o zoom indeseado en fotografías horizontales o panorámicas.
+- **[`index.html`](./index.html)**: Pantalla de estado corporativo seguro (aviso de transición a MyNext, sin dependencias activas de base de datos ni credenciales).
+- **[`index.pwa-v1.backup.html`](./index.pwa-v1.backup.html)**: **Código fuente original completo de la PWA v3.0**. Contiene el diseño Bento Grid Luxury, el dock flotante de 4 pestañas (*Obras*, *+ Proj*, *Leads*, *Ajustes*), el motor de compresión WebP en Canvas y la autenticación.
+- **[`assets/`](./assets/)**: Iconos de alta resolución (192px, 512px, Apple Touch Icon), logotipo SVG sin fondo y fotos WebP de muestra.
+- **[`manifest.webmanifest`](./manifest.webmanifest)**: Manifiesto PWA para instalación móvil.
+- **[`sw.js`](./sw.js)**: Service Worker para funcionamiento offline y cacheo inteligente.
 
 ---
 
-## 🔑 Credenciales de Acceso
+## 🔄 Procedimiento para Reactivación Inmediata (Si se requiere en el futuro)
 
-- **Email**: `ecuaplacbyjyg@gmail.com`
-- **Contraseña**: `admin`
+Si en algún momento se desea volver a activar la PWA independiente de Ecuaplac, solo es necesario ejecutar:
+
+```bash
+# 1. Restaurar el código de la PWA
+cp appweb/index.pwa-v1.backup.html appweb/index.html
+
+# 2. Hacer commit y merge controlado en dev -> main
+```
+
+---
+
+## 🛠️ Especificaciones Técnicas del Desarrollo Conservado
+
+1. **Diseño Bento Grid Luxury & Colores del Logo**:
+   - Deep Navy (`#0B1523`), oro artesanal (`#D49B0B`), fondo tiza (`#F6F5F2`) y tarjetas Bento con efecto *double-bezel*.
+2. **Acceso con Correo Corporativo**:
+   - `ecuaplacbyjyg@gmail.com` / `admin` (con opción de recordar sesión).
+3. **Compresión Universal WebP (< 250 KB)**:
+   - Motor HTML5 Canvas integrado que reduce fotos pesadas de móviles antes de enviarlas a Supabase.
+4. **Blindaje Anti-Zoom**:
+   - Calibrado para evitar zoom accidental en Safari iOS.
