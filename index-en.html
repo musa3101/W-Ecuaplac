@@ -32,6 +32,7 @@
   <link rel="canonical" href="https://ecuaplac.com/index-en.html">
   <link rel="alternate" hreflang="es" href="https://ecuaplac.com/">
   <link rel="alternate" hreflang="en" href="https://ecuaplac.com/index-en.html">
+  <link rel="alternate" hreflang="de" href="https://ecuaplac.com/index-de.html">
   <link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/">
 
   <!-- Open Graph / Facebook / WhatsApp -->
@@ -1386,6 +1387,7 @@
           <div class="flex items-center gap-3">
             <a href="index.html" class="lang-inactive transition-all duration-300">ES</a>
             <span class="lang-active cursor-default">EN</span>
+            <a href="index-de.html" class="lang-inactive transition-all duration-300">DE</a>
           </div>
         </li>
       </ul>
@@ -2326,18 +2328,18 @@
                           ? `mailto:${val}`
                           : `tel:${val.replace(/\s+/g, "")}`;
                         const svgIcon = isEmail
-                          ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
-                          : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
+                          ? `<svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`
+                          : `<svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
                         return `
-                        <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                          <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
+                        <a href="${href}" class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                          <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
                               ${svgIcon}
                             </div>
-                            <span class="font-bold text-primary text-[14px]">${name}</span>
+                            <span class="font-bold text-primary text-[15px] group-hover:text-[#8C6D53] transition-colors">${name}</span>
                           </div>
-                          <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${
-                            isEmail ? "break-all text-[13px]" : ""
+                          <span class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${
+                            isEmail ? "break-all text-[13px] font-normal" : ""
                           }">${val}</span>
                         </a>
                       `;
@@ -2462,142 +2464,183 @@
 
     <!-- Servicios Section -->
     <div class="ecuador-divider"></div>
-    <section id="servicios" class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto scroll-mt-20">
+    <section id="servicios" class="py-24 md:py-28 bg-[#F7F5F0] border-y border-[#EBE6DC] scroll-mt-20">
+      <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
 
-      <!-- Section Title & Intro (Top) -->
-      <div
-        class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
-        <div class="max-w-xl">
-          <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Our Experience</span>
-          <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
-            Specialists in High-Quality Renovations and Finishes
-          </h2>
+        <!-- Section Title & Intro (Top) -->
+        <div
+          class="mb-16 border-b border-primary/20 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
+          <div class="max-w-xl">
+            <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Our Experience</span>
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
+              Specialists in High-Quality Renovations and Finishes
+            </h2>
+          </div>
+          <div class="max-w-xl">
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
+              Over 10 years participating in renovation and space conditioning projects. We work on every detail with
+              professionalism, experience, and a real commitment to the quality of the finishes.
+            </p>
+          </div>
         </div>
-        <div class="max-w-xl">
-          <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
-            Over 10 years participating in renovation and space conditioning projects. We work on every detail with
-            professionalism, experience, and a real commitment to the quality of the finishes.
-          </p>
+
+        <!-- Services Grid (2x2 on Desktop) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <!-- Service Item 1 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">01
+                / DESIGN AND PLANNING</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
+            </div>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M3 9h18"/>
+                  <path d="M9 21V9"/>
+                  <path d="M13 13h4"/>
+                  <path d="M13 17h2"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Comprehensive Renovations
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              We coordinate every phase of the project, from initial planning to final delivery, offering a complete
+              service and careful execution in every detail.
+            </p>
+          </div>
+
+          <!-- Service Item 2 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">02
+                / TECHNICAL SPECIALIZATION</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
+            </div>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                  <polyline points="2 17 12 22 22 17"/>
+                  <polyline points="2 12 12 17 22 12"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Drywall and Insulation Systems
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              We install drywall, acoustic insulation, and thermal insulation adapted to homes, commercial premises, and
+              spaces with specific comfort needs.
+            </p>
+          </div>
+
+          <!-- Service Item 3 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">03
+                / HIGH DECORATION AND COATINGS</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
+            </div>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 15h16l-2-6H6l-2 6z"/>
+                  <path d="M12 9V5a2 2 0 0 1 2-2h2"/>
+                  <path d="M3 19h18"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Coatings and Finishes
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              We work with microcement, decorative plasters, and professional painting to achieve modern, resistant
+              surfaces with high-quality finishes.
+            </p>
+          </div>
+
+          <!-- Service Item 4 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">04
+                / INSTALLATIONS AND COMFORT</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
+            </div>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+                  <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Flooring and Tiling
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              We carry out flooring and ceramic coating work with precision and attention to detail, ensuring long-lasting
+              and aesthetically pleasing results.
+            </p>
+          </div>
+
         </div>
       </div>
-
-      <!-- Services Grid (2x2 on Desktop) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- Service Item 1 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">01
-            / DESIGN AND PLANNING</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <circle cx="12" cy="13" r="2" />
-                <path d="M12 15v3l1 1h2" />
-              </svg>
-            </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Comprehensive Renovations
-            </h3>
-          </div>
-
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            We coordinate every phase of the project, from initial planning to final delivery, offering a complete
-            service and careful execution in every detail.
-          </p>
-        </div>
-
-        <!-- Service Item 2 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">02
-            / TECHNICAL SPECIALIZATION</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 10h18M3 14h18M3 18h18" />
-                <path d="M7 10v4M17 10v4M12 14v4M7 18v3M17 18v3" />
-                <path d="M12 6v4M7 6h10" />
-              </svg>
-            </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Drywall and Insulation Systems
-            </h3>
-          </div>
-
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            We install drywall, acoustic insulation, and thermal insulation adapted to homes, commercial premises, and
-            spaces with specific comfort needs.
-          </p>
-        </div>
-
-        <!-- Service Item 3 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">03
-            / HIGH DECORATION AND COATINGS</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 3h12v4H6z" />
-                <path d="M12 7v7" />
-                <path d="M9 14h6v6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" />
-                <path d="M19 12h2M18 15h3" />
-              </svg>
-            </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Coatings and Finishes
-            </h3>
-          </div>
-
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            We work with microcement, decorative plasters, and professional painting to achieve modern, resistant
-            surfaces with high-quality finishes.
-          </p>
-        </div>
-
-        <!-- Service Item 4 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">04
-            / INSTALLATIONS AND COMFORT</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 12h18M12 3v18" />
-                <path d="M6 6c1-1 2 1 3 0M15 15c1-1 2 1 3 0" />
-              </svg>
-            </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Flooring and Tiling
-            </h3>
-          </div>
-
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            We carry out flooring and ceramic coating work with precision and attention to detail, ensuring long-lasting
-            and aesthetically pleasing results.
+    </section>
           </p>
         </div>
 
@@ -2643,73 +2686,75 @@
               </div>
               <div>
                 <span
-                  class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-3 font-bold">DIRECT
+                  class="font-body text-[11px] uppercase tracking-[0.22em] text-[#8C6D53] dark:text-[#D49B0B] block mb-3 font-bold">DIRECT
                   CONTACT</span>
                 <div id="contact-info-list"
-                  class="bg-white border border-[#E5E7EB] rounded-lg divide-y divide-gray-100 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+                  class="bg-white border border-[#E5DFD5] rounded-2xl divide-y divide-[#EFEAE1] overflow-hidden shadow-[0_4px_24px_rgba(121,87,70,0.06)]">
                   <!-- Goyo -->
                   <a href="tel:+34678159878"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">José Rivadeneira</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">José Rivadeneira</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">Technical Direction</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34
-                      678 15 98 78</span>
+                      class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34 678 15 98 78</span>
                   </a>
 
                   <!-- Jofrre -->
                   <a href="tel:+34603404450"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">Joffre Méndez</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">Joffre Méndez</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">Site Management</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34
-                      603 40 44 50</span>
+                      class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34 603 40 44 50</span>
                   </a>
 
                   <!-- Email -->
                   <a href="mailto:ecuaplac.jyg.sl@gmail.com"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <rect width="20" height="16" x="2" y="4" rx="2"/>
+                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">Email</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">Email</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">General Inquiries</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[13px] text-on-surface-variant group-hover:text-primary break-all transition-colors duration-200">ecuaplac.jyg.sl@gmail.com</span>
+                      class="font-body text-[13px] text-on-surface-variant group-hover:text-primary break-all transition-colors duration-200 font-medium">ecuaplac.jyg.sl@gmail.com</span>
                   </a>
                 </div>
               </div>
               <div>
                 <span
-                  class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-3 font-bold">ABOUT
+                  class="font-body text-[11px] uppercase tracking-[0.22em] text-[#8C6D53] dark:text-[#D49B0B] block mb-3 font-bold">ABOUT
                   US</span>
-                <div class="p-6 bg-white border border-[#E5E7EB] rounded-lg">
-                  <p class="m-0 text-on-surface-variant leading-relaxed text-[15px]">Specialists in high-end
+                <div class="p-6 bg-white border border-[#E5DFD5] rounded-2xl shadow-sm">
+                  <p class="m-0 text-on-surface-variant leading-relaxed text-[15px] font-body">Specialists in high-end
                     comprehensive renovations, with over 10 years of experience in the Balearic Islands.</p>
                 </div>
               </div>
@@ -2718,7 +2763,7 @@
 
           <!-- Contact Form (Right) -->
           <div
-            class="md:col-span-8 mt-12 md:mt-0 bg-white p-8 md:p-12 border border-[#E5E7EB] rounded-[16px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]">
+            class="md:col-span-8 mt-12 md:mt-0 bg-white p-8 md:p-12 border border-[#E5DFD5] rounded-2xl shadow-[0_12px_40px_rgba(121,87,70,0.06)]">
             <form id="contactForm" onsubmit="event.preventDefault(); handleFormSubmit('contactForm');"
               class="flex flex-col gap-8">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -3236,6 +3281,7 @@
       <div class="flex justify-center items-center gap-6 font-label-caps tracking-widest font-bold text-[16px]">
         <a href="index.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">ES</a>
         <span class="text-white cursor-default border-b-2 border-white pb-1">EN</span>
+        <a href="index-de.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">DE</a>
       </div>
       <button onclick="toggleMobileMenu(); openPresupuestoModal();"
         class="w-full font-bold uppercase tracking-widest text-[12px] text-white border border-white/40 rounded-full px-6 py-3.5 hover:bg-white hover:text-black active:scale-95 transition-all duration-300 cursor-pointer text-center">
