@@ -1063,41 +1063,43 @@
       <span class="font-body text-[11px] md:text-xs text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Solicitud de Presupuesto</span>
       <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[46px] font-semibold text-white mb-6 leading-tight tracking-[-0.02em]">Cuéntanos tu proyecto.</h2>
       
-      <form onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
+      <form id="presupuestoForm" onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Nombre Completo</label>
-            <input type="text" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Juan Pérez">
+            <input type="text" name="nombre" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Juan Pérez">
           </div>
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Correo Electrónico</label>
-            <input type="email" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. juan@correo.com">
+            <input type="email" name="email" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. juan@correo.com">
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-2">Tipo de Proyecto</label>
-            <select class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
-              <option class="bg-[#0C0C0C] text-white" value="reforma-integral" class="bg-surface text-white">Reforma Integral</option>
-              <option class="bg-[#0C0C0C] text-white" value="reforma-cocina" class="bg-surface text-white">Reforma de Cocina</option>
-              <option class="bg-[#0C0C0C] text-white" value="reforma-bano" class="bg-surface text-white">Reforma de Baño</option>
-              <option class="bg-[#0C0C0C] text-white" value="arquitectura" class="bg-surface text-white">Diseño & Arquitectura</option>
-              <option class="bg-[#0C0C0C] text-white" value="otro" class="bg-surface text-white">Otro</option>
+            <select name="tipo_proyecto" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
+              <option class="bg-[#0C0C0C] text-white" value="" disabled selected>Selecciona una opción</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma Integral">Reforma Integral</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma de Cocina">Reforma de Cocina</option>
+              <option class="bg-[#0C0C0C] text-white" value="Reforma de Baño">Reforma de Baño</option>
+              <option class="bg-[#0C0C0C] text-white" value="Diseño & Arquitectura">Diseño & Arquitectura</option>
+              <option class="bg-[#0C0C0C] text-white" value="Otro">Otro</option>
             </select>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Superficie aprox. (m²)</label>
-              <input type="number" min="1" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md" placeholder="Ej. 90">
+              <input type="number" min="1" name="metros" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md" placeholder="Ej. 90">
             </div>
             <div>
               <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-2">Presupuesto Estimado</label>
-              <select class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
-                <option class="bg-[#0C0C0C] text-white" value="rango-1" class="bg-surface text-white">&lt; 15.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-2" class="bg-surface text-white">15.000 € - 45.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-3" class="bg-surface text-white">45.000 € - 90.000 €</option>
-                <option class="bg-[#0C0C0C] text-white" value="rango-4" class="bg-surface text-white">&gt; 90.000 €</option>
+              <select name="presupuesto" required class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md">
+                <option class="bg-[#0C0C0C] text-white" value="" disabled selected>Rango estimado</option>
+                <option class="bg-[#0C0C0C] text-white" value="< 15.000 €">&lt; 15.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="15.000 € - 45.000 €">15.000 € - 45.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="45.000 € - 90.000 €">45.000 € - 90.000 €</option>
+                <option class="bg-[#0C0C0C] text-white" value="> 90.000 €">&gt; 90.000 €</option>
               </select>
             </div>
           </div>
@@ -1106,11 +1108,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Localización de la Obra</label>
-            <input type="text" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Palma de Mallorca">
+            <input type="text" name="ubicacion" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Palma de Mallorca">
           </div>
           <div>
             <label class="font-label-caps text-[10px] uppercase tracking-widest text-[#888888] block mb-1">Descripción del Proyecto</label>
-            <input type="text" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Reforma completa de piso con acabados limpios y de alta calidad">
+            <input type="text" name="mensaje" class="w-full bg-transparent border-t-0 border-x-0 border-b border-white/20 focus:border-white/20 focus:ring-0 px-0 py-2 text-white font-body-md placeholder-white/30" placeholder="Ej. Reforma completa de piso con acabados limpios y de alta calidad">
           </div>
         </div>
 
@@ -1133,10 +1135,10 @@
 </div>
 
 <!-- Mobile Side Navigation Drawer (Functional) -->
-<div id="mobileMenu" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end">
+<div id="mobileMenu" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end" onclick="if(event.target === this) toggleMobileMenu()">
   <div class="bg-black w-[280px] h-full p-8 flex flex-col justify-between border-l border-white/10 animate-slide-up relative">
     <div class="ecuador-divider absolute top-0 left-0 w-full"></div>
-    <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
+    <button class="absolute top-6 right-6 text-white" aria-label="Cerrar menú" onclick="toggleMobileMenu()">
       <span class="material-symbols-outlined text-3xl">close</span>
     </button>
     <div class="mt-12 flex flex-col gap-6 font-headline text-2xl font-semibold uppercase tracking-wider">
@@ -1144,7 +1146,7 @@
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#reformas">REFORMAS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#servicios">SERVICIOS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#contacto">CONTACTO</a>
-      <a class="font-bold text-secondary text-[14px] font-label-caps tracking-widest" onclick="toggleMobileMenu()" href="index.html#contacto">Solicitar Presupuesto</a>
+      <a class="font-bold text-secondary text-[14px] font-label-caps tracking-widest cursor-pointer" onclick="openPresupuestoModalFromMobile()">Solicitar Presupuesto</a>
     </div>
     <div class="text-xs text-white/50">
       <!-- Language Selector Mobile -->
@@ -1185,14 +1187,66 @@
     openPresupuestoModal();
   }
 
-  function submitPresupuesto(event) {
+  async function submitPresupuesto(event) {
     event.preventDefault();
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.innerText : '';
+    
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'ENVIANDO...';
+    }
+    
+    const formData = new FormData(form);
+
+    // 1. Guardar copia del Lead en Supabase (ecuaplac_leads)
+    try {
+      if (window.supabase && typeof window.supabase.createClient === 'function') {
+        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+        const sbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const nameVal = formData.get('nombre') || '';
+        const phoneVal = formData.get('telefono') || '';
+        const emailVal = formData.get('email') || '';
+        const projectTypeVal = formData.get('tipo_proyecto') || '';
+        const messageVal = `Metros: ${formData.get('metros') || '-'} m² | Presupuesto: ${formData.get('presupuesto') || '-'} | Ubicación: ${formData.get('ubicacion') || '-'} | Mensaje: ${formData.get('mensaje') || '-'}`;
+
+        await sbClient.from('ecuaplac_leads').insert([{
+          name: String(nameVal),
+          phone: String(phoneVal),
+          email: String(emailVal),
+          project_type: String(projectTypeVal),
+          message: String(messageVal),
+          source_page: 'reformas.html',
+          status: 'nuevo'
+        }]);
+      }
+    } catch (sbErr) {
+      console.warn('Supabase Lead insert notice:', sbErr);
+    }
+
+    // 2. Enviar correo via FormSubmit.co
+    try {
+      await fetch("https://formsubmit.co/ajax/ecuaplac.jyg.sl@gmail.com", {
+        method: "POST",
+        body: formData
+      });
+    } catch(err) {
+      console.error('FormSubmit fetch error:', err);
+    }
+    
     const formContent = document.getElementById('modalFormContent');
     const successContent = document.getElementById('modalSuccessContent');
     
-    // Hide form & show beautiful check success page
     formContent.classList.add('hidden');
     successContent.classList.remove('hidden');
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalText;
+    }
   }
 
   // Mobile drawer controls
@@ -1200,9 +1254,12 @@
     const drawer = document.getElementById('mobileMenu');
     if (drawer.classList.contains('hidden')) {
       drawer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     } else {
       drawer.classList.add('hidden');
+      document.body.style.overflow = '';
     }
+  }
   }
 
   // Scroll listener for dynamic navbar and footer styling
