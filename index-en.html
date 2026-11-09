@@ -1307,16 +1307,49 @@
       }
     }
 
-    /* FAQ Accordion Styles */
+    /* 21st.dev Clean FAQ Accordion */
+    .faq-item {
+      border-bottom: 1px solid rgba(22, 20, 19, 0.12);
+      transition: border-color 0.3s ease;
+    }
+
+    .dark .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: 1.15rem 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .faq-chevron {
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+    }
+
     .faq-answer {
       max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
       opacity: 0;
+      transform: translateY(-6px);
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, transform 0.35s ease;
     }
 
     .faq-item.active .faq-answer {
       opacity: 1;
+      transform: translateY(0);
     }
 
     /* Swiper Mobile Styles */
@@ -2927,140 +2960,100 @@
           </div>
         </div>
 
-        <!-- Accordion Wrapper -->
-        <div class="max-w-4xl mx-auto flex flex-col gap-4">
+        <!-- Accordion Wrapper (21st.dev clean style) -->
+        <div class="max-w-3xl mx-auto flex flex-col border-t border-primary/15 dark:border-white/10">
 
           <!-- FAQ Item 1 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Can I request a free quote?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Of course. You can write or call us to tell us about your project. We will study your needs and offer
                 you an initial assessment without any obligation, with total transparency from the first moment.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 2 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 How long does a renovation usually take?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Every project is different. The duration will depend on the type of work, chosen materials, and scope of
                 the renovation. Before starting, we will inform you of the estimated timelines so you have clear and
                 realistic planning.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 3 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 What kind of work do you do?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 We carry out comprehensive renovations, drywall work, false ceilings, interior divisions, finishes,
                 rehabilitations, interior and exterior work, and various solutions for homes, commercial premises, and
                 professional spaces.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 4 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 How can I request information or resolve a doubt?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 You can contact us by phone or WhatsApp. We will be happy to listen to your idea, resolve your doubts,
                 and guide you on the best solution for your project.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 5 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Do you work in Palma de Mallorca and the rest of the island?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Yes. We work in Palma de Mallorca and also carry out projects in different municipalities of the island,
                 including areas such as Calvià, Andratx, Sóller, Marratxí, Llucmajor, Santanyí, and surroundings. If you
                 have a renovation in mind, you can consult us without obligation and we will assess the best way to help
                 you depending on the location and needs of your project.
-              </div>
+              </p>
             </div>
           </div>
 
@@ -4140,49 +4133,35 @@
     });
   </script>
 
-  <!-- FAQ Accordion Logic -->
+  <!-- FAQ Accordion Logic (21st.dev clean style) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.faq-toggle').forEach(button => {
         button.addEventListener('click', () => {
           const item = button.closest('.faq-item');
           const answer = item.querySelector('.faq-answer');
-          const icon = item.querySelector('.faq-icon svg');
           const isActive = item.classList.contains('active');
 
           // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
             if (otherItem !== item && otherItem.classList.contains('active')) {
               otherItem.classList.remove('active');
-              otherItem.querySelector('.faq-answer').style.maxHeight = '0px';
-              const otherIcon = otherItem.querySelector('.faq-icon svg');
-              if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-              const otherIconBg = otherItem.querySelector('.faq-icon');
-              if (otherIconBg) {
-                otherIconBg.classList.remove('bg-[#795746]', 'text-white');
-                otherIconBg.classList.add('bg-[#795746]/10', 'text-[#795746]');
-              }
+              const otherBtn = otherItem.querySelector('.faq-toggle');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+              const otherAns = otherItem.querySelector('.faq-answer');
+              if (otherAns) otherAns.style.maxHeight = '0px';
             }
           });
 
           // Toggle current item
-          const iconBg = item.querySelector('.faq-icon');
           if (isActive) {
             item.classList.remove('active');
+            button.setAttribute('aria-expanded', 'false');
             answer.style.maxHeight = '0px';
-            if (icon) icon.style.transform = 'rotate(0deg)';
-            if (iconBg) {
-              iconBg.classList.remove('bg-[#795746]', 'text-white');
-              iconBg.classList.add('bg-[#795746]/10', 'text-[#795746]');
-            }
           } else {
             item.classList.add('active');
+            button.setAttribute('aria-expanded', 'true');
             answer.style.maxHeight = answer.scrollHeight + 'px';
-            if (icon) icon.style.transform = 'rotate(180deg)';
-            if (iconBg) {
-              iconBg.classList.remove('bg-[#795746]/10', 'text-[#795746]');
-              iconBg.classList.add('bg-[#795746]', 'text-white');
-            }
           }
         });
       });
