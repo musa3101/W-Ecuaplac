@@ -1359,6 +1359,8 @@
         y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "xfa7w1cqcu");
   </script>
+  <!-- Dithered Footer Effect -->
+  <link rel="stylesheet" href="./assets/css/dithered-footer.css">
 </head>
 
 <body class="bg-background text-on-background font-body-md antialiased pt-[72px] overflow-x-hidden">
@@ -1368,7 +1370,7 @@
     <div
       class="flex justify-between items-center h-[72px] px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
       <!-- Brand -->
-      <a class="flex items-center -ml-8 md:ml-0" href="#">
+      <a class="flex items-center ml-0" href="#" aria-label="Ecuaplac Inicio">
         <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
           class="logo-header h-14 md:h-14 w-auto object-contain select-none" loading="eager">
       </a>
@@ -3103,6 +3105,16 @@
 
       </div>
 
+      <!-- Dithered Brand Band (Efecto 21st para ECUAPLAC) -->
+      <div aria-hidden="true" class="df-band relative w-full overflow-hidden select-none border-t border-[#1C1C1E] mt-12" style="--df-accent: #FFB81C;">
+        <div class="df-field">
+          <div class="df-dots"></div>
+        </div>
+        <p class="df-mark pointer-events-none absolute -bottom-[0.05em] left-3 sm:left-6 md:left-10 select-none text-[clamp(4.2rem,18.5vw,13rem)] font-black leading-[0.8] tracking-[-0.06em]">
+          ECUAPLAC
+        </p>
+      </div>
+
       <!-- Bottom Bar: Full Width Credits -->
       <div class="pt-10 flex flex-col items-center justify-center w-full">
         <div
@@ -3247,7 +3259,7 @@
     <!-- Top Bar inside Mobile Menu (Mini Header) -->
     <div class="absolute top-0 left-0 w-full bg-black z-10">
       <div class="flex justify-between items-center h-24 px-8">
-        <a class="flex items-center -ml-8 md:ml-0" href="#" onclick="toggleMobileMenu()">
+        <a class="flex items-center ml-0" href="#" onclick="toggleMobileMenu()" aria-label="Ecuaplac Inicio">
           <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
             class="h-14 w-auto object-contain select-none" loading="lazy">
         </a>
@@ -3428,31 +3440,103 @@
         requestAnimationFrame(animation);
       }
 
-      // Add smooth scrolling to all local anchors with fixed navbar offset (72px)
+      function updateNavClass(targetId) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === targetId) {
+            link.classList.add('active-nav');
+          } else {
+            link.classList.remove('active-nav');
+          }
+        });
+      }
+
+      // Add smooth scrolling to all local anchors with fixed navbar offset (72px) & History Support
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
           if (targetId === '#') {
+            if (window.location.hash) {
+              history.pushState({ section: '' }, '', window.location.pathname + window.location.search);
+            }
             smoothScrollTo(0, 600);
+            updateNavClass('#hero-scroll-container');
             return;
           }
           const targetElement = document.querySelector(targetId);
           if (targetElement) {
+            if (window.location.hash !== targetId) {
+              history.pushState({ section: targetId }, '', targetId);
+            }
             const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 72;
             smoothScrollTo(offsetTop, 600);
-
-            // Instant feedback class update
-            document.querySelectorAll('.nav-link').forEach(link => {
-              if (link.getAttribute('href') === targetId) {
-                link.classList.add('active-nav');
-              } else {
-                link.classList.remove('active-nav');
-              }
-            });
+            updateNavClass(targetId);
           }
         });
       });
+
+      // Navigation Memory: Popstate listener for iPhone back gesture & browser back/forward buttons
+      window.addEventListener('popstate', function () {
+        const hash = window.location.hash;
+        if (hash) {
+          const targetElement = document.querySelector(hash);
+          if (targetElement) {
+            const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 72;
+            smoothScrollTo(offsetTop, 500);
+            updateNavClass(hash);
+            return;
+          }
+        }
+        smoothScrollTo(0, 500);
+        updateNavClass('#hero-scroll-container');
+      });
+
+      // Navigation Memory: Restore section on entry or return from secondary pages (e.g. reformas.html)
+      const returnSection = window.location.hash || sessionStorage.getItem('ecuaplac_return_section');
+      if (returnSection) {
+        sessionStorage.removeItem('ecuaplac_return_section');
+        setTimeout(() => {
+          const target = document.querySelector(returnSection);
+          if (target) {
+            const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 72;
+            smoothScrollTo(offsetTop, 400);
+            updateNavClass(returnSection);
+          }
+        }, 200);
+      }
+
+      // Touch-Guard: Prevent accidental logo clicks during iPhone edge swipe-back gesture
+      const brandLogo = document.querySelector('nav a[aria-label="Ecuaplac Inicio"], nav a[href="#"]');
+      if (brandLogo) {
+        let touchStartX = 0;
+        let isEdgeSwipe = false;
+
+        brandLogo.addEventListener('touchstart', function (e) {
+          if (e.touches && e.touches.length > 0) {
+            touchStartX = e.touches[0].clientX;
+            // If touch starts within 35px of left bezel, it's the iPhone back gesture zone
+            isEdgeSwipe = touchStartX < 35;
+          }
+        }, { passive: true });
+
+        brandLogo.addEventListener('touchmove', function (e) {
+          if (e.touches && e.touches.length > 0) {
+            const deltaX = e.touches[0].clientX - touchStartX;
+            if (deltaX > 15) {
+              isEdgeSwipe = true;
+            }
+          }
+        }, { passive: true });
+
+        brandLogo.addEventListener('click', function (e) {
+          if (isEdgeSwipe) {
+            e.preventDefault();
+            e.stopPropagation();
+            isEdgeSwipe = false;
+            return false;
+          }
+        });
+      }
 
       // Add smooth scrolling to pagination dots representing hero collage slides
       document.querySelectorAll('#vertical-pagination .pagination-dot').forEach(dot => {
@@ -3767,7 +3851,11 @@
     function handleVerMasProyectos(event) {
       event.preventDefault();
       const url = event.currentTarget.getAttribute('href');
-      // Navegación directa sin loader para evitar pantalla negra en red lenta
+      // Guarda la sección actual en sesión e historial para restaurar al volver atrás
+      sessionStorage.setItem('ecuaplac_return_section', '#reformas');
+      if (window.location.hash !== '#reformas') {
+        history.replaceState({ section: '#reformas' }, '', '#reformas');
+      }
       window.location.href = url;
     }
 
@@ -4026,6 +4114,8 @@
     document.addEventListener('DOMContentLoaded', window.initPortfolioSwiper);
   </script>
 
+  <!-- Dithered Footer JS -->
+  <script src="./assets/js/dithered-footer.js" defer></script>
 </body>
 
 </html>

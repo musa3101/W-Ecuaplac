@@ -497,6 +497,8 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "xfa7w1cqcu");
     </script>
+    <!-- Dithered Footer Effect -->
+    <link rel="stylesheet" href="./assets/css/dithered-footer.css">
 </head>
 <body class="bg-background text-on-background font-body-md antialiased pt-[72px] overflow-x-hidden">
 
@@ -504,7 +506,7 @@
 <nav class="fixed top-0 w-full border-b border-[#1C1C1E] z-50">
 <div class="flex justify-between items-center h-[72px] px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 <!-- Brand -->
-<a class="flex items-center -ml-8 md:ml-0" href="index.html">
+<a class="flex items-center ml-0" href="index.html" aria-label="Ecuaplac Inicio">
   <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="h-14 md:h-14 w-auto object-contain select-none" loading="lazy">
 </a>
 <!-- Desktop Nav -->
@@ -1040,6 +1042,16 @@
       
     </div>
 
+    <!-- Dithered Brand Band (Efecto 21st para ECUAPLAC) -->
+    <div aria-hidden="true" class="df-band relative w-full overflow-hidden select-none border-t border-[#1C1C1E] mt-12" style="--df-accent: #FFB81C;">
+      <div class="df-field">
+        <div class="df-dots"></div>
+      </div>
+      <p class="df-mark pointer-events-none absolute -bottom-[0.05em] left-3 sm:left-6 md:left-10 select-none text-[clamp(4.2rem,18.5vw,13rem)] font-black leading-[0.8] tracking-[-0.06em]">
+        ECUAPLAC
+      </p>
+    </div>
+
     <!-- Bottom Bar: Full Width Credits -->
     <div class="pt-10 flex flex-col items-center justify-center w-full">
       <a href="https://mynextbymusa.com" target="_blank" rel="noopener noreferrer" class="font-label-caps text-[14px] md:text-[16px] text-monolith-white tracking-[0.3em] uppercase font-extrabold hover:text-secondary hover:tracking-[0.4em] transition-all duration-500 py-4 px-8 inline-flex items-center justify-center h-14">
@@ -1219,6 +1231,38 @@
       }
 
 
+    }
+
+    // Touch-Guard: Prevent accidental logo clicks during iPhone edge swipe-back gesture
+    const brandLogo = document.querySelector('nav a[href="index.html"], nav a[aria-label="Ecuaplac Inicio"]');
+    if (brandLogo) {
+      let touchStartX = 0;
+      let isEdgeSwipe = false;
+
+      brandLogo.addEventListener('touchstart', function (e) {
+        if (e.touches && e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+          isEdgeSwipe = touchStartX < 35;
+        }
+      }, { passive: true });
+
+      brandLogo.addEventListener('touchmove', function (e) {
+        if (e.touches && e.touches.length > 0) {
+          const deltaX = e.touches[0].clientX - touchStartX;
+          if (deltaX > 15) {
+            isEdgeSwipe = true;
+          }
+        }
+      }, { passive: true });
+
+      brandLogo.addEventListener('click', function (e) {
+        if (isEdgeSwipe) {
+          e.preventDefault();
+          e.stopPropagation();
+          isEdgeSwipe = false;
+          return false;
+        }
+      });
     }
 
     window.addEventListener('scroll', handleScroll);
@@ -1560,4 +1604,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 </script>
 
+  <!-- Dithered Footer JS -->
+  <script src="./assets/js/dithered-footer.js" defer></script>
 </body></html>
