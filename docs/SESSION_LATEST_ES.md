@@ -1,63 +1,49 @@
-# Resumen de Sesión - 7 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
+# Resumen de Sesión - 7 de Noviembre de 2026 (2ª Sesión — MYNEXT Setup 2.0 — Musa)
 
 ### ¿Qué se ha hecho hoy?
-1. **Creación y Lanzamiento de la Aplicación Web Oficial (`appweb/`)**:
-   - Se diseñó y construyó la Progressive Web App (PWA) de gestión interna para José Rivadeneira alojada en la ruta `/appweb/`.
-   - **Estética de Alta Gama Arquitectónica (Mallorca Luxury Bento Grid)**: Paleta noble en Deep Navy (`#0B1523`), oro artesano (`#D49B0B`), fondo chalk/tiza (`#F6F5F2`) y tarjetas Bento con efecto *double-bezel*.
-   - **Autenticación Directa**: Acceso mediante correo corporativo (`ecuaplacbyjyg@gmail.com`) y contraseña administradora (`admin`), con opción de recordar sesión localmente.
-   - **Blindaje Anti-Zoom en iOS Safari**: Se bloqueó el molesto zoom automático al tocar inputs o botones mediante `touch-action: manipulation`, tamaños mínimos de 16px en inputs, y bloqueo de eventos `gesturestart` y `dblclick`.
-   - **Compresión Automática en el Cliente**: Conversión nativa mediante HTML5 Canvas de cualquier fotografía que suba José (JPG/PNG desde móvil o cámara) a formato `.webp` optimizado antes de enviarlo a Supabase Storage.
-   - **Vínculo Oficial del Logotipo sin Fondo**: Integración del isotipo oficial transparente extraído de `fav-sin-fondo.svg` con calibración milimétrica de viewBox (`355 265 810 805`), luciendo nítido sobre el header Deep Noble Navy.
+1. **Diagnóstico Forense del Bloqueo de Red en España (IPs de Cloudflare Pages):**
+   - Se investigó en vivo por qué `ecuaplac.com` dejaba de responder los fines de semana en horario de tarde/noche.
+   - Se demostró que el dominio tenía asignadas las IPs `188.114.96.5` y `188.114.97.5` de Cloudflare Pages, las cuales son bloqueadas a nivel TCP por las operadoras españolas (Movistar, Digi, O2, MasOrange, Vodafone) durante las jornadas de fútbol de LaLiga.
+   - Se comparó con `mynextbymusa.com` (`104.21.33.195`) comprobando que el fallo era exclusivamente por el rango de IP compartido (`188.114.96.x`) asignado a `ecuaplac.com`.
 
-2. **Estructuración de las 4 Pestañas en el Dock Flotante**:
-   - **Obras**: Gestión del carrusel de obras principales de la portada web. Permite subir nuevas fotos, editar título, ubicación y cambiar visibilidad/orden.
-   - **+ Proj**: Gestión de las 11 reformas secundarias de la galería desplegable en `reformas.html`.
-   - **Leads (Presupuestos)**: Sección preparada con diseño *"Próximamente"*, informando de la seguridad actual (notificación a `ecuaplac.jyg.sl@gmail.com` y registro en la tabla `ecuaplac_leads`).
-   - **Ajustes**: Panel de perfil con avatar personalizable, cambio de contraseña y cierre de sesión.
+2. **Blindaje Definitivo 24/7 con GitHub Pages (Red Fastly) + DNS Solo (Nube Gris):**
+   - Se activó **GitHub Pages** en el repositorio `musa3101/W-Ecuaplac` sirviendo directamente desde la rama `main` (`/`).
+   - Se desvincularon los dominios bloqueados del proyecto de Cloudflare Pages y se configuraron los registros en el panel DNS de Cloudflare en modo **Solo DNS (Nube Gris)**:
+     - Registro `A` (`@` -> `185.199.108.153`, red Fastly de GitHub inmune a bloqueos de operadoras).
+     - Registro `CNAME` (`www` -> `musa3101.github.io`).
+   - Se emitieron y activaron automáticamente los certificados SSL (`HTTPS` forzado) para `https://ecuaplac.com`.
+   - Se añadieron los archivos `CNAME` y `.nojekyll` a la raíz del proyecto para preservar el dominio personalizado en futuros despliegues.
 
-3. **Sincronización Dinámica con Supabase en la Web Pública**:
-   - `reformas.html` y `reformas-en.html` ahora leen dinámicamente en tiempo real las reformas activas de la tabla `ecuaplac_more_projects`, manteniendo fallback estático de seguridad si no hay red.
-   - Creación de los scripts SQL de soporte: `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql`.
-
-4. **Mini-Merge a Producción y Despliegue en Cloudflare**:
-   - **Mini-merge ejecutado con éxito**: Registro `2026-11-07T15:37:58 | merge completo | all | push=1`.
-   - Fusión limpia en `main` sin alterar el entorno local `dev` gracias al uso del `git worktree` temporal.
-   - Push exitoso a `origin main`, activando el despliegue automático en Cloudflare Pages.
+3. **Mini-Merges Ejecutados en el Día:**
+   - `2026-11-07T15:37:58 | merge completo | all | push=1` (Lanzamiento de la PWA `/appweb/` y sincronización de reformas con Supabase).
+   - `2026-11-07T21:00:42 | merge completo | all | push=1` (Configuración de `CNAME` y `.nojekyll` en `main` para GitHub Pages).
 
 ---
 
 ### Archivos Modificados / Creados
-- `appweb/index.html` (Aplicación PWA completa)
-- `appweb/sw.js` (Service Worker v8 con estrategia Network-First)
-- `appweb/manifest.webmanifest` (Instalación PWA móvil)
-- `appweb/README.md` (Documentación técnica del gestor)
-- `appweb/assets/` (`fav-sin-fondo.svg`, iconos PWA 192px/512px, logos y portfolio)
-- `reformas.html` & `reformas-en.html` (Carga dinámica de `ecuaplac_more_projects`)
-- `supabase_admin_setup.sql` (Esquema SQL para credenciales y perfil)
-- `supabase_more_projects_setup.sql` (Esquema SQL para las 11 reformas secundarias)
-- `assets/img/portfolio/` (Imágenes optimizadas de obras)
-- `.musa/merges.log` & `.musa/session.json` (Registro de sesión y mini-merges)
+- `CNAME` (Dominio oficial `ecuaplac.com` para GitHub Pages)
+- `.nojekyll` (Despliegue directo de activos estáticos sin procesado Jekyll)
+- `.musa/session.json` & `.musa/merges.log` (Cierre de sesión y registro de mini-merges)
 - `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación actualizada)
 
 ---
 
 ### Problemas Solucionados
-- **Zoom molesto en iPhone**: Resuelto al 100% con directivas de viewport, inputs a 16px y listeners táctiles.
-- **Formato pesado de fotos de clientes**: Conversión instantánea a WebP directamente en el navegador del móvil antes de subir a la nube.
-- **Header blanco plano**: Sustituido por Deep Noble Navy satinado con borde en oro artesano y logotipo oficial transparente.
-- **Acceso seguro**: Se eliminó el sistema rudimentario de PIN y se adoptó el login por correo y contraseña.
+- **Caídas y carga infinita en España durante jornadas de fútbol:** Resuelto de raíz y para siempre al pasar `ecuaplac.com` de la IP bloqueada de Cloudflare (`188.114.96.5`) a la red Fastly de GitHub Pages (`185.199.108.153`) con Nube Gris en Cloudflare.
+- **Velocidad verificada en vivo durante bloqueo activo:** `https://ecuaplac.com` y `https://ecuaplac.com/appweb/` responden con `HTTP/2 200 OK` en **0.07s - 0.21s** en Mac y móvil.
 
 ---
 
 ### Qué queda pendiente
-- Ejecutar los scripts SQL `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql` en el SQL Editor del dashboard de Supabase para habilitar las nuevas tablas si se requiere persistencia cloud total.
+- Ejecutar los scripts SQL `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql` en el SQL Editor de Supabase (si aún no se han ejecutado).
+- Desarrollar la pestaña de **Leads (Presupuestos)** dentro de la App `/appweb/`.
 
 ---
 
 ### Qué se recomienda hacer en la próxima sesión
-1. **Desarrollar la sección de "Leads" en la App**:
-   - Conectar la pestaña `Leads` a la tabla `ecuaplac_leads` de Supabase para listar en vivo los presupuestos que solicitan los clientes desde el formulario web.
-   - Añadir botones de llamada rápida (`tel:`) y chat directo de WhatsApp (`https://wa.me/`) junto a cada lead.
-   - Incluir selector de estado para cada presupuesto (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
-2. **Revisión en vivo de la PWA**:
-   - Acceder desde el móvil a `https://ecuaplac.com/appweb/` y probar la subida de una obra real desde la cámara del cliente.
+1. **Activar la pestaña "Leads" en la PWA (`appweb/`)**:
+   - Conectar la vista de Leads a la tabla `ecuaplac_leads` de Supabase para ver los presupuestos recibidos en tiempo real.
+   - Añadir botones de llamada rápida (`tel:`) y apertura directa de WhatsApp (`https://wa.me/`) para cada cliente.
+   - Añadir selector de estado (*Nuevo*, *Contactado*, *Presupuesto enviado*, *Aceptado*).
+2. **Prueba con el cliente (José)**:
+   - Instalar el acceso directo de `https://ecuaplac.com/appweb/` en la pantalla de inicio de su teléfono y probar la subida de una foto real.

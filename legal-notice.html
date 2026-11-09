@@ -20,6 +20,7 @@
 <link rel="canonical" href="https://ecuaplac.com/legal-notice.html">
 <link rel="alternate" hreflang="es" href="https://ecuaplac.com/aviso-legal.html">
 <link rel="alternate" hreflang="en" href="https://ecuaplac.com/legal-notice.html">
+<link rel="alternate" hreflang="de" href="https://ecuaplac.com/impressum.html">
 <link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/aviso-legal.html">
 
 <!-- Open Graph / Facebook / WhatsApp -->
@@ -34,7 +35,10 @@
 <meta property="og:url" content="https://ecuaplac.com/legal-notice.html">
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+<!-- Brand Montserrat preserved for official text logo -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
 <style>
   nav {
     transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -47,16 +51,16 @@
     opacity: 1; border: none;
   }
   .legal-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 18px; font-weight: 600;
+    letter-spacing: -0.01em; text-transform: none;
     color: #141414; margin-bottom: 12px; margin-top: 40px;
     padding-bottom: 8px;
     border-bottom: 1px solid #e2e2e2;
   }
   .legal-section h2:first-of-type { margin-top: 0; }
-  .legal-section p { color: #4c4546; line-height: 1.8; margin-bottom: 12px; font-size: 15px; }
-  .legal-section ul { list-style: disc; padding-left: 20px; color: #4c4546; line-height: 1.8; font-size: 15px; margin-bottom: 12px; }
+  .legal-section p { font-family: 'Satoshi', sans-serif; color: #4c4546; line-height: 1.8; margin-bottom: 12px; font-size: 15px; }
+  .legal-section ul { font-family: 'Satoshi', sans-serif; list-style: disc; padding-left: 20px; color: #4c4546; line-height: 1.8; font-size: 15px; margin-bottom: 12px; }
   .legal-section li { margin-bottom: 4px; }
   .legal-section a { color: #795746; text-decoration: underline; }
 </style>
@@ -65,8 +69,13 @@
     theme: { extend: {
       colors: { "primary": "#141414", "secondary": "#795746", "monolith-white": "#FFFFFF", "on-surface-variant": "#4c4546", "mortar-grey": "#666666", "surface-container-lowest": "#FFFFFF", "background": "#F5F6F7", "outline-variant": "#cfc4c5" },
       spacing: { "margin-mobile": "20px", "margin-desktop": "64px", "max-width": "1440px" },
-      fontFamily: { "body-md": ["Open Sans"], "label-caps": ["Montserrat"] },
-      fontSize: { "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.15em", "fontWeight": "600" }] }
+      fontFamily: {
+        "headline": ["'Clash Display'", "sans-serif"],
+        "body": ["'Satoshi'", "sans-serif"],
+        "body-md": ["'Satoshi'", "sans-serif"],
+        "label-caps": ["'Satoshi'", "sans-serif"]
+      },
+      fontSize: { "label-caps": ["11px", { "lineHeight": "1.0", "letterSpacing": "0.2em", "fontWeight": "700" }] }
     }}
   }
 </script>
@@ -157,6 +166,8 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "xfa7w1cqcu");
     </script>
+    <!-- Dithered Footer Effect -->
+    <link rel="stylesheet" href="./assets/css/dithered-footer.css">
 </head>
 <body class="bg-[#F5F6F7] text-[#141414] antialiased pt-[72px] overflow-x-hidden">
 
@@ -164,14 +175,15 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full border-b border-[#1C1C1E] z-50">
 <div class="flex justify-between items-center h-[72px] px-[20px] md:px-[64px] max-w-[1440px] mx-auto">
-  <a class="flex items-center -ml-8 md:ml-0" href="index-en.html">
-    <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="h-14 md:h-14 w-auto object-contain select-none" loading="lazy">
+  <a class="flex items-center ml-0" href="index-en.html" aria-label="Ecuaplac Home">
+    <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="logo-header h-10 md:h-11 w-auto object-contain select-none" loading="lazy">
   </a>
   <div class="flex items-center gap-6">
     <a href="index-en.html" class="text-white/70 hover:text-white text-[12px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300">← Back to Home</a>
     <div class="flex items-center gap-3 text-[12px] font-semibold tracking-[0.15em] uppercase">
       <a href="aviso-legal.html" class="text-white/40 hover:text-white transition-colors duration-300">ES</a>
       <span class="text-white font-bold">EN</span>
+      <a href="impressum.html" class="text-white/40 hover:text-white transition-colors duration-300">DE</a>
     </div>
   </div>
 </div>
@@ -180,14 +192,14 @@
 <main class="py-16 px-[20px] md:px-[64px] max-w-[860px] mx-auto">
 
   <!-- Page Header -->
-  <div class="border-b border-[#141414] pb-6 mb-12">
-    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#666] block mb-2">Legal Information</span>
-    <h1 class="font-['Montserrat'] text-[36px] md:text-[52px] font-light leading-tight text-[#141414] tracking-tight">Legal Notice</h1>
-    <p class="text-[#666] mt-3 text-sm">Last updated: May 2026</p>
+  <div class="border-b border-[#141414]/20 pb-6 mb-12">
+    <span class="font-body text-[11px] font-bold uppercase tracking-[0.25em] text-[#8C6D53] block mb-2">Legal Information</span>
+    <h1 class="font-headline text-[36px] md:text-[52px] font-semibold leading-tight text-[#141414] tracking-[-0.025em]">Legal Notice</h1>
+    <p class="font-body text-[#666] mt-3 text-sm">Last updated: May 2026</p>
   </div>
 
   <!-- Legal Content -->
-  <div class="legal-section font-['Open_Sans']">
+  <div class="legal-section font-body">
 
     <h2>1. Owner Data</h2>
     <p>In compliance with Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSICE), the following identifying data is provided:</p>
@@ -241,7 +253,7 @@
 </main>
 
 <div class="ecuador-divider"></div>
-<footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-10 border-t border-[#1C1C1E] transition-colors duration-300 mt-24">
+<footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300 mt-24">
   <div class="max-w-[1440px] mx-auto px-[20px] md:px-[64px]">
     <!-- 3 Column Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pb-16 border-b border-[#1C1C1E]">
@@ -285,15 +297,30 @@
           </ul>
         </div>
         
-        <!-- Instagram -->
-        <a class="group flex items-center justify-center gap-4 text-[13px] font-['Montserrat'] tracking-widest text-[#888] hover:text-[#FFFFFF] transition-all duration-300 h-11 px-2" href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank" rel="noopener noreferrer">
-          INSTAGRAM
-          <span class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md">
+        <!-- Social & Location -->
+        <div class="flex items-center justify-center md:justify-end gap-3 mt-2">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank"
+            rel="noopener noreferrer" aria-label="Ecuaplac Instagram"
+            class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
             </svg>
-          </span>
-        </a>
+          </a>
+          <!-- Google Maps -->
+          <a href="https://maps.app.goo.gl/5Fr819Bsh6AkjQKd8" target="_blank"
+            rel="noopener noreferrer" aria-label="Location on Google Maps"
+            class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
+            <svg class="w-4 h-4" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
+              <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/>
+              <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
+              <path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.3c4.8 10.6 12.8 19.2 21 29.9l34.1-40.5c-3.3 3.9-8.1 6.3-13.5 6.3"/>
+              <path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2"/>
+            </svg>
+          </a>
+        </div>
       </div>
       
     </div>
@@ -307,6 +334,17 @@
         © 2026 ECUAPLAC. ALL RIGHTS RESERVED.
       </span>
     </div>
+
+    </div>
+
+  <!-- Dithered Brand Band (ABAJO DE TODO - Efecto 21st para ECUAPLAC) -->
+  <div aria-hidden="true" class="df-band relative w-full overflow-hidden select-none border-t border-[#1C1C1E] mt-10" style="--df-accent: #FFB81C;">
+    <div class="df-field">
+      <div class="df-dots"></div>
+    </div>
+    <p class="df-mark pointer-events-none absolute -bottom-[0.05em] left-3 sm:left-6 md:left-10 select-none text-[clamp(3.3rem,16vw,12.5rem)] font-black leading-[0.8] tracking-[0.03em]">
+      ECUAPLAC
+    </p>
   </div>
 </footer>
 
@@ -327,7 +365,7 @@ async function handleFormSubmit(formId) {
   
   if(submitBtn) {
     submitBtn.disabled = true;
-    submitBtn.innerText = 'ENVIANDO...';
+    submitBtn.innerText = 'SENDING...';
   }
   
   try {
@@ -350,7 +388,7 @@ async function handleFormSubmit(formId) {
       <span class="material-symbols-outlined text-6xl text-secondary mb-6">task_alt</span>
       <h3 class="font-headline-lg text-headline-lg text-primary mb-4">Request Received!</h3>
       <p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-8">
-        Hemos recibido tus especificaciones técnicas para el proyecto. Un arquitecto de nuestro equipo analizará la viabilidad y te contactará en las próximas 24 horas.
+        We have received your technical specifications for the project. An architect from our team will analyze the feasibility and contact you within the next 24 hours.
       </p>
       <button onclick="closePresupuestoModal()" class="inline-flex items-center justify-center font-bold uppercase tracking-widest text-[12px] text-primary border border-primary/40 rounded-full px-10 py-3 hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 cursor-pointer">
         Understood
@@ -368,7 +406,7 @@ async function handleFormSubmit(formId) {
     toast.className = 'fixed bottom-8 right-8 z-50 bg-primary text-monolith-white px-6 py-4 shadow-xl border border-outline-variant flex items-center gap-3 animate-slide-up font-body-md';
     toast.innerHTML = `
       <span class="material-symbols-outlined text-secondary">mail</span>
-      <span>Message enviado. Te responderemos muy pronto.</span>
+      <span>Message sent. We will respond very soon.</span>
     `;
     document.body.appendChild(toast);
     
@@ -386,45 +424,78 @@ async function handleFormSubmit(formId) {
 
 
 <!-- Cookie Banner -->
-<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-transform duration-700 translate-y-full">
-  <div class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/80 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex-1 text-center md:text-left">
-      <h4 class="text-monolith-white font-headline-md mb-2 flex items-center justify-center md:justify-start gap-2">
-        <span class="material-symbols-outlined text-secondary">cookie</span>
-        Privacy and Cookies
-      </h4>
-      <p class="text-[#A3A3A3] font-body-sm md:font-body-md leading-relaxed">
-        At Ecuaplac we take care of the light and structure of your navigation. We use cookies to optimize your experience in our renovations.
-      </p>
-    </div>
-    <div class="flex items-center gap-4 w-full md:w-auto">
-      <button onclick="acceptCookies()" class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md">
-        Accept
-      </button>
-      <a href="legal-notice.html" class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white hover:text-primary transition-all duration-300 rounded-full px-8 py-3.5">
-        Configure
-      </a>
+  <div id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-transform duration-700 translate-y-full">
+    <div
+      class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/85 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex-1 text-center md:text-left">
+        <h4 class="text-monolith-white font-headline-md mb-2 flex items-center justify-center md:justify-start gap-2">
+          <span class="material-symbols-outlined text-secondary">cookie</span>
+          Privacy and Cookies
+        </h4>
+        <p class="text-[#A3A3A3] font-body-sm md:font-body-md leading-relaxed">
+          At Ecuaplac we take care of the light and structure of your navigation. We use cookies to optimize your
+          experience in our renovations.
+        </p>
+      </div>
+      <div class="flex items-center gap-4 w-full md:w-auto">
+        <button onclick="acceptCookies()"
+          class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md cursor-pointer active:scale-95">
+          Accept
+        </button>
+        <button onclick="rejectCookies()"
+          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95">
+          Decline
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<script>
-  function acceptCookies() {
-    localStorage.setItem('ecuaplac_cookies', 'accepted');
-    document.getElementById('cookie-banner').classList.add('translate-y-full');
-  }
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('ecuaplac_cookies')) {
-      setTimeout(() => {
-        const banner = document.getElementById('cookie-banner');
-        if (banner) banner.classList.remove('translate-y-full');
-      }, 1000);
+  <script>
+    function saveCookieConsent(status) {
+      try {
+        localStorage.setItem('ecuaplac_cookies', status);
+      } catch (e) {}
+      document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax';
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.add('translate-y-full');
     }
-  });
-</script>
+
+    function acceptCookies() {
+      saveCookieConsent('accepted');
+    }
+
+    function rejectCookies() {
+      saveCookieConsent('rejected');
+    }
+
+    function hasCookieConsent() {
+      try {
+        const ls = localStorage.getItem('ecuaplac_cookies');
+        if (ls === 'accepted' || ls === 'rejected') return true;
+      } catch (e) {}
+      const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
+      if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
+        try { localStorage.setItem('ecuaplac_cookies', match[1]); } catch (e) {}
+        return true;
+      }
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!hasCookieConsent()) {
+        setTimeout(() => {
+          const banner = document.getElementById('cookie-banner');
+          if (banner) banner.classList.remove('translate-y-full');
+        }, 1000);
+      }
+    });
+  </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const logo = document.querySelector('.logo-header');
   if (logo) logo.classList.add('reveal-active');
 });
 </script>
+<!-- Dithered Footer JS -->
+<script src="./assets/js/dithered-footer.js" defer></script>
 </body></html>

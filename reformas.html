@@ -27,6 +27,7 @@
 <link rel="canonical" href="https://ecuaplac.com/reformas.html">
 <link rel="alternate" hreflang="es" href="https://ecuaplac.com/reformas.html">
 <link rel="alternate" hreflang="en" href="https://ecuaplac.com/reformas-en.html">
+<link rel="alternate" hreflang="de" href="https://ecuaplac.com/reformas-de.html">
 <link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/reformas.html">
 
 <!-- Open Graph / Facebook / WhatsApp -->
@@ -47,9 +48,11 @@
 <meta name="twitter:image" content="https://ecuaplac.com/assets/img/logos/favicon-512x512.png">
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+<!-- Brand Montserrat preserved for official text logo -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
         .material-symbols-outlined {
           font-variation-settings:
@@ -206,26 +209,68 @@
                     "margin-desktop": "64px"
             },
             "fontFamily": {
-                    "caption": ["Open Sans"],
-                    "headline-lg-mobile": ["Cormorant Garamond", "serif"],
-                    "body-lg": ["Open Sans"],
-                    "body-md": ["Open Sans"],
-                    "headline-lg": ["Cormorant Garamond", "serif"],
-                    "headline-xl": ["Cormorant Garamond", "serif"],
-                    "label-caps": ["Montserrat", "sans-serif"]
+                    "headline": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "body": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "editorial": [
+                            "'Boska'",
+                            "serif"
+                    ],
+                    "caption": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "headline-lg-mobile": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "body-lg": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "body-md": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "headline-lg": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "headline-xl": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "label-caps": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ]
             },
             "fontSize": {
-                    "headline-lg-mobile": [
-                            "24px",
+                    "caption": [
+                            "13px",
                             {
-                                    "lineHeight": "1.2",
+                                    "lineHeight": "1.4",
                                     "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "1.15",
+                                    "letterSpacing": "-0.015em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "body-lg": [
                             "18px",
                             {
                                     "lineHeight": "1.6",
+                                    "letterSpacing": "0.005em",
                                     "fontWeight": "400"
                             }
                     ],
@@ -233,31 +278,32 @@
                             "16px",
                             {
                                     "lineHeight": "1.6",
+                                    "letterSpacing": "0.005em",
                                     "fontWeight": "400"
                             }
                     ],
                     "headline-lg": [
-                            "32px",
+                            "34px",
                             {
-                                    "lineHeight": "1.2",
-                                    "letterSpacing": "-0.01em",
-                                    "fontWeight": "400"
+                                    "lineHeight": "1.15",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "headline-xl": [
-                            "48px",
+                            "52px",
                             {
-                                    "lineHeight": "1.1",
-                                    "letterSpacing": "-0.02em",
-                                    "fontWeight": "300"
+                                    "lineHeight": "1.08",
+                                    "letterSpacing": "-0.025em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "label-caps": [
-                            "12px",
+                            "11px",
                             {
                                     "lineHeight": "1.0",
-                                    "letterSpacing": "0.15em",
-                                    "fontWeight": "600"
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "700"
                             }
                     ]
             }
@@ -295,6 +341,100 @@
 .carousel-card.card {
   height: 480px;
   padding: 0 !important;
+}
+
+/* 21st.dev Infinite Auto-Slider for Galería 2 */
+@keyframes auto-scroll-infinite {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.infinite-slider-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  contain: paint;
+}
+
+.infinite-slider-mask {
+  mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .infinite-slider-mask {
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+}
+
+.infinite-slider-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: auto-scroll-infinite 36s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .infinite-slider-track {
+    gap: 1.75rem;
+    animation-duration: 42s;
+  }
+}
+
+/* Pause on hover and touch */
+.infinite-slider-track:hover,
+.infinite-slider-track:active {
+  animation-play-state: paused;
+}
+
+/* Luxury card with mobile-first proportions */
+.auto-slider-card {
+  flex-shrink: 0;
+  width: 210px;
+  height: 270px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  position: relative;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, filter 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (min-width: 640px) {
+  .auto-slider-card {
+    width: 250px;
+    height: 315px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auto-slider-card {
+    width: 285px;
+    height: 360px;
+  }
+}
+
+.auto-slider-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.08);
+  box-shadow: 0 20px 40px -15px rgba(212, 155, 11, 0.25), 0 0 0 1px rgba(212, 155, 11, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinite-slider-track {
+    animation: none !important;
+    overflow-x: auto;
+    width: 100%;
+  }
 }
 
 </style>
@@ -358,6 +498,8 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "xfa7w1cqcu");
     </script>
+    <!-- Dithered Footer Effect -->
+    <link rel="stylesheet" href="./assets/css/dithered-footer.css">
 </head>
 <body class="bg-background text-on-background font-body-md antialiased pt-[72px] overflow-x-hidden">
 
@@ -365,8 +507,8 @@
 <nav class="fixed top-0 w-full border-b border-[#1C1C1E] z-50">
 <div class="flex justify-between items-center h-[72px] px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 <!-- Brand -->
-<a class="flex items-center -ml-8 md:ml-0" href="index.html">
-  <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="h-14 md:h-14 w-auto object-contain select-none" loading="lazy">
+<a class="flex items-center ml-0" href="index.html" aria-label="Ecuaplac Inicio">
+  <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="logo-header h-10 md:h-11 w-auto object-contain select-none" loading="lazy">
 </a>
 <!-- Desktop Nav -->
 <ul class="hidden lg:flex items-center gap-8 uppercase font-semibold text-[13px] tracking-[0.18em]">
@@ -378,6 +520,7 @@
   <div class="flex items-center gap-3">
     <span class="lang-active cursor-default">ES</span>
     <a href="reformas-en.html" class="lang-inactive transition-all duration-300">EN</a>
+    <a href="reformas-de.html" class="lang-inactive transition-all duration-300">DE</a>
   </div>
 </li>
 </ul>
@@ -395,10 +538,10 @@
 <main class="py-16">
   <!-- Page Header -->
   <section class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop mb-16">
-    <div class="border-b border-primary pb-6">
-      <span class="font-label-caps text-label-caps uppercase text-mortar-grey tracking-widest block mb-2">Galería Completa</span>
-      <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Antes y Después</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant mt-4 max-w-2xl">
+    <div class="border-b border-primary/20 pb-6">
+      <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Galería Completa</span>
+      <h1 class="font-headline text-[32px] sm:text-[40px] md:text-[54px] font-semibold text-primary leading-tight tracking-[-0.025em]">Antes y Después</h1>
+      <p class="font-body text-base md:text-lg text-on-surface-variant mt-4 max-w-2xl leading-relaxed">
         Explora la transformación integral de nuestros proyectos. Desde el estado original hasta soluciones arquitectónicas terminadas con acabados premium.
       </p>
     </div>
@@ -412,10 +555,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto I</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Reforma Integral de Baño</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto I</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Reforma Integral de Baño</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Sustitución completa de revestimientos por gres porcelánico beige texturizado, plato de ducha a ras de suelo, grifería empotrada negra mate y mueble de roble natural con espejo retroiluminado.
           </p>
         </div>
@@ -459,10 +602,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto II</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Lavabo Flotante a Medida</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto II</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Lavabo Flotante a Medida</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Diseño e instalación de encimera volada de piedra tecnológica en tonos neutros, con lavabo cerámico sobre encimera en color negro mate, grifería mural empotrada e instalaciones totalmente ocultas.
           </p>
         </div>
@@ -506,10 +649,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto III</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Vestidor de Pladur y Roble</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto III</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Vestidor de Pladur y Roble</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Construcción a medida de vestidor y estanterías integradas en pladur con acabados en blanco satinado, cajoneras suspendidas en madera de roble natural y cestas metálicas deslizantes, realzado por iluminación LED cálida indirecta.
           </p>
         </div>
@@ -553,10 +696,10 @@
       <div class="pb-16 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto IV</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Escalera y Distribuidor de Roble</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto IV</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Escalera y Distribuidor de Roble</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Instalación de peldaños y revestimiento de escalera en madera de roble natural, enmarcado por paredes lisas blancas con puertas empotradas sin marco y luminarias lineales LED de cortesía en los laterales.
           </p>
         </div>
@@ -612,141 +755,216 @@
     
     <!-- Section Header -->
     <div class="text-center mb-12 pt-8">
-      <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-3 font-bold">Galería</span>
-      <h2 class="font-headline-xl text-[28px] md:text-[40px] leading-tight font-bold text-primary">Más Proyectos Realizados</h2>
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mt-4">Una selección de trabajos recientes: cerramientos, techos decorativos, baños de diseño y mucho más.</p>
+      <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Galería</span>
+      <h2 class="font-headline text-[28px] sm:text-[36px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Más Proyectos Realizados</h2>
+      <p class="font-body text-base text-on-surface-variant max-w-2xl mx-auto mt-3 leading-relaxed">Una selección de trabajos recientes: cerramientos, techos decorativos, baños de diseño y mucho más.</p>
     </div>
 
-    <!-- Swiper Carousel -->
-    <div class="swiper gallery-swiper rounded-2xl pb-10" style="--swiper-navigation-color: #ffffff; --swiper-pagination-color: #ffffff; --swiper-navigation-size: 24px;">
-      <div class="swiper-wrapper">
-        <!-- Slide 1: ANTES -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Baño en fase de obra - pladur, alicatado e instalaciones" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Reforma integral de baño — Fase de obra</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 2: DESPUÉS -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Baño reformado - resultado final con ducha, espejo LED y mueble de roble" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Reforma integral de baño — Resultado final</p>
+    <!-- 21st.dev Infinite Auto-Slider (Full Responsive Mobile-First & Calibrated Smooth Pace) -->
+    <div class="infinite-slider-wrapper infinite-slider-mask w-full">
+      <div id="auto-slider-track" class="infinite-slider-track py-6">
+        <!-- 11 Obras Reales (Set 1) -->
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Reforma integral de baño — Fase de obra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Fase de obra</p>
             </div>
           </div>
         </div>
-        <!-- Slide 3 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño de piedra natural con doble espejo retroiluminado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Baño en piedra natural con espejos retroiluminados</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Reforma integral de baño — Resultado final" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Resultado final</p>
             </div>
           </div>
         </div>
-        <!-- Slide 4 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Cerramiento de cristal con ventanales panorámicos</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño en piedra natural con espejos retroiluminados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Baño en piedra natural con espejos retroiluminados</p>
             </div>
           </div>
         </div>
-        <!-- Slide 5 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Cerramiento panorámico — Vista frontal</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Cerramiento de cristal con ventanales panorámicos</p>
             </div>
           </div>
         </div>
-        <!-- Slide 6 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo de pladur decorativo en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Falso techo decorativo de pladur en construcción</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico — Vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Cerramiento panorámico — Vista frontal</p>
             </div>
           </div>
         </div>
-        <!-- Slide 7 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur con estructura decorativa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Techo circular de pladur — Fase estructural</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo decorativo de pladur en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Falso techo decorativo de pladur en construcción</p>
             </div>
           </div>
         </div>
-        <!-- Slide 8 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Detalle de techo circular de pladur terminado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Techo circular de pladur — Detalle de acabado</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur — Fase estructural" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Fase estructural</p>
             </div>
           </div>
         </div>
-        <!-- Slide 9 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas al mar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Salón con iluminación LED perimetral y vistas</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Techo circular de pladur — Detalle de acabado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Detalle de acabado</p>
             </div>
           </div>
         </div>
-        <!-- Slide 10 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con downlights empotrados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Revestimiento de piedra natural con iluminación</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Salón con iluminación LED perimetral y vistas</p>
             </div>
           </div>
         </div>
-        <!-- Slide 11 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales en fase de pintura" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con iluminación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Revestimiento de piedra natural con iluminación</p>
             </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Porche con ventanales — Fase de acabados</p>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales — Fase de acabados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Porche con ventanales — Fase de acabados</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 Obras Reales (Set 2 - Duplicado para Seamless Infinite Loop) -->
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Reforma integral de baño — Fase de obra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Fase de obra</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Reforma integral de baño — Resultado final" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Resultado final</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño en piedra natural con espejos retroiluminados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Baño en piedra natural con espejos retroiluminados</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Cerramiento de cristal con ventanales panorámicos</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico — Vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Cerramiento panorámico — Vista frontal</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo decorativo de pladur en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Falso techo decorativo de pladur en construcción</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur — Fase estructural" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Fase estructural</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Techo circular de pladur — Detalle de acabado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Detalle de acabado</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Salón con iluminación LED perimetral y vistas</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con iluminación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Revestimiento de piedra natural con iluminación</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="eager" decoding="async" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales — Fase de acabados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+              <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">Porche con ventanales — Fase de acabados</p>
             </div>
           </div>
         </div>
       </div>
-      <!-- Navigation -->
-      <div class="swiper-button-prev !bg-black/70 !w-12 !h-12 !rounded-full !shadow-xl hover:!bg-black/90 transition-all"></div>
-      <div class="swiper-button-next !bg-black/70 !w-12 !h-12 !rounded-full !shadow-xl hover:!bg-black/90 transition-all"></div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
     </div>
 
     <div class="pb-12"></div>
@@ -754,7 +972,7 @@
 
 
 
-</main><footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-10 border-t border-[#1C1C1E] transition-colors duration-300">
+</main><footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
     <!-- 3 Column Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pb-16 border-b border-[#1C1C1E]">
@@ -798,15 +1016,30 @@
           </ul>
         </div>
         
-        <!-- Instagram -->
-        <a class="group flex items-center justify-center gap-4 text-[13px] font-label-caps tracking-widest text-[#888] hover:text-monolith-white transition-all duration-300 h-11 px-2" href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank" rel="noopener noreferrer">
-          INSTAGRAM
-          <span class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md">
+        <!-- Redes & Ubicación -->
+        <div class="flex items-center justify-center md:justify-end gap-3 mt-2">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram de Ecuaplac"
+            class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
             </svg>
-          </span>
-        </a>
+          </a>
+          <!-- Google Maps -->
+          <a href="https://maps.app.goo.gl/5Fr819Bsh6AkjQKd8" target="_blank"
+            rel="noopener noreferrer" aria-label="Ubicación en Google Maps"
+            class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
+            <svg class="w-4 h-4" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
+              <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/>
+              <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
+              <path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.3c4.8 10.6 12.8 19.2 21 29.9l34.1-40.5c-3.3 3.9-8.1 6.3-13.5 6.3"/>
+              <path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2"/>
+            </svg>
+          </a>
+        </div>
       </div>
       
     </div>
@@ -820,6 +1053,17 @@
         © 2026 ECUAPLAC. TODOS LOS DERECHOS RESERVADOS.
       </span>
     </div>
+
+    </div>
+
+  <!-- Dithered Brand Band (ABAJO DE TODO - Efecto 21st para ECUAPLAC) -->
+  <div aria-hidden="true" class="df-band relative w-full overflow-hidden select-none border-t border-[#1C1C1E] mt-10" style="--df-accent: #FFB81C;">
+    <div class="df-field">
+      <div class="df-dots"></div>
+    </div>
+    <p class="df-mark pointer-events-none absolute -bottom-[0.05em] left-3 sm:left-6 md:left-10 select-none text-[clamp(3.3rem,16vw,12.5rem)] font-black leading-[0.8] tracking-[0.03em]">
+      ECUAPLAC
+    </p>
   </div>
 </footer>
 
@@ -833,8 +1077,8 @@
     
     <!-- Modal Content -->
     <div id="modalFormContent">
-      <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2">Solicitud de Presupuesto</span>
-      <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-white mb-8 leading-tight">Cuéntanos tu proyecto.</h2>
+      <span class="font-body text-[11px] md:text-xs text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Solicitud de Presupuesto</span>
+      <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[46px] font-semibold text-white mb-6 leading-tight tracking-[-0.02em]">Cuéntanos tu proyecto.</h2>
       
       <form onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -912,7 +1156,7 @@
     <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
       <span class="material-symbols-outlined text-3xl">close</span>
     </button>
-    <div class="mt-12 flex flex-col gap-6 font-headline-xl text-2xl uppercase tracking-wider">
+    <div class="mt-12 flex flex-col gap-6 font-headline text-2xl font-semibold uppercase tracking-wider">
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html">INICIO</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#reformas">REFORMAS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#servicios">SERVICIOS</a>
@@ -924,9 +1168,10 @@
     <div class="flex justify-center items-center gap-6 mb-10 font-label-caps tracking-widest font-bold text-[14px]">
       <span class="text-white cursor-default border-b border-white pb-1">ES</span>
       <a href="reformas-en.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">EN</a>
+      <a href="reformas-de.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">DE</a>
     </div>
     <div class="flex items-center mb-3">
-        <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="h-14 w-auto object-contain select-none" loading="lazy">
+        <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="h-10 w-auto object-contain select-none" loading="lazy">
       </div>
       <p>© 2026. Todos los derechos reservados.</p>
     </div>
@@ -990,6 +1235,38 @@
       }
 
 
+    }
+
+    // Touch-Guard: Prevent accidental logo clicks during iPhone edge swipe-back gesture
+    const brandLogo = document.querySelector('nav a[href="index.html"], nav a[aria-label="Ecuaplac Inicio"]');
+    if (brandLogo) {
+      let touchStartX = 0;
+      let isEdgeSwipe = false;
+
+      brandLogo.addEventListener('touchstart', function (e) {
+        if (e.touches && e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+          isEdgeSwipe = touchStartX < 35;
+        }
+      }, { passive: true });
+
+      brandLogo.addEventListener('touchmove', function (e) {
+        if (e.touches && e.touches.length > 0) {
+          const deltaX = e.touches[0].clientX - touchStartX;
+          if (deltaX > 15) {
+            isEdgeSwipe = true;
+          }
+        }
+      }, { passive: true });
+
+      brandLogo.addEventListener('click', function (e) {
+        if (isEdgeSwipe) {
+          e.preventDefault();
+          e.stopPropagation();
+          isEdgeSwipe = false;
+          return false;
+        }
+      });
     }
 
     window.addEventListener('scroll', handleScroll);
@@ -1102,41 +1379,72 @@ async function handleFormSubmit(formId) {
 
 
 <!-- Cookie Banner -->
-<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-transform duration-700 translate-y-full">
-  <div class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/80 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex-1 text-center md:text-left">
-      <h4 class="text-monolith-white font-headline-md mb-2 flex items-center justify-center md:justify-start gap-2">
-        <span class="material-symbols-outlined text-secondary">cookie</span>
-        Privacidad y Cookies
-      </h4>
-      <p class="text-[#A3A3A3] font-body-sm md:font-body-md leading-relaxed">
-        En Ecuaplac cuidamos la luz y la estructura de tu navegación. Usamos cookies para optimizar tu experiencia en nuestras reformas.
-      </p>
-    </div>
-    <div class="flex items-center gap-4 w-full md:w-auto">
-      <button onclick="acceptCookies()" class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md">
-        Aceptar
-      </button>
-      <a href="aviso-legal.html" class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white hover:text-primary transition-all duration-300 rounded-full px-8 py-3.5">
-        Configurar
-      </a>
+  <div id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-transform duration-700 translate-y-full">
+    <div
+      class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/85 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex-1 text-center md:text-left">
+        <h4 class="text-monolith-white font-headline-md mb-2 flex items-center justify-center md:justify-start gap-2">
+          <span class="material-symbols-outlined text-secondary">cookie</span>
+          Privacidad y Cookies
+        </h4>
+        <p class="text-[#A3A3A3] font-body-sm md:font-body-md leading-relaxed">
+          En Ecuaplac cuidamos la luz y la estructura de tu navegación. Usamos cookies para optimizar tu experiencia en
+          nuestras reformas.
+        </p>
+      </div>
+      <div class="flex items-center gap-4 w-full md:w-auto">
+        <button onclick="acceptCookies()"
+          class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md cursor-pointer active:scale-95">
+          Aceptar
+        </button>
+        <button onclick="rejectCookies()"
+          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95">
+          Rechazar
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<script>
-  function acceptCookies() {
-    localStorage.setItem('ecuaplac_cookies', 'accepted');
-    document.getElementById('cookie-banner').classList.add('translate-y-full');
-  }
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('ecuaplac_cookies')) {
-      setTimeout(() => {
-        const banner = document.getElementById('cookie-banner');
-        if (banner) banner.classList.remove('translate-y-full');
-      }, 1000);
+  <script>
+    function saveCookieConsent(status) {
+      try {
+        localStorage.setItem('ecuaplac_cookies', status);
+      } catch (e) {}
+      document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax';
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.add('translate-y-full');
     }
-  });
-</script>
+
+    function acceptCookies() {
+      saveCookieConsent('accepted');
+    }
+
+    function rejectCookies() {
+      saveCookieConsent('rejected');
+    }
+
+    function hasCookieConsent() {
+      try {
+        const ls = localStorage.getItem('ecuaplac_cookies');
+        if (ls === 'accepted' || ls === 'rejected') return true;
+      } catch (e) {}
+      const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
+      if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
+        try { localStorage.setItem('ecuaplac_cookies', match[1]); } catch (e) {}
+        return true;
+      }
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!hasCookieConsent()) {
+        setTimeout(() => {
+          const banner = document.getElementById('cookie-banner');
+          if (banner) banner.classList.remove('translate-y-full');
+        }, 1000);
+      }
+    });
+  </script>
 
 
 <script>
@@ -1183,10 +1491,10 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="border-b border-outline-variant pb-24 relative">
                 <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
                   <div>
-                    <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
-                    <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">${item.title_es}</h2>
+                    <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
+                    <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
                   </div>
-                  <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+                  <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
                     ${item.description_es || ''}
                   </p>
                 </div>
@@ -1240,31 +1548,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
         const client = window.supabase.createClient(supabaseUrl, supabaseKey);
         const { data: moreProjData, error: moreProjErr } = await client
-          .from('ecuaplac_more_projects')
+          .from('ecuaplac_galeria_2')
           .select('*')
           .eq('active', true)
           .order('sort_order', { ascending: true });
 
         if (!moreProjErr && moreProjData && moreProjData.length > 0) {
-          const swiperWrapper = document.querySelector('.gallery-swiper .swiper-wrapper');
-          if (swiperWrapper) {
-            swiperWrapper.innerHTML = moreProjData.map(item => `
-              <div class="swiper-slide">
-                <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-                  <div class="aspect-[4/3] overflow-hidden">
-                    <img loading="lazy" src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop()">
-                  </div>
-                  <div class="px-4 py-3">
-                    <p class="text-white/90 font-medium text-xs md:text-sm">${item.title_es}</p>
+          const autoSliderTrack = document.getElementById('auto-slider-track');
+          if (autoSliderTrack) {
+            // Duplicar dataset para bucle infinito suave sin saltos (técnica 21st.dev)
+            const duplicated = [...moreProjData, ...moreProjData];
+            autoSliderTrack.innerHTML = duplicated.map(item => `
+              <div class="auto-slider-card group">
+                <div class="w-full h-full overflow-hidden relative">
+                  <img loading="eager" decoding="async" src="${item.image_url}" alt="${item.title_es || 'Proyecto'}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop();">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none"></div>
+                  <div class="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 flex flex-col justify-end">
+                    <p class="text-white/90 font-medium text-[11px] sm:text-xs leading-snug drop-shadow-md line-clamp-2">${item.title_es || 'Proyecto'}</p>
                   </div>
                 </div>
               </div>
             `).join('');
-
-            if (window.gallerySwiperInstance) {
-              window.gallerySwiperInstance.destroy(true, true);
-              window.gallerySwiperInstance = null;
-            }
           }
         }
       } catch (e) {
@@ -1274,9 +1578,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // Gallery toggle
+  // Gallery toggle (21st.dev Infinite Auto-Slider)
   let galleryOpen = false;
   function toggleGallery() {
     const section = document.getElementById('gallery-section');
@@ -1284,39 +1587,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const text = document.getElementById('gallery-toggle-text');
     galleryOpen = !galleryOpen;
     if (galleryOpen) {
-      section.style.maxHeight = section.scrollHeight + 200 + 'px';
+      section.style.maxHeight = section.scrollHeight + 100 + 'px';
       section.style.opacity = '1';
-      section.style.marginBottom = '2rem';
+      section.style.marginBottom = '2.5rem';
       arrow.style.transform = 'rotate(180deg)';
       text.textContent = 'OCULTAR GALERÍA';
-      setTimeout(() => { section.style.maxHeight = 'none'; }, 800);
-      // Initialize Swiper only once
-      if (!window.gallerySwiperInstance) {
-        window.gallerySwiperInstance = new Swiper('.gallery-swiper', {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: true,
-          grabCursor: true,
-          autoplay: {
-            delay: 2000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          },
-          navigation: {
-            nextEl: '.gallery-swiper .swiper-button-next',
-            prevEl: '.gallery-swiper .swiper-button-prev',
-          },
-          pagination: {
-            el: '.gallery-swiper .swiper-pagination',
-            clickable: true,
-            dynamicBullets: true,
-          },
-          breakpoints: {
-            640: { slidesPerView: 2, spaceBetween: 24 },
-            1024: { slidesPerView: 3, spaceBetween: 28 },
-          },
-        });
-      }
+      setTimeout(() => {
+        if (galleryOpen) section.style.maxHeight = 'none';
+      }, 700);
     } else {
       section.style.maxHeight = section.scrollHeight + 'px';
       requestAnimationFrame(() => {
@@ -1330,4 +1608,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 </script>
 
+  <!-- Dithered Footer JS -->
+  <script src="./assets/js/dithered-footer.js" defer></script>
 </body></html>

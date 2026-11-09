@@ -32,6 +32,7 @@
   <link rel="canonical" href="https://ecuaplac.com/">
   <link rel="alternate" hreflang="es" href="https://ecuaplac.com/">
   <link rel="alternate" hreflang="en" href="https://ecuaplac.com/index-en.html">
+  <link rel="alternate" hreflang="de" href="https://ecuaplac.com/index-de.html">
   <link rel="alternate" hreflang="x-default" href="https://ecuaplac.com/">
 
   <!-- Open Graph / Facebook / WhatsApp -->
@@ -113,9 +114,10 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap"
-    rel="stylesheet">
+  <!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+  <!-- Brand Montserrat preserved for official text logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet">
@@ -252,13 +254,18 @@
       border-color: rgba(255, 255, 255, 0.15) !important;
     }
 
-    /* GPU-accelerated scrollytelling layers — NO CSS transition (driven by JS per-frame) */
+    /* GPU-accelerated scrollytelling layers — Compositor-only, zero zIndex churn (motion-design & modern-web-guidance) */
     #hero-sticky-element>div[id^="hero-layer-"] {
-      will-change: transform, opacity;
+      will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
+      contain: paint;
     }
+
+    #hero-layer-1 { z-index: 10; }
+    #hero-layer-2 { z-index: 20; }
+    #hero-layer-3 { z-index: 30; }
 
     /* Stable mobile viewport for hero sticky element */
     #hero-sticky-element {
@@ -266,17 +273,30 @@
       height: calc(100dvh - 72px);
     }
 
-    /* Prevent iOS overscroll rubber-banding inside hero */
+    /* Calibrated ergonomic scroll height (emil-design-eng) — eliminates 450vh dead drag */
     #hero-scroll-container {
+      height: 230vh;
+      height: 230dvh;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
     }
 
-    /* Desktop: taller hero for smoother, slower transitions */
     @media (min-width: 768px) {
       #hero-scroll-container {
-        height: 450vh !important;
-        height: 450dvh !important;
+        height: 260vh !important;
+        height: 260dvh !important;
+      }
+    }
+
+    /* Accessibility: Respect reduced motion (modern-web-guidance) */
+    @media (prefers-reduced-motion: reduce) {
+      #hero-sticky-element>div[id^="hero-layer-"] {
+        will-change: auto;
+        transform: none !important;
+      }
+      #hero-layer-2,
+      #hero-layer-3 {
+        display: none !important;
       }
     }
 
@@ -633,107 +653,99 @@
             "margin-desktop": "64px"
           },
           "fontFamily": {
+            "headline": [
+              "'Clash Display'",
+              "sans-serif"
+            ],
+            "body": [
+              "'Satoshi'",
+              "sans-serif"
+            ],
+            "editorial": [
+              "'Boska'",
+              "serif"
+            ],
             "caption": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg-mobile": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "body-lg": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "body-md": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "headline-xl": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "label-caps": [
-              "Montserrat",
+              "'Satoshi'",
               "sans-serif"
             ]
           },
           "fontSize": {
             "caption": [
-              "14px",
+              "13px",
               {
                 "lineHeight": "1.4",
                 "fontWeight": "400"
               }
             ],
             "headline-lg-mobile": [
-              "24px",
-              {
-                "lineHeight": "1.2",
-                "fontWeight": "400"
-              }
-            ],
-            "body-lg": [
-              "18px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "body-md": [
-              "16px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-lg": [
-              "32px",
-              {
-                "lineHeight": "1.2",
-                "letterSpacing": "-0.01em",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-xl": [
-              "48px",
-              {
-                "lineHeight": "1.08",
-                "letterSpacing": "-0.025em",
-                "fontWeight": "300"
-              }
-            ],
-            "headline-lg": [
-              "32px",
+              "28px",
               {
                 "lineHeight": "1.15",
                 "letterSpacing": "-0.015em",
-                "fontWeight": "400"
+                "fontWeight": "600"
               }
             ],
             "body-lg": [
               "18px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
             "body-md": [
               "16px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
+            "headline-lg": [
+              "34px",
+              {
+                "lineHeight": "1.15",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-xl": [
+              "52px",
+              {
+                "lineHeight": "1.08",
+                "letterSpacing": "-0.025em",
+                "fontWeight": "600"
+              }
+            ],
             "label-caps": [
-              "12px",
+              "11px",
               {
                 "lineHeight": "1.0",
-                "letterSpacing": "0.15em",
-                "fontWeight": "600"
+                "letterSpacing": "0.2em",
+                "fontWeight": "700"
               }
             ]
           }
@@ -1118,7 +1130,7 @@
 
 
   <style>
-    /* Transformaciones Reales Custom Card */
+    /* Transformaciones Reales Custom Card - Tono Piedra Caliza / Yeso Mallorquín */
     .transform-card-wrapper {
       position: relative;
       width: 100%;
@@ -1126,47 +1138,35 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 6rem;
-      border-radius: 14px;
+      border-radius: 24px;
       z-index: 10;
       overflow: hidden;
-      box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+      border: 1px solid #E5E0D6;
+      box-shadow: 0 20px 45px -12px rgba(60, 48, 36, 0.08), 0 4px 16px -4px rgba(60, 48, 36, 0.04);
+      background: #F7F5F0;
     }
 
     .dark .transform-card-wrapper {
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5), -10px -10px 30px rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.6);
+      background: #181715;
     }
 
     .transform-card-bg {
       position: relative;
-      margin: 5px;
-      width: calc(100% - 10px);
+      width: 100%;
       z-index: 2;
-      background: rgba(255, 255, 255, .95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 10px;
-      overflow: hidden;
-      outline: 2px solid white;
+      background: transparent;
+      border-radius: 24px;
     }
 
     .dark .transform-card-bg {
-      background: rgba(22, 20, 19, .95);
-      outline: 2px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      outline: none;
     }
 
     .transform-card-blob {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background-color: #ff0000;
-      opacity: 1;
-      filter: blur(24px);
-      animation: blob-bounce 5s infinite ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     @keyframes blob-bounce {
@@ -1359,6 +1359,8 @@
         y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "xfa7w1cqcu");
   </script>
+  <!-- Dithered Footer Effect -->
+  <link rel="stylesheet" href="./assets/css/dithered-footer.css">
 </head>
 
 <body class="bg-background text-on-background font-body-md antialiased pt-[72px] overflow-x-hidden">
@@ -1368,9 +1370,9 @@
     <div
       class="flex justify-between items-center h-[72px] px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
       <!-- Brand -->
-      <a class="flex items-center -ml-8 md:ml-0" href="#">
+      <a class="flex items-center ml-0" href="#" aria-label="Ecuaplac Inicio">
         <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
-          class="logo-header h-14 md:h-14 w-auto object-contain select-none" loading="eager">
+          class="logo-header h-10 md:h-11 w-auto object-contain select-none" loading="eager">
       </a>
       <!-- Desktop Nav -->
       <ul class="hidden lg:flex items-center gap-8 uppercase font-semibold text-[13px] tracking-[0.18em]">
@@ -1386,6 +1388,7 @@
           <div class="flex items-center gap-3">
             <span class="lang-active cursor-default">ES</span>
             <a href="index-en.html" class="lang-inactive transition-all duration-300">EN</a>
+            <a href="index-de.html" class="lang-inactive transition-all duration-300">DE</a>
           </div>
         </li>
       </ul>
@@ -1401,68 +1404,74 @@
     </div>
   </nav>
   <main>
-    <!-- Pinned Hero Section with Scroll-Triggered Collage Animation -->
-    <section id="hero-scroll-container" class="relative w-full bg-black" style="height: 300vh; height: 300dvh;">
+    <!-- Pinned Hero Section with Scroll-Triggered Collage Animation (motion-design & emil-design-eng) -->
+    <section id="hero-scroll-container" class="relative w-full bg-black">
       <div id="hero-sticky-element" class="sticky top-[72px] w-full overflow-hidden">
-        <!-- Image Layers -->
-        <!-- Image 1: Villa Minimalista (Actual) -->
-        <div id="hero-layer-1" class="absolute inset-0 z-0 opacity-100">
+        <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
+        <!-- Image 1: Villa Minimalista -->
+        <div id="hero-layer-1" class="absolute inset-0 opacity-100">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/1.webp">
             <img alt="Villa minimalista de lujo en Palma de Mallorca" class="w-full h-full object-cover object-center"
-              src="./assets/img/hero/1.webp" loading="eager">
+              src="./assets/img/hero/1.webp" loading="eager" decoding="async">
           </picture>
         </div>
         <!-- Image 2: Cocina de diseño de alta gama -->
-        <div id="hero-layer-2" class="absolute inset-0 z-0 opacity-0">
+        <div id="hero-layer-2" class="absolute inset-0 transform translate-y-full">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/2.webp">
-            <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="lazy"
+            <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
               src="./assets/img/hero/2.webp">
           </picture>
         </div>
         <!-- Image 3: Resultado Final Reforma Integral -->
-        <div id="hero-layer-3" class="absolute inset-0 z-0 opacity-0">
+        <div id="hero-layer-3" class="absolute inset-0 transform translate-y-full">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/3.webp">
-            <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center"
-              loading="lazy"
+            <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
               src="./assets/img/hero/3.webp">
           </picture>
         </div>
 
-        <!-- Subtle gradient to ensure text readability -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent z-10"></div>
+        <!-- Calibrated gradient to ensure 100% text readability over any photo -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-40 pointer-events-none"></div>
 
         <!-- Hero Text Overlays (Scrollytelling Content) -->
-        <div class="absolute inset-x-0 bottom-0 z-20 h-full max-w-5xl mx-auto pointer-events-none">
+        <div class="absolute inset-x-0 bottom-0 z-50 h-full max-w-5xl mx-auto pointer-events-none">
 
           <!-- Stage 1 Content -->
           <div id="hero-text-1"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto transition-opacity duration-200">
             <h1
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Arquitectura de<br>espacios limpios.
             </h1>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-2xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Más de 10 años ayudando a transformar viviendas y espacios comerciales en Palma de Mallorca con
               profesionalidad, experiencia y acabados de calidad.
             </p>
           </div>
 
-          <!-- Stage 2 Content (Clean view) -->
+          <!-- Stage 2 Content (Diseño & Detalle) -->
           <div id="hero-text-2"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            <h2
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
+              Diseño integral &<br>precisión en cada detalle.
+            </h2>
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+              Materiales nobles, iluminación cuidada y ejecución impecable para hogares únicos en Mallorca.
+            </p>
           </div>
 
           <!-- Stage 3 Content -->
           <div id="hero-text-3"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
-            <h1
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            <h2
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               El resultado que<br>siempre imaginaste.
-            </h1>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+            </h2>
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Acabados premium en microcemento pulido, carpintería integrada y confort absoluto.
             </p>
           </div>
@@ -1495,595 +1504,856 @@
       <!-- Portfolio Card Carousel -->
       <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 
-        <div class="text-center mb-12">
-          <span class="font-label-caps text-xs md:text-sm tracking-[0.3em] text-[#795746] uppercase font-bold">Nuestros
-            Últimos Trabajos</span>
+        <div class="text-center mb-8 md:mb-12">
+          <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Nuestro Trabajo</span>
+          <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em]">
+            Proyectos y Acabados de Alta Gama
+          </h2>
+          <p class="font-body text-sm md:text-base text-on-surface-variant/80 mt-2 max-w-xl mx-auto leading-relaxed">
+            Desliza para explorar nuestras reformas y diseños más representativos en Mallorca
+          </p>
         </div>
 
-        <!-- Outer wrapper (relative, no overflow-hidden so buttons don't get cut off) -->
-
-        <!-- Mobile Swiper Carousel -->
-        <div class="block lg:hidden w-full swiper portfolio-swiper">
-          <div class="swiper-wrapper">
-            <!-- Card 1 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2131.webp" alt="Baño de diseño con bañera exenta"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Andratx</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Reforma de Baño Minimalista con Bañera Exenta</h3>
-              </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2135.webp" alt="Escalera helicoidal de yeso pulido"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Escalera de Diseño Escultural en Yeso Pulido</h3>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2134.webp" alt="Ducha de obra con hornacinas iluminadas"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Sóller</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Ducha Revestida en Piedra con Iluminación LED Integrada</h3>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2119.webp" alt="Cocina moderna integrada y minimalista"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Cocina Minimalista Totalmente Integrada</h3>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2129.webp" alt="Terraza exterior y solárium"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy" style="object-position: 80% center;">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Santanyí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Terraza Rústica con Cocina de Obra y Solárium</h3>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2132.webp" alt="Aseo minimalista de cortesía"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Marratxí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Aseo de Cortesía con Acabados en Microcemento</h3>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2133.webp" alt="Distribuidor con iluminación indirecta"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Distribuidor Moderno con Líneas de Luz LED</h3>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2136.webp" alt="Nicho iluminado para coleccionismo"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Hornacinas de Obra Iluminadas para Decoración</h3>
-              </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2138.webp" alt="Detalle de escalera helicoidal"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Perspectiva y Acabados de la Escalera Helicoidal</h3>
-              </div>
-            </div>
-
-
+        <!-- Circular Gallery 2 (WebGL 3D Curved Experience) -->
+        <div id="circular-gallery-wrapper" class="relative w-full max-w-[1400px] mx-auto select-none my-2">
+          <!-- WebGL Canvas Container -->
+          <div id="circular-gallery-canvas"
+            class="relative w-full h-[520px] sm:h-[580px] md:h-[650px] cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
+            style="touch-action: pan-y;">
           </div>
-          <div class="swiper-button-prev" style="color: #FCD116;"></div>
-          <div class="swiper-button-next" style="color: #FCD116;"></div>
+
+          <!-- Luxury Navigation Buttons -->
+          <button id="cg-btn-prev" aria-label="Anterior"
+            class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="cg-btn-next" aria-label="Siguiente"
+            class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- Interactive Swipe Hint -->
+          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-neutral-400 dark:text-neutral-500 uppercase font-medium">
+            <svg class="w-4 h-4 text-[#795746] dark:text-[#C5A880] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+            <span>Arrastra o desliza para navegar</span>
+          </div>
         </div>
-
-        <!-- Desktop Original Carousel Wrapper -->
-        <div class="hidden lg:block">
-          <div class="relative px-2 md:px-4" id="portfolio-carousel-wrapper">
-
-            <!-- Inner wrapper (overflow-hidden to clip track) -->
-            <div class="overflow-hidden" id="portfolio-carousel">
-              <!-- Track: all 9 cards in a flex row -->
-              <div id="carousel-track" class="flex gap-8 transition-transform duration-500 ease-in-out py-4">
-
-                <!-- Card 1 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2131.webp" alt="Baño de diseño con bañera exenta"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Andratx</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Reforma de Baño Minimalista con Bañera Exenta</h3>
-                  </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2135.webp" alt="Escalera helicoidal de yeso pulido"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Escalera de Diseño Escultural en Yeso Pulido</h3>
-                  </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2134.webp" alt="Ducha de obra con hornacinas iluminadas"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Sóller</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Ducha Revestida en Piedra con Iluminación LED Integrada</h3>
-                  </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2119.webp" alt="Cocina moderna integrada y minimalista"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Cocina Minimalista Totalmente Integrada</h3>
-                  </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2129.webp" alt="Terraza exterior y solárium"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy" style="object-position: 80% center;">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Santanyí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Terraza Rústica con Cocina de Obra y Solárium</h3>
-                  </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2132.webp" alt="Aseo minimalista de cortesía"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Marratxí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Aseo de Cortesía con Acabados en Microcemento</h3>
-                  </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2133.webp" alt="Distribuidor con iluminación indirecta"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Distribuidor Moderno con Líneas de Luz LED</h3>
-                  </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2136.webp" alt="Nicho iluminado para coleccionismo"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Hornacinas de Obra Iluminadas para Decoración</h3>
-                  </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2138.webp" alt="Detalle de escalera helicoidal"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Perspectiva y Acabados de la Escalera Helicoidal</h3>
-                  </div>
-                </div>
-
-              </div><!-- end track -->
-            </div><!-- end inner wrapper -->
-
-            <!-- Prev / Next arrows (positioned relative to outer wrapper, outside the inner clip area) -->
-            <button id="carousel-prev" aria-label="Anterior"
-              class="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_left</span>
-            </button>
-            <button id="carousel-next" aria-label="Siguiente"
-              class="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_right</span>
-            </button>
-
-          </div><!-- end relative wrapper -->
-
-          <!-- Dot indicators -->
-          <div id="carousel-dots" class="flex justify-center gap-2 mt-8"></div>
-        </div><!-- end desktop wrapper -->
 
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script>
-          (async function () {
-            const track = document.getElementById('carousel-track');
+        <script type="module">
+          import {
+            Renderer,
+            Camera,
+            Transform,
+            Plane,
+            Mesh,
+            Program,
+            Texture,
+          } from "https://cdn.jsdelivr.net/npm/ogl/+esm";
 
-            // Supabase Dynamic Fetch
-            if (window.supabase) {
-              try {
-                const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
-                const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
-                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
-                const { data, error } = await client
-                  .from('ecuaplac_carousel')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
+          // Items iniciales con fotos originales de alta resolución y aspecto vertical natural
+          const initialGalleryItems = [
+            {
+              image: "./assets/img/portfolio/IMG_2131.webp",
+              location: "Andratx",
+              title: "Reforma de Baño Minimalista con Bañera Exenta",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2135.webp",
+              location: "Calvià",
+              title: "Escalera de Diseño Escultural en Yeso Pulido",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2134.webp",
+              location: "Sóller",
+              title: "Ducha de Obra con Hornacinas Iluminadas",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2119.webp",
+              location: "Palma de Mallorca",
+              title: "Cocina Moderna Integrada y Minimalista",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2129.webp",
+              location: "Santanyí",
+              title: "Terraza Exterior y Solárium de Diseño",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2132.webp",
+              location: "Marratxí",
+              title: "Aseo Minimalista de Cortesía",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2133.webp",
+              location: "Palma de Mallorca",
+              title: "Distribuidor con Iluminación Indirecta",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2136.webp",
+              location: "Palma de Mallorca",
+              title: "Nicho Iluminado para Coleccionismo",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2138.webp",
+              location: "Calvià",
+              title: "Perspectiva y Acabados de la Escalera Helicoidal",
+            },
+          ];
 
-                if (!error && data && data.length > 0) {
-                  const processedData = data.map(item => {
-                    if (item.image_url) item.image_url = item.image_url.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-                    if (item.title_es === 'Baño de Diseño con Bañera Exenta') {
-                      item.title_es = 'Reforma Integral de Baño con Bañera Exenta';
-                    }
-                    return item;
-                  });
-                  if (track) {
-                    track.innerHTML = processedData.map(item => `
-            <div class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">${item.location_es}</span>
-                <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_es}</h3>
-              </div>
-            </div>
-          `).join('');
-                  }
+          function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+          }
 
-                  // Actualizar también el carrusel Swiper móvil
-                  const mobileWrapper = document.querySelector('.portfolio-swiper .swiper-wrapper');
-                  if (mobileWrapper) {
-                    mobileWrapper.innerHTML = processedData.map(item => `
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">${item.location_es}</span>
-                <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_es}</h3>
-              </div>
-            </div>
-          `).join('');
-                    if (typeof window.initPortfolioSwiper === 'function') {
-                      window.initPortfolioSwiper();
-                    }
-                  }
-                }
+          function lerp(p1, p2, t) {
+            return p1 + (p2 - p1) * t;
+          }
 
-                // Fetch Contact Info
-                const { data: contactData, error: contactError } = await client
-                  .from('ecuaplac_contact')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
-
-                if (!contactError && contactData && contactData.length > 0) {
-                  const listContainer = document.getElementById('contact-info-list');
-                  const addressEl = document.getElementById('contact-address');
-
-                  const addressItem = contactData.find(item => item.key === 'address');
-                  if (addressItem && addressEl) {
-                    addressEl.textContent = addressItem.value_es;
-                  }
-
-                  const listItems = contactData.filter(item => item.key !== 'address');
-                  if (listItems.length > 0 && listContainer) {
-                    listContainer.innerHTML = listItems.map(item => {
-                      const name = item.name_es;
-                      const val = item.value_es;
-                      const isEmail = item.icon === 'mail';
-                      const href = isEmail ? `mailto:${val}` : `tel:${val.replace(/\s+/g, '')}`;
-
-                      const svgIcon = isEmail
-                        ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
-                        : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
-
-                      return `
-                <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                      ${svgIcon}
-                    </div>
-                    <span class="font-bold text-primary text-[14px]">${name}</span>
-                  </div>
-                  <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${isEmail ? 'break-all text-[13px]' : ''}">${val}</span>
-                </a>
-              `;
-                    }).join('');
-                  }
-                }
-              } catch (err) {
-                console.warn('Supabase fetch failed, using fallback static content:', err);
+          function autoBind(instance) {
+            const proto = Object.getPrototypeOf(instance);
+            Object.getOwnPropertyNames(proto).forEach((key) => {
+              if (key !== "constructor" && typeof instance[key] === "function") {
+                instance[key] = instance[key].bind(instance);
               }
+            });
+          }
+
+          // Generador de textura 2D nítida con footer oscuro de lujo, badge dorado y título
+          function createCardCaptionTexture(gl, location, title) {
+            const dpr = 2; // Forzar 2x DPR para nitidez perfecta en 3D
+            const w = 500;
+            const h = 160;
+            const canvas = document.createElement("canvas");
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            const ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+            ctx.clearRect(0, 0, w, h);
+
+            // Fondo de tarjeta inferior estilo Luxury Dark Glassmorphic
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, "rgba(18, 16, 15, 0.75)");
+            grad.addColorStop(0.35, "rgba(18, 16, 15, 0.94)");
+            grad.addColorStop(1, "rgba(18, 16, 15, 0.98)");
+
+            // Borde inferior redondeado
+            const radius = 24;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(w, 0);
+            ctx.lineTo(w, h - radius);
+            ctx.arcTo(w, h, w - radius, h, radius);
+            ctx.lineTo(radius, h);
+            ctx.arcTo(0, h, 0, h - radius, radius);
+            ctx.closePath();
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Línea divisoria sutil superior
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(w, 0);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // 1. Badge / Píldora de Ubicación
+            if (location) {
+              const locText = location.toUpperCase();
+              ctx.font = "bold 11px 'Montserrat', sans-serif";
+              const metrics = ctx.measureText(locText);
+              const pillPad = 14;
+              const pillH = 24;
+              const pillW = Math.max(metrics.width + pillPad * 2, 76);
+              const pillX = (w - pillW) / 2;
+              const pillY = 14;
+              const pillR = 12;
+
+              ctx.beginPath();
+              ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+              ctx.fillStyle = "rgba(35, 32, 30, 0.9)";
+              ctx.fill();
+              ctx.lineWidth = 1;
+              ctx.strokeStyle = "rgba(212, 175, 55, 0.4)"; // Dorado suave
+              ctx.stroke();
+
+              ctx.fillStyle = "#E5B869"; // Dorado premium
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText(locText, w / 2, pillY + pillH / 2 + 0.5);
             }
 
-            // Now initialize the infinite loop carousel
-            const originalCards = Array.from(track.querySelectorAll('.carousel-card'));
-            const total = originalCards.length;
-            if (total === 0) return;
+            // 2. Título de la obra en blanco nítido
+            if (title) {
+              ctx.font = "bold 16px 'Montserrat', sans-serif";
+              ctx.fillStyle = "#FFFFFF";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "top";
+              ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+              ctx.shadowBlur = 6;
+              ctx.shadowOffsetY = 2;
 
-            const dotsEl = document.getElementById('carousel-dots');
-            const prevBtn = document.getElementById('carousel-prev');
-            const nextBtn = document.getElementById('carousel-next');
-            const numClones = 3;
-
-            // Clone first 3 cards and append
-            for (let i = 0; i < numClones; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.appendChild(clone);
-            }
-            // Clone last 3 cards and prepend
-            for (let i = total - numClones; i < total; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.insertBefore(clone, track.firstChild);
-            }
-
-            let current = 0;
-            let isTransitioning = false;
-
-            function getCardWidth() {
-              const firstCard = track.querySelector('.carousel-card');
-              if (!firstCard) return 0;
-              const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-              return firstCard.getBoundingClientRect().width + gap;
-            }
-
-            function setPositionWithoutAnimation(position) {
-              track.style.transition = 'none';
-              track.style.transform = `translateX(${-position}px)`;
-              // force repaint
-              track.offsetHeight;
-            }
-
-            function goTo(index, animate = true) {
-              if (isTransitioning && animate) return;
-              if (animate) {
-                isTransitioning = true;
-                track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              } else {
-                track.style.transition = 'none';
+              const maxLineW = w - 40;
+              const words = title.split(" ");
+              let line = "";
+              const lines = [];
+              for (let i = 0; i < words.length; i++) {
+                const test = line + words[i] + " ";
+                if (ctx.measureText(test).width > maxLineW && i > 0) {
+                  lines.push(line.trim());
+                  line = words[i] + " ";
+                } else {
+                  line = test;
+                }
               }
+              lines.push(line.trim());
 
-              const targetPos = (numClones + index) * getCardWidth();
-              track.style.transform = `translateX(${-targetPos}px)`;
-              current = index;
-              updateDots();
-            }
-
-            function updateDots() {
-              dotsEl.querySelectorAll('button').forEach((d, i) => {
-                let dotIndex = current;
-                if (dotIndex >= total) dotIndex = 0;
-                if (dotIndex < 0) dotIndex = total - 1;
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === dotIndex ? 'bg-primary scale-125' : 'bg-primary/25');
+              const startY = location ? 48 : 30;
+              const lineH = 22;
+              lines.slice(0, 2).forEach((l, idx) => {
+                ctx.fillText(l, w / 2, startY + idx * lineH);
               });
             }
 
-            function buildDots() {
-              dotsEl.innerHTML = '';
-              for (let i = 0; i < total; i++) {
-                const d = document.createElement('button');
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-primary scale-125' : 'bg-primary/25');
-                d.setAttribute('aria-label', 'Página ' + (i + 1));
-                d.addEventListener('click', () => {
-                  goTo(i);
-                  resetTimer();
-                });
-                dotsEl.appendChild(d);
-              }
+            const texture = new Texture(gl, { generateMipmaps: false });
+            texture.image = canvas;
+            return { texture, width: w, height: h };
+          }
+
+          class CaptionTitle {
+            constructor({ gl, plane, location, title }) {
+              autoBind(this);
+              this.gl = gl;
+              this.plane = plane;
+              this.location = location;
+              this.title = title;
+              this.createMesh();
             }
 
-            track.addEventListener('transitionend', () => {
-              isTransitioning = false;
-              if (current >= total) {
-                setPositionWithoutAnimation(numClones * getCardWidth());
-                current = 0;
-                updateDots();
-              } else if (current < 0) {
-                setPositionWithoutAnimation((numClones + total - 1) * getCardWidth());
-                current = total - 1;
-                updateDots();
-              }
-            });
+            createMesh() {
+              const { texture } = createCardCaptionTexture(
+                this.gl,
+                this.location,
+                this.title
+              );
+              const geometry = new Plane(this.gl);
+              const program = new Program(this.gl, {
+                vertex: `
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform sampler2D tMap;
+                  varying vec2 vUv;
+                  void main() {
+                    vec4 color = texture2D(tMap, vUv);
+                    if (color.a < 0.05) discard;
+                    gl_FragColor = color;
+                  }
+                `,
+                uniforms: { tMap: { value: texture } },
+                transparent: true,
+                depthTest: false,
+                depthWrite: false,
+              });
 
-            function next() {
-              goTo(current + 1);
+              this.mesh = new Mesh(this.gl, { geometry, program });
+              const capHeightRatio = 0.28;
+              this.mesh.scale.set(1.0, capHeightRatio, 1.0);
+              this.mesh.position.y = -0.5 + capHeightRatio * 0.5;
+              this.mesh.position.z = 0.04;
+              this.mesh.setParent(this.plane);
             }
-            function prev() {
-              goTo(current - 1);
+          }
+
+          class Media {
+            constructor({
+              geometry,
+              gl,
+              image,
+              index,
+              length,
+              renderer,
+              scene,
+              screen,
+              location,
+              title,
+              viewport,
+              bend,
+              borderRadius = 0.05,
+            }) {
+              this.geometry = geometry;
+              this.gl = gl;
+              this.image = image;
+              this.index = index;
+              this.length = length;
+              this.renderer = renderer;
+              this.scene = scene;
+              this.screen = screen;
+              this.location = location;
+              this.title = title;
+              this.viewport = viewport;
+              this.bend = bend;
+              this.borderRadius = borderRadius;
+
+              this.extra = 0;
+              this.widthTotal = 0;
+              this.width = 0;
+              this.x = 0;
+              this.speed = 0;
+              this.isBefore = false;
+              this.isAfter = false;
+
+              this.createShader();
+              this.createMesh();
+              this.createCaption();
+              this.onResize();
             }
 
-            nextBtn.addEventListener('click', () => { next(); resetTimer(); });
-            prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+            createShader() {
+              const texture = new Texture(this.gl, {
+                generateMipmaps: true,
+              });
+              this.program = new Program(this.gl, {
+                depthTest: false,
+                depthWrite: false,
+                vertex: `
+                  precision highp float;
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  uniform float uTime;
+                  uniform float uSpeed;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    vec3 p = position;
+                    // Inercia sutil de curvatura al arrastrar
+                    p.z = (sin(p.x * 3.0 + uTime) * 0.6 + cos(p.y * 2.0 + uTime) * 0.6) * (0.02 + min(abs(uSpeed) * 0.05, 0.08));
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform vec2 uImageSizes;
+                  uniform vec2 uPlaneSizes;
+                  uniform sampler2D tMap;
+                  uniform float uBorderRadius;
+                  varying vec2 vUv;
 
-            // Touch swipe with live dragging
-            let startX = 0;
-            let isDragging = false;
+                  float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                    vec2 d = abs(p) - b;
+                    return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                  }
 
-            track.addEventListener('touchstart', e => {
-              startX = e.touches[0].clientX;
-              isDragging = true;
-              isTransitioning = false; // allow interrupting transition
-              track.style.transition = 'none';
-              clearInterval(timer);
-            }, { passive: true });
+                  void main() {
+                    // Object-cover perfecto sin deformación ni recorte excesivo
+                    vec2 ratio = vec2(
+                      min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
+                      min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+                    );
+                    vec2 uv = vec2(
+                      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                    );
+                    vec4 color = texture2D(tMap, uv);
 
-            track.addEventListener('touchmove', e => {
-              if (!isDragging) return;
-              const currentX = e.touches[0].clientX;
-              const dx = currentX - startX;
-              const basePos = (numClones + current) * getCardWidth();
-              track.style.transform = `translateX(${-basePos + dx}px)`;
-            }, { passive: true });
+                    float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                    float edgeSmooth = 0.003;
+                    float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
 
-            track.addEventListener('touchend', e => {
-              if (!isDragging) return;
-              isDragging = false;
-              const dx = e.changedTouches[0].clientX - startX;
+                    if (alpha < 0.01) discard;
 
-              if (Math.abs(dx) > 50) {
-                if (dx < 0) {
-                  next();
-                } else {
-                  prev();
-                }
+                    // COLOR 100% ORIGINAL (Sin blanco y negro, colores vivos y reales)
+                    gl_FragColor = vec4(color.rgb, color.a * alpha);
+                  }
+                `,
+                uniforms: {
+                  tMap: { value: texture },
+                  uPlaneSizes: { value: [0, 0] },
+                  uImageSizes: { value: [0, 0] },
+                  uSpeed: { value: 0 },
+                  uTime: { value: 100 * Math.random() },
+                  uBorderRadius: { value: this.borderRadius },
+                },
+                transparent: true,
+              });
+
+              const img = new Image();
+              img.crossOrigin = "anonymous";
+              img.src = this.image;
+              img.onload = () => {
+                texture.image = img;
+                this.program.uniforms.uImageSizes.value = [
+                  img.naturalWidth || img.width,
+                  img.naturalHeight || img.height,
+                ];
+              };
+            }
+
+            createMesh() {
+              this.plane = new Mesh(this.gl, {
+                geometry: this.geometry,
+                program: this.program,
+              });
+              this.plane.setParent(this.scene);
+            }
+
+            createCaption() {
+              this.caption = new CaptionTitle({
+                gl: this.gl,
+                plane: this.plane,
+                location: this.location,
+                title: this.title,
+              });
+            }
+
+            update(scroll, direction) {
+              this.plane.position.x = this.x - scroll.current - this.extra;
+
+              const x = this.plane.position.x;
+              const H = this.viewport.width / 2;
+
+              if (this.bend === 0) {
+                this.plane.position.y = 0;
+                this.plane.rotation.z = 0;
+                this.plane.rotation.y = 0;
               } else {
-                goTo(current);
+                const B_abs = Math.abs(this.bend);
+                const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+                const effectiveX = Math.min(Math.abs(x), H);
+                const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
+
+                if (this.bend > 0) {
+                  this.plane.position.y = -arc;
+                  this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
+                } else {
+                  this.plane.position.y = arc;
+                  this.plane.rotation.z = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
+                }
               }
-              resetTimer();
-            }, { passive: true });
 
-            // Auto-advance
-            let timer;
-            function startTimer() { timer = setInterval(next, 4000); }
-            function resetTimer() { clearInterval(timer); startTimer(); }
+              this.speed = scroll.current - scroll.last;
+              this.program.uniforms.uTime.value += 0.02;
+              this.program.uniforms.uSpeed.value = this.speed;
 
-            // Pause on hover
-            const wrapper = document.getElementById('portfolio-carousel');
-            wrapper.addEventListener('mouseenter', () => clearInterval(timer));
-            wrapper.addEventListener('mouseleave', startTimer);
+              const planeOffset = this.plane.scale.x / 2;
+              const viewportOffset = this.viewport.width / 2;
+              this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
+              this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
 
-            // Recalculate on resize
-            window.addEventListener('resize', () => {
-              setPositionWithoutAnimation((numClones + current) * getCardWidth());
-            });
+              if (direction === "right" && this.isBefore) {
+                this.extra -= this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+              if (direction === "left" && this.isAfter) {
+                this.extra += this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+            }
 
-            // Initial position setup
-            setTimeout(() => {
-              setPositionWithoutAnimation(numClones * getCardWidth());
-              buildDots();
-              startTimer();
-            }, 50);
-          })();
+            onResize({ screen, viewport } = {}) {
+              if (screen) this.screen = screen;
+              if (viewport) this.viewport = viewport;
+
+              const isMobile = this.screen.width < 768;
+              const cardScale = isMobile ? 0.60 : 0.55;
+
+              this.plane.scale.y = this.viewport.height * cardScale;
+              this.plane.scale.x = this.plane.scale.y * 0.74; // Relación vertical proporcional perfecta
+
+              this.program.uniforms.uPlaneSizes.value = [
+                this.plane.scale.x,
+                this.plane.scale.y,
+              ];
+              this.padding = isMobile ? 1.0 : 1.6;
+              this.width = this.plane.scale.x + this.padding;
+              this.widthTotal = this.width * this.length;
+              this.x = this.width * this.index;
+            }
+          }
+
+          class CircularGalleryApp {
+            constructor(container, options = {}) {
+              this.container = container;
+              this.items = options.items || initialGalleryItems;
+              this.scrollSpeed = options.scrollSpeed || 1.0;
+              this.scroll = { ease: options.scrollEase || 0.020, current: 0, target: 0, last: 0 };
+              this.borderRadius = options.borderRadius || 0.05;
+
+              this.isDown = false;
+              this.start = 0;
+              this.startY = 0;
+              this.onCheckDebounce = debounce(this.onCheck.bind(this), 180);
+
+              autoBind(this);
+
+              this.createRenderer();
+              this.createCamera();
+              this.createScene();
+              this.onResize();
+              this.createGeometry();
+              this.createMedias();
+              this.update();
+              this.addEventListeners();
+            }
+
+            createRenderer() {
+              this.renderer = new Renderer({
+                alpha: true,
+                antialias: true,
+                dpr: Math.min(window.devicePixelRatio || 1, 2),
+              });
+              this.gl = this.renderer.gl;
+              this.gl.clearColor(0, 0, 0, 0);
+              this.container.appendChild(this.gl.canvas);
+            }
+
+            createCamera() {
+              this.camera = new Camera(this.gl);
+              this.camera.fov = 45;
+              this.camera.position.z = 20;
+            }
+
+            createScene() {
+              this.scene = new Transform();
+              this.scene.position.y = 0.35;
+            }
+
+            createGeometry() {
+              this.planeGeometry = new Plane(this.gl, {
+                heightSegments: 40,
+                widthSegments: 70,
+              });
+            }
+
+            createMedias() {
+              // Duplicar items para loop infinito fluido
+              this.mediasImages = [...this.items, ...this.items];
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+              this.scene.position.y = isMobile ? 0.45 : 0.35;
+
+              this.medias = this.mediasImages.map((data, index) => {
+                return new Media({
+                  geometry: this.planeGeometry,
+                  gl: this.gl,
+                  image: data.image,
+                  index,
+                  length: this.mediasImages.length,
+                  renderer: this.renderer,
+                  scene: this.scene,
+                  screen: this.screen,
+                  location: data.location,
+                  title: data.title,
+                  viewport: this.viewport,
+                  bend,
+                  borderRadius: this.borderRadius,
+                });
+              });
+            }
+
+            onTouchDown(e) {
+              this.isDown = true;
+              this.scroll.position = this.scroll.current;
+              this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
+              this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
+              this.startTime = Date.now();
+              this.hasMoved = false;
+            }
+
+            onTouchMove(e) {
+              if (!this.isDown) return;
+              const x = "touches" in e ? e.touches[0].clientX : e.clientX;
+              const y = "touches" in e ? e.touches[0].clientY : e.clientY;
+              const dx = this.start - x;
+              const dy = this.startY - y;
+
+              if (Math.abs(dx) > 6) {
+                this.hasMoved = true;
+              }
+
+              if (Math.abs(dx) > Math.abs(dy) && e.cancelable) {
+                e.preventDefault();
+              }
+
+              const distance = dx * (this.scrollSpeed * 0.018);
+              this.scroll.target = this.scroll.position + distance;
+            }
+
+            onTouchUp(e) {
+              if (!this.isDown) return;
+              this.isDown = false;
+
+              const endX =
+                e && e.changedTouches && e.changedTouches.length > 0
+                  ? e.changedTouches[0].clientX
+                  : e && typeof e.clientX === "number"
+                  ? e.clientX
+                  : this.start;
+
+              const dx = this.start - endX;
+              const elapsed = Math.max(1, Date.now() - (this.startTime || Date.now()));
+              const velocity = dx / elapsed;
+
+              // 1. Tocar con el táctil para adelantar o volver hacia atrás (Tap)
+              if (!this.hasMoved || Math.abs(dx) < 12) {
+                const rect = this.container.getBoundingClientRect();
+                const tapX = endX - rect.left;
+                const ratioX = tapX / Math.max(rect.width, 1);
+
+                if (ratioX > 0.58) {
+                  this.next();
+                  return;
+                } else if (ratioX < 0.42) {
+                  this.prev();
+                  return;
+                }
+              }
+
+              // 2. Gesto de deslizamiento rápido táctil (Swipe / Flick)
+              if (Math.abs(dx) > 30 || Math.abs(velocity) > 0.20) {
+                if (dx > 0) {
+                  this.next();
+                } else {
+                  this.prev();
+                }
+                return;
+              }
+
+              // 3. Ajuste al soltar arrastre manual
+              this.onCheck();
+            }
+
+            onWheel(e) {
+              const delta =
+                e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)
+                  ? e.deltaX
+                  : e.deltaY || (e.wheelDelta ? -e.wheelDelta : 0);
+              this.scroll.target += Math.sign(delta) * (this.scrollSpeed * 0.30);
+              this.onCheckDebounce();
+            }
+
+            onCheck() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const itemIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = itemIndex * width;
+            }
+
+            next() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex + 1) * width;
+            }
+
+            prev() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex - 1) * width;
+            }
+
+            onResize() {
+              const rect = this.container.getBoundingClientRect();
+              this.screen = {
+                width: rect.width || window.innerWidth,
+                height: rect.height || 600,
+              };
+              this.renderer.setSize(this.screen.width, this.screen.height);
+              this.camera.perspective({
+                aspect: this.screen.width / this.screen.height,
+              });
+              const fov = (this.camera.fov * Math.PI) / 180;
+              const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+              const width = height * this.camera.aspect;
+              this.viewport = { width, height };
+
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+              this.scene.position.y = isMobile ? 0.45 : 0.35;
+
+              if (this.medias) {
+                this.medias.forEach((media) => {
+                  media.bend = bend;
+                  media.onResize({ screen: this.screen, viewport: this.viewport });
+                });
+              }
+            }
+
+            update() {
+              this.scroll.current = lerp(
+                this.scroll.current,
+                this.scroll.target,
+                this.scroll.ease
+              );
+              const direction =
+                this.scroll.current > this.scroll.last ? "right" : "left";
+              if (this.medias) {
+                this.medias.forEach((media) =>
+                  media.update(this.scroll, direction)
+                );
+              }
+              this.renderer.render({ scene: this.scene, camera: this.camera });
+              this.scroll.last = this.scroll.current;
+              this.raf = window.requestAnimationFrame(this.update);
+            }
+
+            addEventListeners() {
+              window.addEventListener("resize", this.onResize);
+              this.container.addEventListener("wheel", this.onWheel, { passive: true });
+              this.container.addEventListener("mousedown", this.onTouchDown);
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("mouseup", this.onTouchUp);
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
+            }
+
+            destroy() {
+              window.cancelAnimationFrame(this.raf);
+              window.removeEventListener("resize", this.onResize);
+              this.container.removeEventListener("wheel", this.onWheel);
+              this.container.removeEventListener("mousedown", this.onTouchDown);
+              window.removeEventListener("mousemove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
+              this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("touchend", this.onTouchUp);
+
+              if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
+                this.gl.canvas.parentNode.removeChild(this.gl.canvas);
+              }
+            }
+          }
+
+          // Inicializar y conectar con Supabase
+          document.addEventListener("DOMContentLoaded", async () => {
+            const container = document.getElementById("circular-gallery-canvas");
+            if (!container) return;
+
+            let currentItems = initialGalleryItems;
+            let galleryApp = null;
+
+            try {
+              galleryApp = new CircularGalleryApp(container, {
+                items: currentItems,
+                scrollEase: 0.020, // Deslizamiento cinemático más pausado, fluido y prémium
+                scrollSpeed: 1.0,
+                borderRadius: 0.05,
+              });
+
+              // Controles de navegación
+              const btnPrev = document.getElementById("cg-btn-prev");
+              const btnNext = document.getElementById("cg-btn-next");
+              if (btnPrev) btnPrev.addEventListener("click", () => galleryApp.prev());
+              if (btnNext) btnNext.addEventListener("click", () => galleryApp.next());
+            } catch (err) {
+              console.warn("Error al inicializar CircularGallery WebGL:", err);
+            }
+
+            // Integración Supabase para Galería y Contacto
+            if (window.supabase) {
+              try {
+                const supabaseUrl = "https://wkfddccsantywcrsxpox.supabase.co";
+                const supabaseKey = "sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI";
+                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+                // 1. Cargar Proyectos dinámicos si existen en Supabase
+                const { data: galleryData, error: galleryError } = await client
+                  .from("ecuaplac_galeria_1")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!galleryError && galleryData && galleryData.length > 0) {
+                  const dbItems = galleryData.map((item) => ({
+                    image: item.image_url ? item.image_url.replace(/\.(jpg|jpeg|png)$/i, ".webp") : "",
+                    location: item.location_es || "Mallorca",
+                    title: item.title_es || "Proyecto de Reforma",
+                  }));
+
+                  if (galleryApp) {
+                    galleryApp.destroy();
+                    galleryApp = new CircularGalleryApp(container, {
+                      items: dbItems,
+                      scrollEase: 0.020,
+                      scrollSpeed: 1.0,
+                      borderRadius: 0.05,
+                    });
+                    const btnPrev = document.getElementById("cg-btn-prev");
+                    const btnNext = document.getElementById("cg-btn-next");
+                    if (btnPrev) btnPrev.onclick = () => galleryApp.prev();
+                    if (btnNext) btnNext.onclick = () => galleryApp.next();
+                  }
+                }
+
+                // 2. Mantener carga de información de Contacto para el footer
+                const { data: contactData, error: contactError } = await client
+                  .from("ecuaplac_contact")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!contactError && contactData && contactData.length > 0) {
+                  const listContainer = document.getElementById("contact-info-list");
+                  const addressEl = document.getElementById("contact-address");
+                  const addressItem = contactData.find((item) => item.key === "address");
+                  if (addressItem && addressEl) {
+                    addressEl.textContent = addressItem.value_es;
+                  }
+                  const listItems = contactData.filter((item) => item.key !== "address");
+                  if (listItems.length > 0 && listContainer) {
+                    listContainer.innerHTML = listItems
+                      .map((item) => {
+                        const name = item.name_es;
+                        const val = item.value_es;
+                        const isEmail = item.icon === "mail";
+                        const href = isEmail
+                          ? `mailto:${val}`
+                          : `tel:${val.replace(/\s+/g, "")}`;
+                        const svgIcon = isEmail
+                          ? `<svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`
+                          : `<svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+                        return `
+                        <a href="${href}" class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                          <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                              ${svgIcon}
+                            </div>
+                            <span class="font-bold text-primary text-[15px] group-hover:text-[#8C6D53] transition-colors">${name}</span>
+                          </div>
+                          <span class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${
+                            isEmail ? "break-all text-[13px] font-normal" : ""
+                          }">${val}</span>
+                        </a>
+                      `;
+                      })
+                      .join("");
+                  }
+                }
+              } catch (err) {
+                console.warn("Supabase fetch failed, using fallback content:", err);
+              }
+            }
+          });
         </script>
 
       </div>
@@ -2094,73 +2364,79 @@
       <div class="ecuador-divider"></div>
       <div class="py-24 bg-surface-container-lowest">
         <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-          <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Transformaciones Reales</h2>
+          <div class="mb-14 border-b border-primary/20 pb-4 scroll-reveal">
+            <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Antes y Después</span>
+            <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[48px] font-semibold text-primary leading-tight tracking-[-0.02em]">Transformaciones Reales</h2>
           </div>
-          <!-- Interactive Slider (Replaces Stack Item 1) -->
+          <!-- Interactive Slider (Reveal1 21st.dev luxury style - Piedra Caliza) -->
           <div class="transform-card-wrapper group">
-            <div class="transform-card-blob"></div>
-            <div class="transform-card-bg p-4 md:p-8">
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-8 gap-4">
-                <div class="max-w-2xl">
-                  <span
-                    class="font-label-caps text-label-caps uppercase tracking-widest text-primary block mb-2">Vestidor a
-                    Medida</span>
-                  <p class="font-body-lg text-body-lg text-on-surface-variant">
-                    Aprovechamos al máximo cada rincón para diseñar un vestidor a medida súper funcional. La iluminación
-                    LED integrada le da ese toque cálido y moderno, ideal para organizar el día a día con comodidad.
-                  </p>
-                </div>
-                <!-- Interactive Hint Badge -->
-                <div
-                  class="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full border border-primary/20 animate-pulse shrink-0">
-                  <span class="material-symbols-outlined text-sm">swipe</span>
-                  <span class="font-label-caps text-[10px] md:text-xs tracking-widest uppercase font-bold">Desliza para
-                    comparar</span>
-                </div>
+            <div class="transform-card-bg p-4 sm:p-7 md:p-9">
+              <div class="mb-5 md:mb-8">
+                <span
+                  class="font-label-caps text-label-caps uppercase tracking-widest text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Vestidor a
+                  Medida</span>
+                <p class="font-body-lg text-body-lg text-[#403B37] dark:text-neutral-300 max-w-2xl leading-relaxed">
+                  Aprovechamos al máximo cada rincón para diseñar un vestidor a medida súper funcional. La iluminación
+                  LED integrada le da ese toque cálido y moderno, ideal para organizar el día a día con comodidad.
+                </p>
               </div>
 
-              <!-- Slider Container -->
+              <!-- Slider Container (Calibrated Aspect: Portrait Rectangular on Mobile & Spacious on Desktop) -->
               <div id="before-after-slider"
-                class="relative w-full aspect-[1/1] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-black select-none group rounded-xl shadow-inner border border-black/10 dark:border-white/10">
+                class="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 select-none cursor-ew-resize group bg-[#111] touch-none">
 
-                <!-- After Image (Base Layer) -->
+                <!-- After Image (Base Layer - Full) -->
                 <img src="./assets/img/portfolio/despues3.webp"
                   alt="Vestidor terminado e iluminado con LEDs con acabados premium" loading="lazy"
-                  class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                  class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
 
                 <!-- Label After -->
                 <div id="label-after"
-                  class="absolute top-4 right-4 md:top-6 md:right-6 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-md text-white font-label-caps text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+                  class="absolute top-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
                   RESULTADO FINAL
                 </div>
 
-                <!-- Before Image (Clipped Layer) -->
-                <div id="slider-before-clip"
-                  class="absolute inset-0 w-1/2 overflow-hidden border-r-[2px] border-white/90 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-20">
+                <!-- Before Image (Top Layer - Clipped) -->
+                <div id="slider-before-layer"
+                  class="absolute inset-0 pointer-events-none select-none z-10"
+                  style="clip-path: inset(0 50% 0 0);">
                   <img src="./assets/img/portfolio/antes3.webp" alt="Estructura de vestidor de pladur en fase de obra"
-                    loading="lazy" class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                    id="before-img-el">
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
+                  
                   <!-- Label Before -->
                   <div id="label-before"
-                    class="absolute top-4 left-4 md:top-6 md:left-6 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-md text-white font-label-caps text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+                    class="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
                     ESTADO INICIAL
                   </div>
                 </div>
 
-                <!-- Slider Handle Bar -->
-                <div id="slider-bar-handle"
-                  class="absolute inset-y-0 left-1/2 w-[2px] bg-white shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-ew-resize z-30 flex items-center justify-center pointer-events-none">
-                  <div
-                    class="relative w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center text-primary transition-all duration-500 group-hover:scale-105 border-4 border-white/80">
-                    <span class="material-symbols-outlined text-2xl font-bold">code</span>
-                    <!-- Pulsating rings to indicate interaction -->
-                    <div class="absolute inset-0 rounded-full border-2 border-white animate-ping opacity-70"></div>
+                <!-- Divider Line -->
+                <div id="slider-divider"
+                  class="absolute top-0 bottom-0 z-30 w-[3px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.45)] pointer-events-none -translate-x-1/2 flex items-center justify-center"
+                  style="left: 50%;">
+                  
+                  <!-- Handle (21st.dev style with GripVertical icon) -->
+                  <div id="slider-handle-btn"
+                    class="w-10 h-10 bg-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.35)] border-2 border-white flex items-center justify-center text-slate-800 transition-transform duration-150 pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-800">
+                      <circle cx="9" cy="12" r="1.2" fill="currentColor"/>
+                      <circle cx="9" cy="5" r="1.2" fill="currentColor"/>
+                      <circle cx="9" cy="19" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="12" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="5" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="19" r="1.2" fill="currentColor"/>
+                    </svg>
                   </div>
                 </div>
 
-                <!-- Interaction overlay layer -->
-                <div class="absolute inset-0 z-40 cursor-ew-resize" id="slider-interaction-overlay"></div>
+                <!-- Invisible interaction overlay -->
+                <div class="absolute inset-0 z-40 cursor-ew-resize touch-none" id="slider-interaction-overlay"></div>
+              </div>
+
+              <!-- Discrete Luxury Legend underneath the photo -->
+              <div class="flex items-center justify-center gap-2 mt-4 text-[#736B63] dark:text-neutral-400 text-[11px] md:text-xs tracking-widest uppercase font-medium">
+                <span class="material-symbols-outlined text-[16px] text-[#C49320]">drag_indicator</span>
+                <span>Desliza para comparar el antes y después</span>
               </div>
             </div>
           </div>
@@ -2190,146 +2466,181 @@
 
     <!-- Servicios Section -->
     <div class="ecuador-divider"></div>
-    <section id="servicios" class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto scroll-mt-20">
+    <section id="servicios" class="py-24 md:py-28 bg-[#F7F5F0] border-y border-[#EBE6DC] scroll-mt-20">
+      <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
 
-      <!-- Section Title & Intro (Top) -->
-      <div
-        class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
-        <div class="max-w-xl">
-          <span class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey mb-3 block">Nuestra
-            Experiencia</span>
-          <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
-            Especialistas en Reformas y Acabados de Calidad
-          </h2>
-        </div>
-        <div class="max-w-xl">
-          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            Más de 10 años participando en proyectos de reforma y acondicionamiento de espacios. Trabajamos cada detalle
-            con profesionalidad, experiencia y un compromiso real con la calidad de los acabados.
-          </p>
-        </div>
-      </div>
-
-      <!-- Services Grid (2x2 on Desktop) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- Service Item 1 -->
+        <!-- Section Title & Intro (Top) -->
         <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">01
-            / DISEÑO Y PLANIFICACIÓN</span>
+          class="mb-16 border-b border-primary/20 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
+          <div class="max-w-xl">
+            <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Nuestra Experiencia</span>
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
+              Especialistas en Reformas y Acabados de Calidad
+            </h2>
+          </div>
+          <div class="max-w-xl">
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
+              Más de 10 años participando en proyectos de reforma y acondicionamiento de espacios. Trabajamos cada detalle
+              con profesionalidad, experiencia y un compromiso real con la calidad de los acabados.
+            </p>
+          </div>
+        </div>
 
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <circle cx="12" cy="13" r="2" />
-                <path d="M12 15v3l1 1h2" />
-              </svg>
+        <!-- Services Grid (2x2 on Desktop) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <!-- Service Item 1 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">01
+                / DISEÑO Y PLANIFICACIÓN</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
             </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Reformas Integrales
-            </h3>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M3 9h18"/>
+                  <path d="M9 21V9"/>
+                  <path d="M13 13h4"/>
+                  <path d="M13 17h2"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Reformas Integrales
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              Nos encargamos de coordinar cada fase del proyecto, desde la planificación inicial hasta la entrega final,
+              ofreciendo un servicio completo y una ejecución cuidada en cada detalle.
+            </p>
           </div>
 
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            Nos encargamos de coordinar cada fase del proyecto, desde la planificación inicial hasta la entrega final,
-            ofreciendo un servicio completo y una ejecución cuidada en cada detalle.
-          </p>
-        </div>
+          <!-- Service Item 2 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        <!-- Service Item 2 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">02
-            / ESPECIALIZACIÓN TÉCNICA</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 10h18M3 14h18M3 18h18" />
-                <path d="M7 10v4M17 10v4M12 14v4M7 18v3M17 18v3" />
-                <path d="M12 6v4M7 6h10" />
-              </svg>
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">02
+                / ESPECIALIZACIÓN TÉCNICA</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
             </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Sistemas de Pladur y Aislamiento
-            </h3>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                  <polyline points="2 17 12 22 22 17"/>
+                  <polyline points="2 12 12 17 22 12"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Sistemas de Pladur y Aislamiento
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              Instalamos pladur, aislamiento acústico y aislamiento térmico adaptados a viviendas, locales comerciales y
+              espacios con necesidades específicas de confort.
+            </p>
           </div>
 
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            Instalamos pladur, aislamiento acústico y aislamiento térmico adaptados a viviendas, locales comerciales y
-            espacios con necesidades específicas de confort.
-          </p>
-        </div>
+          <!-- Service Item 3 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        <!-- Service Item 3 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">03
-            / ALTA DECORACIÓN Y REVESTIMIENTOS</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 3h12v4H6z" />
-                <path d="M12 7v7" />
-                <path d="M9 14h6v6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" />
-                <path d="M19 12h2M18 15h3" />
-              </svg>
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">03
+                / ALTA DECORACIÓN Y REVESTIMIENTOS</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
             </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Revestimientos y Acabados
-            </h3>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 15h16l-2-6H6l-2 6z"/>
+                  <path d="M12 9V5a2 2 0 0 1 2-2h2"/>
+                  <path d="M3 19h18"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Revestimientos y Acabados
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              Trabajamos con microcemento, yesos decorativos y pintura profesional para conseguir superficies modernas,
+              resistentes y con acabados de alta calidad.
+            </p>
           </div>
 
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            Trabajamos con microcemento, yesos decorativos y pintura profesional para conseguir superficies modernas,
-            resistentes y con acabados de alta calidad.
-          </p>
-        </div>
+          <!-- Service Item 4 -->
+          <div
+            class="relative bg-white rounded-2xl border border-[#E5DFD5] p-7 md:p-9 shadow-[0_4px_20px_rgba(121,87,70,0.05),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(121,87,70,0.12),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+            
+            <!-- Subtle Top Accent Glow on Hover -->
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        <!-- Service Item 4 -->
-        <div
-          class="bg-white dark:bg-[#161413] rounded-2xl border border-primary/5 hover:border-[#795746]/20 shadow-md hover:shadow-2xl transition-all duration-300 p-6 md:p-8 group cursor-pointer flex flex-col">
-          <span
-            class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey block mb-4 text-[11px] font-bold">04
-            / INSTALACIONES Y CONFORT</span>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div
-              class="w-12 h-12 rounded-full bg-[#795746]/10 dark:bg-[#795746]/20 flex items-center justify-center text-[#795746] dark:text-[#EABDA9] flex-shrink-0 group-hover:bg-[#795746] group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 12h18M12 3v18" />
-                <path d="M6 6c1-1 2 1 3 0M15 15c1-1 2 1 3 0" />
-              </svg>
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="font-body text-[11px] uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold">04
+                / INSTALACIONES Y CONFORT</span>
+              <span class="text-xs font-semibold text-[#8C6D53]/40 group-hover:text-[#8C6D53] transition-colors duration-300">✦</span>
             </div>
-            <h3
-              class="font-headline-lg text-headline-lg-mobile md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight">
-              Pavimentos y Alicatados
-            </h3>
+
+            <div class="flex items-start gap-4 mb-4">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] flex-shrink-0 group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(140,109,83,0.25)] transition-all duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+                  <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+                </svg>
+              </div>
+              <div>
+                <h3
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  Pavimentos y Alicatados
+                </h3>
+              </div>
+            </div>
+
+            <p class="font-body text-sm md:text-base text-on-surface-variant/90 leading-relaxed flex-grow mt-2">
+              Realizamos trabajos de pavimentación y revestimiento cerámico con precisión y atención al detalle,
+              garantizando resultados duraderos y estéticamente cuidados.
+            </p>
           </div>
 
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed flex-grow">
-            Realizamos trabajos de pavimentación y revestimiento cerámico con precisión y atención al detalle,
-            garantizando resultados duraderos y estéticamente cuidados.
-          </p>
         </div>
-
       </div>
     </section>
 
@@ -2341,10 +2652,9 @@
           <!-- Contact Info (Left) -->
           <div class="md:col-span-4 flex flex-col justify-start scroll-reveal">
             <span
-              class="font-label-caps text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-2 block">¿HABLAMOS
-              DE SU ESPACIO?</span>
+              class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">¿HABLAMOS DE SU ESPACIO?</span>
             <h2
-              class="font-headline-xl text-[3rem] md:text-[4rem] text-primary leading-none mb-12 font-light tracking-tight">
+              class="font-headline text-[2.75rem] md:text-[3.75rem] font-semibold text-primary leading-none mb-10 tracking-[-0.03em]">
               Contacto.
             </h2>
 
@@ -2372,73 +2682,75 @@
               </div>
               <div>
                 <span
-                  class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-3 font-bold">CONTACTO
+                  class="font-body text-[11px] uppercase tracking-[0.22em] text-[#8C6D53] dark:text-[#D49B0B] block mb-3 font-bold">CONTACTO
                   DIRECTO</span>
                 <div id="contact-info-list"
-                  class="bg-white border border-[#E5E7EB] rounded-lg divide-y divide-gray-100 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+                  class="bg-white border border-[#E5DFD5] rounded-2xl divide-y divide-[#EFEAE1] overflow-hidden shadow-[0_4px_24px_rgba(121,87,70,0.06)]">
                   <!-- Goyo -->
                   <a href="tel:+34678159878"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">Goyo</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">Goyo</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">Dirección Técnica</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34
-                      678 15 98 78</span>
+                      class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34 678 15 98 78</span>
                   </a>
 
                   <!-- Jofrre -->
                   <a href="tel:+34603404450"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">Jofrre</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">Jofrre</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">Gestión de Obra</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34
-                      603 40 44 50</span>
+                      class="font-body font-semibold text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200">+34 603 40 44 50</span>
                   </a>
 
                   <!-- Email -->
                   <a href="mailto:ecuaplac.jyg.sl@gmail.com"
-                    class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    class="flex items-center justify-between p-4 sm:p-5 hover:bg-[#FAF8F5] group transition-all duration-300">
+                    <div class="flex items-center gap-3.5">
                       <div
-                        class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                        <svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FAF8F5] to-[#EFEAE1] border border-[#E5DFD5] flex items-center justify-center text-[#8C6D53] group-hover:bg-[#8C6D53] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_4px_14px_rgba(140,109,83,0.25)] transition-all duration-300">
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <rect width="20" height="16" x="2" y="4" rx="2"/>
+                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                         </svg>
                       </div>
-                      <span class="font-bold text-primary text-[14px]">Email</span>
+                      <div>
+                        <span class="font-bold text-primary text-[15px] block group-hover:text-[#8C6D53] transition-colors">Correo</span>
+                        <span class="font-body text-[11px] text-[#8C6D53] uppercase tracking-wider font-semibold">Atención General</span>
+                      </div>
                     </div>
                     <span
-                      class="font-body-md text-[13px] text-on-surface-variant group-hover:text-primary break-all transition-colors duration-200">ecuaplac.jyg.sl@gmail.com</span>
+                      class="font-body text-[13px] text-on-surface-variant group-hover:text-primary break-all transition-colors duration-200 font-medium">ecuaplac.jyg.sl@gmail.com</span>
                   </a>
                 </div>
               </div>
               <div>
                 <span
-                  class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-3 font-bold">SOBRE
+                  class="font-body text-[11px] uppercase tracking-[0.22em] text-[#8C6D53] dark:text-[#D49B0B] block mb-3 font-bold">SOBRE
                   NOSOTROS</span>
-                <div class="p-6 bg-white border border-[#E5E7EB] rounded-lg">
-                  <p class="m-0 text-on-surface-variant leading-relaxed text-[15px]">Especialistas en reformas
+                <div class="p-6 bg-white border border-[#E5DFD5] rounded-2xl shadow-sm">
+                  <p class="m-0 text-on-surface-variant leading-relaxed text-[15px] font-body">Especialistas en reformas
                     integrales de alto standing, con más de 10 años de trayectoria en Islas Baleares.</p>
                 </div>
               </div>
@@ -2447,7 +2759,7 @@
 
           <!-- Contact Form (Right) -->
           <div
-            class="md:col-span-8 mt-12 md:mt-0 bg-white p-8 md:p-12 border border-[#E5E7EB] rounded-[16px] shadow-[0_8px_32px_rgba(0,0,0,0.04)]">
+            class="md:col-span-8 mt-12 md:mt-0 bg-white p-8 md:p-12 border border-[#E5DFD5] rounded-2xl shadow-[0_12px_40px_rgba(121,87,70,0.06)]">
             <form id="contactForm" onsubmit="event.preventDefault(); handleFormSubmit('contactForm');"
               class="flex flex-col gap-8">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -2521,14 +2833,13 @@
         <div
           class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
           <div class="max-w-xl">
-            <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#795746] mb-3 block">Resolución
-              de Dudas</span>
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
+            <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Resolución de Dudas</span>
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
               Preguntas Frecuentes
             </h2>
           </div>
           <div class="max-w-xl">
-            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
               ¿Tienes alguna duda? Aquí respondemos algunas de las preguntas más habituales de nuestros clientes.
             </p>
           </div>
@@ -2700,7 +3011,7 @@
   <!-- Footer -->
   <div class="ecuador-divider"></div>
   <footer
-    class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-10 border-t border-[#1C1C1E] transition-colors duration-300">
+    class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300">
     <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
       <!-- 3 Column Layout -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pb-16 border-b border-[#1C1C1E]">
@@ -2737,7 +3048,7 @@
                 class="w-full h-full object-contain scale-110" loading="lazy">
             </div>
           </a>
-          <p class="text-[15px] text-[#E5E7EB] leading-relaxed max-w-sm text-balance">
+          <p class="font-editorial text-[17px] md:text-[18px] text-[#E5E7EB] italic leading-relaxed max-w-md text-balance drop-shadow-sm">
             Cuando J &amp; G empezamos un proyecto, lo hacemos con una regla simple:<br>tratar tu casa en Mallorca como
             si fuera la nuestra.<br>No se trata solo de cumplir con el plano, sino de que el resultado final<br>sea algo
             de lo que tú te sientas orgulloso y nosotros también.
@@ -2766,19 +3077,30 @@
             </ul>
           </div>
 
-          <!-- Instagram -->
-          <a class="group flex items-center justify-center gap-4 text-[13px] font-label-caps tracking-widest text-[#888] hover:text-monolith-white transition-all duration-300 h-11 px-2"
-            href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank"
-            rel="noopener noreferrer">
-            INSTAGRAM
-            <span
-              class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md">
+          <!-- Redes & Ubicación -->
+          <div class="flex items-center justify-center md:justify-end gap-3 mt-2">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram de Ecuaplac"
+              class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
               </svg>
-            </span>
-          </a>
+            </a>
+            <!-- Google Maps -->
+            <a href="https://maps.app.goo.gl/5Fr819Bsh6AkjQKd8" target="_blank"
+              rel="noopener noreferrer" aria-label="Ubicación en Google Maps"
+              class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
+              <svg class="w-4 h-4" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
+                <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/>
+                <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
+                <path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.3c4.8 10.6 12.8 19.2 21 29.9l34.1-40.5c-3.3 3.9-8.1 6.3-13.5 6.3"/>
+                <path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
       </div>
@@ -2795,8 +3117,19 @@
           © 2026 ECUAPLAC. TODOS LOS DERECHOS RESERVADOS.
         </span>
       </div>
+
     </div>
-  </footer>
+
+  <!-- Dithered Brand Band (ABAJO DE TODO - Efecto 21st para ECUAPLAC) -->
+  <div aria-hidden="true" class="df-band relative w-full overflow-hidden select-none border-t border-[#1C1C1E] mt-10" style="--df-accent: #FFB81C;">
+    <div class="df-field">
+      <div class="df-dots"></div>
+    </div>
+    <p class="df-mark pointer-events-none absolute -bottom-[0.05em] left-3 sm:left-6 md:left-10 select-none text-[clamp(3.3rem,16vw,12.5rem)] font-black leading-[0.8] tracking-[0.03em]">
+      ECUAPLAC
+    </p>
+  </div>
+</footer>
 
   <!-- Presupuesto Modal -->
   <div id="presupuestoModal"
@@ -2815,12 +3148,11 @@
       </button>
 
       <div class="mb-8">
-        <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#888888] block mb-2">Presupuesto
-          sin compromiso</span>
-        <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-white leading-tight">
+        <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#D49B0B] font-bold block mb-2">Presupuesto sin compromiso</span>
+        <h2 class="font-headline text-[32px] sm:text-[40px] md:text-[48px] font-semibold text-white leading-tight tracking-[-0.02em]">
           Solicitar Presupuesto.
         </h2>
-        <p class="font-body-md text-body-md text-[#C5C5C5] mt-2">
+        <p class="font-body text-sm md:text-base text-[#C5C5C5] mt-2">
           Facilítanos algunos detalles preliminares de tu obra y nuestro equipo técnico realizará un estudio inicial de
           viabilidad.
         </p>
@@ -2928,9 +3260,9 @@
     <!-- Top Bar inside Mobile Menu (Mini Header) -->
     <div class="absolute top-0 left-0 w-full bg-black z-10">
       <div class="flex justify-between items-center h-24 px-8">
-        <a class="flex items-center -ml-8 md:ml-0" href="#" onclick="toggleMobileMenu()">
+        <a class="flex items-center ml-0" href="#" onclick="toggleMobileMenu()" aria-label="Ecuaplac Inicio">
           <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
-            class="h-14 w-auto object-contain select-none" loading="lazy">
+            class="h-10 w-auto object-contain select-none" loading="lazy">
         </a>
         <button class="text-white cursor-pointer" onclick="toggleMobileMenu()">
           <span class="material-symbols-outlined text-3xl">close</span>
@@ -2940,7 +3272,7 @@
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col gap-8 font-headline-xl text-3xl uppercase tracking-wider text-center mt-12">
+    <ul class="flex flex-col gap-8 font-headline text-2xl font-semibold uppercase tracking-wider text-center mt-12">
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#hero-scroll-container"
           onclick="toggleMobileMenu()">INICIO</a></li>
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#reformas"
@@ -2957,6 +3289,7 @@
       <div class="flex justify-center items-center gap-6 font-label-caps tracking-widest font-bold text-[16px]">
         <span class="text-white cursor-default border-b-2 border-white pb-1">ES</span>
         <a href="index-en.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">EN</a>
+        <a href="index-de.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">DE</a>
       </div>
       <button onclick="toggleMobileMenu(); openPresupuestoModal();"
         class="w-full font-bold uppercase tracking-widest text-[12px] text-white border border-white/40 rounded-full px-6 py-3.5 hover:bg-white hover:text-black active:scale-95 transition-all duration-300 cursor-pointer text-center">
@@ -3108,31 +3441,103 @@
         requestAnimationFrame(animation);
       }
 
-      // Add smooth scrolling to all local anchors with fixed navbar offset (72px)
+      function updateNavClass(targetId) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === targetId) {
+            link.classList.add('active-nav');
+          } else {
+            link.classList.remove('active-nav');
+          }
+        });
+      }
+
+      // Add smooth scrolling to all local anchors with fixed navbar offset (72px) & History Support
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
           if (targetId === '#') {
+            if (window.location.hash) {
+              history.pushState({ section: '' }, '', window.location.pathname + window.location.search);
+            }
             smoothScrollTo(0, 600);
+            updateNavClass('#hero-scroll-container');
             return;
           }
           const targetElement = document.querySelector(targetId);
           if (targetElement) {
+            if (window.location.hash !== targetId) {
+              history.pushState({ section: targetId }, '', targetId);
+            }
             const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 72;
             smoothScrollTo(offsetTop, 600);
-
-            // Instant feedback class update
-            document.querySelectorAll('.nav-link').forEach(link => {
-              if (link.getAttribute('href') === targetId) {
-                link.classList.add('active-nav');
-              } else {
-                link.classList.remove('active-nav');
-              }
-            });
+            updateNavClass(targetId);
           }
         });
       });
+
+      // Navigation Memory: Popstate listener for iPhone back gesture & browser back/forward buttons
+      window.addEventListener('popstate', function () {
+        const hash = window.location.hash;
+        if (hash) {
+          const targetElement = document.querySelector(hash);
+          if (targetElement) {
+            const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 72;
+            smoothScrollTo(offsetTop, 500);
+            updateNavClass(hash);
+            return;
+          }
+        }
+        smoothScrollTo(0, 500);
+        updateNavClass('#hero-scroll-container');
+      });
+
+      // Navigation Memory: Restore section on entry or return from secondary pages (e.g. reformas.html)
+      const returnSection = window.location.hash || sessionStorage.getItem('ecuaplac_return_section');
+      if (returnSection) {
+        sessionStorage.removeItem('ecuaplac_return_section');
+        setTimeout(() => {
+          const target = document.querySelector(returnSection);
+          if (target) {
+            const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 72;
+            smoothScrollTo(offsetTop, 400);
+            updateNavClass(returnSection);
+          }
+        }, 200);
+      }
+
+      // Touch-Guard: Prevent accidental logo clicks during iPhone edge swipe-back gesture
+      const brandLogo = document.querySelector('nav a[aria-label="Ecuaplac Inicio"], nav a[href="#"]');
+      if (brandLogo) {
+        let touchStartX = 0;
+        let isEdgeSwipe = false;
+
+        brandLogo.addEventListener('touchstart', function (e) {
+          if (e.touches && e.touches.length > 0) {
+            touchStartX = e.touches[0].clientX;
+            // If touch starts within 35px of left bezel, it's the iPhone back gesture zone
+            isEdgeSwipe = touchStartX < 35;
+          }
+        }, { passive: true });
+
+        brandLogo.addEventListener('touchmove', function (e) {
+          if (e.touches && e.touches.length > 0) {
+            const deltaX = e.touches[0].clientX - touchStartX;
+            if (deltaX > 15) {
+              isEdgeSwipe = true;
+            }
+          }
+        }, { passive: true });
+
+        brandLogo.addEventListener('click', function (e) {
+          if (isEdgeSwipe) {
+            e.preventDefault();
+            e.stopPropagation();
+            isEdgeSwipe = false;
+            return false;
+          }
+        });
+      }
 
       // Add smooth scrolling to pagination dots representing hero collage slides
       document.querySelectorAll('#vertical-pagination .pagination-dot').forEach(dot => {
@@ -3144,16 +3549,16 @@
             const containerHeight = heroContainer.getBoundingClientRect().height;
             const viewportHeight = window.innerHeight;
             const totalScrollable = containerHeight - viewportHeight;
-            // Map slideIndex to progress 0..0.80 of total scrollable height
+            // Map slideIndex directly to progress 0, 0.50, 1.0 of total scrollable height
             const numStages = document.querySelectorAll('#vertical-pagination .pagination-dot').length;
-            const step = (numStages > 1) ? (0.80 / (numStages - 1)) : 0;
+            const step = (numStages > 1) ? (1.0 / (numStages - 1)) : 0;
             const targetScroll = heroTop + (slideIndex * step * totalScrollable);
-            smoothScrollTo(targetScroll, 600);
+            smoothScrollTo(targetScroll, 500);
           }
         });
       });
 
-      // High-performance scroll spy for navigation active links
+      // High-performance scroll spy for navigation active links (throttled to avoid layout thrashing)
       const sections = ['hero-scroll-container', 'reformas', 'servicios', 'contacto'];
       const navLinks = document.querySelectorAll('.nav-link');
 
@@ -3186,25 +3591,20 @@
         });
       }
 
-      window.addEventListener('scroll', updateActiveNavLink, { passive: true });
-      updateActiveNavLink(); // initial call
-
       // Scroll listener for dynamic navbar styling
       const navElement = document.querySelector('nav');
 
-      // Scrollytelling Pinned Hero Logic
+      // Scrollytelling Pinned Hero Logic (GPU-composited, zero zIndex churn, motion-design & emil-design-eng)
       const heroContainer = document.getElementById('hero-scroll-container');
-      const layers = [
-        document.getElementById('hero-layer-1'),
-        document.getElementById('hero-layer-2'),
-        document.getElementById('hero-layer-3')
-      ];
+      const layer1 = document.getElementById('hero-layer-1');
+      const layer2 = document.getElementById('hero-layer-2');
+      const layer3 = document.getElementById('hero-layer-3');
 
-      const texts = [
-        document.getElementById('hero-text-1'),
-        document.getElementById('hero-text-2'),
-        document.getElementById('hero-text-3')
-      ];
+      const text1 = document.getElementById('hero-text-1');
+      const text2 = document.getElementById('hero-text-2');
+      const text3 = document.getElementById('hero-text-3');
+
+      const paginationDots = document.querySelectorAll('#vertical-pagination .pagination-dot');
 
       // Cache viewport height to avoid Safari address-bar resize jank
       let cachedVH = window.innerHeight;
@@ -3218,103 +3618,101 @@
         if (!heroContainer) return;
 
         const rect = heroContainer.getBoundingClientRect();
-        const containerHeight = rect.height;
-
-        // Use cached viewport height to avoid Safari address-bar resize jank
-        const viewportHeight = cachedVH;
-
-        // Calculate scroll progress (0 to 1) for the entire container scrollable area
-        const totalScrollable = containerHeight - viewportHeight;
+        const totalScrollable = rect.height - cachedVH;
         if (totalScrollable <= 0) return;
-        let progress = -rect.top / totalScrollable;
-        progress = Math.min(Math.max(progress, 0), 1);
 
-        // Transitions finish at 80% of scroll; remaining 20% is a static pause on last image
-        let transitionProgress = progress / 0.8;
-        transitionProgress = Math.min(Math.max(transitionProgress, 0), 1);
+        // Normalized progress: 0.0 at top of hero, 1.0 at exit
+        const rawProgress = -rect.top / totalScrollable;
+        const progress = Math.min(Math.max(rawProgress, 0), 1);
 
-        const numStages = layers.length;
-        const numTransitions = numStages - 1;
-        const step = 1 / numTransitions;
+        // Continuous curtain kinematics (Stage 1: 0.0 -> 0.50, Stage 2: 0.50 -> 1.0)
+        // Fixed CSS stacking context: Layer 1 (z-10), Layer 2 (z-20), Layer 3 (z-30).
+        // Zero zIndex churn prevents GPU texture repainting and composite drops.
+        const p1 = Math.min(Math.max(progress / 0.5, 0), 1);
+        const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
-        let transitionIndex = Math.floor(transitionProgress / step);
-        if (transitionIndex >= numTransitions) {
-          transitionIndex = numTransitions - 1;
+        if (layer1) {
+          // Layer 1: subtle architectural parallax drift
+          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(3)}%, 0)`;
         }
 
-        const localProg = (transitionProgress - (transitionIndex * step)) / step;
+        if (layer2) {
+          // Layer 2 slides up to cover layer 1 (100% -> 0%), then drifts (-12%) during stage 2
+          const y2 = (1 - p1) * 100 - (p2 * 12);
+          layer2.style.transform = `translate3d(0, ${y2.toFixed(3)}%, 0)`;
+        }
 
-        // GPU-accelerated layer transitions using translate3d (no CSS transition delay)
-        layers.forEach((layer, idx) => {
-          if (!layer) return;
-          if (idx === transitionIndex) {
-            layer.style.transform = `translate3d(0, ${-localProg * 25}%, 0)`;
-            layer.style.opacity = '1';
-            layer.style.zIndex = '1';
-          } else if (idx === transitionIndex + 1) {
-            layer.style.transform = `translate3d(0, ${(1 - localProg) * 100}%, 0)`;
-            layer.style.opacity = '1';
-            layer.style.zIndex = '2';
-          } else if (idx < transitionIndex) {
-            layer.style.transform = 'translate3d(0, -100%, 0)';
-            layer.style.opacity = '0';
-            layer.style.zIndex = '0';
-          } else {
-            layer.style.transform = 'translate3d(0, 100%, 0)';
-            layer.style.opacity = '0';
-            layer.style.zIndex = '0';
-          }
-        });
+        if (layer3) {
+          // Layer 3 slides up to cover layer 2 (100% -> 0%)
+          const y3 = (1 - p2) * 100;
+          layer3.style.transform = `translate3d(0, ${y3.toFixed(3)}%, 0)`;
+        }
 
-        // Update right-side vertical pagination dot active states
-        const paginationDots = document.querySelectorAll('#vertical-pagination .pagination-dot');
-        if (paginationDots.length === numStages) {
-          const activeIdx = localProg < 0.5 ? transitionIndex : transitionIndex + 1;
+        // Active pagination dot indicator
+        if (paginationDots.length === 3) {
+          const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
           paginationDots.forEach((dot, idx) => {
-            if (idx === activeIdx) {
-              dot.classList.add('active');
-            } else {
-              dot.classList.remove('active');
-            }
+            dot.classList.toggle('active', idx === activeIdx);
           });
         }
 
-        // Optimize text overlay cross-fading
-        texts.forEach((text, idx) => {
-          if (!text) return;
-          if (idx !== transitionIndex && idx !== transitionIndex + 1) {
-            if (text.style.opacity !== '0') {
-              text.style.opacity = '0';
-              text.style.transform = 'translateY(16px)';
-              text.style.pointerEvents = 'none';
-            }
+        // Typography cross-fades with smooth translation (motion-design & emil-design-eng)
+        // Text 1: active 0.0 -> 0.32, fades out 0.32 -> 0.46
+        if (text1) {
+          if (progress <= 0.32) {
+            text1.style.opacity = '1';
+            text1.style.transform = 'translateY(0)';
+            text1.style.pointerEvents = 'auto';
+          } else if (progress <= 0.46) {
+            const f = (progress - 0.32) / 0.14;
+            text1.style.opacity = (1 - f).toFixed(2);
+            text1.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text1.style.pointerEvents = 'none';
+          } else {
+            text1.style.opacity = '0';
+            text1.style.pointerEvents = 'none';
           }
-        });
+        }
 
-        const fromText = texts[transitionIndex];
-        const toText = texts[transitionIndex + 1];
+        // Text 2: fades in 0.42 -> 0.54, active until 0.74, fades out 0.74 -> 0.86
+        if (text2) {
+          if (progress < 0.42) {
+            text2.style.opacity = '0';
+            text2.style.pointerEvents = 'none';
+          } else if (progress <= 0.54) {
+            const f = (progress - 0.42) / 0.12;
+            text2.style.opacity = f.toFixed(2);
+            text2.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text2.style.pointerEvents = 'auto';
+          } else if (progress <= 0.74) {
+            text2.style.opacity = '1';
+            text2.style.transform = 'translateY(0)';
+            text2.style.pointerEvents = 'auto';
+          } else if (progress <= 0.86) {
+            const f = (progress - 0.74) / 0.12;
+            text2.style.opacity = (1 - f).toFixed(2);
+            text2.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text2.style.pointerEvents = 'none';
+          } else {
+            text2.style.opacity = '0';
+            text2.style.pointerEvents = 'none';
+          }
+        }
 
-        if (localProg < 0.5) {
-          if (fromText) {
-            fromText.style.opacity = 1 - (localProg * 2);
-            fromText.style.transform = `translateY(${-localProg * 16}px)`;
-            fromText.style.pointerEvents = 'auto';
-          }
-          if (toText && toText.style.opacity !== '0') {
-            toText.style.opacity = '0';
-            toText.style.transform = 'translateY(16px)';
-            toText.style.pointerEvents = 'none';
-          }
-        } else {
-          if (toText) {
-            toText.style.opacity = (localProg - 0.5) * 2;
-            toText.style.transform = `translateY(${(1 - localProg) * 32}px)`;
-            toText.style.pointerEvents = 'auto';
-          }
-          if (fromText && fromText.style.opacity !== '0') {
-            fromText.style.opacity = '0';
-            fromText.style.transform = 'translateY(-16px)';
-            fromText.style.pointerEvents = 'none';
+        // Text 3: fades in 0.80 -> 0.92, active until 1.0
+        if (text3) {
+          if (progress < 0.80) {
+            text3.style.opacity = '0';
+            text3.style.pointerEvents = 'none';
+          } else if (progress <= 0.92) {
+            const f = (progress - 0.80) / 0.12;
+            text3.style.opacity = f.toFixed(2);
+            text3.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text3.style.pointerEvents = 'auto';
+          } else {
+            text3.style.opacity = '1';
+            text3.style.transform = 'translateY(0)';
+            text3.style.pointerEvents = 'auto';
           }
         }
       }
@@ -3331,15 +3729,12 @@
         const paginationContainer = document.getElementById('vertical-pagination');
         if (heroContainer && paginationContainer) {
           const rect = heroContainer.getBoundingClientRect();
-          // If the bottom of the hero is above the middle of the screen, fade it out
           if (rect.bottom < window.innerHeight / 2) {
             paginationContainer.classList.add('opacity-0', 'pointer-events-none');
           } else {
             paginationContainer.classList.remove('opacity-0', 'pointer-events-none');
           }
         }
-
-
       }
 
       // Intersection Observer for separator text slide-in animation
@@ -3352,7 +3747,6 @@
               sepText.classList.add('opacity-100', 'translate-x-0');
               sepText.classList.add('played');
             } else {
-              // Re-enable animation for repeat triggers on scroll
               if (!sepText.classList.contains('played')) {
                 sepText.classList.add('opacity-0', '-translate-x-24');
                 sepText.classList.remove('opacity-100', 'translate-x-0');
@@ -3363,16 +3757,17 @@
         sepObserver.observe(sepText);
       }
 
-      // Optimized scroll handler — hero runs every rAF, nav/pagination run at reduced rate
+      // Unified, rAF-scheduled scroll handler (eliminates layout thrashing)
       let ticking = false;
       let lastScrollHandleTime = 0;
       function onScroll() {
         if (!ticking) {
           window.requestAnimationFrame((now) => {
             handleHeroScroll();
-            // Throttle non-critical scroll work to ~60ms intervals
-            if (now - lastScrollHandleTime > 60) {
+            // Throttle non-critical layout reads (navbar & navLink spy) to ~80ms
+            if (now - lastScrollHandleTime > 80) {
               handleScroll();
+              updateActiveNavLink();
               lastScrollHandleTime = now;
             }
             ticking = false;
@@ -3385,6 +3780,7 @@
       // Run once on load to set correct initial state
       handleHeroScroll();
       handleScroll();
+      updateActiveNavLink();
 
       // Scroll-reveal: subtle fade-in for section headings
       const revealEls = document.querySelectorAll('.scroll-reveal');
@@ -3400,72 +3796,52 @@
         revealEls.forEach(el => revealObserver.observe(el));
       }
 
-      // Image Comparison Slider Logic
+      // Image Comparison Slider Logic (Reveal1 21st.dev style)
       const slider = document.getElementById('before-after-slider');
-      const clipDiv = document.getElementById('slider-before-clip');
-      const beforeImg = document.getElementById('before-img-el');
-      const handle = document.getElementById('slider-bar-handle');
+      const beforeLayer = document.getElementById('slider-before-layer');
+      const divider = document.getElementById('slider-divider');
+      const handleBtn = document.getElementById('slider-handle-btn');
       const overlay = document.getElementById('slider-interaction-overlay');
-      const labelBefore = document.getElementById('label-before');
-      const labelAfter = document.getElementById('label-after');
 
-      if (slider && clipDiv && beforeImg && handle && overlay) {
-        const resizeBeforeImg = () => {
-          beforeImg.style.width = `${slider.offsetWidth}px`;
-        };
-
-        // Initial sizing
-        resizeBeforeImg();
-        window.addEventListener('resize', resizeBeforeImg);
-
+      if (slider && beforeLayer && divider && overlay) {
         let isDragging = false;
 
-        const updateSlider = (percent) => {
-          percent = Math.max(0, Math.min(100, percent));
-          clipDiv.style.width = `${percent}%`;
-          handle.style.left = `${percent}%`;
+        const updatePosition = (clientX) => {
+          const rect = slider.getBoundingClientRect();
+          const x = clientX - rect.left;
+          const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          beforeLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+          divider.style.left = `${percentage}%`;
+        };
+
+        const handleStart = (e) => {
+          isDragging = true;
+          if (handleBtn) handleBtn.classList.add('scale-110');
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          updatePosition(clientX);
         };
 
         const handleMove = (e) => {
           if (!isDragging) return;
-          const rect = slider.getBoundingClientRect();
           const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const x = clientX - rect.left;
-          const percent = (x / rect.width) * 100;
-          updateSlider(percent);
+          updatePosition(clientX);
         };
 
-        const startDragging = (e) => {
-          isDragging = true;
-          labelBefore.classList.add('opacity-100');
-          labelAfter.classList.add('opacity-100');
-          handleMove(e);
+        const handleEnd = () => {
+          if (isDragging) {
+            isDragging = false;
+            if (handleBtn) handleBtn.classList.remove('scale-110');
+          }
         };
 
-        const stopDragging = () => {
-          isDragging = false;
-        };
-
-        overlay.addEventListener('mousedown', startDragging);
-        overlay.addEventListener('touchstart', startDragging, { passive: true });
+        overlay.addEventListener('mousedown', handleStart);
+        overlay.addEventListener('touchstart', handleStart, { passive: true });
 
         window.addEventListener('mousemove', handleMove);
-        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchmove', handleMove, { passive: true });
 
-        window.addEventListener('mouseup', stopDragging);
-        window.addEventListener('touchend', stopDragging);
-
-        // Show/hide labels on hover
-        overlay.addEventListener('mouseenter', () => {
-          labelBefore.classList.add('opacity-100');
-          labelAfter.classList.add('opacity-100');
-        });
-        overlay.addEventListener('mouseleave', () => {
-          if (!isDragging) {
-            labelBefore.classList.remove('opacity-100');
-            labelAfter.classList.remove('opacity-100');
-          }
-        });
+        window.addEventListener('mouseup', handleEnd);
+        window.addEventListener('touchend', handleEnd);
       }
       handleScroll();
       handleHeroScroll();
@@ -3476,7 +3852,11 @@
     function handleVerMasProyectos(event) {
       event.preventDefault();
       const url = event.currentTarget.getAttribute('href');
-      // Navegación directa sin loader para evitar pantalla negra en red lenta
+      // Guarda la sección actual en sesión e historial para restaurar al volver atrás
+      sessionStorage.setItem('ecuaplac_return_section', '#reformas');
+      if (window.location.hash !== '#reformas') {
+        history.replaceState({ section: '#reformas' }, '', '#reformas');
+      }
       window.location.href = url;
     }
 
@@ -3580,7 +3960,7 @@
   <div id="cookie-banner"
     class="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-transform duration-700 translate-y-full">
     <div
-      class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/80 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+      class="max-w-4xl mx-auto backdrop-blur-md bg-[#161413]/85 border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex-1 text-center md:text-left">
         <h4 class="text-monolith-white font-headline-md mb-2 flex items-center justify-center md:justify-start gap-2">
           <span class="material-symbols-outlined text-secondary">cookie</span>
@@ -3593,23 +3973,49 @@
       </div>
       <div class="flex items-center gap-4 w-full md:w-auto">
         <button onclick="acceptCookies()"
-          class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md">
+          class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md cursor-pointer active:scale-95">
           Aceptar
         </button>
-        <a href="aviso-legal.html"
-          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white hover:text-primary transition-all duration-300 rounded-full px-8 py-3.5">
-          Configurar
-        </a>
+        <button onclick="rejectCookies()"
+          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95">
+          Rechazar
+        </button>
       </div>
     </div>
   </div>
   <script>
-    function acceptCookies() {
-      localStorage.setItem('ecuaplac_cookies', 'accepted');
-      document.getElementById('cookie-banner').classList.add('translate-y-full');
+    function saveCookieConsent(status) {
+      try {
+        localStorage.setItem('ecuaplac_cookies', status);
+      } catch (e) {}
+      document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax';
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.add('translate-y-full');
     }
+
+    function acceptCookies() {
+      saveCookieConsent('accepted');
+    }
+
+    function rejectCookies() {
+      saveCookieConsent('rejected');
+    }
+
+    function hasCookieConsent() {
+      try {
+        const ls = localStorage.getItem('ecuaplac_cookies');
+        if (ls === 'accepted' || ls === 'rejected') return true;
+      } catch (e) {}
+      const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
+      if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
+        try { localStorage.setItem('ecuaplac_cookies', match[1]); } catch (e) {}
+        return true;
+      }
+      return false;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      if (!localStorage.getItem('ecuaplac_cookies')) {
+      if (!hasCookieConsent()) {
         setTimeout(() => {
           const banner = document.getElementById('cookie-banner');
           if (banner) banner.classList.remove('translate-y-full');
@@ -3709,6 +4115,8 @@
     document.addEventListener('DOMContentLoaded', window.initPortfolioSwiper);
   </script>
 
+  <!-- Dithered Footer JS -->
+  <script src="./assets/js/dithered-footer.js" defer></script>
 </body>
 
 </html>
