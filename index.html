@@ -252,13 +252,18 @@
       border-color: rgba(255, 255, 255, 0.15) !important;
     }
 
-    /* GPU-accelerated scrollytelling layers — NO CSS transition (driven by JS per-frame) */
+    /* GPU-accelerated scrollytelling layers — Compositor-only, zero zIndex churn (motion-design & modern-web-guidance) */
     #hero-sticky-element>div[id^="hero-layer-"] {
-      will-change: transform, opacity;
+      will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
+      contain: paint;
     }
+
+    #hero-layer-1 { z-index: 10; }
+    #hero-layer-2 { z-index: 20; }
+    #hero-layer-3 { z-index: 30; }
 
     /* Stable mobile viewport for hero sticky element */
     #hero-sticky-element {
@@ -266,17 +271,30 @@
       height: calc(100dvh - 72px);
     }
 
-    /* Prevent iOS overscroll rubber-banding inside hero */
+    /* Calibrated ergonomic scroll height (emil-design-eng) — eliminates 450vh dead drag */
     #hero-scroll-container {
+      height: 230vh;
+      height: 230dvh;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
     }
 
-    /* Desktop: taller hero for smoother, slower transitions */
     @media (min-width: 768px) {
       #hero-scroll-container {
-        height: 450vh !important;
-        height: 450dvh !important;
+        height: 260vh !important;
+        height: 260dvh !important;
+      }
+    }
+
+    /* Accessibility: Respect reduced motion (modern-web-guidance) */
+    @media (prefers-reduced-motion: reduce) {
+      #hero-sticky-element>div[id^="hero-layer-"] {
+        will-change: auto;
+        transform: none !important;
+      }
+      #hero-layer-2,
+      #hero-layer-3 {
+        display: none !important;
       }
     }
 
@@ -1401,45 +1419,44 @@
     </div>
   </nav>
   <main>
-    <!-- Pinned Hero Section with Scroll-Triggered Collage Animation -->
-    <section id="hero-scroll-container" class="relative w-full bg-black" style="height: 300vh; height: 300dvh;">
+    <!-- Pinned Hero Section with Scroll-Triggered Collage Animation (motion-design & emil-design-eng) -->
+    <section id="hero-scroll-container" class="relative w-full bg-black">
       <div id="hero-sticky-element" class="sticky top-[72px] w-full overflow-hidden">
-        <!-- Image Layers -->
-        <!-- Image 1: Villa Minimalista (Actual) -->
-        <div id="hero-layer-1" class="absolute inset-0 z-0 opacity-100">
+        <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
+        <!-- Image 1: Villa Minimalista -->
+        <div id="hero-layer-1" class="absolute inset-0 opacity-100">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/1.webp">
             <img alt="Villa minimalista de lujo en Palma de Mallorca" class="w-full h-full object-cover object-center"
-              src="./assets/img/hero/1.webp" loading="eager">
+              src="./assets/img/hero/1.webp" loading="eager" decoding="async">
           </picture>
         </div>
         <!-- Image 2: Cocina de diseño de alta gama -->
-        <div id="hero-layer-2" class="absolute inset-0 z-0 opacity-0">
+        <div id="hero-layer-2" class="absolute inset-0 transform translate-y-full">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/2.webp">
-            <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="lazy"
+            <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
               src="./assets/img/hero/2.webp">
           </picture>
         </div>
         <!-- Image 3: Resultado Final Reforma Integral -->
-        <div id="hero-layer-3" class="absolute inset-0 z-0 opacity-0">
+        <div id="hero-layer-3" class="absolute inset-0 transform translate-y-full">
           <picture class="w-full h-full block">
             <source media="(max-width: 768px)" srcset="./assets/img/hero/3.webp">
-            <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center"
-              loading="lazy"
+            <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
               src="./assets/img/hero/3.webp">
           </picture>
         </div>
 
         <!-- Subtle gradient to ensure text readability -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent z-40 pointer-events-none"></div>
 
         <!-- Hero Text Overlays (Scrollytelling Content) -->
-        <div class="absolute inset-x-0 bottom-0 z-20 h-full max-w-5xl mx-auto pointer-events-none">
+        <div class="absolute inset-x-0 bottom-0 z-50 h-full max-w-5xl mx-auto pointer-events-none">
 
           <!-- Stage 1 Content -->
           <div id="hero-text-1"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto transition-opacity duration-200">
             <h1
               class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
               Arquitectura de<br>espacios limpios.
@@ -1450,18 +1467,25 @@
             </p>
           </div>
 
-          <!-- Stage 2 Content (Clean view) -->
+          <!-- Stage 2 Content (Diseño & Detalle) -->
           <div id="hero-text-2"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            <h2
+              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              Diseño integral &<br>precisión en cada detalle.
+            </h2>
+            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+              Materiales nobles, iluminación cuidada y ejecución impecable para hogares únicos en Mallorca.
+            </p>
           </div>
 
           <!-- Stage 3 Content -->
           <div id="hero-text-3"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
-            <h1
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            <h2
               class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
               El resultado que<br>siempre imaginaste.
-            </h1>
+            </h2>
             <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
               Acabados premium en microcemento pulido, carpintería integrada y confort absoluto.
             </p>
@@ -1830,7 +1854,7 @@
                 const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
                 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
                 const { data, error } = await client
-                  .from('ecuaplac_carousel')
+                  .from('ecuaplac_galeria_1')
                   .select('*')
                   .eq('active', true)
                   .order('sort_order', { ascending: true });
@@ -2097,70 +2121,76 @@
           <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
             <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Transformaciones Reales</h2>
           </div>
-          <!-- Interactive Slider (Replaces Stack Item 1) -->
+          <!-- Interactive Slider (Reveal1 21st.dev luxury style) -->
           <div class="transform-card-wrapper group">
             <div class="transform-card-blob"></div>
-            <div class="transform-card-bg p-4 md:p-8">
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-8 gap-4">
-                <div class="max-w-2xl">
-                  <span
-                    class="font-label-caps text-label-caps uppercase tracking-widest text-primary block mb-2">Vestidor a
-                    Medida</span>
-                  <p class="font-body-lg text-body-lg text-on-surface-variant">
-                    Aprovechamos al máximo cada rincón para diseñar un vestidor a medida súper funcional. La iluminación
-                    LED integrada le da ese toque cálido y moderno, ideal para organizar el día a día con comodidad.
-                  </p>
-                </div>
-                <!-- Interactive Hint Badge -->
-                <div
-                  class="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full border border-primary/20 animate-pulse shrink-0">
-                  <span class="material-symbols-outlined text-sm">swipe</span>
-                  <span class="font-label-caps text-[10px] md:text-xs tracking-widest uppercase font-bold">Desliza para
-                    comparar</span>
-                </div>
+            <div class="transform-card-bg p-3.5 sm:p-6 md:p-8">
+              <div class="mb-5 md:mb-8">
+                <span
+                  class="font-label-caps text-label-caps uppercase tracking-widest text-primary block mb-2">Vestidor a
+                  Medida</span>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                  Aprovechamos al máximo cada rincón para diseñar un vestidor a medida súper funcional. La iluminación
+                  LED integrada le da ese toque cálido y moderno, ideal para organizar el día a día con comodidad.
+                </p>
               </div>
 
-              <!-- Slider Container -->
+              <!-- Slider Container (Calibrated Aspect: Portrait Rectangular on Mobile & Spacious on Desktop) -->
               <div id="before-after-slider"
-                class="relative w-full aspect-[1/1] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-black select-none group rounded-xl shadow-inner border border-black/10 dark:border-white/10">
+                class="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 select-none cursor-ew-resize group bg-[#111] touch-none">
 
-                <!-- After Image (Base Layer) -->
+                <!-- After Image (Base Layer - Full) -->
                 <img src="./assets/img/portfolio/despues3.webp"
                   alt="Vestidor terminado e iluminado con LEDs con acabados premium" loading="lazy"
-                  class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                  class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
 
                 <!-- Label After -->
                 <div id="label-after"
-                  class="absolute top-4 right-4 md:top-6 md:right-6 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-md text-white font-label-caps text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+                  class="absolute top-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
                   RESULTADO FINAL
                 </div>
 
-                <!-- Before Image (Clipped Layer) -->
-                <div id="slider-before-clip"
-                  class="absolute inset-0 w-1/2 overflow-hidden border-r-[2px] border-white/90 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-20">
+                <!-- Before Image (Top Layer - Clipped) -->
+                <div id="slider-before-layer"
+                  class="absolute inset-0 pointer-events-none select-none z-10"
+                  style="clip-path: inset(0 50% 0 0);">
                   <img src="./assets/img/portfolio/antes3.webp" alt="Estructura de vestidor de pladur en fase de obra"
-                    loading="lazy" class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                    id="before-img-el">
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
+                  
                   <!-- Label Before -->
                   <div id="label-before"
-                    class="absolute top-4 left-4 md:top-6 md:left-6 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-md text-white font-label-caps text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+                    class="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
                     ESTADO INICIAL
                   </div>
                 </div>
 
-                <!-- Slider Handle Bar -->
-                <div id="slider-bar-handle"
-                  class="absolute inset-y-0 left-1/2 w-[2px] bg-white shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-ew-resize z-30 flex items-center justify-center pointer-events-none">
-                  <div
-                    class="relative w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center text-primary transition-all duration-500 group-hover:scale-105 border-4 border-white/80">
-                    <span class="material-symbols-outlined text-2xl font-bold">code</span>
-                    <!-- Pulsating rings to indicate interaction -->
-                    <div class="absolute inset-0 rounded-full border-2 border-white animate-ping opacity-70"></div>
+                <!-- Divider Line -->
+                <div id="slider-divider"
+                  class="absolute top-0 bottom-0 z-30 w-[3px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.45)] pointer-events-none -translate-x-1/2 flex items-center justify-center"
+                  style="left: 50%;">
+                  
+                  <!-- Handle (21st.dev style with GripVertical icon) -->
+                  <div id="slider-handle-btn"
+                    class="w-10 h-10 bg-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.35)] border-2 border-white flex items-center justify-center text-slate-800 transition-transform duration-150 pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-800">
+                      <circle cx="9" cy="12" r="1.2" fill="currentColor"/>
+                      <circle cx="9" cy="5" r="1.2" fill="currentColor"/>
+                      <circle cx="9" cy="19" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="12" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="5" r="1.2" fill="currentColor"/>
+                      <circle cx="15" cy="19" r="1.2" fill="currentColor"/>
+                    </svg>
                   </div>
                 </div>
 
-                <!-- Interaction overlay layer -->
-                <div class="absolute inset-0 z-40 cursor-ew-resize" id="slider-interaction-overlay"></div>
+                <!-- Invisible interaction overlay -->
+                <div class="absolute inset-0 z-40 cursor-ew-resize touch-none" id="slider-interaction-overlay"></div>
+              </div>
+
+              <!-- Discrete Luxury Legend underneath the photo -->
+              <div class="flex items-center justify-center gap-2 mt-4 text-on-surface-variant/75 text-[11px] md:text-xs tracking-widest uppercase font-medium">
+                <span class="material-symbols-outlined text-[15px] text-secondary">drag_indicator</span>
+                <span>Desliza para comparar el antes y después</span>
               </div>
             </div>
           </div>
@@ -3144,16 +3174,16 @@
             const containerHeight = heroContainer.getBoundingClientRect().height;
             const viewportHeight = window.innerHeight;
             const totalScrollable = containerHeight - viewportHeight;
-            // Map slideIndex to progress 0..0.80 of total scrollable height
+            // Map slideIndex directly to progress 0, 0.50, 1.0 of total scrollable height
             const numStages = document.querySelectorAll('#vertical-pagination .pagination-dot').length;
-            const step = (numStages > 1) ? (0.80 / (numStages - 1)) : 0;
+            const step = (numStages > 1) ? (1.0 / (numStages - 1)) : 0;
             const targetScroll = heroTop + (slideIndex * step * totalScrollable);
-            smoothScrollTo(targetScroll, 600);
+            smoothScrollTo(targetScroll, 500);
           }
         });
       });
 
-      // High-performance scroll spy for navigation active links
+      // High-performance scroll spy for navigation active links (throttled to avoid layout thrashing)
       const sections = ['hero-scroll-container', 'reformas', 'servicios', 'contacto'];
       const navLinks = document.querySelectorAll('.nav-link');
 
@@ -3186,25 +3216,20 @@
         });
       }
 
-      window.addEventListener('scroll', updateActiveNavLink, { passive: true });
-      updateActiveNavLink(); // initial call
-
       // Scroll listener for dynamic navbar styling
       const navElement = document.querySelector('nav');
 
-      // Scrollytelling Pinned Hero Logic
+      // Scrollytelling Pinned Hero Logic (GPU-composited, zero zIndex churn, motion-design & emil-design-eng)
       const heroContainer = document.getElementById('hero-scroll-container');
-      const layers = [
-        document.getElementById('hero-layer-1'),
-        document.getElementById('hero-layer-2'),
-        document.getElementById('hero-layer-3')
-      ];
+      const layer1 = document.getElementById('hero-layer-1');
+      const layer2 = document.getElementById('hero-layer-2');
+      const layer3 = document.getElementById('hero-layer-3');
 
-      const texts = [
-        document.getElementById('hero-text-1'),
-        document.getElementById('hero-text-2'),
-        document.getElementById('hero-text-3')
-      ];
+      const text1 = document.getElementById('hero-text-1');
+      const text2 = document.getElementById('hero-text-2');
+      const text3 = document.getElementById('hero-text-3');
+
+      const paginationDots = document.querySelectorAll('#vertical-pagination .pagination-dot');
 
       // Cache viewport height to avoid Safari address-bar resize jank
       let cachedVH = window.innerHeight;
@@ -3218,103 +3243,101 @@
         if (!heroContainer) return;
 
         const rect = heroContainer.getBoundingClientRect();
-        const containerHeight = rect.height;
-
-        // Use cached viewport height to avoid Safari address-bar resize jank
-        const viewportHeight = cachedVH;
-
-        // Calculate scroll progress (0 to 1) for the entire container scrollable area
-        const totalScrollable = containerHeight - viewportHeight;
+        const totalScrollable = rect.height - cachedVH;
         if (totalScrollable <= 0) return;
-        let progress = -rect.top / totalScrollable;
-        progress = Math.min(Math.max(progress, 0), 1);
 
-        // Transitions finish at 80% of scroll; remaining 20% is a static pause on last image
-        let transitionProgress = progress / 0.8;
-        transitionProgress = Math.min(Math.max(transitionProgress, 0), 1);
+        // Normalized progress: 0.0 at top of hero, 1.0 at exit
+        const rawProgress = -rect.top / totalScrollable;
+        const progress = Math.min(Math.max(rawProgress, 0), 1);
 
-        const numStages = layers.length;
-        const numTransitions = numStages - 1;
-        const step = 1 / numTransitions;
+        // Continuous curtain kinematics (Stage 1: 0.0 -> 0.50, Stage 2: 0.50 -> 1.0)
+        // Fixed CSS stacking context: Layer 1 (z-10), Layer 2 (z-20), Layer 3 (z-30).
+        // Zero zIndex churn prevents GPU texture repainting and composite drops.
+        const p1 = Math.min(Math.max(progress / 0.5, 0), 1);
+        const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
-        let transitionIndex = Math.floor(transitionProgress / step);
-        if (transitionIndex >= numTransitions) {
-          transitionIndex = numTransitions - 1;
+        if (layer1) {
+          // Layer 1: subtle architectural parallax drift
+          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(3)}%, 0)`;
         }
 
-        const localProg = (transitionProgress - (transitionIndex * step)) / step;
+        if (layer2) {
+          // Layer 2 slides up to cover layer 1 (100% -> 0%), then drifts (-12%) during stage 2
+          const y2 = (1 - p1) * 100 - (p2 * 12);
+          layer2.style.transform = `translate3d(0, ${y2.toFixed(3)}%, 0)`;
+        }
 
-        // GPU-accelerated layer transitions using translate3d (no CSS transition delay)
-        layers.forEach((layer, idx) => {
-          if (!layer) return;
-          if (idx === transitionIndex) {
-            layer.style.transform = `translate3d(0, ${-localProg * 25}%, 0)`;
-            layer.style.opacity = '1';
-            layer.style.zIndex = '1';
-          } else if (idx === transitionIndex + 1) {
-            layer.style.transform = `translate3d(0, ${(1 - localProg) * 100}%, 0)`;
-            layer.style.opacity = '1';
-            layer.style.zIndex = '2';
-          } else if (idx < transitionIndex) {
-            layer.style.transform = 'translate3d(0, -100%, 0)';
-            layer.style.opacity = '0';
-            layer.style.zIndex = '0';
-          } else {
-            layer.style.transform = 'translate3d(0, 100%, 0)';
-            layer.style.opacity = '0';
-            layer.style.zIndex = '0';
-          }
-        });
+        if (layer3) {
+          // Layer 3 slides up to cover layer 2 (100% -> 0%)
+          const y3 = (1 - p2) * 100;
+          layer3.style.transform = `translate3d(0, ${y3.toFixed(3)}%, 0)`;
+        }
 
-        // Update right-side vertical pagination dot active states
-        const paginationDots = document.querySelectorAll('#vertical-pagination .pagination-dot');
-        if (paginationDots.length === numStages) {
-          const activeIdx = localProg < 0.5 ? transitionIndex : transitionIndex + 1;
+        // Active pagination dot indicator
+        if (paginationDots.length === 3) {
+          const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
           paginationDots.forEach((dot, idx) => {
-            if (idx === activeIdx) {
-              dot.classList.add('active');
-            } else {
-              dot.classList.remove('active');
-            }
+            dot.classList.toggle('active', idx === activeIdx);
           });
         }
 
-        // Optimize text overlay cross-fading
-        texts.forEach((text, idx) => {
-          if (!text) return;
-          if (idx !== transitionIndex && idx !== transitionIndex + 1) {
-            if (text.style.opacity !== '0') {
-              text.style.opacity = '0';
-              text.style.transform = 'translateY(16px)';
-              text.style.pointerEvents = 'none';
-            }
+        // Typography cross-fades with smooth translation (motion-design & emil-design-eng)
+        // Text 1: active 0.0 -> 0.32, fades out 0.32 -> 0.46
+        if (text1) {
+          if (progress <= 0.32) {
+            text1.style.opacity = '1';
+            text1.style.transform = 'translateY(0)';
+            text1.style.pointerEvents = 'auto';
+          } else if (progress <= 0.46) {
+            const f = (progress - 0.32) / 0.14;
+            text1.style.opacity = (1 - f).toFixed(2);
+            text1.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text1.style.pointerEvents = 'none';
+          } else {
+            text1.style.opacity = '0';
+            text1.style.pointerEvents = 'none';
           }
-        });
+        }
 
-        const fromText = texts[transitionIndex];
-        const toText = texts[transitionIndex + 1];
+        // Text 2: fades in 0.42 -> 0.54, active until 0.74, fades out 0.74 -> 0.86
+        if (text2) {
+          if (progress < 0.42) {
+            text2.style.opacity = '0';
+            text2.style.pointerEvents = 'none';
+          } else if (progress <= 0.54) {
+            const f = (progress - 0.42) / 0.12;
+            text2.style.opacity = f.toFixed(2);
+            text2.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text2.style.pointerEvents = 'auto';
+          } else if (progress <= 0.74) {
+            text2.style.opacity = '1';
+            text2.style.transform = 'translateY(0)';
+            text2.style.pointerEvents = 'auto';
+          } else if (progress <= 0.86) {
+            const f = (progress - 0.74) / 0.12;
+            text2.style.opacity = (1 - f).toFixed(2);
+            text2.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text2.style.pointerEvents = 'none';
+          } else {
+            text2.style.opacity = '0';
+            text2.style.pointerEvents = 'none';
+          }
+        }
 
-        if (localProg < 0.5) {
-          if (fromText) {
-            fromText.style.opacity = 1 - (localProg * 2);
-            fromText.style.transform = `translateY(${-localProg * 16}px)`;
-            fromText.style.pointerEvents = 'auto';
-          }
-          if (toText && toText.style.opacity !== '0') {
-            toText.style.opacity = '0';
-            toText.style.transform = 'translateY(16px)';
-            toText.style.pointerEvents = 'none';
-          }
-        } else {
-          if (toText) {
-            toText.style.opacity = (localProg - 0.5) * 2;
-            toText.style.transform = `translateY(${(1 - localProg) * 32}px)`;
-            toText.style.pointerEvents = 'auto';
-          }
-          if (fromText && fromText.style.opacity !== '0') {
-            fromText.style.opacity = '0';
-            fromText.style.transform = 'translateY(-16px)';
-            fromText.style.pointerEvents = 'none';
+        // Text 3: fades in 0.80 -> 0.92, active until 1.0
+        if (text3) {
+          if (progress < 0.80) {
+            text3.style.opacity = '0';
+            text3.style.pointerEvents = 'none';
+          } else if (progress <= 0.92) {
+            const f = (progress - 0.80) / 0.12;
+            text3.style.opacity = f.toFixed(2);
+            text3.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text3.style.pointerEvents = 'auto';
+          } else {
+            text3.style.opacity = '1';
+            text3.style.transform = 'translateY(0)';
+            text3.style.pointerEvents = 'auto';
           }
         }
       }
@@ -3331,15 +3354,12 @@
         const paginationContainer = document.getElementById('vertical-pagination');
         if (heroContainer && paginationContainer) {
           const rect = heroContainer.getBoundingClientRect();
-          // If the bottom of the hero is above the middle of the screen, fade it out
           if (rect.bottom < window.innerHeight / 2) {
             paginationContainer.classList.add('opacity-0', 'pointer-events-none');
           } else {
             paginationContainer.classList.remove('opacity-0', 'pointer-events-none');
           }
         }
-
-
       }
 
       // Intersection Observer for separator text slide-in animation
@@ -3352,7 +3372,6 @@
               sepText.classList.add('opacity-100', 'translate-x-0');
               sepText.classList.add('played');
             } else {
-              // Re-enable animation for repeat triggers on scroll
               if (!sepText.classList.contains('played')) {
                 sepText.classList.add('opacity-0', '-translate-x-24');
                 sepText.classList.remove('opacity-100', 'translate-x-0');
@@ -3363,16 +3382,17 @@
         sepObserver.observe(sepText);
       }
 
-      // Optimized scroll handler — hero runs every rAF, nav/pagination run at reduced rate
+      // Unified, rAF-scheduled scroll handler (eliminates layout thrashing)
       let ticking = false;
       let lastScrollHandleTime = 0;
       function onScroll() {
         if (!ticking) {
           window.requestAnimationFrame((now) => {
             handleHeroScroll();
-            // Throttle non-critical scroll work to ~60ms intervals
-            if (now - lastScrollHandleTime > 60) {
+            // Throttle non-critical layout reads (navbar & navLink spy) to ~80ms
+            if (now - lastScrollHandleTime > 80) {
               handleScroll();
+              updateActiveNavLink();
               lastScrollHandleTime = now;
             }
             ticking = false;
@@ -3385,6 +3405,7 @@
       // Run once on load to set correct initial state
       handleHeroScroll();
       handleScroll();
+      updateActiveNavLink();
 
       // Scroll-reveal: subtle fade-in for section headings
       const revealEls = document.querySelectorAll('.scroll-reveal');
@@ -3400,72 +3421,52 @@
         revealEls.forEach(el => revealObserver.observe(el));
       }
 
-      // Image Comparison Slider Logic
+      // Image Comparison Slider Logic (Reveal1 21st.dev style)
       const slider = document.getElementById('before-after-slider');
-      const clipDiv = document.getElementById('slider-before-clip');
-      const beforeImg = document.getElementById('before-img-el');
-      const handle = document.getElementById('slider-bar-handle');
+      const beforeLayer = document.getElementById('slider-before-layer');
+      const divider = document.getElementById('slider-divider');
+      const handleBtn = document.getElementById('slider-handle-btn');
       const overlay = document.getElementById('slider-interaction-overlay');
-      const labelBefore = document.getElementById('label-before');
-      const labelAfter = document.getElementById('label-after');
 
-      if (slider && clipDiv && beforeImg && handle && overlay) {
-        const resizeBeforeImg = () => {
-          beforeImg.style.width = `${slider.offsetWidth}px`;
-        };
-
-        // Initial sizing
-        resizeBeforeImg();
-        window.addEventListener('resize', resizeBeforeImg);
-
+      if (slider && beforeLayer && divider && overlay) {
         let isDragging = false;
 
-        const updateSlider = (percent) => {
-          percent = Math.max(0, Math.min(100, percent));
-          clipDiv.style.width = `${percent}%`;
-          handle.style.left = `${percent}%`;
+        const updatePosition = (clientX) => {
+          const rect = slider.getBoundingClientRect();
+          const x = clientX - rect.left;
+          const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          beforeLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+          divider.style.left = `${percentage}%`;
+        };
+
+        const handleStart = (e) => {
+          isDragging = true;
+          if (handleBtn) handleBtn.classList.add('scale-110');
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          updatePosition(clientX);
         };
 
         const handleMove = (e) => {
           if (!isDragging) return;
-          const rect = slider.getBoundingClientRect();
           const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const x = clientX - rect.left;
-          const percent = (x / rect.width) * 100;
-          updateSlider(percent);
+          updatePosition(clientX);
         };
 
-        const startDragging = (e) => {
-          isDragging = true;
-          labelBefore.classList.add('opacity-100');
-          labelAfter.classList.add('opacity-100');
-          handleMove(e);
+        const handleEnd = () => {
+          if (isDragging) {
+            isDragging = false;
+            if (handleBtn) handleBtn.classList.remove('scale-110');
+          }
         };
 
-        const stopDragging = () => {
-          isDragging = false;
-        };
-
-        overlay.addEventListener('mousedown', startDragging);
-        overlay.addEventListener('touchstart', startDragging, { passive: true });
+        overlay.addEventListener('mousedown', handleStart);
+        overlay.addEventListener('touchstart', handleStart, { passive: true });
 
         window.addEventListener('mousemove', handleMove);
-        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchmove', handleMove, { passive: true });
 
-        window.addEventListener('mouseup', stopDragging);
-        window.addEventListener('touchend', stopDragging);
-
-        // Show/hide labels on hover
-        overlay.addEventListener('mouseenter', () => {
-          labelBefore.classList.add('opacity-100');
-          labelAfter.classList.add('opacity-100');
-        });
-        overlay.addEventListener('mouseleave', () => {
-          if (!isDragging) {
-            labelBefore.classList.remove('opacity-100');
-            labelAfter.classList.remove('opacity-100');
-          }
-        });
+        window.addEventListener('mouseup', handleEnd);
+        window.addEventListener('touchend', handleEnd);
       }
       handleScroll();
       handleHeroScroll();

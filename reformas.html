@@ -49,7 +49,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
         .material-symbols-outlined {
           font-variation-settings:
@@ -295,6 +294,100 @@
 .carousel-card.card {
   height: 480px;
   padding: 0 !important;
+}
+
+/* 21st.dev Infinite Auto-Slider for Galería 2 */
+@keyframes auto-scroll-infinite {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.infinite-slider-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  contain: paint;
+}
+
+.infinite-slider-mask {
+  mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .infinite-slider-mask {
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+}
+
+.infinite-slider-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: auto-scroll-infinite 36s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .infinite-slider-track {
+    gap: 1.75rem;
+    animation-duration: 42s;
+  }
+}
+
+/* Pause on hover and touch */
+.infinite-slider-track:hover,
+.infinite-slider-track:active {
+  animation-play-state: paused;
+}
+
+/* Luxury card with mobile-first proportions */
+.auto-slider-card {
+  flex-shrink: 0;
+  width: 210px;
+  height: 270px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  position: relative;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, filter 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (min-width: 640px) {
+  .auto-slider-card {
+    width: 250px;
+    height: 315px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auto-slider-card {
+    width: 285px;
+    height: 360px;
+  }
+}
+
+.auto-slider-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.08);
+  box-shadow: 0 20px 40px -15px rgba(212, 155, 11, 0.25), 0 0 0 1px rgba(212, 155, 11, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinite-slider-track {
+    animation: none !important;
+    overflow-x: auto;
+    width: 100%;
+  }
 }
 
 </style>
@@ -617,136 +710,233 @@
       <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mt-4">Una selección de trabajos recientes: cerramientos, techos decorativos, baños de diseño y mucho más.</p>
     </div>
 
-    <!-- Swiper Carousel -->
-    <div class="swiper gallery-swiper rounded-2xl pb-10" style="--swiper-navigation-color: #ffffff; --swiper-pagination-color: #ffffff; --swiper-navigation-size: 24px;">
-      <div class="swiper-wrapper">
-        <!-- Slide 1: ANTES -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Baño en fase de obra - pladur, alicatado e instalaciones" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Reforma integral de baño — Fase de obra</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 2: DESPUÉS -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Baño reformado - resultado final con ducha, espejo LED y mueble de roble" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Reforma integral de baño — Resultado final</p>
+    <!-- 21st.dev Infinite Auto-Slider (Full Responsive Mobile-First & Calibrated Smooth Pace) -->
+    <div class="infinite-slider-wrapper infinite-slider-mask w-full">
+      <div id="auto-slider-track" class="infinite-slider-track py-6">
+        <!-- 11 Obras Reales (Set 1) -->
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Reforma integral de baño — Fase de obra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Fase de obra</p>
             </div>
           </div>
         </div>
-        <!-- Slide 3 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño de piedra natural con doble espejo retroiluminado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Baño en piedra natural con espejos retroiluminados</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 4 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Cerramiento de cristal con ventanales panorámicos</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Reforma integral de baño — Resultado final" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Resultado final</p>
             </div>
           </div>
         </div>
-        <!-- Slide 5 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Cerramiento panorámico — Vista frontal</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 6 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo de pladur decorativo en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Falso techo decorativo de pladur en construcción</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño en piedra natural con espejos retroiluminados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Baño en piedra natural con espejos retroiluminados</p>
             </div>
           </div>
         </div>
-        <!-- Slide 7 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur con estructura decorativa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Techo circular de pladur — Fase estructural</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 8 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Detalle de techo circular de pladur terminado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Techo circular de pladur — Detalle de acabado</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Cerramiento de cristal con ventanales panorámicos</p>
             </div>
           </div>
         </div>
-        <!-- Slide 9 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas al mar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Salón con iluminación LED perimetral y vistas</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 10 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con downlights empotrados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Revestimiento de piedra natural con iluminación</p>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico — Vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Cerramiento panorámico — Vista frontal</p>
             </div>
           </div>
         </div>
-        <!-- Slide 11 -->
-        <div class="swiper-slide">
-          <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img loading="lazy" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales en fase de pintura" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo decorativo de pladur en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Falso techo decorativo de pladur en construcción</p>
             </div>
-            <div class="px-4 py-3">
-              <p class="text-white/90 font-medium text-xs md:text-sm">Porche con ventanales — Fase de acabados</p>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur — Fase estructural" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Fase estructural</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Techo circular de pladur — Detalle de acabado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Detalle de acabado</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Salón con iluminación LED perimetral y vistas</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con iluminación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Revestimiento de piedra natural con iluminación</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales — Fase de acabados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Porche con ventanales — Fase de acabados</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 Obras Reales (Set 2 - Duplicado para Seamless Infinite Loop) -->
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-antes-collage.webp" alt="Reforma integral de baño — Fase de obra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Fase de obra</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-despues-collage.webp" alt="Reforma integral de baño — Resultado final" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Reforma integral de baño — Resultado final</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/bano-piedra-espejos.webp" alt="Baño en piedra natural con espejos retroiluminados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Baño en piedra natural con espejos retroiluminados</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-1.webp" alt="Cerramiento de cristal con ventanales panorámicos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Cerramiento de cristal con ventanales panorámicos</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/cerramiento-cristal-frontal.webp" alt="Cerramiento panorámico — Vista frontal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Cerramiento panorámico — Vista frontal</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-pladur-construccion.webp" alt="Falso techo decorativo de pladur en construcción" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Falso techo decorativo de pladur en construcción</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-andamios.webp" alt="Techo circular de pladur — Fase estructural" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Fase estructural</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/techo-circular-detalle.webp" alt="Techo circular de pladur — Detalle de acabado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Techo circular de pladur — Detalle de acabado</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/salon-led-vistas.webp" alt="Salón con iluminación LED perimetral y vistas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Salón con iluminación LED perimetral y vistas</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/piedra-natural-downlights.webp" alt="Revestimiento de piedra natural con iluminación" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Revestimiento de piedra natural con iluminación</p>
+            </div>
+          </div>
+        </div>
+        <div class="auto-slider-card group" aria-hidden="true">
+          <div class="w-full h-full overflow-hidden relative">
+            <img loading="lazy" src="./assets/img/portfolio/galeria/porche-ventanales-obra.webp" alt="Porche con ventanales — Fase de acabados" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+              <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">Porche con ventanales — Fase de acabados</p>
             </div>
           </div>
         </div>
       </div>
-      <!-- Navigation -->
-      <div class="swiper-button-prev !bg-black/70 !w-12 !h-12 !rounded-full !shadow-xl hover:!bg-black/90 transition-all"></div>
-      <div class="swiper-button-next !bg-black/70 !w-12 !h-12 !rounded-full !shadow-xl hover:!bg-black/90 transition-all"></div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
     </div>
 
     <div class="pb-12"></div>
@@ -1240,31 +1430,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
         const client = window.supabase.createClient(supabaseUrl, supabaseKey);
         const { data: moreProjData, error: moreProjErr } = await client
-          .from('ecuaplac_more_projects')
+          .from('ecuaplac_galeria_2')
           .select('*')
           .eq('active', true)
           .order('sort_order', { ascending: true });
 
         if (!moreProjErr && moreProjData && moreProjData.length > 0) {
-          const swiperWrapper = document.querySelector('.gallery-swiper .swiper-wrapper');
-          if (swiperWrapper) {
-            swiperWrapper.innerHTML = moreProjData.map(item => `
-              <div class="swiper-slide">
-                <div class="group rounded-2xl overflow-hidden shadow-lg border border-outline-variant/20 bg-[#1a1a1a]">
-                  <div class="aspect-[4/3] overflow-hidden">
-                    <img loading="lazy" src="${item.image_url}" alt="${item.title_es}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop()">
-                  </div>
-                  <div class="px-4 py-3">
-                    <p class="text-white/90 font-medium text-xs md:text-sm">${item.title_es}</p>
+          const autoSliderTrack = document.getElementById('auto-slider-track');
+          if (autoSliderTrack) {
+            // Duplicar dataset para bucle infinito suave sin saltos (técnica 21st.dev)
+            const duplicated = [...moreProjData, ...moreProjData];
+            autoSliderTrack.innerHTML = duplicated.map(item => `
+              <div class="auto-slider-card group">
+                <div class="w-full h-full overflow-hidden relative">
+                  <img loading="lazy" src="${item.image_url}" alt="${item.title_es || 'Proyecto Ecuaplac'}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='./assets/img/portfolio/galeria/' + this.src.split('/').pop()">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none"></div>
+                  <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex flex-col justify-end">
+                    <span class="text-[#D49B0B] text-[10px] tracking-widest uppercase font-bold mb-1 block">Ecuaplac</span>
+                    <p class="text-white/95 font-medium text-xs sm:text-sm leading-snug drop-shadow-md line-clamp-2">${item.title_es || 'Proyecto Ecuaplac'}</p>
                   </div>
                 </div>
               </div>
             `).join('');
-
-            if (window.gallerySwiperInstance) {
-              window.gallerySwiperInstance.destroy(true, true);
-              window.gallerySwiperInstance = null;
-            }
           }
         }
       } catch (e) {
@@ -1274,9 +1461,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // Gallery toggle
+  // Gallery toggle (21st.dev Infinite Auto-Slider)
   let galleryOpen = false;
   function toggleGallery() {
     const section = document.getElementById('gallery-section');
@@ -1284,39 +1470,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const text = document.getElementById('gallery-toggle-text');
     galleryOpen = !galleryOpen;
     if (galleryOpen) {
-      section.style.maxHeight = section.scrollHeight + 200 + 'px';
+      section.style.maxHeight = section.scrollHeight + 100 + 'px';
       section.style.opacity = '1';
-      section.style.marginBottom = '2rem';
+      section.style.marginBottom = '2.5rem';
       arrow.style.transform = 'rotate(180deg)';
       text.textContent = 'OCULTAR GALERÍA';
-      setTimeout(() => { section.style.maxHeight = 'none'; }, 800);
-      // Initialize Swiper only once
-      if (!window.gallerySwiperInstance) {
-        window.gallerySwiperInstance = new Swiper('.gallery-swiper', {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: true,
-          grabCursor: true,
-          autoplay: {
-            delay: 2000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          },
-          navigation: {
-            nextEl: '.gallery-swiper .swiper-button-next',
-            prevEl: '.gallery-swiper .swiper-button-prev',
-          },
-          pagination: {
-            el: '.gallery-swiper .swiper-pagination',
-            clickable: true,
-            dynamicBullets: true,
-          },
-          breakpoints: {
-            640: { slidesPerView: 2, spaceBetween: 24 },
-            1024: { slidesPerView: 3, spaceBetween: 28 },
-          },
-        });
-      }
+      setTimeout(() => {
+        if (galleryOpen) section.style.maxHeight = 'none';
+      }, 700);
     } else {
       section.style.maxHeight = section.scrollHeight + 'px';
       requestAnimationFrame(() => {
