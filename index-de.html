@@ -196,7 +196,7 @@
 
     /* Dynamic Navigation bar & links */
     nav {
-      transition: opacity 0.5s ease, background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      transition: opacity 0.5s ease, background-color 0.4s ease, border-color 0.4s ease;
       background-color: #000000 !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
       animation: fadeIn 0.8s ease forwards;
@@ -204,8 +204,7 @@
 
     nav.scrolled {
       background-color: #000000 !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.12) !important;
     }
 
     .nav-link {
@@ -263,18 +262,16 @@
       will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      transform: translateZ(0);
     }
 
     #hero-sticky-element img {
-      transform: translateZ(0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
 
-    #hero-layer-1 { z-index: 10; }
-    #hero-layer-2 { z-index: 20; }
-    #hero-layer-3 { z-index: 30; }
+    #hero-layer-1 { z-index: 10; transform: translate3d(0, 0%, 0); }
+    #hero-layer-2 { z-index: 20; transform: translate3d(0, 100%, 0); }
+    #hero-layer-3 { z-index: 30; transform: translate3d(0, 100%, 0); }
 
     /* Immutable viewport heights: svh prevents browser dynamic toolbars from shifting layout */
     #hero-sticky-element {
@@ -1307,16 +1304,49 @@
       }
     }
 
-    /* FAQ Accordion Styles */
+    /* 21st.dev Clean FAQ Accordion */
+    .faq-item {
+      border-bottom: 1px solid rgba(22, 20, 19, 0.12);
+      transition: border-color 0.3s ease;
+    }
+
+    .dark .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: 1.15rem 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .faq-chevron {
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+    }
+
     .faq-answer {
       max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
       opacity: 0;
+      transform: translateY(-6px);
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, transform 0.35s ease;
     }
 
     .faq-item.active .faq-answer {
       opacity: 1;
+      transform: translateY(0);
     }
 
     /* Swiper Mobile Styles */
@@ -1448,19 +1478,19 @@
       <div id="hero-sticky-element" class="sticky top-[72px] w-full overflow-hidden">
         <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
         <!-- Image 1: Minimalist Villa -->
-        <div id="hero-layer-1" class="absolute inset-0 opacity-100">
+        <div id="hero-layer-1" class="absolute inset-0 opacity-100" style="transform: translate3d(0, 0%, 0);">
           <img alt="Luxusvilla im minimalistischen Stil in Palma de Mallorca" class="w-full h-full object-cover object-center"
-            src="./assets/img/hero/1.webp" loading="eager" decoding="sync">
+            src="./assets/img/hero/1.webp" loading="eager" decoding="async">
         </div>
         <!-- Image 2: High-end custom kitchen -->
-        <div id="hero-layer-2" class="absolute inset-0">
-          <img alt="Hochwertige maßgefertigte Küche" class="w-full h-full object-cover object-center" loading="eager" decoding="sync"
+        <div id="hero-layer-2" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
+          <img alt="Hochwertige maßgefertigte Küche" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
             src="./assets/img/hero/2.webp">
         </div>
         <!-- Image 3: Final Result of Comprehensive Renovation -->
-        <div id="hero-layer-3" class="absolute inset-0">
+        <div id="hero-layer-3" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
           <img alt="Endergebnis der Komplettrenovierung von Ecuaplac"
-            class="w-full h-full object-cover object-center" loading="eager" decoding="sync" src="./assets/img/hero/3.webp">
+            class="w-full h-full object-cover object-center" loading="eager" decoding="async" src="./assets/img/hero/3.webp">
         </div>
 
         <!-- Calibrated gradient to ensure 100% text readability over any photo -->
@@ -1473,10 +1503,10 @@
           <div id="hero-text-1"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
             <h1
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               Architektur der<br>klaren Räume.
             </h1>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
               Über 10 Jahre Erfahrung bei der Transformation von Villen und Geschäftsräumen in Palma de Mallorca mit höchster handwerklicher Präzision.
             </p>
           </div>
@@ -1485,10 +1515,10 @@
           <div id="hero-text-2"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               Ganzheitliches Design &amp;<br>Präzision in jedem Detail.
             </h2>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
               Edle Materialien, kuratierte Beleuchtung und makellose Ausführung für einzigartige Immobilien auf Mallorca.
             </p>
           </div>
@@ -1497,10 +1527,10 @@
           <div id="hero-text-3"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               Das Ergebnis, das<br>Sie sich immer vorgestellt haben.
             </h2>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
               Exklusive Oberflächen aus poliertem Mikrozement, maßgefertigte Tischlerarbeiten und absoluter Wohnkomfort.
             </p>
           </div>
@@ -2089,7 +2119,16 @@
               this.onResize();
               this.createGeometry();
               this.createMedias();
-              this.update();
+              this.isVisible = false;
+              this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                  this.isVisible = entry.isIntersecting;
+                  if (this.isVisible && !this.raf) {
+                    this.update();
+                  }
+                });
+              }, { rootMargin: "250px" });
+              this.observer.observe(this.container);
               this.addEventListeners();
             }
 
@@ -2155,6 +2194,11 @@
               this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
               this.startTime = Date.now();
               this.hasMoved = false;
+
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("mouseup", this.onTouchUp);
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
             }
 
             onTouchMove(e) {
@@ -2179,6 +2223,11 @@
             onTouchUp(e) {
               if (!this.isDown) return;
               this.isDown = false;
+
+              window.removeEventListener("mousemove", this.onTouchMove);
+              window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
+              window.removeEventListener("touchend", this.onTouchUp);
 
               const endX =
                 e && e.changedTouches && e.changedTouches.length > 0
@@ -2278,6 +2327,10 @@
             }
 
             update() {
+              if (!this.isVisible) {
+                this.raf = null;
+                return;
+              }
               this.scroll.current = lerp(
                 this.scroll.current,
                 this.scroll.target,
@@ -2299,22 +2352,20 @@
               window.addEventListener("resize", this.onResize);
               this.container.addEventListener("wheel", this.onWheel, { passive: true });
               this.container.addEventListener("mousedown", this.onTouchDown);
-              window.addEventListener("mousemove", this.onTouchMove);
-              window.addEventListener("mouseup", this.onTouchUp);
-              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
-              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
-              window.addEventListener("touchend", this.onTouchUp, { passive: true });
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: true });
             }
 
             destroy() {
-              window.cancelAnimationFrame(this.raf);
+              if (this.observer) this.observer.disconnect();
+              if (this.raf) window.cancelAnimationFrame(this.raf);
+              this.raf = null;
               window.removeEventListener("resize", this.onResize);
               this.container.removeEventListener("wheel", this.onWheel);
               this.container.removeEventListener("mousedown", this.onTouchDown);
-              window.removeEventListener("mousemove", this.onTouchMove);
-              window.removeEventListener("mouseup", this.onTouchUp);
               this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("mousemove", this.onTouchMove);
               window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
               window.removeEventListener("touchend", this.onTouchUp);
 
               if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
@@ -2933,131 +2984,91 @@
           </div>
         </div>
 
-        <!-- Accordion Wrapper -->
-        <div class="max-w-4xl mx-auto flex flex-col gap-4">
+        <!-- Accordion Wrapper (21st.dev clean style) -->
+        <div class="max-w-3xl mx-auto flex flex-col border-t border-primary/15 dark:border-white/10">
 
           <!-- FAQ Item 1 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Kann ich ein unverbindliches Angebot anfordern?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Selbstverständlich. Kontaktieren Sie uns einfach telefonisch oder per WhatsApp. Wir analysieren Ihre Wünsche und erstellen Ihnen eine transparente, fundierte Ersteinschätzung – vollkommen unverbindlich.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 2 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Wie lange dauert eine Sanierung in der Regel?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Jedes Projekt ist ein Unikat. Die Dauer hängt vom Umfang der Gewerke, den gewählten Materialien und den baulichen Gegebenheiten ab. Vor Beginn erhalten Sie einen detaillierten und verlässlichen Zeitplan.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 3 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Welche Bau- und Sanierungsleistungen führen Sie durch?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Unser Leistungsspektrum umfasst ganzheitliche Sanierungen, Trockenbau, Akustikdecken, Innenausbau, Veredelung mit Mikrozement, Bäderbau sowie hochwertige Fassaden- und Terrassengestaltungen auf Mallorca.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 4 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Wie kann ich mich am besten mit Ihnen in Verbindung setzen?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Sie erreichen uns jederzeit direkt per Telefon oder unkompliziert über WhatsApp. Wir freuen uns darauf, Ihr Projekt kennenzulernen und Sie umfassend zu beraten.
-              </div>
+              </p>
             </div>
           </div>
 
           <!-- FAQ Item 5 -->
-          <div
-            class="faq-item bg-white rounded-2xl border border-primary/5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#795746]/20 hover:shadow-md transition-all duration-300 overflow-hidden">
-            <button
-              class="faq-toggle w-full flex items-center justify-between text-left p-6 md:p-8 focus:outline-none group">
-              <span
-                class="font-headline-lg text-lg md:text-[20px] text-primary transition-colors duration-300 group-hover:text-[#795746] font-bold leading-tight pr-4">
+          <div class="faq-item">
+            <button class="faq-toggle group" aria-expanded="false">
+              <span class="font-headline text-[15px] sm:text-base md:text-[18px] font-semibold text-primary group-hover:text-[#795746] dark:group-hover:text-[#D49B0B] transition-colors duration-200 leading-snug pr-4">
                 Arbeiten Sie inselweit auf Mallorca?
               </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-[#795746]/10 flex items-center justify-center text-[#795746] transition-all duration-300 group-hover:bg-[#795746] group-hover:text-white">
-                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="faq-chevron text-primary/70 group-hover:text-[#795746] dark:group-hover:text-[#D49B0B]">
+                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
-            <div class="faq-answer max-h-0 overflow-hidden">
-              <div
-                class="p-6 md:p-8 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed border-t border-primary/5">
+            <div class="faq-answer">
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed pb-4 pt-1 pr-2 md:pr-6">
                 Ja. Neben Palma de Mallorca sind wir regelmäßig in ganz Mallorca tätig – unter anderem in Calvià, Andratx, Sóller, Santanyí, Son Vida, Bendinat und Santa Ponsa.
-              </div>
+              </p>
             </div>
           </div>
 
@@ -3090,70 +3101,24 @@
   <footer
     class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300">
     <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-      <!-- 3 Column Layout -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pb-16 border-b border-[#1C1C1E]">
+      <!-- 3 Column Layout (Desktop) / 2 Column + Top Brand (Mobile) -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-6 md:gap-8 pb-14 md:pb-16 border-b border-[#1C1C1E]">
 
-        <!-- Left Column: Navigation -->
-        <div class="flex flex-col items-center md:items-start text-center md:text-left justify-center">
-          <h4
-            class="font-label-caps text-[11px] uppercase text-monolith-white tracking-[0.2em] mb-8 font-bold relative inline-block">
-            Navigation
-            <span
-              class="absolute -bottom-2 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 w-8 h-[2px] bg-secondary"></span>
-          </h4>
-          <ul class="flex flex-col gap-3 font-body-md w-full">
-            <li><a
-                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start h-11"
-                href="#hero-scroll-container">Startseite</a></li>
-            <li><a
-                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start h-11"
-                href="#reformas">Renovierungen</a></li>
-            <li><a
-                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start h-11"
-                href="#servicios">Leistungen</a></li>
-            <li><a
-                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start h-11"
-                href="#contacto">Kontakt</a></li>
-          </ul>
-        </div>
-
-        <div class="flex flex-col items-center justify-center text-center">
+        <!-- Column 1 (Mobile: Top Full Width / Desktop: Center) -->
+        <div class="col-span-2 md:col-span-1 order-1 md:order-2 flex flex-col items-center justify-center text-center pb-8 md:pb-0 border-b border-[#1C1C1E]/60 md:border-b-0">
           <a href="#" class="block cursor-pointer inline-flex">
             <div
-              class="w-36 h-36 mb-8 group rounded-full border-[3px] border-[#FFB81C] bg-white flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 shadow-md">
+              class="w-28 h-28 md:w-36 md:h-36 mb-6 md:mb-8 group rounded-full border-[3px] border-[#FFB81C] bg-white flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 shadow-md">
               <img src="./assets/img/logos/Logofotter.svg" alt="ECUAPLAC Logo"
                 class="w-full h-full object-contain scale-110" loading="lazy">
             </div>
           </a>
-          <p class="font-editorial italic text-base sm:text-lg text-[#E5E7EB] leading-relaxed max-w-sm text-balance">
-            Wenn J &amp; G ein Projekt beginnen, tun wir das nach einer einfachen Regel:<br>Wir behandeln Ihr Haus auf Mallorca so, als wäre es unser eigenes.<br>Es geht nicht nur darum, dem Plan zu folgen, sondern sicherzustellen, dass das Endergebnis etwas ist,<br>auf das Sie und wir gleichermaßen stolz sind.
+          <p class="font-editorial text-[15px] sm:text-[16px] md:text-[18px] text-[#E5E7EB] italic leading-relaxed max-w-md text-balance drop-shadow-sm px-2">
+            Wenn J &amp; G ein Projekt beginnen, tun wir das nach einer einfachen Regel:<br class="hidden sm:inline"> Wir behandeln Ihr Haus auf Mallorca so, als wäre es unser eigenes.<br class="hidden sm:inline"> Es geht nicht nur darum, dem Plan zu folgen, sondern sicherzustellen, dass das Endergebnis etwas ist,<br class="hidden sm:inline"> auf das Sie und wir gleichermaßen stolz sind.
           </p>
-        </div>
 
-        <!-- Right Column: Legal & Social -->
-        <div class="flex flex-col items-center md:items-end text-center md:text-right justify-center">
-          <div class="mb-10 w-full flex flex-col items-center md:items-end">
-            <h4
-              class="font-label-caps text-[11px] uppercase text-monolith-white tracking-[0.2em] mb-8 font-bold relative inline-block">
-              Rechtliches
-              <span
-                class="absolute -bottom-2 left-1/2 md:left-auto md:right-0 -translate-x-1/2 md:translate-x-0 w-8 h-[2px] bg-secondary"></span>
-            </h4>
-            <ul class="flex flex-col gap-3 font-body-md w-full">
-              <li><a
-                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end h-11"
-                  href="impressum.html#impressum">Impressum</a></li>
-              <li><a
-                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end h-11"
-                  href="impressum.html#cookies">Cookie-Richtlinie</a></li>
-              <li><a
-                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end h-11"
-                  href="impressum.html#terminos">Allgemeine Geschäftsbedingungen</a></li>
-            </ul>
-          </div>
-
-          <!-- Social & Location -->
-          <div class="flex items-center justify-center md:justify-end gap-3 mt-2">
+          <!-- Social & Location centered right below text -->
+          <div class="flex items-center justify-center gap-3 mt-6">
             <!-- Instagram -->
             <a href="https://www.instagram.com/ecuaplac.jyg?igsh=MTJ6d2I3cDFnempyZg==" target="_blank"
               rel="noopener noreferrer" aria-label="Ecuaplac Instagram"
@@ -3166,8 +3131,8 @@
             <!-- Google Maps -->
             <a href="https://maps.app.goo.gl/5Fr819Bsh6AkjQKd8" target="_blank"
               rel="noopener noreferrer" aria-label="Standort auf Google Maps"
-              class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
-              <svg class="w-4 h-4" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
+              class="w-8 h-8 relative flex items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 hover:scale-110 hover:shadow-md">
+              <svg class="w-6 h-8 absolute top-[1px]" viewBox="0 0 92.3 132.3" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
                 <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/>
                 <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
@@ -3175,6 +3140,53 @@
                 <path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2"/>
               </svg>
             </a>
+          </div>
+        </div>
+
+        <!-- Left Column: Navigation (Mobile: Left Col / Desktop: Left) -->
+        <div class="col-span-1 order-2 md:order-1 flex flex-col items-center md:items-start text-center md:text-left justify-start">
+          <h4
+            class="font-label-caps text-[11px] uppercase text-monolith-white tracking-[0.2em] mb-6 md:mb-8 font-bold relative inline-block">
+            Navigation
+            <span
+              class="absolute -bottom-2 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 w-8 h-[2px] bg-secondary"></span>
+          </h4>
+          <ul class="flex flex-col gap-1.5 md:gap-3 font-body-md w-full">
+            <li><a
+                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start py-2 text-[14px] md:text-[15px]"
+                href="#hero-scroll-container">Startseite</a></li>
+            <li><a
+                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start py-2 text-[14px] md:text-[15px]"
+                href="#reformas">Renovierungen</a></li>
+            <li><a
+                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start py-2 text-[14px] md:text-[15px]"
+                href="#servicios">Leistungen</a></li>
+            <li><a
+                class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-start py-2 text-[14px] md:text-[15px]"
+                href="#contacto">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <!-- Right Column: Legal (Mobile: Right Col / Desktop: Right) -->
+        <div class="col-span-1 order-3 md:order-3 flex flex-col items-center md:items-end text-center md:text-right justify-start">
+          <div class="w-full flex flex-col items-center md:items-end">
+            <h4
+              class="font-label-caps text-[11px] uppercase text-monolith-white tracking-[0.2em] mb-6 md:mb-8 font-bold relative inline-block">
+              Rechtliches
+              <span
+                class="absolute -bottom-2 left-1/2 md:left-auto md:right-0 -translate-x-1/2 md:translate-x-0 w-8 h-[2px] bg-secondary"></span>
+            </h4>
+            <ul class="flex flex-col gap-1.5 md:gap-3 font-body-md w-full">
+              <li><a
+                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end py-2 text-[14px] md:text-[15px]"
+                  href="impressum.html#impressum">Impressum</a></li>
+              <li><a
+                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end py-2 text-[14px] md:text-[15px]"
+                  href="impressum.html#cookies">Cookie-Richtlinie</a></li>
+              <li><a
+                  class="hover:text-monolith-white transition-colors duration-300 flex items-center justify-center md:justify-end py-2 text-[14px] md:text-[15px]"
+                  href="impressum.html#terminos">Allgemeine Geschäftsbedingungen</a></li>
+            </ul>
           </div>
         </div>
 
@@ -3357,10 +3369,10 @@
         <a href="index-en.html" class="text-white/60 hover:text-white transition-colors cursor-pointer pb-1">EN</a>
         <span class="text-white cursor-default border-b-2 border-white pb-1">DE</span>
       </div>
-      <button onclick="toggleMobileMenu(); openPresupuestoModal();"
-        class="w-full font-bold uppercase tracking-widest text-[12px] text-white border border-white/40 rounded-full px-6 py-3.5 hover:bg-white hover:text-black active:scale-95 transition-all duration-300 cursor-pointer text-center">
+      <a href="#contacto" onclick="toggleMobileMenu();"
+        class="w-full font-bold uppercase tracking-widest text-[12px] text-white border border-white/40 rounded-full px-6 py-3.5 hover:bg-white hover:text-black active:scale-95 transition-all duration-300 cursor-pointer text-center block">
         ANGEBOT ANFORDERN
-      </button>
+      </a>
     </div>
   </div>
 
@@ -3553,9 +3565,7 @@
       });
 
       // 1. Off-thread Pre-warming & GPU Texture Decode for Hero Images
-      ['./assets/img/hero/1.webp', './assets/img/hero/2.webp', './assets/img/hero/3.webp'].forEach(src => {
-        const img = new Image();
-        img.src = src;
+      document.querySelectorAll('#hero-sticky-element img').forEach(img => {
         if (img.decode) {
           img.decode().catch(() => {});
         }
@@ -3643,6 +3653,7 @@
       let heroScrollable = 0;
       let isHeroActive = true;
       let currentDotIndex = -1;
+      let lastY1 = '', lastY2 = '', lastY3 = '';
 
       function measureHero() {
         if (!heroContainer) return;
@@ -3671,9 +3682,9 @@
         if (scrollY > heroScrollable + 80) {
           if (isHeroActive) {
             isHeroActive = false;
-            if (layer1) layer1.style.transform = 'translate3d(0, -12%, 0)';
-            if (layer2) layer2.style.transform = 'translate3d(0, -12%, 0)';
-            if (layer3) layer3.style.transform = 'translate3d(0, 0%, 0)';
+            if (layer1 && lastY1 !== '-12%') { layer1.style.transform = 'translate3d(0, -12%, 0)'; lastY1 = '-12%'; }
+            if (layer2 && lastY2 !== '-12%') { layer2.style.transform = 'translate3d(0, -12%, 0)'; lastY2 = '-12%'; }
+            if (layer3 && lastY3 !== '0%') { layer3.style.transform = 'translate3d(0, 0%, 0)'; lastY3 = '0%'; }
             if (text1) { text1.style.opacity = '0'; text1.style.pointerEvents = 'none'; }
             if (text2) { text2.style.opacity = '0'; text2.style.pointerEvents = 'none'; }
             if (text3) { text3.style.opacity = '1'; text3.style.pointerEvents = 'auto'; }
@@ -3691,17 +3702,29 @@
         const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
         if (layer1) {
-          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(2)}%, 0)`;
+          const t1 = (-p1 * 12).toFixed(2) + '%';
+          if (t1 !== lastY1) {
+            lastY1 = t1;
+            layer1.style.transform = `translate3d(0, ${t1}, 0)`;
+          }
         }
 
         if (layer2) {
           const y2 = (1 - p1) * 100 - (p2 * 12);
-          layer2.style.transform = `translate3d(0, ${y2.toFixed(2)}%, 0)`;
+          const t2 = y2.toFixed(2) + '%';
+          if (t2 !== lastY2) {
+            lastY2 = t2;
+            layer2.style.transform = `translate3d(0, ${t2}, 0)`;
+          }
         }
 
         if (layer3) {
           const y3 = (1 - p2) * 100;
-          layer3.style.transform = `translate3d(0, ${y3.toFixed(2)}%, 0)`;
+          const t3 = y3.toFixed(2) + '%';
+          if (t3 !== lastY3) {
+            lastY3 = t3;
+            layer3.style.transform = `translate3d(0, ${t3}, 0)`;
+          }
         }
 
         // Active pagination dot indicator (only updates if dot actually changes)
@@ -3805,6 +3828,10 @@
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
+      // Execute once immediately on DOM load to guarantee sync without waiting for first scroll
+      const initialScrollY = window.pageYOffset || window.scrollY || 0;
+      handleHeroScroll(initialScrollY);
+      handleScroll(initialScrollY);
 
       // Scroll-reveal: subtle fade-in for section headings
       const revealEls = document.querySelectorAll('.scroll-reveal');
@@ -4048,49 +4075,35 @@
     });
   </script>
 
-  <!-- FAQ Accordion Logic -->
+  <!-- FAQ Accordion Logic (21st.dev clean style) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.faq-toggle').forEach(button => {
         button.addEventListener('click', () => {
           const item = button.closest('.faq-item');
           const answer = item.querySelector('.faq-answer');
-          const icon = item.querySelector('.faq-icon svg');
           const isActive = item.classList.contains('active');
 
           // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
             if (otherItem !== item && otherItem.classList.contains('active')) {
               otherItem.classList.remove('active');
-              otherItem.querySelector('.faq-answer').style.maxHeight = '0px';
-              const otherIcon = otherItem.querySelector('.faq-icon svg');
-              if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-              const otherIconBg = otherItem.querySelector('.faq-icon');
-              if (otherIconBg) {
-                otherIconBg.classList.remove('bg-[#795746]', 'text-white');
-                otherIconBg.classList.add('bg-[#795746]/10', 'text-[#795746]');
-              }
+              const otherBtn = otherItem.querySelector('.faq-toggle');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+              const otherAns = otherItem.querySelector('.faq-answer');
+              if (otherAns) otherAns.style.maxHeight = '0px';
             }
           });
 
           // Toggle current item
-          const iconBg = item.querySelector('.faq-icon');
           if (isActive) {
             item.classList.remove('active');
+            button.setAttribute('aria-expanded', 'false');
             answer.style.maxHeight = '0px';
-            if (icon) icon.style.transform = 'rotate(0deg)';
-            if (iconBg) {
-              iconBg.classList.remove('bg-[#795746]', 'text-white');
-              iconBg.classList.add('bg-[#795746]/10', 'text-[#795746]');
-            }
           } else {
             item.classList.add('active');
+            button.setAttribute('aria-expanded', 'true');
             answer.style.maxHeight = answer.scrollHeight + 'px';
-            if (icon) icon.style.transform = 'rotate(180deg)';
-            if (iconBg) {
-              iconBg.classList.remove('bg-[#795746]/10', 'text-[#795746]');
-              iconBg.classList.add('bg-[#795746]', 'text-white');
-            }
           }
         });
       });
