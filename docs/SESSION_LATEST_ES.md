@@ -1,49 +1,51 @@
-# Resumen de Sesión - 7 de Noviembre de 2026 (2ª Sesión — MYNEXT Setup 2.0 — Musa)
+# Resumen de Sesión - 9 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
 
 ### ¿Qué se ha hecho hoy?
-1. **Diagnóstico Forense del Bloqueo de Red en España (IPs de Cloudflare Pages):**
-   - Se investigó en vivo por qué `ecuaplac.com` dejaba de responder los fines de semana en horario de tarde/noche.
-   - Se demostró que el dominio tenía asignadas las IPs `188.114.96.5` y `188.114.97.5` de Cloudflare Pages, las cuales son bloqueadas a nivel TCP por las operadoras españolas (Movistar, Digi, O2, MasOrange, Vodafone) durante las jornadas de fútbol de LaLiga.
-   - Se comparó con `mynextbymusa.com` (`104.21.33.195`) comprobando que el fallo era exclusivamente por el rango de IP compartido (`188.114.96.x`) asignado a `ecuaplac.com`.
+1. **Alineación y Optimización del Logo del Header en Móvil y Escritorio:**
+   - **Diagnóstico del problema:** Se detectó que el archivo `LogoHedder.webp` contenía 229 píxeles de espacio transparente vacío en el margen izquierdo (más del 22% del total de la imagen). En vista móvil (pantallas de ~390px), esto provocaba que el logo comenzara a ~77px del borde, viéndose desplazado hacia el centro de la pantalla en lugar de alineado a la izquierda.
+   - **Recorte lossless del asset:** Se recortó `assets/img/logos/LogoHedder.webp` a sus límites de contenido reales sin pérdida de resolución.
+   - **Posicionamiento pegado a la izquierda:** El logo ahora arranca en el margen estándar (`px-margin-mobile` = 20px en móvil, 64px en desktop), alineándose con el texto del cuerpo de la web y en simetría con el menú hamburguesa derecho.
+   - **Preservación total de la animación de fading:** Se mantuvo al 100% la clase `.logo-header`, los keyframes `reveal` (`clip-path` y `opacity`) y el listener de DOM, funcionando ahora con mayor fluidez al iniciar la revelación desde el primer píxel visible.
+   - **Sincronización global:** Implementado en `index.html`, `reformas.html`, `aviso-legal.html`, `legal-notice.html`, `impressum.html` y versiones multiidioma (`-en`, `-de`).
 
-2. **Blindaje Definitivo 24/7 con GitHub Pages (Red Fastly) + DNS Solo (Nube Gris):**
-   - Se activó **GitHub Pages** en el repositorio `musa3101/W-Ecuaplac` sirviendo directamente desde la rama `main` (`/`).
-   - Se desvincularon los dominios bloqueados del proyecto de Cloudflare Pages y se configuraron los registros en el panel DNS de Cloudflare en modo **Solo DNS (Nube Gris)**:
-     - Registro `A` (`@` -> `185.199.108.153`, red Fastly de GitHub inmune a bloqueos de operadoras).
-     - Registro `CNAME` (`www` -> `musa3101.github.io`).
-   - Se emitieron y activaron automáticamente los certificados SSL (`HTTPS` forzado) para `https://ecuaplac.com`.
-   - Se añadieron los archivos `CNAME` y `.nojekyll` a la raíz del proyecto para preservar el dominio personalizado en futuros despliegues.
+2. **Integración de Versión en Alemán (DE) y Navegación Multilingüe:**
+   - Se crearon y vincularon `index-de.html`, `reformas-de.html` e `impressum.html`.
+   - Se unificó el selector de idiomas en el header y footer para alternar de forma limpia entre ES, EN y DE.
 
-3. **Mini-Merges Ejecutados en el Día:**
-   - `2026-11-07T15:37:58 | merge completo | all | push=1` (Lanzamiento de la PWA `/appweb/` y sincronización de reformas con Supabase).
-   - `2026-11-07T21:00:42 | merge completo | all | push=1` (Configuración de `CNAME` y `.nojekyll` en `main` para GitHub Pages).
+3. **Banda de Marca Dithered en el Footer (Estilo 21st):**
+   - Implementación de la banda inferior reactiva con trama dithered dorada y tipografía de impacto visual para la marca ECUAPLAC (`assets/css/dithered-footer.css` y `assets/js/dithered-footer.js`).
+
+4. **Mini-Merges Ejecutados en el Día:**
+   - `2026-11-09T16:17:39 | merge completo | all | push=1` (Merge a `main` y despliegue a producción).
 
 ---
 
 ### Archivos Modificados / Creados
-- `CNAME` (Dominio oficial `ecuaplac.com` para GitHub Pages)
-- `.nojekyll` (Despliegue directo de activos estáticos sin procesado Jekyll)
-- `.musa/session.json` & `.musa/merges.log` (Cierre de sesión y registro de mini-merges)
-- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación actualizada)
+- `assets/img/logos/LogoHedder.webp` (Recorte lossless de transparencia y centrado)
+- `index.html`, `index-en.html`, `index-de.html` (Ajuste de header logo, menú móvil y footer)
+- `reformas.html`, `reformas-en.html`, `reformas-de.html` (Ajuste de header logo, menú móvil y footer)
+- `aviso-legal.html`, `legal-notice.html`, `impressum.html` (Ajuste de header logo y footer dithered)
+- `assets/css/dithered-footer.css` & `assets/js/dithered-footer.js` (Efecto dithered)
+- `components/ui/dithered-footer.tsx` (Componente base de referencia)
+- `.musa/merges.log` & `.musa/session.json` (Registro de sesión)
+- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación del proyecto)
 
 ---
 
 ### Problemas Solucionados
-- **Caídas y carga infinita en España durante jornadas de fútbol:** Resuelto de raíz y para siempre al pasar `ecuaplac.com` de la IP bloqueada de Cloudflare (`188.114.96.5`) a la red Fastly de GitHub Pages (`185.199.108.153`) con Nube Gris en Cloudflare.
-- **Velocidad verificada en vivo durante bloqueo activo:** `https://ecuaplac.com` y `https://ecuaplac.com/appweb/` responden con `HTTP/2 200 OK` en **0.07s - 0.21s** en Mac y móvil.
+- **Logo del header desplazado al centro en móvil:** Solucionado de raíz eliminando el padding transparente interno del WebP y ajustando las clases a `h-10 md:h-11` (40px en móvil, 44px en desktop).
+- **Eliminación de offsets negativos hacky:** Se eliminó la clase residual `-ml-8` que se había colocado como parche temporal en algunas vistas alemanas, quedando un estándar limpio de `ml-0` en todo el sitio.
 
 ---
 
 ### Qué queda pendiente
-- Ejecutar los scripts SQL `supabase_admin_setup.sql` y `supabase_more_projects_setup.sql` en el SQL Editor de Supabase (si aún no se han ejecutado).
-- Desarrollar la pestaña de **Leads (Presupuestos)** dentro de la App `/appweb/`.
+- Comprobación visual en dispositivos móviles reales (Safari iOS y Chrome Android).
+- Conectar la pestaña de **Leads (Presupuestos)** dentro de la app web con la tabla `ecuaplac_leads` de Supabase.
 
 ---
 
 ### Qué se recomienda hacer en la próxima sesión
-1. **Activar la pestaña "Leads" en la PWA (`appweb/`)**:
-   - Conectar la vista de Leads a la tabla `ecuaplac_leads` de Supabase para ver los presupuestos recibidos en tiempo real.
-   - Añadir botones de llamada rápida (`tel:`) y apertura directa de WhatsApp (`https://wa.me/`) para cada cliente.
-   - Añadir selector de estado (*Nuevo*, *Contactado*, *Presupuesto enviado*, *Aceptado*).
-2. **Prueba con el cliente (José)**:
-   - Instalar el acceso directo de `https://ecuaplac.com/appweb/` en la pantalla de inicio de su teléfono y probar la subida de una foto real.
+1. **Comprobación en vivo en el móvil de Musa:**
+   - Abrir `https://ecuaplac.com` en Safari iOS y verificar la fluidez de la animación reveal del logo y su alineación izquierda.
+2. **Conexión de Leads en la plataforma de gestión:**
+   - Vincular la tabla `ecuaplac_leads` para consultar presupuestos enviados desde la web directamente en la app del gestor.

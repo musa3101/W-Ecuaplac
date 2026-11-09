@@ -5,6 +5,7 @@
 - [x] Configuración de reproducción automática (autoplay) y control táctil para el carrusel de reformas.
 - [x] Rediseño premium de los botones de navegación y paginación del carrusel de reformas.
 - [x] Traducción al 100% en inglés de todo el sitio web, incluyendo textos de base de datos en `reformas-en.html`.
+- [x] Traducción al 100% en alemán (`index-de.html`, `reformas-de.html`, `impressum.html`) con selector de idiomas ES | EN | DE.
 - [x] Corrección del comportamiento de los logos (enlace a home y smooth scroll en portadas).
 - [x] Actualización del logotipo del footer al nuevo diseño SVG transparente.
 - [x] Vinculación del dominio principal (`ecuaplac.com`) y el subdominio (`www.ecuaplac.com`).
@@ -21,8 +22,8 @@
 - [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
 - [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
 - [x] **Desarrollo de la App Web Gestor (`appweb/`)**: PWA móvil con diseño Bento Luxury, login con email y contraseña, conversión client-side a WebP, bloqueo de zoom en iOS, header Deep Navy y logo sin fondo oficial.
-- [x] **Dock de 4 Secciones en la App**: Pestañas de *Obras*, *+ Proj*, *Leads (Próximamente)* y *Ajustes*.
-- [x] **Sincronización Dinámica de Galería Secundaria**: Conexión de `reformas.html` y `reformas-en.html` con la tabla `ecuaplac_more_projects` de Supabase.
+- [x] **Banda de Marca Dithered en el Footer (Estilo 21st)**: Banda interactiva con efecto dithered dorado para ECUAPLAC.
+- [x] **Alineación Perfecta del Logo en Header Móvil**: Corrección del padding transparente en `LogoHedder.webp`, alineación estricta a la izquierda y preservación íntegra de la animación fade/reveal.
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
 
 ## Tareas en Progreso
