@@ -113,6 +113,10 @@
   </script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+  <!-- Preload Critical Hero Images for Instant GPU Decode & Zero Scroll Jank -->
+  <link rel="preload" as="image" href="./assets/img/hero/1.webp" type="image/webp">
+  <link rel="preload" as="image" href="./assets/img/hero/2.webp" type="image/webp">
+  <link rel="preload" as="image" href="./assets/img/hero/3.webp" type="image/webp">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
@@ -260,7 +264,6 @@
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
-      contain: paint;
     }
 
     #hero-layer-1 { z-index: 10; }
@@ -277,8 +280,6 @@
     #hero-scroll-container {
       height: 230vh;
       height: 230dvh;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-y;
     }
 
     @media (min-width: 768px) {
@@ -1441,7 +1442,7 @@
 
           <!-- Stage 1 Content -->
           <div id="hero-text-1"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto transition-opacity duration-200">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
             <h1
               class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Arquitectura de<br>espacios limpios.
@@ -1454,7 +1455,7 @@
 
           <!-- Stage 2 Content (Diseño & Detalle) -->
           <div id="hero-text-2"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
               class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Diseño integral &<br>precisión en cada detalle.
@@ -1466,7 +1467,7 @@
 
           <!-- Stage 3 Content -->
           <div id="hero-text-3"
-            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
+            class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
               class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               El resultado que<br>siempre imaginaste.
@@ -3558,43 +3559,82 @@
         });
       });
 
-      // High-performance scroll spy for navigation active links (throttled to avoid layout thrashing)
-      const sections = ['hero-scroll-container', 'reformas', 'servicios', 'contacto'];
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      function updateActiveNavLink() {
-        const scrollPos = window.pageYOffset + 120; // 120px offset from top for trigger
-        let currentSectionId = '';
-
-        sections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            const top = el.offsetTop - 75; // account for navbar height
-            const height = el.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-              currentSectionId = id;
-            }
-          }
-        });
-
-        // Special case: bottom of the page highlights Contact
-        if ((window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 50) {
-          currentSectionId = 'contacto';
+      // 1. Off-thread Pre-warming & GPU Texture Decode for Hero Images
+      ['./assets/img/hero/1.webp', './assets/img/hero/2.webp', './assets/img/hero/3.webp'].forEach(src => {
+        const img = new Image();
+        img.src = src;
+        if (img.decode) {
+          img.decode().catch(() => {});
         }
+      });
 
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${currentSectionId}`) {
-            link.classList.add('active-nav');
-          } else {
-            link.classList.remove('active-nav');
+      // 2. High-performance Section Measurement (Calculated ONCE on load & resize, NEVER on scroll)
+      let cachedSections = [];
+      const navLinks = document.querySelectorAll('.nav-link');
+      function measureSections() {
+        if (window.innerWidth < 1024) return;
+        const sectionIds = ['hero-scroll-container', 'reformas', 'servicios', 'contacto'];
+        cachedSections = sectionIds.map(id => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          return {
+            id,
+            top: el.offsetTop - 75,
+            bottom: el.offsetTop - 75 + el.offsetHeight
+          };
+        }).filter(Boolean);
+      }
+      measureSections();
+
+      let currentActiveId = '';
+      function updateActiveNavLink(scrollY) {
+        if (window.innerWidth < 1024 || !cachedSections.length) return;
+        const scrollPos = scrollY + 120;
+        let activeId = '';
+        for (let i = 0; i < cachedSections.length; i++) {
+          const s = cachedSections[i];
+          if (scrollPos >= s.top && scrollPos < s.bottom) {
+            activeId = s.id;
+            break;
           }
-        });
+        }
+        if (activeId && activeId !== currentActiveId) {
+          currentActiveId = activeId;
+          navLinks.forEach(link => {
+            const matches = link.getAttribute('href') === `#${activeId}`;
+            link.classList.toggle('active-nav', matches);
+          });
+        }
       }
 
-      // Scroll listener for dynamic navbar styling
+      // 3. Dynamic Navbar & Pagination Dot Styling (Guarded with boolean flags to prevent layout thrashing)
       const navElement = document.querySelector('nav');
+      const paginationContainer = document.getElementById('vertical-pagination');
+      let isScrolled = false;
+      let isPaginationHidden = false;
 
-      // Scrollytelling Pinned Hero Logic (GPU-composited, zero zIndex churn, motion-design & emil-design-eng)
+      function handleScroll(scrollY) {
+        // Only mutate nav DOM if state actually changes (crosses 20px threshold)
+        const shouldBeScrolled = scrollY > 20;
+        if (shouldBeScrolled !== isScrolled) {
+          isScrolled = shouldBeScrolled;
+          if (navElement) {
+            navElement.classList.toggle('scrolled', isScrolled);
+          }
+        }
+
+        // Hide desktop pagination dots past the hero section
+        if (paginationContainer) {
+          const shouldHidePagination = scrollY > (heroScrollable - 100);
+          if (shouldHidePagination !== isPaginationHidden) {
+            isPaginationHidden = shouldHidePagination;
+            paginationContainer.classList.toggle('opacity-0', isPaginationHidden);
+            paginationContainer.classList.toggle('pointer-events-none', isPaginationHidden);
+          }
+        }
+      }
+
+      // 4. Scrollytelling Pinned Hero Logic (GPU-composited, zero layout reads on scroll)
       const heroContainer = document.getElementById('hero-scroll-container');
       const layer1 = document.getElementById('hero-layer-1');
       const layer2 = document.getElementById('hero-layer-2');
@@ -3606,67 +3646,87 @@
 
       const paginationDots = document.querySelectorAll('#vertical-pagination .pagination-dot');
 
-      // Cache viewport height to avoid Safari address-bar resize jank
-      let cachedVH = window.innerHeight;
-      let resizeTimer;
+      let heroHeight = 0;
+      let heroScrollable = 0;
+      let isHeroActive = true;
+      let currentDotIndex = -1;
+
+      function measureHero() {
+        if (!heroContainer) return;
+        heroHeight = heroContainer.offsetHeight;
+        const vh = window.innerHeight;
+        // Total scrollable distance while sticky element is pinned
+        heroScrollable = Math.max(heroHeight - (vh - 72), 1);
+      }
+      measureHero();
+
       window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => { cachedVH = window.innerHeight; }, 150);
+        measureHero();
+        measureSections();
       }, { passive: true });
 
-      function handleHeroScroll() {
+      function handleHeroScroll(scrollY) {
         if (!heroContainer) return;
 
-        const rect = heroContainer.getBoundingClientRect();
-        const totalScrollable = rect.height - cachedVH;
-        if (totalScrollable <= 0) return;
+        // If user is scrolled well past the hero section, lock state and exit immediately
+        if (scrollY > heroScrollable + 80) {
+          if (isHeroActive) {
+            isHeroActive = false;
+            if (layer1) layer1.style.transform = 'translate3d(0, -12%, 0)';
+            if (layer2) layer2.style.transform = 'translate3d(0, -12%, 0)';
+            if (layer3) layer3.style.transform = 'translate3d(0, 0%, 0)';
+            if (text1) { text1.style.opacity = '0'; text1.style.pointerEvents = 'none'; }
+            if (text2) { text2.style.opacity = '0'; text2.style.pointerEvents = 'none'; }
+            if (text3) { text3.style.opacity = '1'; text3.style.pointerEvents = 'auto'; }
+          }
+          return;
+        }
 
-        // Normalized progress: 0.0 at top of hero, 1.0 at exit
-        const rawProgress = -rect.top / totalScrollable;
-        const progress = Math.min(Math.max(rawProgress, 0), 1);
+        isHeroActive = true;
+
+        // Clean normalized progress: 0.0 at top of page, 1.0 at exit
+        const progress = Math.min(Math.max(scrollY / heroScrollable, 0), 1);
 
         // Continuous curtain kinematics (Stage 1: 0.0 -> 0.50, Stage 2: 0.50 -> 1.0)
-        // Fixed CSS stacking context: Layer 1 (z-10), Layer 2 (z-20), Layer 3 (z-30).
-        // Zero zIndex churn prevents GPU texture repainting and composite drops.
         const p1 = Math.min(Math.max(progress / 0.5, 0), 1);
         const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
         if (layer1) {
-          // Layer 1: subtle architectural parallax drift
-          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(3)}%, 0)`;
+          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(2)}%, 0)`;
         }
 
         if (layer2) {
-          // Layer 2 slides up to cover layer 1 (100% -> 0%), then drifts (-12%) during stage 2
           const y2 = (1 - p1) * 100 - (p2 * 12);
-          layer2.style.transform = `translate3d(0, ${y2.toFixed(3)}%, 0)`;
+          layer2.style.transform = `translate3d(0, ${y2.toFixed(2)}%, 0)`;
         }
 
         if (layer3) {
-          // Layer 3 slides up to cover layer 2 (100% -> 0%)
           const y3 = (1 - p2) * 100;
-          layer3.style.transform = `translate3d(0, ${y3.toFixed(3)}%, 0)`;
+          layer3.style.transform = `translate3d(0, ${y3.toFixed(2)}%, 0)`;
         }
 
-        // Active pagination dot indicator
-        if (paginationDots.length === 3) {
+        // Active pagination dot indicator (only updates if dot actually changes)
+        if (paginationDots.length === 3 && window.innerWidth >= 768) {
           const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
-          paginationDots.forEach((dot, idx) => {
-            dot.classList.toggle('active', idx === activeIdx);
-          });
+          if (activeIdx !== currentDotIndex) {
+            currentDotIndex = activeIdx;
+            paginationDots.forEach((dot, idx) => {
+              dot.classList.toggle('active', idx === activeIdx);
+            });
+          }
         }
 
-        // Typography cross-fades with smooth translation (motion-design & emil-design-eng)
-        // Text 1: active 0.0 -> 0.32, fades out 0.32 -> 0.46
+        // Typography cross-fades (immediate, no CSS transition delay)
+        // Text 1: active 0.0 -> 0.20, fades out smoothly 0.20 -> 0.38
         if (text1) {
-          if (progress <= 0.32) {
+          if (progress <= 0.20) {
             text1.style.opacity = '1';
             text1.style.transform = 'translateY(0)';
             text1.style.pointerEvents = 'auto';
-          } else if (progress <= 0.46) {
-            const f = (progress - 0.32) / 0.14;
+          } else if (progress <= 0.38) {
+            const f = (progress - 0.20) / 0.18;
             text1.style.opacity = (1 - f).toFixed(2);
-            text1.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text1.style.transform = `translateY(${(-f * 14).toFixed(1)}px)`;
             text1.style.pointerEvents = 'none';
           } else {
             text1.style.opacity = '0';
@@ -3674,24 +3734,24 @@
           }
         }
 
-        // Text 2: fades in 0.42 -> 0.54, active until 0.74, fades out 0.74 -> 0.86
+        // Text 2: fades in 0.38 -> 0.50, active until 0.70, fades out 0.70 -> 0.85
         if (text2) {
-          if (progress < 0.42) {
+          if (progress < 0.38) {
             text2.style.opacity = '0';
             text2.style.pointerEvents = 'none';
-          } else if (progress <= 0.54) {
-            const f = (progress - 0.42) / 0.12;
+          } else if (progress <= 0.50) {
+            const f = (progress - 0.38) / 0.12;
             text2.style.opacity = f.toFixed(2);
-            text2.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text2.style.transform = `translateY(${((1 - f) * 14).toFixed(1)}px)`;
             text2.style.pointerEvents = 'auto';
-          } else if (progress <= 0.74) {
+          } else if (progress <= 0.70) {
             text2.style.opacity = '1';
             text2.style.transform = 'translateY(0)';
             text2.style.pointerEvents = 'auto';
-          } else if (progress <= 0.86) {
-            const f = (progress - 0.74) / 0.12;
+          } else if (progress <= 0.85) {
+            const f = (progress - 0.70) / 0.15;
             text2.style.opacity = (1 - f).toFixed(2);
-            text2.style.transform = `translateY(${(-f * 12).toFixed(1)}px)`;
+            text2.style.transform = `translateY(${(-f * 14).toFixed(1)}px)`;
             text2.style.pointerEvents = 'none';
           } else {
             text2.style.opacity = '0';
@@ -3699,40 +3759,20 @@
           }
         }
 
-        // Text 3: fades in 0.80 -> 0.92, active until 1.0
+        // Text 3: fades in 0.78 -> 0.90, active until 1.0
         if (text3) {
-          if (progress < 0.80) {
+          if (progress < 0.78) {
             text3.style.opacity = '0';
             text3.style.pointerEvents = 'none';
-          } else if (progress <= 0.92) {
-            const f = (progress - 0.80) / 0.12;
+          } else if (progress <= 0.90) {
+            const f = (progress - 0.78) / 0.12;
             text3.style.opacity = f.toFixed(2);
-            text3.style.transform = `translateY(${((1 - f) * 12).toFixed(1)}px)`;
+            text3.style.transform = `translateY(${((1 - f) * 14).toFixed(1)}px)`;
             text3.style.pointerEvents = 'auto';
           } else {
             text3.style.opacity = '1';
             text3.style.transform = 'translateY(0)';
             text3.style.pointerEvents = 'auto';
-          }
-        }
-      }
-
-      function handleScroll() {
-        // Header scroll logic
-        if (window.scrollY > 20) {
-          navElement.classList.add('scrolled');
-        } else {
-          navElement.classList.remove('scrolled');
-        }
-
-        // Hide right-side pagination dots past the hero section
-        const paginationContainer = document.getElementById('vertical-pagination');
-        if (heroContainer && paginationContainer) {
-          const rect = heroContainer.getBoundingClientRect();
-          if (rect.bottom < window.innerHeight / 2) {
-            paginationContainer.classList.add('opacity-0', 'pointer-events-none');
-          } else {
-            paginationContainer.classList.remove('opacity-0', 'pointer-events-none');
           }
         }
       }
@@ -3757,19 +3797,15 @@
         sepObserver.observe(sepText);
       }
 
-      // Unified, rAF-scheduled scroll handler (eliminates layout thrashing)
+      // Ultra-lightweight rAF scroll scheduler — ZERO layout thrashing
       let ticking = false;
-      let lastScrollHandleTime = 0;
       function onScroll() {
         if (!ticking) {
-          window.requestAnimationFrame((now) => {
-            handleHeroScroll();
-            // Throttle non-critical layout reads (navbar & navLink spy) to ~80ms
-            if (now - lastScrollHandleTime > 80) {
-              handleScroll();
-              updateActiveNavLink();
-              lastScrollHandleTime = now;
-            }
+          window.requestAnimationFrame(() => {
+            const scrollY = window.pageYOffset || window.scrollY || 0;
+            handleHeroScroll(scrollY);
+            handleScroll(scrollY);
+            updateActiveNavLink(scrollY);
             ticking = false;
           });
           ticking = true;
@@ -3777,10 +3813,6 @@
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
-      // Run once on load to set correct initial state
-      handleHeroScroll();
-      handleScroll();
-      updateActiveNavLink();
 
       // Scroll-reveal: subtle fade-in for section headings
       const revealEls = document.querySelectorAll('.scroll-reveal');
@@ -3843,8 +3875,10 @@
         window.addEventListener('mouseup', handleEnd);
         window.addEventListener('touchend', handleEnd);
       }
-      handleScroll();
-      handleHeroScroll();
+      const initialScrollY = window.pageYOffset || window.scrollY || 0;
+      handleHeroScroll(initialScrollY);
+      handleScroll(initialScrollY);
+      updateActiveNavLink(initialScrollY);
     });
   </script>
 

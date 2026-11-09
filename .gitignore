@@ -12,6 +12,7 @@ __pycache__/
 
 # Scratch local
 scratch/
+Referencias/
 
 # Script local
 setup.sh

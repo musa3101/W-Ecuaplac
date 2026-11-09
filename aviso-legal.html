@@ -179,7 +179,7 @@
     <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo" class="logo-header h-10 md:h-11 w-auto object-contain select-none" loading="lazy">
   </a>
   <div class="flex items-center gap-6">
-    <a href="index.html" class="text-white/70 hover:text-white text-[12px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300">← Volver al inicio</a>
+    <a href="index.html" class="hidden md:inline-block text-white/70 hover:text-white text-[12px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300">← Volver al inicio</a>
     <div class="flex items-center gap-3 text-[12px] font-semibold tracking-[0.15em] uppercase">
       <span class="text-white font-bold">ES</span>
       <a href="legal-notice.html" class="text-white/40 hover:text-white transition-colors duration-300">EN</a>
@@ -189,12 +189,12 @@
 </div>
 </nav>
 
-<main class="py-16 px-[20px] md:px-[64px] max-w-[860px] mx-auto">
+<main class="pt-16 pb-24 px-[20px] md:px-[64px] max-w-[860px] mx-auto">
 
   <!-- Page Header -->
   <div class="border-b border-[#141414]/20 pb-6 mb-12">
     <span class="font-body text-[11px] font-bold uppercase tracking-[0.25em] text-[#8C6D53] block mb-2">Información Legal</span>
-    <h1 class="font-headline text-[36px] md:text-[52px] font-semibold leading-tight text-[#141414] tracking-[-0.025em]">Aviso Legal</h1>
+    <h1 id="aviso-legal" class="font-headline text-[36px] md:text-[52px] font-semibold leading-tight text-[#141414] tracking-[-0.025em] scroll-mt-28">Aviso Legal</h1>
     <p class="font-body text-[#666] mt-3 text-sm">Última actualización: mayo de 2026</p>
   </div>
 
@@ -211,7 +211,7 @@
       <li><strong>Teléfono:</strong> <a href="tel:+34678159878">+34 678 15 98 78</a></li>
     </ul>
 
-    <h2>2. Objeto y Ámbito de Aplicación</h2>
+    <h2 id="terminos" class="scroll-mt-28">2. Objeto y Ámbito de Aplicación</h2>
     <p>El presente Aviso Legal regula el acceso y uso del sitio web de ECUAPLAC, cuya finalidad es exclusivamente informativa sobre los servicios y proyectos ofrecidos por la empresa. El acceso a este sitio implica la aceptación plena y sin reservas de las condiciones aquí establecidas.</p>
     <p>ECUAPLAC se reserva el derecho de modificar el contenido del sitio web en cualquier momento y sin previo aviso, con el fin de mantenerlo actualizado.</p>
 
@@ -230,7 +230,7 @@
       <li><strong>Reclamaciones:</strong> Tiene derecho a presentar reclamación ante la Agencia Española de Protección de Datos (aepd.es)</li>
     </ul>
 
-    <h2 id="cookies">5. Política de Cookies</h2>
+    <h2 id="cookies" class="scroll-mt-28">5. Política de Cookies</h2>
     <p>Este sitio web no utiliza cookies propias de seguimiento, analítica ni publicidad. Únicamente pueden generarse cookies técnicas estrictamente necesarias para el correcto funcionamiento de la navegación, las cuales no almacenan datos personales identificativos.</p>
     <p>Las imágenes del sitio son servidas a través de <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>, un servicio externo, que puede gestionar sus propias cookies conforme a su política de privacidad.</p>
 
@@ -243,17 +243,10 @@
 
   </div>
 
-  <!-- Back Button -->
-  <div class="mt-16 mb-4">
-    <a href="index.html" class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest text-[#141414] border border-[#141414]/30 rounded-full px-8 py-3 hover:bg-[#141414] hover:text-white transition-all duration-300 active:scale-95">
-      ← Volver al Inicio
-    </a>
-  </div>
-
 </main>
 
 <div class="ecuador-divider"></div>
-<footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300 mt-24">
+<footer class="w-full bg-[#141414] text-[#A3A3A3] pt-20 pb-0 border-t border-[#1C1C1E] transition-colors duration-300">
   <div class="max-w-[1440px] mx-auto px-[20px] md:px-[64px]">
     <!-- 3 Column Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pb-16 border-b border-[#1C1C1E]">
