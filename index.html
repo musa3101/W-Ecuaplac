@@ -113,9 +113,10 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap"
-    rel="stylesheet">
+  <!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+  <!-- Brand Montserrat preserved for official text logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet">
@@ -651,107 +652,99 @@
             "margin-desktop": "64px"
           },
           "fontFamily": {
+            "headline": [
+              "'Clash Display'",
+              "sans-serif"
+            ],
+            "body": [
+              "'Satoshi'",
+              "sans-serif"
+            ],
+            "editorial": [
+              "'Boska'",
+              "serif"
+            ],
             "caption": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg-mobile": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "body-lg": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "body-md": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "headline-xl": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "label-caps": [
-              "Montserrat",
+              "'Satoshi'",
               "sans-serif"
             ]
           },
           "fontSize": {
             "caption": [
-              "14px",
+              "13px",
               {
                 "lineHeight": "1.4",
                 "fontWeight": "400"
               }
             ],
             "headline-lg-mobile": [
-              "24px",
-              {
-                "lineHeight": "1.2",
-                "fontWeight": "400"
-              }
-            ],
-            "body-lg": [
-              "18px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "body-md": [
-              "16px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-lg": [
-              "32px",
-              {
-                "lineHeight": "1.2",
-                "letterSpacing": "-0.01em",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-xl": [
-              "48px",
-              {
-                "lineHeight": "1.08",
-                "letterSpacing": "-0.025em",
-                "fontWeight": "300"
-              }
-            ],
-            "headline-lg": [
-              "32px",
+              "28px",
               {
                 "lineHeight": "1.15",
                 "letterSpacing": "-0.015em",
-                "fontWeight": "400"
+                "fontWeight": "600"
               }
             ],
             "body-lg": [
               "18px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
             "body-md": [
               "16px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
+            "headline-lg": [
+              "34px",
+              {
+                "lineHeight": "1.15",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-xl": [
+              "52px",
+              {
+                "lineHeight": "1.08",
+                "letterSpacing": "-0.025em",
+                "fontWeight": "600"
+              }
+            ],
             "label-caps": [
-              "12px",
+              "11px",
               {
                 "lineHeight": "1.0",
-                "letterSpacing": "0.15em",
-                "fontWeight": "600"
+                "letterSpacing": "0.2em",
+                "fontWeight": "700"
               }
             ]
           }
@@ -1436,8 +1429,8 @@
           </picture>
         </div>
 
-        <!-- Subtle gradient to ensure text readability -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent z-40 pointer-events-none"></div>
+        <!-- Calibrated gradient to ensure 100% text readability over any photo -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-40 pointer-events-none"></div>
 
         <!-- Hero Text Overlays (Scrollytelling Content) -->
         <div class="absolute inset-x-0 bottom-0 z-50 h-full max-w-5xl mx-auto pointer-events-none">
@@ -1446,10 +1439,10 @@
           <div id="hero-text-1"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto transition-opacity duration-200">
             <h1
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Arquitectura de<br>espacios limpios.
             </h1>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-2xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Más de 10 años ayudando a transformar viviendas y espacios comerciales en Palma de Mallorca con
               profesionalidad, experiencia y acabados de calidad.
             </p>
@@ -1459,10 +1452,10 @@
           <div id="hero-text-2"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
             <h2
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Diseño integral &<br>precisión en cada detalle.
             </h2>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Materiales nobles, iluminación cuidada y ejecución impecable para hogares únicos en Mallorca.
             </p>
           </div>
@@ -1471,10 +1464,10 @@
           <div id="hero-text-3"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
             <h2
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               El resultado que<br>siempre imaginaste.
             </h2>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Acabados premium en microcemento pulido, carpintería integrada y confort absoluto.
             </p>
           </div>
@@ -1508,11 +1501,11 @@
       <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 
         <div class="text-center mb-8 md:mb-12">
-          <span class="font-label-caps text-xs md:text-sm tracking-[0.3em] text-[#795746] dark:text-[#C5A880] uppercase font-bold">Nuestro Trabajo</span>
-          <h2 class="font-['Montserrat'] text-2xl md:text-4xl font-bold text-[#161413] dark:text-white mt-2">
+          <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Nuestro Trabajo</span>
+          <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em]">
             Proyectos y Acabados de Alta Gama
           </h2>
-          <p class="text-sm md:text-base text-neutral-500 dark:text-neutral-400 mt-2 max-w-xl mx-auto">
+          <p class="font-body text-sm md:text-base text-on-surface-variant/80 mt-2 max-w-xl mx-auto leading-relaxed">
             Desliza para explorar nuestras reformas y diseños más representativos en Mallorca
           </p>
         </div>
@@ -2077,6 +2070,8 @@
               this.scroll.position = this.scroll.current;
               this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
               this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
+              this.startTime = Date.now();
+              this.hasMoved = false;
             }
 
             onTouchMove(e) {
@@ -2086,6 +2081,10 @@
               const dx = this.start - x;
               const dy = this.startY - y;
 
+              if (Math.abs(dx) > 6) {
+                this.hasMoved = true;
+              }
+
               if (Math.abs(dx) > Math.abs(dy) && e.cancelable) {
                 e.preventDefault();
               }
@@ -2094,8 +2093,47 @@
               this.scroll.target = this.scroll.position + distance;
             }
 
-            onTouchUp() {
+            onTouchUp(e) {
+              if (!this.isDown) return;
               this.isDown = false;
+
+              const endX =
+                e && e.changedTouches && e.changedTouches.length > 0
+                  ? e.changedTouches[0].clientX
+                  : e && typeof e.clientX === "number"
+                  ? e.clientX
+                  : this.start;
+
+              const dx = this.start - endX;
+              const elapsed = Math.max(1, Date.now() - (this.startTime || Date.now()));
+              const velocity = dx / elapsed;
+
+              // 1. Tocar con el táctil para adelantar o volver hacia atrás (Tap)
+              if (!this.hasMoved || Math.abs(dx) < 12) {
+                const rect = this.container.getBoundingClientRect();
+                const tapX = endX - rect.left;
+                const ratioX = tapX / Math.max(rect.width, 1);
+
+                if (ratioX > 0.58) {
+                  this.next();
+                  return;
+                } else if (ratioX < 0.42) {
+                  this.prev();
+                  return;
+                }
+              }
+
+              // 2. Gesto de deslizamiento rápido táctil (Swipe / Flick)
+              if (Math.abs(dx) > 30 || Math.abs(velocity) > 0.20) {
+                if (dx > 0) {
+                  this.next();
+                } else {
+                  this.prev();
+                }
+                return;
+              }
+
+              // 3. Ajuste al soltar arrastre manual
               this.onCheck();
             }
 
@@ -2117,12 +2155,16 @@
 
             next() {
               if (!this.medias || !this.medias[0]) return;
-              this.scroll.target += this.medias[0].width;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex + 1) * width;
             }
 
             prev() {
               if (!this.medias || !this.medias[0]) return;
-              this.scroll.target -= this.medias[0].width;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex - 1) * width;
             }
 
             onResize() {
@@ -2318,8 +2360,9 @@
       <div class="ecuador-divider"></div>
       <div class="py-24 bg-surface-container-lowest">
         <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-          <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Transformaciones Reales</h2>
+          <div class="mb-14 border-b border-primary/20 pb-4 scroll-reveal">
+            <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Antes y Después</span>
+            <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[48px] font-semibold text-primary leading-tight tracking-[-0.02em]">Transformaciones Reales</h2>
           </div>
           <!-- Interactive Slider (Reveal1 21st.dev luxury style - Piedra Caliza) -->
           <div class="transform-card-wrapper group">
@@ -2425,14 +2468,13 @@
       <div
         class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
         <div class="max-w-xl">
-          <span class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey mb-3 block">Nuestra
-            Experiencia</span>
-          <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
+          <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Nuestra Experiencia</span>
+          <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
             Especialistas en Reformas y Acabados de Calidad
           </h2>
         </div>
         <div class="max-w-xl">
-          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
             Más de 10 años participando en proyectos de reforma y acondicionamiento de espacios. Trabajamos cada detalle
             con profesionalidad, experiencia y un compromiso real con la calidad de los acabados.
           </p>
@@ -2570,10 +2612,9 @@
           <!-- Contact Info (Left) -->
           <div class="md:col-span-4 flex flex-col justify-start scroll-reveal">
             <span
-              class="font-label-caps text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-2 block">¿HABLAMOS
-              DE SU ESPACIO?</span>
+              class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">¿HABLAMOS DE SU ESPACIO?</span>
             <h2
-              class="font-headline-xl text-[3rem] md:text-[4rem] text-primary leading-none mb-12 font-light tracking-tight">
+              class="font-headline text-[2.75rem] md:text-[3.75rem] font-semibold text-primary leading-none mb-10 tracking-[-0.03em]">
               Contacto.
             </h2>
 
@@ -2750,14 +2791,13 @@
         <div
           class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
           <div class="max-w-xl">
-            <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#795746] mb-3 block">Resolución
-              de Dudas</span>
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
+            <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Resolución de Dudas</span>
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
               Preguntas Frecuentes
             </h2>
           </div>
           <div class="max-w-xl">
-            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
               ¿Tienes alguna duda? Aquí respondemos algunas de las preguntas más habituales de nuestros clientes.
             </p>
           </div>
@@ -2966,7 +3006,7 @@
                 class="w-full h-full object-contain scale-110" loading="lazy">
             </div>
           </a>
-          <p class="text-[15px] text-[#E5E7EB] leading-relaxed max-w-sm text-balance">
+          <p class="font-editorial text-[17px] md:text-[18px] text-[#E5E7EB] italic leading-relaxed max-w-md text-balance drop-shadow-sm">
             Cuando J &amp; G empezamos un proyecto, lo hacemos con una regla simple:<br>tratar tu casa en Mallorca como
             si fuera la nuestra.<br>No se trata solo de cumplir con el plano, sino de que el resultado final<br>sea algo
             de lo que tú te sientas orgulloso y nosotros también.
@@ -3044,12 +3084,11 @@
       </button>
 
       <div class="mb-8">
-        <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#888888] block mb-2">Presupuesto
-          sin compromiso</span>
-        <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-white leading-tight">
+        <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#D49B0B] font-bold block mb-2">Presupuesto sin compromiso</span>
+        <h2 class="font-headline text-[32px] sm:text-[40px] md:text-[48px] font-semibold text-white leading-tight tracking-[-0.02em]">
           Solicitar Presupuesto.
         </h2>
-        <p class="font-body-md text-body-md text-[#C5C5C5] mt-2">
+        <p class="font-body text-sm md:text-base text-[#C5C5C5] mt-2">
           Facilítanos algunos detalles preliminares de tu obra y nuestro equipo técnico realizará un estudio inicial de
           viabilidad.
         </p>
@@ -3169,7 +3208,7 @@
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col gap-8 font-headline-xl text-3xl uppercase tracking-wider text-center mt-12">
+    <ul class="flex flex-col gap-8 font-headline text-2xl font-semibold uppercase tracking-wider text-center mt-12">
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#hero-scroll-container"
           onclick="toggleMobileMenu()">INICIO</a></li>
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#reformas"

@@ -113,9 +113,10 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap"
-    rel="stylesheet">
+  <!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+  <!-- Brand Montserrat preserved for official text logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet">
@@ -651,107 +652,99 @@
             "margin-desktop": "64px"
           },
           "fontFamily": {
+            "headline": [
+              "'Clash Display'",
+              "sans-serif"
+            ],
+            "body": [
+              "'Satoshi'",
+              "sans-serif"
+            ],
+            "editorial": [
+              "'Boska'",
+              "serif"
+            ],
             "caption": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg-mobile": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "body-lg": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "body-md": [
-              "Open Sans"
+              "'Satoshi'",
+              "sans-serif"
             ],
             "headline-lg": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "headline-xl": [
-              "Cormorant Garamond",
-              "serif"
+              "'Clash Display'",
+              "sans-serif"
             ],
             "label-caps": [
-              "Montserrat",
+              "'Satoshi'",
               "sans-serif"
             ]
           },
           "fontSize": {
             "caption": [
-              "14px",
+              "13px",
               {
                 "lineHeight": "1.4",
                 "fontWeight": "400"
               }
             ],
             "headline-lg-mobile": [
-              "24px",
-              {
-                "lineHeight": "1.2",
-                "fontWeight": "400"
-              }
-            ],
-            "body-lg": [
-              "18px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "body-md": [
-              "16px",
-              {
-                "lineHeight": "1.6",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-lg": [
-              "32px",
-              {
-                "lineHeight": "1.2",
-                "letterSpacing": "-0.01em",
-                "fontWeight": "400"
-              }
-            ],
-            "headline-xl": [
-              "48px",
-              {
-                "lineHeight": "1.08",
-                "letterSpacing": "-0.025em",
-                "fontWeight": "300"
-              }
-            ],
-            "headline-lg": [
-              "32px",
+              "28px",
               {
                 "lineHeight": "1.15",
                 "letterSpacing": "-0.015em",
-                "fontWeight": "400"
+                "fontWeight": "600"
               }
             ],
             "body-lg": [
               "18px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
             "body-md": [
               "16px",
               {
-                "lineHeight": "1.55",
-                "letterSpacing": "0.005em",
+                "lineHeight": "1.6",
                 "fontWeight": "400"
               }
             ],
+            "headline-lg": [
+              "34px",
+              {
+                "lineHeight": "1.15",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-xl": [
+              "52px",
+              {
+                "lineHeight": "1.08",
+                "letterSpacing": "-0.025em",
+                "fontWeight": "600"
+              }
+            ],
             "label-caps": [
-              "12px",
+              "11px",
               {
                 "lineHeight": "1.0",
-                "letterSpacing": "0.15em",
-                "fontWeight": "600"
+                "letterSpacing": "0.2em",
+                "fontWeight": "700"
               }
             ]
           }
@@ -1437,8 +1430,8 @@
           </picture>
         </div>
 
-        <!-- Subtle gradient to ensure text readability -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent z-40 pointer-events-none"></div>
+        <!-- Calibrated gradient to ensure 100% text readability over any photo -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-40 pointer-events-none"></div>
 
         <!-- Hero Text Overlays (Scrollytelling Content) -->
         <div class="absolute inset-x-0 bottom-0 z-50 h-full max-w-5xl mx-auto pointer-events-none">
@@ -1447,10 +1440,10 @@
           <div id="hero-text-1"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto transition-opacity duration-200">
             <h1
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Architecture of<br>clean spaces.
             </h1>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-2xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Over 10 years helping to transform homes and commercial spaces in Palma de Mallorca with professionalism,
               experience, and high-quality finishes.
             </p>
@@ -1460,10 +1453,10 @@
           <div id="hero-text-2"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
             <h2
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Comprehensive design &<br>precision in every detail.
             </h2>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Noble materials, curated lighting and flawless execution for unique homes across Mallorca.
             </p>
           </div>
@@ -1472,10 +1465,10 @@
           <div id="hero-text-3"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none transition-opacity duration-200">
             <h2
-              class="font-headline-xl text-[28px] sm:text-[32px] md:text-[44px] lg:text-[56px] font-semibold md:font-light leading-tight text-monolith-white max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               The result that<br>you always imagined.
             </h2>
-            <p class="font-body-md text-sm md:text-body-lg text-monolith-white/90 mt-2 max-w-xl">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Premium finishes in polished microcement, integrated carpentry, and absolute comfort.
             </p>
           </div>
@@ -1505,598 +1498,858 @@
         </div>
       </div>
 
-      <!-- Portfolio Card Carousel -->
-      <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+            <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 
-        <div class="text-center mb-12">
-          <span class="font-label-caps text-xs md:text-sm tracking-[0.3em] text-[#795746] uppercase font-bold">Our
-            Latest Work</span>
+        <div class="text-center mb-8 md:mb-12">
+          <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Our Work</span>
+          <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em]">
+            High-End Projects & Finishes
+          </h2>
+          <p class="font-body text-sm md:text-base text-on-surface-variant/80 mt-2 max-w-xl mx-auto leading-relaxed">
+            Swipe to explore our most iconic renovations and architectural designs in Mallorca
+          </p>
         </div>
 
-        <!-- Outer wrapper (relative, no overflow-hidden so buttons don't get cut off) -->
-
-        <!-- Mobile Swiper Carousel -->
-        <div class="block lg:hidden w-full swiper portfolio-swiper">
-          <div class="swiper-wrapper">
-            <!-- Card 1 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2131.webp" alt="Designer bathroom with freestanding bathtub"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Andratx</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Minimalist Bathroom Renovation with Freestanding Bathtub</h3>
-              </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2135.webp" alt="Polished plaster helical staircase"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Sculptural Design Staircase in Polished Plaster</h3>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2134.webp" alt="Custom shower with illuminated niches"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Sóller</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Stone-Clad Shower with Integrated LED Lighting</h3>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2119.webp" alt="Modern integrated and minimalist kitchen"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Fully Integrated Minimalist Kitchen</h3>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2129.webp" alt="Outdoor terrace and solarium"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy" style="object-position: 80% center;">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Santanyí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Rustic Terrace with Built-in Kitchen and Solarium</h3>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2132.webp" alt="Minimalist guest toilet"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Marratxí</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Guest Toilet with Microcement Finishes</h3>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2133.webp" alt="Hallway with indirect lighting"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Modern Hallway with LED Light Lines</h3>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2136.webp" alt="Illuminated display niche"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Palma de Mallorca</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Illuminated Built-in Niches for Decoration</h3>
-              </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-              <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                <img src="./assets/img/portfolio/IMG_2138.webp" alt="Helical staircase details and perspective"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy">
-              </div>
-              <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                <span class="location-badge">Calvià</span>
-                <h3
-                  class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                  Perspective and Finishes of the Helical Staircase</h3>
-              </div>
-            </div>
-
-
+        <!-- Circular Gallery 2 (WebGL 3D Curved Experience) -->
+        <div id="circular-gallery-wrapper" class="relative w-full max-w-[1400px] mx-auto select-none my-2">
+          <!-- WebGL Canvas Container -->
+          <div id="circular-gallery-canvas"
+            class="relative w-full h-[520px] sm:h-[580px] md:h-[650px] cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
+            style="touch-action: pan-y;">
           </div>
-          <div class="swiper-button-prev" style="color: #FCD116;"></div>
-          <div class="swiper-button-next" style="color: #FCD116;"></div>
+
+          <!-- Luxury Navigation Buttons -->
+          <button id="cg-btn-prev" aria-label="Previous"
+            class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="cg-btn-next" aria-label="Next"
+            class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            <svg class="w-6 h-6 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- Interactive Swipe Hint -->
+          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-neutral-400 dark:text-neutral-500 uppercase font-medium">
+            <svg class="w-4 h-4 text-[#795746] dark:text-[#C5A880] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+            <span>Drag or swipe to browse</span>
+          </div>
         </div>
-
-        <!-- Desktop Original Carousel Wrapper -->
-        <div class="hidden lg:block">
-          <div class="relative px-2 md:px-4" id="portfolio-carousel-wrapper">
-
-            <!-- Inner wrapper (overflow-hidden to clip track) -->
-            <div class="overflow-hidden" id="portfolio-carousel">
-              <!-- Track: all 9 cards in a flex row -->
-              <div id="carousel-track" class="flex gap-8 transition-transform duration-500 ease-in-out py-4">
-
-                <!-- Card 1 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2131.webp" alt="Designer bathroom with freestanding bathtub"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Andratx</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Minimalist Bathroom Renovation with Freestanding Bathtub</h3>
-                  </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2135.webp" alt="Polished plaster helical staircase"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Sculptural Design Staircase in Polished Plaster</h3>
-                  </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2134.webp" alt="Custom shower with illuminated niches"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Sóller</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Stone-Clad Shower with Integrated LED Lighting</h3>
-                  </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2119.webp" alt="Modern integrated and minimalist kitchen"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Fully Integrated Minimalist Kitchen</h3>
-                  </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2129.webp" alt="Outdoor terrace and solarium"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy" style="object-position: 80% center;">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Santanyí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Rustic Terrace with Built-in Kitchen and Solarium</h3>
-                  </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2132.webp" alt="Minimalist guest toilet"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Marratxí</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Guest Toilet with Microcement Finishes</h3>
-                  </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2133.webp" alt="Hallway with indirect lighting"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Modern Hallway with LED Light Lines</h3>
-                  </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2136.webp" alt="Illuminated display niche"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Palma de Mallorca</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Illuminated Built-in Niches for Decoration</h3>
-                  </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div
-                  class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                  <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                    <img src="./assets/img/portfolio/IMG_2138.webp" alt="Helical staircase details and perspective"
-                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy">
-                  </div>
-                  <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                    <span class="location-badge">Calvià</span>
-                    <h3
-                      class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">
-                      Perspective and Finishes of the Helical Staircase</h3>
-                  </div>
-                </div>
-
-              </div><!-- end track -->
-            </div><!-- end inner wrapper -->
-
-            <!-- Prev / Next arrows (positioned relative to outer wrapper, outside the inner clip area) -->
-            <button id="carousel-prev" aria-label="Anterior"
-              class="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_left</span>
-            </button>
-            <button id="carousel-next" aria-label="Siguiente"
-              class="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 flex items-center justify-center rounded-full bg-white/85 dark:bg-black/85 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg text-primary dark:text-white hover:bg-[#795746] hover:text-white hover:border-[#795746] active:scale-95 transition-all duration-300">
-              <span class="material-symbols-outlined text-2xl">chevron_right</span>
-            </button>
-
-          </div><!-- end relative wrapper -->
-
-          <!-- Dot indicators -->
-          <div id="carousel-dots" class="flex justify-center gap-2 mt-8"></div>
-        </div><!-- end desktop wrapper -->
 
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script>
-          (async function () {
-            const track = document.getElementById('carousel-track');
+        <script type="module">
+          import {
+            Renderer,
+            Camera,
+            Transform,
+            Plane,
+            Mesh,
+            Program,
+            Texture,
+          } from "https://cdn.jsdelivr.net/npm/ogl/+esm";
 
-            // Supabase Dynamic Fetch
-            if (window.supabase) {
-              try {
-                const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
-                const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
-                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
-                const { data, error } = await client
-                  .from('ecuaplac_galeria_1')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
+          // Items iniciales con fotos originales de alta resolución y aspecto vertical natural
+          const initialGalleryItems = [
+            {
+              image: "./assets/img/portfolio/IMG_2131.webp",
+              location: "Andratx",
+              title: "Minimalist Bathroom with Freestanding Bathtub",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2135.webp",
+              location: "Calvià",
+              title: "Sculptural Staircase in Polished Plaster",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2134.webp",
+              location: "Sóller",
+              title: "Walk-in Shower with Illuminated Niches",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2119.webp",
+              location: "Palma de Mallorca",
+              title: "Integrated Minimalist Modern Kitchen",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2129.webp",
+              location: "Santanyí",
+              title: "Designer Outdoor Terrace and Solarium",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2132.webp",
+              location: "Marratxí",
+              title: "Minimalist Guest Powder Room",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2133.webp",
+              location: "Palma de Mallorca",
+              title: "Hallway with Architectural Indirect Lighting",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2136.webp",
+              location: "Palma de Mallorca",
+              title: "Backlit Display Niche for Collectibles",
+            },
+            {
+              image: "./assets/img/portfolio/IMG_2138.webp",
+              location: "Calvià",
+              title: "Perspective and Finishes of Helical Staircase",
+            },
+          ];
 
-                if (!error && data && data.length > 0) {
-                  const processedData = data.map(item => {
-                    if (item.image_url) item.image_url = item.image_url.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-                    if (item.title_en === 'Designer Bathroom with Freestanding Bathtub') {
-                      item.title_en = 'Minimalist Bathroom Renovation with Freestanding Bathtub';
-                    }
-                    return item;
-                  });
-                  if (track) {
-                    track.innerHTML = processedData.map(item => `
-              <div class="carousel-card card flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer overflow-hidden flex flex-col p-0">
-                <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                  <img src="${item.image_url}" alt="${item.title_en}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-                </div>
-                <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                  <span class="location-badge">${item.location_en}</span>
-                  <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_en}</h3>
-                </div>
-              </div>
-            `).join('');
-                  }
+          function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+          }
 
-                  // Update Mobile Swiper
-                  const mobileWrapper = document.querySelector('.portfolio-swiper .swiper-wrapper');
-                  if (mobileWrapper) {
-                    mobileWrapper.innerHTML = processedData.map(item => `
-              <div class="swiper-slide group cursor-pointer overflow-hidden flex flex-col p-0 bg-white dark:bg-[#1C1C1E]">
-                <div class="w-full h-[75%] bg-surface-container overflow-hidden relative">
-                  <img src="${item.image_url}" alt="${item.title_en}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-                </div>
-                <div class="h-[25%] flex flex-col items-center justify-center px-4 text-center">
-                  <span class="location-badge">${item.location_en}</span>
-                  <h3 class="font-bold text-[16px] text-[#111] leading-tight transition-colors duration-300 group-hover:text-[#1E4E7C] dark:group-hover:text-[#4A90E2]">${item.title_en}</h3>
-                </div>
-              </div>
-            `).join('');
-                    if (typeof window.initPortfolioSwiper === 'function') {
-                      window.initPortfolioSwiper();
-                    }
-                  }
-                }
+          function lerp(p1, p2, t) {
+            return p1 + (p2 - p1) * t;
+          }
 
-                // Fetch Contact Info
-                const { data: contactData, error: contactError } = await client
-                  .from('ecuaplac_contact')
-                  .select('*')
-                  .eq('active', true)
-                  .order('sort_order', { ascending: true });
-
-                if (!contactError && contactData && contactData.length > 0) {
-                  const listContainer = document.getElementById('contact-info-list');
-                  const addressEl = document.getElementById('contact-address');
-
-                  const addressItem = contactData.find(item => item.key === 'address');
-                  if (addressItem && addressEl) {
-                    addressEl.textContent = addressItem.value_en;
-                  }
-
-                  const listItems = contactData.filter(item => item.key !== 'address');
-                  if (listItems.length > 0 && listContainer) {
-                    listContainer.innerHTML = listItems.map(item => {
-                      const name = item.name_en;
-                      const val = item.value_en;
-                      const isEmail = item.icon === 'mail';
-                      const href = isEmail ? `mailto:${val}` : `tel:${val.replace(/\s+/g, '')}`;
-
-                      const svgIcon = isEmail
-                        ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
-                        : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
-
-                      return `
-                <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
-                      ${svgIcon}
-                    </div>
-                    <span class="font-bold text-primary text-[14px]">${name}</span>
-                  </div>
-                  <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${isEmail ? 'break-all text-[13px]' : ''}">${val}</span>
-                </a>
-              `;
-                    }).join('');
-                  }
-                }
-              } catch (err) {
-                console.warn('Supabase fetch failed, using fallback static content:', err);
+          function autoBind(instance) {
+            const proto = Object.getPrototypeOf(instance);
+            Object.getOwnPropertyNames(proto).forEach((key) => {
+              if (key !== "constructor" && typeof instance[key] === "function") {
+                instance[key] = instance[key].bind(instance);
               }
+            });
+          }
+
+          // Generador de textura 2D nítida con footer oscuro de lujo, badge dorado y título
+          function createCardCaptionTexture(gl, location, title) {
+            const dpr = 2; // Forzar 2x DPR para nitidez perfecta en 3D
+            const w = 500;
+            const h = 160;
+            const canvas = document.createElement("canvas");
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            const ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+            ctx.clearRect(0, 0, w, h);
+
+            // Fondo de tarjeta inferior estilo Luxury Dark Glassmorphic
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, "rgba(18, 16, 15, 0.75)");
+            grad.addColorStop(0.35, "rgba(18, 16, 15, 0.94)");
+            grad.addColorStop(1, "rgba(18, 16, 15, 0.98)");
+
+            // Borde inferior redondeado
+            const radius = 24;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(w, 0);
+            ctx.lineTo(w, h - radius);
+            ctx.arcTo(w, h, w - radius, h, radius);
+            ctx.lineTo(radius, h);
+            ctx.arcTo(0, h, 0, h - radius, radius);
+            ctx.closePath();
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Línea divisoria sutil superior
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(w, 0);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // 1. Badge / Píldora de Ubicación
+            if (location) {
+              const locText = location.toUpperCase();
+              ctx.font = "bold 11px 'Montserrat', sans-serif";
+              const metrics = ctx.measureText(locText);
+              const pillPad = 14;
+              const pillH = 24;
+              const pillW = Math.max(metrics.width + pillPad * 2, 76);
+              const pillX = (w - pillW) / 2;
+              const pillY = 14;
+              const pillR = 12;
+
+              ctx.beginPath();
+              ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+              ctx.fillStyle = "rgba(35, 32, 30, 0.9)";
+              ctx.fill();
+              ctx.lineWidth = 1;
+              ctx.strokeStyle = "rgba(212, 175, 55, 0.4)"; // Dorado suave
+              ctx.stroke();
+
+              ctx.fillStyle = "#E5B869"; // Dorado premium
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText(locText, w / 2, pillY + pillH / 2 + 0.5);
             }
 
-            // Now initialize the infinite loop carousel
-            const originalCards = Array.from(track.querySelectorAll('.carousel-card'));
-            const total = originalCards.length;
-            if (total === 0) return;
+            // 2. Título de la obra en blanco nítido
+            if (title) {
+              ctx.font = "bold 16px 'Montserrat', sans-serif";
+              ctx.fillStyle = "#FFFFFF";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "top";
+              ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+              ctx.shadowBlur = 6;
+              ctx.shadowOffsetY = 2;
 
-            const dotsEl = document.getElementById('carousel-dots');
-            const prevBtn = document.getElementById('carousel-prev');
-            const nextBtn = document.getElementById('carousel-next');
-            const numClones = 3;
-
-            // Clone first 3 cards and append
-            for (let i = 0; i < numClones; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.appendChild(clone);
-            }
-            // Clone last 3 cards and prepend
-            for (let i = total - numClones; i < total; i++) {
-              const clone = originalCards[i].cloneNode(true);
-              clone.classList.add('clone-card');
-              track.insertBefore(clone, track.firstChild);
-            }
-
-            let current = 0;
-            let isTransitioning = false;
-
-            function getCardWidth() {
-              const firstCard = track.querySelector('.carousel-card');
-              if (!firstCard) return 0;
-              const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-              return firstCard.getBoundingClientRect().width + gap;
-            }
-
-            function setPositionWithoutAnimation(position) {
-              track.style.transition = 'none';
-              track.style.transform = `translateX(${-position}px)`;
-              // force repaint
-              track.offsetHeight;
-            }
-
-            function goTo(index, animate = true) {
-              if (isTransitioning && animate) return;
-              if (animate) {
-                isTransitioning = true;
-                track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              } else {
-                track.style.transition = 'none';
+              const maxLineW = w - 40;
+              const words = title.split(" ");
+              let line = "";
+              const lines = [];
+              for (let i = 0; i < words.length; i++) {
+                const test = line + words[i] + " ";
+                if (ctx.measureText(test).width > maxLineW && i > 0) {
+                  lines.push(line.trim());
+                  line = words[i] + " ";
+                } else {
+                  line = test;
+                }
               }
+              lines.push(line.trim());
 
-              const targetPos = (numClones + index) * getCardWidth();
-              track.style.transform = `translateX(${-targetPos}px)`;
-              current = index;
-              updateDots();
-            }
-
-            function updateDots() {
-              dotsEl.querySelectorAll('button').forEach((d, i) => {
-                let dotIndex = current;
-                if (dotIndex >= total) dotIndex = 0;
-                if (dotIndex < 0) dotIndex = total - 1;
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === dotIndex ? 'bg-primary scale-125' : 'bg-primary/25');
+              const startY = location ? 48 : 30;
+              const lineH = 22;
+              lines.slice(0, 2).forEach((l, idx) => {
+                ctx.fillText(l, w / 2, startY + idx * lineH);
               });
             }
 
-            function buildDots() {
-              dotsEl.innerHTML = '';
-              for (let i = 0; i < total; i++) {
-                const d = document.createElement('button');
-                d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-primary scale-125' : 'bg-primary/25');
-                d.setAttribute('aria-label', 'Página ' + (i + 1));
-                d.addEventListener('click', () => {
-                  goTo(i);
-                  resetTimer();
-                });
-                dotsEl.appendChild(d);
-              }
+            const texture = new Texture(gl, { generateMipmaps: false });
+            texture.image = canvas;
+            return { texture, width: w, height: h };
+          }
+
+          class CaptionTitle {
+            constructor({ gl, plane, location, title }) {
+              autoBind(this);
+              this.gl = gl;
+              this.plane = plane;
+              this.location = location;
+              this.title = title;
+              this.createMesh();
             }
 
-            track.addEventListener('transitionend', () => {
-              isTransitioning = false;
-              if (current >= total) {
-                setPositionWithoutAnimation(numClones * getCardWidth());
-                current = 0;
-                updateDots();
-              } else if (current < 0) {
-                setPositionWithoutAnimation((numClones + total - 1) * getCardWidth());
-                current = total - 1;
-                updateDots();
-              }
-            });
+            createMesh() {
+              const { texture } = createCardCaptionTexture(
+                this.gl,
+                this.location,
+                this.title
+              );
+              const geometry = new Plane(this.gl);
+              const program = new Program(this.gl, {
+                vertex: `
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform sampler2D tMap;
+                  varying vec2 vUv;
+                  void main() {
+                    vec4 color = texture2D(tMap, vUv);
+                    if (color.a < 0.05) discard;
+                    gl_FragColor = color;
+                  }
+                `,
+                uniforms: { tMap: { value: texture } },
+                transparent: true,
+                depthTest: false,
+                depthWrite: false,
+              });
 
-            function next() {
-              goTo(current + 1);
+              this.mesh = new Mesh(this.gl, { geometry, program });
+              const capHeightRatio = 0.28;
+              this.mesh.scale.set(1.0, capHeightRatio, 1.0);
+              this.mesh.position.y = -0.5 + capHeightRatio * 0.5;
+              this.mesh.position.z = 0.04;
+              this.mesh.setParent(this.plane);
             }
-            function prev() {
-              goTo(current - 1);
+          }
+
+          class Media {
+            constructor({
+              geometry,
+              gl,
+              image,
+              index,
+              length,
+              renderer,
+              scene,
+              screen,
+              location,
+              title,
+              viewport,
+              bend,
+              borderRadius = 0.05,
+            }) {
+              this.geometry = geometry;
+              this.gl = gl;
+              this.image = image;
+              this.index = index;
+              this.length = length;
+              this.renderer = renderer;
+              this.scene = scene;
+              this.screen = screen;
+              this.location = location;
+              this.title = title;
+              this.viewport = viewport;
+              this.bend = bend;
+              this.borderRadius = borderRadius;
+
+              this.extra = 0;
+              this.widthTotal = 0;
+              this.width = 0;
+              this.x = 0;
+              this.speed = 0;
+              this.isBefore = false;
+              this.isAfter = false;
+
+              this.createShader();
+              this.createMesh();
+              this.createCaption();
+              this.onResize();
             }
 
-            nextBtn.addEventListener('click', () => { next(); resetTimer(); });
-            prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+            createShader() {
+              const texture = new Texture(this.gl, {
+                generateMipmaps: true,
+              });
+              this.program = new Program(this.gl, {
+                depthTest: false,
+                depthWrite: false,
+                vertex: `
+                  precision highp float;
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  uniform float uTime;
+                  uniform float uSpeed;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    vec3 p = position;
+                    // Inercia sutil de curvatura al arrastrar
+                    p.z = (sin(p.x * 3.0 + uTime) * 0.6 + cos(p.y * 2.0 + uTime) * 0.6) * (0.02 + min(abs(uSpeed) * 0.05, 0.08));
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform vec2 uImageSizes;
+                  uniform vec2 uPlaneSizes;
+                  uniform sampler2D tMap;
+                  uniform float uBorderRadius;
+                  varying vec2 vUv;
 
-            // Touch swipe with live dragging
-            let startX = 0;
-            let isDragging = false;
+                  float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                    vec2 d = abs(p) - b;
+                    return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                  }
 
-            track.addEventListener('touchstart', e => {
-              startX = e.touches[0].clientX;
-              isDragging = true;
-              isTransitioning = false; // allow interrupting transition
-              track.style.transition = 'none';
-              clearInterval(timer);
-            }, { passive: true });
+                  void main() {
+                    // Object-cover perfecto sin deformación ni recorte excesivo
+                    vec2 ratio = vec2(
+                      min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
+                      min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+                    );
+                    vec2 uv = vec2(
+                      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                    );
+                    vec4 color = texture2D(tMap, uv);
 
-            track.addEventListener('touchmove', e => {
-              if (!isDragging) return;
-              const currentX = e.touches[0].clientX;
-              const dx = currentX - startX;
-              const basePos = (numClones + current) * getCardWidth();
-              track.style.transform = `translateX(${-basePos + dx}px)`;
-            }, { passive: true });
+                    float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                    float edgeSmooth = 0.003;
+                    float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
 
-            track.addEventListener('touchend', e => {
-              if (!isDragging) return;
-              isDragging = false;
-              const dx = e.changedTouches[0].clientX - startX;
+                    if (alpha < 0.01) discard;
 
-              if (Math.abs(dx) > 50) {
-                if (dx < 0) {
-                  next();
-                } else {
-                  prev();
-                }
+                    // COLOR 100% ORIGINAL (Sin blanco y negro, colores vivos y reales)
+                    gl_FragColor = vec4(color.rgb, color.a * alpha);
+                  }
+                `,
+                uniforms: {
+                  tMap: { value: texture },
+                  uPlaneSizes: { value: [0, 0] },
+                  uImageSizes: { value: [0, 0] },
+                  uSpeed: { value: 0 },
+                  uTime: { value: 100 * Math.random() },
+                  uBorderRadius: { value: this.borderRadius },
+                },
+                transparent: true,
+              });
+
+              const img = new Image();
+              img.crossOrigin = "anonymous";
+              img.src = this.image;
+              img.onload = () => {
+                texture.image = img;
+                this.program.uniforms.uImageSizes.value = [
+                  img.naturalWidth || img.width,
+                  img.naturalHeight || img.height,
+                ];
+              };
+            }
+
+            createMesh() {
+              this.plane = new Mesh(this.gl, {
+                geometry: this.geometry,
+                program: this.program,
+              });
+              this.plane.setParent(this.scene);
+            }
+
+            createCaption() {
+              this.caption = new CaptionTitle({
+                gl: this.gl,
+                plane: this.plane,
+                location: this.location,
+                title: this.title,
+              });
+            }
+
+            update(scroll, direction) {
+              this.plane.position.x = this.x - scroll.current - this.extra;
+
+              const x = this.plane.position.x;
+              const H = this.viewport.width / 2;
+
+              if (this.bend === 0) {
+                this.plane.position.y = 0;
+                this.plane.rotation.z = 0;
+                this.plane.rotation.y = 0;
               } else {
-                goTo(current);
+                const B_abs = Math.abs(this.bend);
+                const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+                const effectiveX = Math.min(Math.abs(x), H);
+                const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
+
+                if (this.bend > 0) {
+                  this.plane.position.y = -arc;
+                  this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
+                } else {
+                  this.plane.position.y = arc;
+                  this.plane.rotation.z = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
+                  this.plane.rotation.y = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
+                }
               }
-              resetTimer();
-            }, { passive: true });
 
-            // Auto-advance
-            let timer;
-            function startTimer() { timer = setInterval(next, 4000); }
-            function resetTimer() { clearInterval(timer); startTimer(); }
+              this.speed = scroll.current - scroll.last;
+              this.program.uniforms.uTime.value += 0.02;
+              this.program.uniforms.uSpeed.value = this.speed;
 
-            // Pause on hover
-            const wrapper = document.getElementById('portfolio-carousel');
-            wrapper.addEventListener('mouseenter', () => clearInterval(timer));
-            wrapper.addEventListener('mouseleave', startTimer);
+              const planeOffset = this.plane.scale.x / 2;
+              const viewportOffset = this.viewport.width / 2;
+              this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
+              this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
 
-            // Recalculate on resize
-            window.addEventListener('resize', () => {
-              setPositionWithoutAnimation((numClones + current) * getCardWidth());
-            });
+              if (direction === "right" && this.isBefore) {
+                this.extra -= this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+              if (direction === "left" && this.isAfter) {
+                this.extra += this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+            }
 
-            // Initial position setup
-            setTimeout(() => {
-              setPositionWithoutAnimation(numClones * getCardWidth());
-              buildDots();
-              startTimer();
-            }, 50);
-          })();
+            onResize({ screen, viewport } = {}) {
+              if (screen) this.screen = screen;
+              if (viewport) this.viewport = viewport;
+
+              const isMobile = this.screen.width < 768;
+              const cardScale = isMobile ? 0.60 : 0.55;
+
+              this.plane.scale.y = this.viewport.height * cardScale;
+              this.plane.scale.x = this.plane.scale.y * 0.74; // Relación vertical proporcional perfecta
+
+              this.program.uniforms.uPlaneSizes.value = [
+                this.plane.scale.x,
+                this.plane.scale.y,
+              ];
+              this.padding = isMobile ? 1.0 : 1.6;
+              this.width = this.plane.scale.x + this.padding;
+              this.widthTotal = this.width * this.length;
+              this.x = this.width * this.index;
+            }
+          }
+
+          class CircularGalleryApp {
+            constructor(container, options = {}) {
+              this.container = container;
+              this.items = options.items || initialGalleryItems;
+              this.scrollSpeed = options.scrollSpeed || 1.0;
+              this.scroll = { ease: options.scrollEase || 0.020, current: 0, target: 0, last: 0 };
+              this.borderRadius = options.borderRadius || 0.05;
+
+              this.isDown = false;
+              this.start = 0;
+              this.startY = 0;
+              this.onCheckDebounce = debounce(this.onCheck.bind(this), 180);
+
+              autoBind(this);
+
+              this.createRenderer();
+              this.createCamera();
+              this.createScene();
+              this.onResize();
+              this.createGeometry();
+              this.createMedias();
+              this.update();
+              this.addEventListeners();
+            }
+
+            createRenderer() {
+              this.renderer = new Renderer({
+                alpha: true,
+                antialias: true,
+                dpr: Math.min(window.devicePixelRatio || 1, 2),
+              });
+              this.gl = this.renderer.gl;
+              this.gl.clearColor(0, 0, 0, 0);
+              this.container.appendChild(this.gl.canvas);
+            }
+
+            createCamera() {
+              this.camera = new Camera(this.gl);
+              this.camera.fov = 45;
+              this.camera.position.z = 20;
+            }
+
+            createScene() {
+              this.scene = new Transform();
+              this.scene.position.y = 0.35;
+            }
+
+            createGeometry() {
+              this.planeGeometry = new Plane(this.gl, {
+                heightSegments: 40,
+                widthSegments: 70,
+              });
+            }
+
+            createMedias() {
+              // Duplicar items para loop infinito fluido
+              this.mediasImages = [...this.items, ...this.items];
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+              this.scene.position.y = isMobile ? 0.45 : 0.35;
+
+              this.medias = this.mediasImages.map((data, index) => {
+                return new Media({
+                  geometry: this.planeGeometry,
+                  gl: this.gl,
+                  image: data.image,
+                  index,
+                  length: this.mediasImages.length,
+                  renderer: this.renderer,
+                  scene: this.scene,
+                  screen: this.screen,
+                  location: data.location,
+                  title: data.title,
+                  viewport: this.viewport,
+                  bend,
+                  borderRadius: this.borderRadius,
+                });
+              });
+            }
+
+            onTouchDown(e) {
+              this.isDown = true;
+              this.scroll.position = this.scroll.current;
+              this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
+              this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
+              this.startTime = Date.now();
+              this.hasMoved = false;
+            }
+
+            onTouchMove(e) {
+              if (!this.isDown) return;
+              const x = "touches" in e ? e.touches[0].clientX : e.clientX;
+              const y = "touches" in e ? e.touches[0].clientY : e.clientY;
+              const dx = this.start - x;
+              const dy = this.startY - y;
+
+              if (Math.abs(dx) > 6) {
+                this.hasMoved = true;
+              }
+
+              if (Math.abs(dx) > Math.abs(dy) && e.cancelable) {
+                e.preventDefault();
+              }
+
+              const distance = dx * (this.scrollSpeed * 0.018);
+              this.scroll.target = this.scroll.position + distance;
+            }
+
+            onTouchUp(e) {
+              if (!this.isDown) return;
+              this.isDown = false;
+
+              const endX =
+                e && e.changedTouches && e.changedTouches.length > 0
+                  ? e.changedTouches[0].clientX
+                  : e && typeof e.clientX === "number"
+                  ? e.clientX
+                  : this.start;
+
+              const dx = this.start - endX;
+              const elapsed = Math.max(1, Date.now() - (this.startTime || Date.now()));
+              const velocity = dx / elapsed;
+
+              // 1. Tocar con el táctil para adelantar o volver hacia atrás (Tap)
+              if (!this.hasMoved || Math.abs(dx) < 12) {
+                const rect = this.container.getBoundingClientRect();
+                const tapX = endX - rect.left;
+                const ratioX = tapX / Math.max(rect.width, 1);
+
+                if (ratioX > 0.58) {
+                  this.next();
+                  return;
+                } else if (ratioX < 0.42) {
+                  this.prev();
+                  return;
+                }
+              }
+
+              // 2. Gesto de deslizamiento rápido táctil (Swipe / Flick)
+              if (Math.abs(dx) > 30 || Math.abs(velocity) > 0.20) {
+                if (dx > 0) {
+                  this.next();
+                } else {
+                  this.prev();
+                }
+                return;
+              }
+
+              // 3. Ajuste al soltar arrastre manual
+              this.onCheck();
+            }
+
+            onWheel(e) {
+              const delta =
+                e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)
+                  ? e.deltaX
+                  : e.deltaY || (e.wheelDelta ? -e.wheelDelta : 0);
+              this.scroll.target += Math.sign(delta) * (this.scrollSpeed * 0.30);
+              this.onCheckDebounce();
+            }
+
+            onCheck() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const itemIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = itemIndex * width;
+            }
+
+            next() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex + 1) * width;
+            }
+
+            prev() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const currentIndex = Math.round(this.scroll.target / width);
+              this.scroll.target = (currentIndex - 1) * width;
+            }
+
+            onResize() {
+              const rect = this.container.getBoundingClientRect();
+              this.screen = {
+                width: rect.width || window.innerWidth,
+                height: rect.height || 600,
+              };
+              this.renderer.setSize(this.screen.width, this.screen.height);
+              this.camera.perspective({
+                aspect: this.screen.width / this.screen.height,
+              });
+              const fov = (this.camera.fov * Math.PI) / 180;
+              const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+              const width = height * this.camera.aspect;
+              this.viewport = { width, height };
+
+              const isMobile = window.innerWidth < 768;
+              const bend = isMobile ? 1.5 : 2.5;
+              this.scene.position.y = isMobile ? 0.45 : 0.35;
+
+              if (this.medias) {
+                this.medias.forEach((media) => {
+                  media.bend = bend;
+                  media.onResize({ screen: this.screen, viewport: this.viewport });
+                });
+              }
+            }
+
+            update() {
+              this.scroll.current = lerp(
+                this.scroll.current,
+                this.scroll.target,
+                this.scroll.ease
+              );
+              const direction =
+                this.scroll.current > this.scroll.last ? "right" : "left";
+              if (this.medias) {
+                this.medias.forEach((media) =>
+                  media.update(this.scroll, direction)
+                );
+              }
+              this.renderer.render({ scene: this.scene, camera: this.camera });
+              this.scroll.last = this.scroll.current;
+              this.raf = window.requestAnimationFrame(this.update);
+            }
+
+            addEventListeners() {
+              window.addEventListener("resize", this.onResize);
+              this.container.addEventListener("wheel", this.onWheel, { passive: true });
+              this.container.addEventListener("mousedown", this.onTouchDown);
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("mouseup", this.onTouchUp);
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
+            }
+
+            destroy() {
+              window.cancelAnimationFrame(this.raf);
+              window.removeEventListener("resize", this.onResize);
+              this.container.removeEventListener("wheel", this.onWheel);
+              this.container.removeEventListener("mousedown", this.onTouchDown);
+              window.removeEventListener("mousemove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
+              this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("touchend", this.onTouchUp);
+
+              if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
+                this.gl.canvas.parentNode.removeChild(this.gl.canvas);
+              }
+            }
+          }
+
+          // Inicializar y conectar con Supabase
+          document.addEventListener("DOMContentLoaded", async () => {
+            const container = document.getElementById("circular-gallery-canvas");
+            if (!container) return;
+
+            let currentItems = initialGalleryItems;
+            let galleryApp = null;
+
+            try {
+              galleryApp = new CircularGalleryApp(container, {
+                items: currentItems,
+                scrollEase: 0.020, // Deslizamiento cinemático más pausado, fluido y prémium
+                scrollSpeed: 1.0,
+                borderRadius: 0.05,
+              });
+
+              // Controles de navegación
+              const btnPrev = document.getElementById("cg-btn-prev");
+              const btnNext = document.getElementById("cg-btn-next");
+              if (btnPrev) btnPrev.addEventListener("click", () => galleryApp.prev());
+              if (btnNext) btnNext.addEventListener("click", () => galleryApp.next());
+            } catch (err) {
+              console.warn("Error al inicializar CircularGallery WebGL:", err);
+            }
+
+            // Integración Supabase para Galería y Contacto
+            if (window.supabase) {
+              try {
+                const supabaseUrl = "https://wkfddccsantywcrsxpox.supabase.co";
+                const supabaseKey = "sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI";
+                const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+                // 1. Cargar Proyectos dinámicos si existen en Supabase
+                const { data: galleryData, error: galleryError } = await client
+                  .from("ecuaplac_galeria_1")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!galleryError && galleryData && galleryData.length > 0) {
+                  const dbItems = galleryData.map((item) => ({
+                    image: item.image_url ? item.image_url.replace(/\.(jpg|jpeg|png)$/i, ".webp") : "",
+                    location: item.location_en || item.location_es || "Mallorca",
+                    title: item.title_en || item.title_es || "Renovation Project",
+                  }));
+
+                  if (galleryApp) {
+                    galleryApp.destroy();
+                    galleryApp = new CircularGalleryApp(container, {
+                      items: dbItems,
+                      scrollEase: 0.020,
+                      scrollSpeed: 1.0,
+                      borderRadius: 0.05,
+                    });
+                    const btnPrev = document.getElementById("cg-btn-prev");
+                    const btnNext = document.getElementById("cg-btn-next");
+                    if (btnPrev) btnPrev.onclick = () => galleryApp.prev();
+                    if (btnNext) btnNext.onclick = () => galleryApp.next();
+                  }
+                }
+
+                // 2. Mantener carga de información de Contacto para el footer
+                const { data: contactData, error: contactError } = await client
+                  .from("ecuaplac_contact")
+                  .select("*")
+                  .eq("active", true)
+                  .order("sort_order", { ascending: true });
+
+                if (!contactError && contactData && contactData.length > 0) {
+                  const listContainer = document.getElementById("contact-info-list");
+                  const addressEl = document.getElementById("contact-address");
+                  const addressItem = contactData.find((item) => item.key === "address");
+                  if (addressItem && addressEl) {
+                    addressEl.textContent = addressItem.value_en || addressItem.value_es;
+                  }
+                  const listItems = contactData.filter((item) => item.key !== "address");
+                  if (listItems.length > 0 && listContainer) {
+                    listContainer.innerHTML = listItems
+                      .map((item) => {
+                        const name = item.name_en || item.name_es;
+                        const val = item.value_en || item.value_es;
+                        const isEmail = item.icon === "mail";
+                        const href = isEmail
+                          ? `mailto:${val}`
+                          : `tel:${val.replace(/\s+/g, "")}`;
+                        const svgIcon = isEmail
+                          ? `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+                          : `<svg class="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>`;
+                        return `
+                        <a href="${href}" class="flex items-center justify-between p-4 hover:bg-gray-50/50 group transition-all duration-300">
+                          <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#F4EFE6] transition-colors duration-300">
+                              ${svgIcon}
+                            </div>
+                            <span class="font-bold text-primary text-[14px]">${name}</span>
+                          </div>
+                          <span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors duration-200 ${
+                            isEmail ? "break-all text-[13px]" : ""
+                          }">${val}</span>
+                        </a>
+                      `;
+                      })
+                      .join("");
+                  }
+                }
+              } catch (err) {
+                console.warn("Supabase fetch failed, using fallback content:", err);
+              }
+            }
+          });
         </script>
 
       </div>
@@ -2107,8 +2360,9 @@
       <div class="ecuador-divider"></div>
       <div class="py-24 bg-surface-container-lowest">
         <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-          <div class="mb-16 border-b border-primary pb-4 scroll-reveal">
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Real Transformations</h2>
+          <div class="mb-14 border-b border-primary/20 pb-4 scroll-reveal">
+            <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Before &amp; After</span>
+            <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[48px] font-semibold text-primary leading-tight tracking-[-0.02em]">Real Transformations</h2>
           </div>
           <!-- Interactive Slider (Reveal1 21st.dev luxury style - Limestone) -->
           <div class="transform-card-wrapper group">
@@ -2128,7 +2382,7 @@
 
                 <!-- After Image (Base Layer - Full) -->
                 <img src="./assets/img/portfolio/despues3.webp"
-                  alt="Vestidor terminado e iluminado con LEDs con acabados premium" loading="lazy"
+                  alt="Finished dressing room illuminated with LEDs and premium finishes" loading="lazy"
                   class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
 
                 <!-- Label After -->
@@ -2214,14 +2468,13 @@
       <div
         class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
         <div class="max-w-xl">
-          <span class="font-label-caps text-label-caps uppercase tracking-widest text-mortar-grey mb-3 block">Our
-            Experience</span>
-          <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
+          <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Our Experience</span>
+          <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
             Specialists in High-Quality Renovations and Finishes
           </h2>
         </div>
         <div class="max-w-xl">
-          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
             Over 10 years participating in renovation and space conditioning projects. We work on every detail with
             professionalism, experience, and a real commitment to the quality of the finishes.
           </p>
@@ -2359,10 +2612,10 @@
           <!-- Contact Info (Left) -->
           <div class="md:col-span-4 flex flex-col justify-start scroll-reveal">
             <span
-              class="font-label-caps text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-2 block">SHALL
+              class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">SHALL
               WE TALK ABOUT YOUR SPACE?</span>
             <h2
-              class="font-headline-xl text-[3rem] md:text-[4rem] text-primary leading-none mb-12 font-light tracking-tight">
+              class="font-headline text-[2.75rem] md:text-[3.75rem] font-semibold text-primary leading-none mb-10 tracking-[-0.03em]">
               Contact.
             </h2>
 
@@ -2377,7 +2630,7 @@
                 <span
                   class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-4 font-bold">CUSTOMER
                   SERVICE</span>
-                <a href="https://wa.me/34678159878?text=Hola%2C%20equipo%20de%20Ecuaplac.%20Estoy%20interesado%2Fa%20en%20un%20proyecto%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+                <a href="https://wa.me/34678159878?text=Hello%20Ecuaplac%20team%2C%20I%20am%20interested%20in%20a%20project%20and%20would%20like%20to%20receive%20more%20information."
                   target="_blank" rel="noopener noreferrer"
                   class="inline-flex items-center justify-center w-full md:w-max bg-[#25D366] text-monolith-white px-8 py-3.5 text-sm rounded-full font-bold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-1 hover:shadow-lg active:scale-95 group">
                   <svg class="w-5 h-5 mr-3 fill-current transition-transform duration-300 group-hover:scale-110"
@@ -2539,14 +2792,13 @@
         <div
           class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
           <div class="max-w-xl">
-            <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#795746] mb-3 block">Doubt
-              Resolution</span>
-            <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary leading-tight font-bold">
+            <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Questions &amp; Answers</span>
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
               Frequently Asked Questions
             </h2>
           </div>
           <div class="max-w-xl">
-            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
               Do you have any doubts? Here we answer some of the most common questions from our clients.
             </p>
           </div>
@@ -2698,7 +2950,7 @@
             If you need more information or want to speak directly about your project, contact us on WhatsApp. We will
             reply as soon as possible.
           </p>
-          <a href="https://wa.me/34678159878?text=Hola%2C%20equipo%20de%20Ecuaplac.%20Tengo%20algunas%20dudas%20sobre%20un%20proyecto%20de%20reforma%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+          <a href="https://wa.me/34678159878?text=Hello%20Ecuaplac%20team%2C%20I%20have%20some%20questions%20about%20a%20renovation%20project%20and%20would%20like%20to%20receive%20more%20information."
             target="_blank" rel="noopener noreferrer"
             class="inline-flex items-center justify-center bg-[#25D366] text-monolith-white px-8 py-3.5 text-sm rounded-full font-bold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-1 hover:shadow-lg active:scale-95 group">
             <svg class="w-5 h-5 mr-3 fill-current transition-transform duration-300 group-hover:scale-110"
@@ -2754,7 +3006,7 @@
                 class="w-full h-full object-contain scale-110" loading="lazy">
             </div>
           </a>
-          <p class="text-[15px] text-[#E5E7EB] leading-relaxed max-w-sm text-balance">
+          <p class="font-editorial italic text-base sm:text-lg text-[#E5E7EB] leading-relaxed max-w-sm text-balance">
             When J &amp; G start a project, we do it with a simple rule:<br>treat your house in Mallorca as if it were
             our own.<br>It is not just about following the plan, but ensuring the final result<br>is something you are
             proud of, and we are too.
@@ -2832,12 +3084,11 @@
       </button>
 
       <div class="mb-8">
-        <span class="font-label-caps text-label-caps uppercase tracking-widest text-[#888888] block mb-2">Free
-          Quote</span>
-        <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-white leading-tight">
+        <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#D49B0B] font-bold block mb-2">Free Quote</span>
+        <h2 class="font-headline text-[32px] sm:text-[40px] md:text-[48px] font-semibold text-white leading-tight tracking-[-0.02em]">
           Request Quote.
         </h2>
-        <p class="font-body-md text-body-md text-[#C5C5C5] mt-2">
+        <p class="font-body text-sm md:text-base text-[#C5C5C5] mt-2">
           Provide us with some preliminary details of your project and our technical team will carry out an initial
           feasibility study.
         </p>
@@ -2957,7 +3208,7 @@
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col gap-8 font-headline-xl text-3xl uppercase tracking-wider text-center mt-12">
+    <ul class="flex flex-col gap-8 font-headline text-2xl font-semibold uppercase tracking-wider text-center mt-12">
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#hero-scroll-container"
           onclick="toggleMobileMenu()">HOME</a></li>
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#reformas"
@@ -2985,13 +3236,13 @@
   <!-- Minimalist Vertical Scroll Pagination Indicator -->
   <div id="vertical-pagination"
     class="fixed right-5 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-6 transition-all duration-300 dark-bg">
-    <button class="pagination-dot group active" data-slide="0" aria-label="Imagen 1">
+    <button class="pagination-dot group active" data-slide="0" aria-label="Slide 1">
       <span class="pagination-tooltip">Home</span>
     </button>
-    <button class="pagination-dot group" data-slide="1" aria-label="Imagen 2">
+    <button class="pagination-dot group" data-slide="1" aria-label="Slide 2">
       <span class="pagination-tooltip">Kitchen</span>
     </button>
-    <button class="pagination-dot group" data-slide="2" aria-label="Imagen 3">
+    <button class="pagination-dot group" data-slide="2" aria-label="Slide 3">
       <span class="pagination-tooltip">Result</span>
     </button>
   </div>
@@ -3068,7 +3319,7 @@
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerText;
         submitBtn.disabled = true;
-        submitBtn.innerText = 'Enviando...';
+        submitBtn.innerText = 'Sending...';
 
         setTimeout(() => {
           // Show success state
@@ -3481,7 +3732,7 @@
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerText = 'ENVIANDO...';
+        submitBtn.innerText = 'SENDING...';
       }
 
       const formData = new FormData(form);

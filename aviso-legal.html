@@ -34,7 +34,10 @@
 <meta property="og:url" content="https://ecuaplac.com/aviso-legal.html">
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+<!-- Brand Montserrat preserved for official text logo -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
 <style>
   nav {
     transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -47,16 +50,16 @@
     opacity: 1; border: none;
   }
   .legal-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 18px; font-weight: 600;
+    letter-spacing: -0.01em; text-transform: none;
     color: #141414; margin-bottom: 12px; margin-top: 40px;
     padding-bottom: 8px;
     border-bottom: 1px solid #e2e2e2;
   }
   .legal-section h2:first-of-type { margin-top: 0; }
-  .legal-section p { color: #4c4546; line-height: 1.8; margin-bottom: 12px; font-size: 15px; }
-  .legal-section ul { list-style: disc; padding-left: 20px; color: #4c4546; line-height: 1.8; font-size: 15px; margin-bottom: 12px; }
+  .legal-section p { font-family: 'Satoshi', sans-serif; color: #4c4546; line-height: 1.8; margin-bottom: 12px; font-size: 15px; }
+  .legal-section ul { font-family: 'Satoshi', sans-serif; list-style: disc; padding-left: 20px; color: #4c4546; line-height: 1.8; font-size: 15px; margin-bottom: 12px; }
   .legal-section li { margin-bottom: 4px; }
   .legal-section a { color: #795746; text-decoration: underline; }
 </style>
@@ -65,8 +68,13 @@
     theme: { extend: {
       colors: { "primary": "#141414", "secondary": "#795746", "monolith-white": "#FFFFFF", "on-surface-variant": "#4c4546", "mortar-grey": "#666666", "surface-container-lowest": "#FFFFFF", "background": "#F5F6F7", "outline-variant": "#cfc4c5" },
       spacing: { "margin-mobile": "20px", "margin-desktop": "64px", "max-width": "1440px" },
-      fontFamily: { "body-md": ["Open Sans"], "label-caps": ["Montserrat"] },
-      fontSize: { "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.15em", "fontWeight": "600" }] }
+      fontFamily: {
+        "headline": ["'Clash Display'", "sans-serif"],
+        "body": ["'Satoshi'", "sans-serif"],
+        "body-md": ["'Satoshi'", "sans-serif"],
+        "label-caps": ["'Satoshi'", "sans-serif"]
+      },
+      fontSize: { "label-caps": ["11px", { "lineHeight": "1.0", "letterSpacing": "0.2em", "fontWeight": "700" }] }
     }}
   }
 </script>
@@ -180,14 +188,14 @@
 <main class="py-16 px-[20px] md:px-[64px] max-w-[860px] mx-auto">
 
   <!-- Page Header -->
-  <div class="border-b border-[#141414] pb-6 mb-12">
-    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#666] block mb-2">Información Legal</span>
-    <h1 class="font-['Montserrat'] text-[36px] md:text-[52px] font-light leading-tight text-[#141414] tracking-tight">Aviso Legal</h1>
-    <p class="text-[#666] mt-3 text-sm">Última actualización: mayo de 2026</p>
+  <div class="border-b border-[#141414]/20 pb-6 mb-12">
+    <span class="font-body text-[11px] font-bold uppercase tracking-[0.25em] text-[#8C6D53] block mb-2">Información Legal</span>
+    <h1 class="font-headline text-[36px] md:text-[52px] font-semibold leading-tight text-[#141414] tracking-[-0.025em]">Aviso Legal</h1>
+    <p class="font-body text-[#666] mt-3 text-sm">Última actualización: mayo de 2026</p>
   </div>
 
   <!-- Legal Content -->
-  <div class="legal-section font-['Open_Sans']">
+  <div class="legal-section font-body">
 
     <h2>1. Datos del Titular</h2>
     <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se facilitan los siguientes datos identificativos:</p>

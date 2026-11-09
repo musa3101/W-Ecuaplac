@@ -47,7 +47,10 @@
 <meta name="twitter:image" content="https://ecuaplac.com/assets/img/logos/favicon-512x512.png">
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Montserrat:wght@300;400;600;700;800;900&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
+<!-- Brand Montserrat preserved for official text logo -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
         .material-symbols-outlined {
@@ -205,26 +208,68 @@
                     "margin-desktop": "64px"
             },
             "fontFamily": {
-                    "caption": ["Open Sans"],
-                    "headline-lg-mobile": ["Cormorant Garamond", "serif"],
-                    "body-lg": ["Open Sans"],
-                    "body-md": ["Open Sans"],
-                    "headline-lg": ["Cormorant Garamond", "serif"],
-                    "headline-xl": ["Cormorant Garamond", "serif"],
-                    "label-caps": ["Montserrat", "sans-serif"]
+                    "headline": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "body": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "editorial": [
+                            "'Boska'",
+                            "serif"
+                    ],
+                    "caption": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "headline-lg-mobile": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "body-lg": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "body-md": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ],
+                    "headline-lg": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "headline-xl": [
+                            "'Clash Display'",
+                            "sans-serif"
+                    ],
+                    "label-caps": [
+                            "'Satoshi'",
+                            "sans-serif"
+                    ]
             },
             "fontSize": {
-                    "headline-lg-mobile": [
-                            "24px",
+                    "caption": [
+                            "13px",
                             {
-                                    "lineHeight": "1.2",
+                                    "lineHeight": "1.4",
                                     "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "1.15",
+                                    "letterSpacing": "-0.015em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "body-lg": [
                             "18px",
                             {
                                     "lineHeight": "1.6",
+                                    "letterSpacing": "0.005em",
                                     "fontWeight": "400"
                             }
                     ],
@@ -232,31 +277,32 @@
                             "16px",
                             {
                                     "lineHeight": "1.6",
+                                    "letterSpacing": "0.005em",
                                     "fontWeight": "400"
                             }
                     ],
                     "headline-lg": [
-                            "32px",
+                            "34px",
                             {
-                                    "lineHeight": "1.2",
-                                    "letterSpacing": "-0.01em",
-                                    "fontWeight": "400"
+                                    "lineHeight": "1.15",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "headline-xl": [
-                            "48px",
+                            "52px",
                             {
-                                    "lineHeight": "1.1",
-                                    "letterSpacing": "-0.02em",
-                                    "fontWeight": "300"
+                                    "lineHeight": "1.08",
+                                    "letterSpacing": "-0.025em",
+                                    "fontWeight": "600"
                             }
                     ],
                     "label-caps": [
-                            "12px",
+                            "11px",
                             {
                                     "lineHeight": "1.0",
-                                    "letterSpacing": "0.15em",
-                                    "fontWeight": "600"
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "700"
                             }
                     ]
             }
@@ -488,10 +534,10 @@
 <main class="py-16">
   <!-- Page Header -->
   <section class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop mb-16">
-    <div class="border-b border-primary pb-6">
-      <span class="font-label-caps text-label-caps uppercase text-mortar-grey tracking-widest block mb-2">Galería Completa</span>
-      <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary">Antes y Después</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant mt-4 max-w-2xl">
+    <div class="border-b border-primary/20 pb-6">
+      <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Galería Completa</span>
+      <h1 class="font-headline text-[32px] sm:text-[40px] md:text-[54px] font-semibold text-primary leading-tight tracking-[-0.025em]">Antes y Después</h1>
+      <p class="font-body text-base md:text-lg text-on-surface-variant mt-4 max-w-2xl leading-relaxed">
         Explora la transformación integral de nuestros proyectos. Desde el estado original hasta soluciones arquitectónicas terminadas con acabados premium.
       </p>
     </div>
@@ -505,10 +551,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto I</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Reforma Integral de Baño</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto I</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Reforma Integral de Baño</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Sustitución completa de revestimientos por gres porcelánico beige texturizado, plato de ducha a ras de suelo, grifería empotrada negra mate y mueble de roble natural con espejo retroiluminado.
           </p>
         </div>
@@ -552,10 +598,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto II</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Lavabo Flotante a Medida</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto II</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Lavabo Flotante a Medida</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Diseño e instalación de encimera volada de piedra tecnológica en tonos neutros, con lavabo cerámico sobre encimera en color negro mate, grifería mural empotrada e instalaciones totalmente ocultas.
           </p>
         </div>
@@ -599,10 +645,10 @@
       <div class="border-b border-outline-variant pb-24 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto III</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Vestidor de Pladur y Roble</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto III</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Vestidor de Pladur y Roble</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Construcción a medida de vestidor y estanterías integradas en pladur con acabados en blanco satinado, cajoneras suspendidas en madera de roble natural y cestas metálicas deslizantes, realzado por iluminación LED cálida indirecta.
           </p>
         </div>
@@ -646,10 +692,10 @@
       <div class="pb-16 relative">
         <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
           <div>
-            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">Proyecto IV</span>
-            <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">Escalera y Distribuidor de Roble</h2>
+            <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Proyecto IV</span>
+            <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Escalera y Distribuidor de Roble</h2>
           </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+          <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Instalación de peldaños y revestimiento de escalera en madera de roble natural, enmarcado por paredes lisas blancas con puertas empotradas sin marco y luminarias lineales LED de cortesía en los laterales.
           </p>
         </div>
@@ -705,9 +751,9 @@
     
     <!-- Section Header -->
     <div class="text-center mb-12 pt-8">
-      <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-3 font-bold">Galería</span>
-      <h2 class="font-headline-xl text-[28px] md:text-[40px] leading-tight font-bold text-primary">Más Proyectos Realizados</h2>
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mt-4">Una selección de trabajos recientes: cerramientos, techos decorativos, baños de diseño y mucho más.</p>
+      <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Galería</span>
+      <h2 class="font-headline text-[28px] sm:text-[36px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Más Proyectos Realizados</h2>
+      <p class="font-body text-base text-on-surface-variant max-w-2xl mx-auto mt-3 leading-relaxed">Una selección de trabajos recientes: cerramientos, techos decorativos, baños de diseño y mucho más.</p>
     </div>
 
     <!-- 21st.dev Infinite Auto-Slider (Full Responsive Mobile-First & Calibrated Smooth Pace) -->
@@ -1001,8 +1047,8 @@
     
     <!-- Modal Content -->
     <div id="modalFormContent">
-      <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2">Solicitud de Presupuesto</span>
-      <h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-white mb-8 leading-tight">Cuéntanos tu proyecto.</h2>
+      <span class="font-body text-[11px] md:text-xs text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Solicitud de Presupuesto</span>
+      <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[46px] font-semibold text-white mb-6 leading-tight tracking-[-0.02em]">Cuéntanos tu proyecto.</h2>
       
       <form onsubmit="submitPresupuesto(event)" class="space-y-8 font-body-md text-body-md text-[#C5C5C5]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1080,7 +1126,7 @@
     <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
       <span class="material-symbols-outlined text-3xl">close</span>
     </button>
-    <div class="mt-12 flex flex-col gap-6 font-headline-xl text-2xl uppercase tracking-wider">
+    <div class="mt-12 flex flex-col gap-6 font-headline text-2xl font-semibold uppercase tracking-wider">
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html">INICIO</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#reformas">REFORMAS</a>
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html#servicios">SERVICIOS</a>
@@ -1351,10 +1397,10 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="border-b border-outline-variant pb-24 relative">
                 <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
                   <div>
-                    <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
-                    <h2 class="font-headline-xl text-[32px] md:text-[48px] leading-tight font-bold text-primary">${item.title_es}</h2>
+                    <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
+                    <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
                   </div>
-                  <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-secondary pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8">
+                  <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
                     ${item.description_es || ''}
                   </p>
                 </div>
