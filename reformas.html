@@ -727,9 +727,6 @@
     </div>
   </section>
 
-    </div>
-  </section>
-
   <!-- Gallery Toggle Button -->
   <div class="flex justify-center mt-24 mb-16">
     <button id="gallery-toggle-btn" onclick="toggleGallery()" class="group inline-flex items-center justify-center gap-3 font-bold uppercase tracking-widest text-[12px] text-monolith-white bg-primary border border-transparent rounded-full px-10 py-3.5 hover:bg-secondary hover:-translate-y-0.5 hover:shadow-lg active:scale-95 transition-all duration-300 cursor-pointer">
@@ -1529,46 +1526,49 @@ document.addEventListener('DOMContentLoaded', function() {
           });
           container.innerHTML = processedData.map((item, index) => {
             const indexRoman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][index] || (index + 1);
+            const aspectClass = index === 0 
+              ? 'aspect-[16/10] sm:aspect-[4/3] md:aspect-[2/3]' 
+              : 'aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3]';
             return `
-              <div class="border-b border-outline-variant pb-24 relative">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+              <div class="border-b border-outline-variant pb-14 md:pb-24 relative">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
                   <div>
                     <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">${item.category_es || ('Proyecto ' + indexRoman)}</span>
-                    <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
+                    <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_es}</h2>
                   </div>
-                  <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-4 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
+                  <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
                     ${item.description_es || ''}
                   </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-stretch">
                   <!-- Antes -->
-                  <div class="relative group p-4 md:p-6 bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-                    <div class="absolute -top-5 left-6 bg-zinc-800 text-white px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
+                  <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+                    <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-zinc-800 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-md flex items-center gap-2 border border-zinc-700 z-10">
                       <span class="w-2 h-2 rounded-full bg-[#EF3D3D] animate-pulse"></span>
                       ${item.caption_before_es || 'Estado Inicial'}
                     </div>
-                    <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0">
+                    <div class="w-full ${aspectClass} overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0">
                       <img loading="lazy" alt="${item.title_es} antes" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${item.image_before}">
                     </div>
-                    <div class="mt-6 flex-grow flex items-start">
-                      <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-4 leading-relaxed">
+                    <div class="mt-3 md:mt-6 flex-grow flex items-start">
+                      <p class="text-on-surface-variant font-body-md text-sm md:text-base border-l-2 border-[#EF3D3D] pl-3.5 md:pl-4 leading-relaxed">
                         ${item.description_before_es || ''}
                       </p>
                     </div>
                   </div>
                   
                   <!-- Después -->
-                  <div class="relative group p-4 md:p-6 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 mt-6 md:mt-0 flex flex-col">
-                    <div class="absolute -top-5 left-6 bg-black text-[#F1A214] px-4 py-2 rounded-full font-label-caps text-[10px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
-                      <span class="material-symbols-outlined text-[16px]">verified</span>
+                  <div class="relative group p-4 md:p-6 bg-white border border-black rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 mt-5 md:mt-0 flex flex-col">
+                    <div class="absolute -top-3.5 left-5 md:-top-5 md:left-6 bg-black text-[#F1A214] px-3 py-1 md:px-4 md:py-2 rounded-full font-label-caps text-[9.5px] md:text-[11px] tracking-[0.2em] uppercase shadow-xl flex items-center gap-2 border border-[#F1A214]/30 z-10">
+                      <span class="material-symbols-outlined text-[15px] md:text-[16px]">verified</span>
                       ${item.caption_after_es || 'Resultado Final'}
                     </div>
-                    <div class="w-full aspect-[2/3] overflow-hidden rounded-xl mt-2 relative flex-shrink-0 border border-outline-variant/20">
+                    <div class="w-full ${aspectClass} overflow-hidden rounded-xl mt-1.5 md:mt-2 relative flex-shrink-0 border border-outline-variant/20">
                       <img loading="lazy" alt="${item.title_es} después" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${item.image_after}">
                     </div>
-                    <div class="mt-6 flex-grow flex items-start">
-                      <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-4 leading-relaxed font-medium">
+                    <div class="mt-3 md:mt-6 flex-grow flex items-start">
+                      <p class="text-on-surface font-body-md text-sm md:text-base border-l-2 border-[#F1A214] pl-3.5 md:pl-4 leading-relaxed font-medium">
                         ${item.description_after_es || ''}
                       </p>
                     </div>
