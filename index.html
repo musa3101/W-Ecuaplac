@@ -266,26 +266,31 @@
       transform: translateZ(0);
     }
 
+    #hero-sticky-element img {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
     #hero-layer-1 { z-index: 10; }
     #hero-layer-2 { z-index: 20; }
     #hero-layer-3 { z-index: 30; }
 
-    /* Stable mobile viewport for hero sticky element */
+    /* Immutable viewport heights: svh prevents browser dynamic toolbars from shifting layout */
     #hero-sticky-element {
       height: calc(100vh - 72px);
-      height: calc(100dvh - 72px);
+      height: calc(100svh - 72px);
     }
 
-    /* Calibrated ergonomic scroll height (emil-design-eng) — eliminates 450vh dead drag */
     #hero-scroll-container {
       height: 230vh;
-      height: 230dvh;
+      height: 230svh;
     }
 
     @media (min-width: 768px) {
       #hero-scroll-container {
         height: 260vh !important;
-        height: 260dvh !important;
+        height: 260svh !important;
       }
     }
 
@@ -1411,27 +1416,18 @@
         <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
         <!-- Image 1: Villa Minimalista -->
         <div id="hero-layer-1" class="absolute inset-0 opacity-100">
-          <picture class="w-full h-full block">
-            <source media="(max-width: 768px)" srcset="./assets/img/hero/1.webp">
-            <img alt="Villa minimalista de lujo en Palma de Mallorca" class="w-full h-full object-cover object-center"
-              src="./assets/img/hero/1.webp" loading="eager" decoding="async">
-          </picture>
+          <img alt="Villa minimalista de lujo en Palma de Mallorca" class="w-full h-full object-cover object-center"
+            src="./assets/img/hero/1.webp" loading="eager" decoding="sync">
         </div>
         <!-- Image 2: Cocina de diseño de alta gama -->
-        <div id="hero-layer-2" class="absolute inset-0 transform translate-y-full">
-          <picture class="w-full h-full block">
-            <source media="(max-width: 768px)" srcset="./assets/img/hero/2.webp">
-            <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
-              src="./assets/img/hero/2.webp">
-          </picture>
+        <div id="hero-layer-2" class="absolute inset-0">
+          <img alt="Cocina de alta gama a medida" class="w-full h-full object-cover object-center" loading="eager" decoding="sync"
+            src="./assets/img/hero/2.webp">
         </div>
         <!-- Image 3: Resultado Final Reforma Integral -->
-        <div id="hero-layer-3" class="absolute inset-0 transform translate-y-full">
-          <picture class="w-full h-full block">
-            <source media="(max-width: 768px)" srcset="./assets/img/hero/3.webp">
-            <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
-              src="./assets/img/hero/3.webp">
-          </picture>
+        <div id="hero-layer-3" class="absolute inset-0">
+          <img alt="Resultado Final de Reforma Integral Ecuaplac" class="w-full h-full object-cover object-center" loading="eager" decoding="sync"
+            src="./assets/img/hero/3.webp">
         </div>
 
         <!-- Calibrated gradient to ensure 100% text readability over any photo -->
@@ -1502,11 +1498,51 @@
         </div>
       </div>
 
-      <!-- Portfolio Card Carousel -->
-      <div class="pt-24 pb-24 scroll-mt-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+      <!-- Portfolio Card Carousel (Piedra Caliza de Mallorca + Detalles de Oficio B+D) -->
+      <section class="relative w-full py-20 sm:py-24 overflow-hidden border-t border-b border-[#E8DFD1]"
+        style="background: radial-gradient(circle at 50% 36%, #FFFFFF 0%, #F7F3EB 42%, #ECE5D7 100%);">
+
+        <!-- Elementos Arquitectónicos Decorativos de Fondo (B + D) -->
+        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+          <!-- Textura de sombra elíptica 3D en el suelo bajo el carrusel (D) -->
+          <div class="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 w-[340px] sm:w-[520px] md:w-[780px] h-[36px] md:h-[50px] rounded-[100%] bg-[#3D2E20]/15 blur-xl"></div>
+
+          <!-- Esquinas de Encuadre Arquitectónico (D) -->
+          <div class="absolute top-6 left-6 w-7 h-7 border-t-2 border-l-2 border-[#8E7358]/35"></div>
+          <div class="absolute top-6 right-6 w-7 h-7 border-t-2 border-r-2 border-[#8E7358]/35"></div>
+          <div class="absolute bottom-6 left-6 w-7 h-7 border-b-2 border-l-2 border-[#8E7358]/35"></div>
+          <div class="absolute bottom-6 right-6 w-7 h-7 border-b-2 border-r-2 border-[#8E7358]/35"></div>
+
+          <!-- Herramientas de Precisión (B): Llana de yeso pulido en lateral izquierdo (inclinada y discreta) -->
+          <div class="absolute left-2.5 sm:left-8 md:left-14 top-60 sm:top-48 opacity-30 -rotate-12 transition-transform duration-300 pointer-events-none">
+            <svg width="34" height="52" viewBox="0 0 70 110" fill="none" stroke="#7A5E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="0" y="0" width="70" height="110" rx="4" fill="rgba(240, 230, 215, 0.45)"/>
+              <path d="M 35 15 L 35 95 M 25 35 L 45 35 M 25 75 L 45 75"/>
+              <rect x="28" y="40" width="14" height="40" rx="3" fill="#C5A880"/>
+              <path d="M -15 125 Q 35 140 85 115" stroke="#B89B77" stroke-width="2" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+
+          <!-- Herramientas de Precisión (B): Escuadra y Plomada en lateral derecho (discreta) -->
+          <div class="absolute right-2.5 sm:right-8 md:right-14 top-60 sm:top-48 opacity-30 pointer-events-none">
+            <svg width="36" height="46" viewBox="0 0 80 100" fill="none" stroke="#7A5E44" stroke-width="1.5" stroke-linecap="round">
+              <path d="M 12 0 L 12 85 L 75 85" stroke-width="2"/>
+              <line x1="12" y1="20" x2="22" y2="20"/>
+              <line x1="12" y1="40" x2="22" y2="40"/>
+              <line x1="12" y1="60" x2="22" y2="60"/>
+              <line x1="32" y1="85" x2="32" y2="75"/>
+              <line x1="52" y1="85" x2="52" y2="75"/>
+              <line x1="45" y1="5" x2="45" y2="65" stroke-dasharray="2 3"/>
+              <polygon points="45,80 38,67 52,67" fill="#B89B77"/>
+              <circle cx="45" cy="65" r="2" fill="#7A5E44"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 
         <div class="text-center mb-8 md:mb-12">
-          <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Nuestro Trabajo</span>
+          <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] uppercase font-bold block mb-2">Nuestro Trabajo</span>
           <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em]">
             Proyectos y Acabados de Alta Gama
           </h2>
@@ -1519,26 +1555,26 @@
         <div id="circular-gallery-wrapper" class="relative w-full max-w-[1400px] mx-auto select-none my-2">
           <!-- WebGL Canvas Container -->
           <div id="circular-gallery-canvas"
-            class="relative w-full h-[520px] sm:h-[580px] md:h-[650px] cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
+            class="relative w-full h-[550px] sm:h-[600px] md:h-[660px] cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
             style="touch-action: pan-y;">
           </div>
 
-          <!-- Luxury Navigation Buttons -->
+          <!-- Luxury Navigation Buttons (Ocultas en móvil para no tapar fotos, visibles en desktop) -->
           <button id="cg-btn-prev" aria-label="Anterior"
-            class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            class="hidden md:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/90 hover:bg-[#795746] hover:text-white text-[#161413] border border-black/10 backdrop-blur-md items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
             <svg class="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
           </button>
           <button id="cg-btn-next" aria-label="Siguiente"
-            class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/85 dark:bg-black/75 hover:bg-[#795746] hover:text-white dark:hover:bg-[#795746] text-[#161413] dark:text-white border border-black/10 dark:border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
+            class="hidden md:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/90 hover:bg-[#795746] hover:text-white text-[#161413] border border-black/10 backdrop-blur-md items-center justify-center transition-all duration-300 shadow-xl active:scale-95 group">
             <svg class="w-6 h-6 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
           </button>
 
           <!-- Interactive Swipe Hint -->
-          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-neutral-400 dark:text-neutral-500 uppercase font-medium">
-            <svg class="w-4 h-4 text-[#795746] dark:text-[#C5A880] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-[#8C6D53] uppercase font-semibold">
+            <svg class="w-4 h-4 text-[#8C6D53] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
             </svg>
-            <span>Arrastra o desliza para navegar</span>
+            <span>Desliza para explorar obras</span>
           </div>
         </div>
 
@@ -1636,11 +1672,12 @@
             ctx.scale(dpr, dpr);
             ctx.clearRect(0, 0, w, h);
 
-            // Fondo de tarjeta inferior estilo Luxury Dark Glassmorphic
+            // Fondo de tarjeta inferior suave y transparente arriba para no tapar la foto
             const grad = ctx.createLinearGradient(0, 0, 0, h);
-            grad.addColorStop(0, "rgba(18, 16, 15, 0.75)");
-            grad.addColorStop(0.35, "rgba(18, 16, 15, 0.94)");
-            grad.addColorStop(1, "rgba(18, 16, 15, 0.98)");
+            grad.addColorStop(0, "rgba(18, 16, 15, 0.0)");
+            grad.addColorStop(0.35, "rgba(18, 16, 15, 0.35)");
+            grad.addColorStop(0.70, "rgba(18, 16, 15, 0.80)");
+            grad.addColorStop(1, "rgba(18, 16, 15, 0.92)");
 
             // Borde inferior redondeado
             const radius = 24;
@@ -1654,14 +1691,6 @@
             ctx.closePath();
             ctx.fillStyle = grad;
             ctx.fill();
-
-            // Línea divisoria sutil superior
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(w, 0);
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-            ctx.lineWidth = 1;
-            ctx.stroke();
 
             // 1. Badge / Píldora de Ubicación
             if (location) {
@@ -1772,7 +1801,7 @@
               });
 
               this.mesh = new Mesh(this.gl, { geometry, program });
-              const capHeightRatio = 0.28;
+              const capHeightRatio = 0.20;
               this.mesh.scale.set(1.0, capHeightRatio, 1.0);
               this.mesh.position.y = -0.5 + capHeightRatio * 0.5;
               this.mesh.position.z = 0.04;
@@ -1899,10 +1928,21 @@
               img.src = this.image;
               img.onload = () => {
                 texture.image = img;
+                this.naturalAspect = (img.naturalWidth || img.width) / (img.naturalHeight || img.height);
                 this.program.uniforms.uImageSizes.value = [
                   img.naturalWidth || img.width,
                   img.naturalHeight || img.height,
                 ];
+                if (this.plane && this.viewport) {
+                  const isMobile = (this.screen?.width || window.innerWidth) < 768;
+                  const cardScale = isMobile ? 0.80 : 0.62;
+                  this.plane.scale.y = this.viewport.height * cardScale;
+                  this.plane.scale.x = this.plane.scale.y * Math.min(Math.max(this.naturalAspect, 0.58), 0.85);
+                  this.program.uniforms.uPlaneSizes.value = [
+                    this.plane.scale.x,
+                    this.plane.scale.y,
+                  ];
+                }
               };
             }
 
@@ -1974,16 +2014,17 @@
               if (viewport) this.viewport = viewport;
 
               const isMobile = this.screen.width < 768;
-              const cardScale = isMobile ? 0.60 : 0.55;
+              const cardScale = isMobile ? 0.80 : 0.62;
 
               this.plane.scale.y = this.viewport.height * cardScale;
-              this.plane.scale.x = this.plane.scale.y * 0.74; // Relación vertical proporcional perfecta
+              const aspect = this.naturalAspect || 0.74;
+              this.plane.scale.x = this.plane.scale.y * Math.min(Math.max(aspect, 0.58), 0.85);
 
               this.program.uniforms.uPlaneSizes.value = [
                 this.plane.scale.x,
                 this.plane.scale.y,
               ];
-              this.padding = isMobile ? 1.0 : 1.6;
+              this.padding = isMobile ? 0.9 : 1.5;
               this.width = this.plane.scale.x + this.padding;
               this.widthTotal = this.width * this.length;
               this.x = this.width * this.index;
@@ -2357,9 +2398,8 @@
           });
         </script>
 
-      </div>
-
-
+        </div>
+      </section>
 
       <!-- Transformaciones Reales (Stacked Layout) -->
       <div class="ecuador-divider"></div>
@@ -3660,9 +3700,15 @@
       }
       measureHero();
 
+      let lastWindowWidth = window.innerWidth;
       window.addEventListener('resize', () => {
-        measureHero();
-        measureSections();
+        // Only re-measure if viewport width changes (orientation/screen resize).
+        // Prevents dynamic mobile browser toolbars (Chrome/Safari iOS) from causing layout jumps.
+        if (window.innerWidth !== lastWindowWidth) {
+          lastWindowWidth = window.innerWidth;
+          measureHero();
+          measureSections();
+        }
       }, { passive: true });
 
       function handleHeroScroll(scrollY) {
@@ -3851,6 +3897,11 @@
           if (handleBtn) handleBtn.classList.add('scale-110');
           const clientX = e.touches ? e.touches[0].clientX : e.clientX;
           updatePosition(clientX);
+
+          window.addEventListener('mousemove', handleMove);
+          window.addEventListener('touchmove', handleMove, { passive: true });
+          window.addEventListener('mouseup', handleEnd);
+          window.addEventListener('touchend', handleEnd);
         };
 
         const handleMove = (e) => {
@@ -3863,17 +3914,15 @@
           if (isDragging) {
             isDragging = false;
             if (handleBtn) handleBtn.classList.remove('scale-110');
+            window.removeEventListener('mousemove', handleMove);
+            window.removeEventListener('touchmove', handleMove);
+            window.removeEventListener('mouseup', handleEnd);
+            window.removeEventListener('touchend', handleEnd);
           }
         };
 
         overlay.addEventListener('mousedown', handleStart);
         overlay.addEventListener('touchstart', handleStart, { passive: true });
-
-        window.addEventListener('mousemove', handleMove);
-        window.addEventListener('touchmove', handleMove, { passive: true });
-
-        window.addEventListener('mouseup', handleEnd);
-        window.addEventListener('touchend', handleEnd);
       }
       const initialScrollY = window.pageYOffset || window.scrollY || 0;
       handleHeroScroll(initialScrollY);
