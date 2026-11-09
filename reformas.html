@@ -511,10 +511,10 @@
 </ul>
 <!-- Trailing Action -->
 <div class="hidden lg:block">
-<a class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block" onclick="openPresupuestoModal()">PRESUPUESTO</a>
+<a role="button" tabindex="0" class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block" onclick="openPresupuestoModal()">PRESUPUESTO</a>
 </div>
 <!-- Mobile Menu Icon (Functional) -->
-<div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()">
+<div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()" aria-label="Abrir menú" role="button" tabindex="0">
 <span class="material-symbols-outlined text-white">menu</span>
 </div>
 </div>

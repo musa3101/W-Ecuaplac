@@ -196,7 +196,7 @@
 
     /* Dynamic Navigation bar & links */
     nav {
-      transition: opacity 0.5s ease, background-color 0.4s ease, border-color 0.4s ease;
+      transition: opacity 0.5s ease, background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
       background-color: #000000 !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
       animation: fadeIn 0.8s ease forwards;
@@ -204,7 +204,8 @@
 
     nav.scrolled {
       background-color: #000000 !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav-link {
@@ -262,16 +263,18 @@
       will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     #hero-sticky-element img {
+      transform: translateZ(0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
 
-    #hero-layer-1 { z-index: 10; transform: translate3d(0, 0%, 0); }
-    #hero-layer-2 { z-index: 20; transform: translate3d(0, 100%, 0); }
-    #hero-layer-3 { z-index: 30; transform: translate3d(0, 100%, 0); }
+    #hero-layer-1 { z-index: 10; }
+    #hero-layer-2 { z-index: 20; }
+    #hero-layer-3 { z-index: 30; }
 
     /* Immutable viewport heights: svh prevents browser dynamic toolbars from shifting layout */
     #hero-sticky-element {
@@ -1478,19 +1481,19 @@
       <div id="hero-sticky-element" class="sticky top-[72px] w-full overflow-hidden">
         <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
         <!-- Image 1: Minimalist Villa -->
-        <div id="hero-layer-1" class="absolute inset-0 opacity-100" style="transform: translate3d(0, 0%, 0);">
+        <div id="hero-layer-1" class="absolute inset-0 opacity-100">
           <img alt="Luxusvilla im minimalistischen Stil in Palma de Mallorca" class="w-full h-full object-cover object-center"
-            src="./assets/img/hero/1.webp" loading="eager" decoding="async">
+            src="./assets/img/hero/1.webp" loading="eager" decoding="sync">
         </div>
         <!-- Image 2: High-end custom kitchen -->
-        <div id="hero-layer-2" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
-          <img alt="Hochwertige maßgefertigte Küche" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
+        <div id="hero-layer-2" class="absolute inset-0">
+          <img alt="Hochwertige maßgefertigte Küche" class="w-full h-full object-cover object-center" loading="eager" decoding="sync"
             src="./assets/img/hero/2.webp">
         </div>
         <!-- Image 3: Final Result of Comprehensive Renovation -->
-        <div id="hero-layer-3" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
+        <div id="hero-layer-3" class="absolute inset-0">
           <img alt="Endergebnis der Komplettrenovierung von Ecuaplac"
-            class="w-full h-full object-cover object-center" loading="eager" decoding="async" src="./assets/img/hero/3.webp">
+            class="w-full h-full object-cover object-center" loading="eager" decoding="sync" src="./assets/img/hero/3.webp">
         </div>
 
         <!-- Calibrated gradient to ensure 100% text readability over any photo -->
@@ -1503,10 +1506,10 @@
           <div id="hero-text-1"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
             <h1
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Architektur der<br>klaren Räume.
             </h1>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Über 10 Jahre Erfahrung bei der Transformation von Villen und Geschäftsräumen in Palma de Mallorca mit höchster handwerklicher Präzision.
             </p>
           </div>
@@ -1515,10 +1518,10 @@
           <div id="hero-text-2"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Ganzheitliches Design &amp;<br>Präzision in jedem Detail.
             </h2>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Edle Materialien, kuratierte Beleuchtung und makellose Ausführung für einzigartige Immobilien auf Mallorca.
             </p>
           </div>
@@ -1527,10 +1530,10 @@
           <div id="hero-text-3"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] max-w-3xl">
               Das Ergebnis, das<br>Sie sich immer vorgestellt haben.
             </h2>
-            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
+            <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
               Exklusive Oberflächen aus poliertem Mikrozement, maßgefertigte Tischlerarbeiten und absoluter Wohnkomfort.
             </p>
           </div>
@@ -2119,16 +2122,7 @@
               this.onResize();
               this.createGeometry();
               this.createMedias();
-              this.isVisible = false;
-              this.observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                  this.isVisible = entry.isIntersecting;
-                  if (this.isVisible && !this.raf) {
-                    this.update();
-                  }
-                });
-              }, { rootMargin: "250px" });
-              this.observer.observe(this.container);
+              this.update();
               this.addEventListeners();
             }
 
@@ -2194,11 +2188,6 @@
               this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
               this.startTime = Date.now();
               this.hasMoved = false;
-
-              window.addEventListener("mousemove", this.onTouchMove);
-              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
-              window.addEventListener("mouseup", this.onTouchUp);
-              window.addEventListener("touchend", this.onTouchUp, { passive: true });
             }
 
             onTouchMove(e) {
@@ -2223,11 +2212,6 @@
             onTouchUp(e) {
               if (!this.isDown) return;
               this.isDown = false;
-
-              window.removeEventListener("mousemove", this.onTouchMove);
-              window.removeEventListener("touchmove", this.onTouchMove);
-              window.removeEventListener("mouseup", this.onTouchUp);
-              window.removeEventListener("touchend", this.onTouchUp);
 
               const endX =
                 e && e.changedTouches && e.changedTouches.length > 0
@@ -2327,10 +2311,6 @@
             }
 
             update() {
-              if (!this.isVisible) {
-                this.raf = null;
-                return;
-              }
               this.scroll.current = lerp(
                 this.scroll.current,
                 this.scroll.target,
@@ -2352,20 +2332,22 @@
               window.addEventListener("resize", this.onResize);
               this.container.addEventListener("wheel", this.onWheel, { passive: true });
               this.container.addEventListener("mousedown", this.onTouchDown);
-              this.container.addEventListener("touchstart", this.onTouchDown, { passive: true });
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("mouseup", this.onTouchUp);
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
             }
 
             destroy() {
-              if (this.observer) this.observer.disconnect();
-              if (this.raf) window.cancelAnimationFrame(this.raf);
-              this.raf = null;
+              window.cancelAnimationFrame(this.raf);
               window.removeEventListener("resize", this.onResize);
               this.container.removeEventListener("wheel", this.onWheel);
               this.container.removeEventListener("mousedown", this.onTouchDown);
-              this.container.removeEventListener("touchstart", this.onTouchDown);
               window.removeEventListener("mousemove", this.onTouchMove);
-              window.removeEventListener("touchmove", this.onTouchMove);
               window.removeEventListener("mouseup", this.onTouchUp);
+              this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("touchmove", this.onTouchMove);
               window.removeEventListener("touchend", this.onTouchUp);
 
               if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
@@ -3565,7 +3547,9 @@
       });
 
       // 1. Off-thread Pre-warming & GPU Texture Decode for Hero Images
-      document.querySelectorAll('#hero-sticky-element img').forEach(img => {
+      ['./assets/img/hero/1.webp', './assets/img/hero/2.webp', './assets/img/hero/3.webp'].forEach(src => {
+        const img = new Image();
+        img.src = src;
         if (img.decode) {
           img.decode().catch(() => {});
         }
@@ -3653,7 +3637,6 @@
       let heroScrollable = 0;
       let isHeroActive = true;
       let currentDotIndex = -1;
-      let lastY1 = '', lastY2 = '', lastY3 = '';
 
       function measureHero() {
         if (!heroContainer) return;
@@ -3682,9 +3665,9 @@
         if (scrollY > heroScrollable + 80) {
           if (isHeroActive) {
             isHeroActive = false;
-            if (layer1 && lastY1 !== '-12%') { layer1.style.transform = 'translate3d(0, -12%, 0)'; lastY1 = '-12%'; }
-            if (layer2 && lastY2 !== '-12%') { layer2.style.transform = 'translate3d(0, -12%, 0)'; lastY2 = '-12%'; }
-            if (layer3 && lastY3 !== '0%') { layer3.style.transform = 'translate3d(0, 0%, 0)'; lastY3 = '0%'; }
+            if (layer1) layer1.style.transform = 'translate3d(0, -12%, 0)';
+            if (layer2) layer2.style.transform = 'translate3d(0, -12%, 0)';
+            if (layer3) layer3.style.transform = 'translate3d(0, 0%, 0)';
             if (text1) { text1.style.opacity = '0'; text1.style.pointerEvents = 'none'; }
             if (text2) { text2.style.opacity = '0'; text2.style.pointerEvents = 'none'; }
             if (text3) { text3.style.opacity = '1'; text3.style.pointerEvents = 'auto'; }
@@ -3702,29 +3685,17 @@
         const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
         if (layer1) {
-          const t1 = (-p1 * 12).toFixed(2) + '%';
-          if (t1 !== lastY1) {
-            lastY1 = t1;
-            layer1.style.transform = `translate3d(0, ${t1}, 0)`;
-          }
+          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(2)}%, 0)`;
         }
 
         if (layer2) {
           const y2 = (1 - p1) * 100 - (p2 * 12);
-          const t2 = y2.toFixed(2) + '%';
-          if (t2 !== lastY2) {
-            lastY2 = t2;
-            layer2.style.transform = `translate3d(0, ${t2}, 0)`;
-          }
+          layer2.style.transform = `translate3d(0, ${y2.toFixed(2)}%, 0)`;
         }
 
         if (layer3) {
           const y3 = (1 - p2) * 100;
-          const t3 = y3.toFixed(2) + '%';
-          if (t3 !== lastY3) {
-            lastY3 = t3;
-            layer3.style.transform = `translate3d(0, ${t3}, 0)`;
-          }
+          layer3.style.transform = `translate3d(0, ${y3.toFixed(2)}%, 0)`;
         }
 
         // Active pagination dot indicator (only updates if dot actually changes)
@@ -3828,10 +3799,6 @@
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
-      // Execute once immediately on DOM load to guarantee sync without waiting for first scroll
-      const initialScrollY = window.pageYOffset || window.scrollY || 0;
-      handleHeroScroll(initialScrollY);
-      handleScroll(initialScrollY);
 
       // Scroll-reveal: subtle fade-in for section headings
       const revealEls = document.querySelectorAll('.scroll-reveal');
