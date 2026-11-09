@@ -1892,7 +1892,6 @@
               location,
               title,
               viewport,
-              bend,
               borderRadius = 0.05,
             }) {
               this.geometry = geometry;
@@ -1906,16 +1905,13 @@
               this.location = location;
               this.title = title;
               this.viewport = viewport;
-              this.bend = bend;
               this.borderRadius = borderRadius;
 
-              this.extra = 0;
               this.widthTotal = 0;
               this.width = 0;
               this.x = 0;
-              this.speed = 0;
-              this.isBefore = false;
-              this.isAfter = false;
+              this.baseWidth = 0;
+              this.baseHeight = 0;
 
               this.createShader();
               this.createMesh();
@@ -1928,23 +1924,18 @@
                 generateMipmaps: true,
               });
               this.program = new Program(this.gl, {
-                depthTest: false,
-                depthWrite: false,
+                depthTest: true,
+                depthWrite: true,
                 vertex: `
                   precision highp float;
                   attribute vec3 position;
                   attribute vec2 uv;
                   uniform mat4 modelViewMatrix;
                   uniform mat4 projectionMatrix;
-                  uniform float uTime;
-                  uniform float uSpeed;
                   varying vec2 vUv;
                   void main() {
                     vUv = uv;
-                    vec3 p = position;
-                    // Inercia sutil de curvatura al arrastrar
-                    p.z = (sin(p.x * 3.0 + uTime) * 0.6 + cos(p.y * 2.0 + uTime) * 0.6) * (0.02 + min(abs(uSpeed) * 0.05, 0.08));
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
                   }
                 `,
                 fragment: `
@@ -1953,6 +1944,7 @@
                   uniform vec2 uPlaneSizes;
                   uniform sampler2D tMap;
                   uniform float uBorderRadius;
+                  uniform float uDarken;
                   varying vec2 vUv;
 
                   float roundedBoxSDF(vec2 p, vec2 b, float r) {
@@ -1978,17 +1970,17 @@
 
                     if (alpha < 0.01) discard;
 
-                    // COLOR 100% ORIGINAL (Sin blanco y negro, colores vivos y reales)
-                    gl_FragColor = vec4(color.rgb, color.a * alpha);
+                    // Atenuación suave para tarjetas no centradas, enfoque heroico en la activa
+                    vec3 rgb = color.rgb * (1.0 - uDarken * 0.25);
+                    gl_FragColor = vec4(rgb, color.a * alpha);
                   }
                 `,
                 uniforms: {
                   tMap: { value: texture },
                   uPlaneSizes: { value: [0, 0] },
                   uImageSizes: { value: [0, 0] },
-                  uSpeed: { value: 0 },
-                  uTime: { value: 100 * Math.random() },
                   uBorderRadius: { value: this.borderRadius },
+                  uDarken: { value: 0 },
                 },
                 transparent: true,
               });
@@ -2003,16 +1995,7 @@
                   img.naturalWidth || img.width,
                   img.naturalHeight || img.height,
                 ];
-                if (this.plane && this.viewport) {
-                  const isMobile = (this.screen?.width || window.innerWidth) < 768;
-                  const cardScale = isMobile ? 0.80 : 0.62;
-                  this.plane.scale.y = this.viewport.height * cardScale;
-                  this.plane.scale.x = this.plane.scale.y * Math.min(Math.max(this.naturalAspect, 0.58), 0.85);
-                  this.program.uniforms.uPlaneSizes.value = [
-                    this.plane.scale.x,
-                    this.plane.scale.y,
-                  ];
-                }
+                this.recomputeScale();
               };
             }
 
@@ -2033,71 +2016,64 @@
               });
             }
 
-            update(scroll, direction) {
-              this.plane.position.x = this.x - scroll.current - this.extra;
+            recomputeScale() {
+              if (!this.plane || !this.viewport) return;
+              const isMobile = (this.screen?.width || window.innerWidth) < 768;
+              const cardScale = isMobile ? 0.76 : 0.65;
+              this.baseHeight = this.viewport.height * cardScale;
+              const aspect = this.naturalAspect || 0.72;
+              this.baseWidth = this.baseHeight * Math.min(Math.max(aspect, 0.60), 0.82);
 
-              const x = this.plane.position.x;
-              const H = this.viewport.width / 2;
+              this.plane.scale.y = this.baseHeight;
+              this.plane.scale.x = this.baseWidth;
 
-              if (this.bend === 0) {
-                this.plane.position.y = 0;
-                this.plane.rotation.z = 0;
-                this.plane.rotation.y = 0;
-              } else {
-                const B_abs = Math.abs(this.bend);
-                const R = (H * H + B_abs * B_abs) / (2 * B_abs);
-                const effectiveX = Math.min(Math.abs(x), H);
-                const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
+              this.program.uniforms.uPlaneSizes.value = [
+                this.baseWidth,
+                this.baseHeight,
+              ];
+              this.padding = isMobile ? 0.9 : 1.6;
+              this.width = this.baseWidth + this.padding;
+              this.widthTotal = this.width * this.length;
+              this.x = this.width * this.index;
+            }
 
-                if (this.bend > 0) {
-                  this.plane.position.y = -arc;
-                  this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
-                  this.plane.rotation.y = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
-                } else {
-                  this.plane.position.y = arc;
-                  this.plane.rotation.z = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
-                  this.plane.rotation.y = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R)) * 0.42;
-                }
-              }
+            update(scroll) {
+              const W = this.widthTotal;
+              if (!W) return;
 
-              this.speed = scroll.current - scroll.last;
-              this.program.uniforms.uTime.value += 0.02;
-              this.program.uniforms.uSpeed.value = this.speed;
+              // Modular wrap determinista alrededor de 0: rango [-W/2, W/2]
+              let relX = (this.x - scroll.current) % W;
+              if (relX < -W / 2) relX += W;
+              if (relX > W / 2) relX -= W;
 
-              const planeOffset = this.plane.scale.x / 2;
-              const viewportOffset = this.viewport.width / 2;
-              this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
-              this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
+              this.plane.position.x = relX;
 
-              if (direction === "right" && this.isBefore) {
-                this.extra -= this.widthTotal;
-                this.isBefore = this.isAfter = false;
-              }
-              if (direction === "left" && this.isAfter) {
-                this.extra += this.widthTotal;
-                this.isBefore = this.isAfter = false;
-              }
+              const isMobile = (this.screen?.width || window.innerWidth) < 768;
+              const H = Math.max(this.viewport.width * 0.5, 1);
+              const normX = Math.abs(relX) / H;
+
+              // 1. SIN rotación en Z (tarjetas 100% verticales, aplomadas y profesionales)
+              this.plane.rotation.z = 0;
+              this.plane.position.y = 0;
+
+              // 2. Curvatura cilíndrica prémium en profundidad (Z y rotación sutil en Y)
+              const depthCurve = Math.pow(Math.min(normX, 1.4), 1.4);
+              this.plane.position.z = -depthCurve * (isMobile ? 1.6 : 2.4);
+              this.plane.rotation.y = -Math.sign(relX) * Math.min(normX, 1.0) * (isMobile ? 0.20 : 0.28);
+
+              // 3. Enfoque de escala suave: activa 100%, adyacentes 90-92%
+              const scaleMod = 1.0 - Math.min(normX, 1.2) * (isMobile ? 0.08 : 0.12);
+              this.plane.scale.x = this.baseWidth * scaleMod;
+              this.plane.scale.y = this.baseHeight * scaleMod;
+
+              // 4. Atenuación sutil en laterales
+              this.program.uniforms.uDarken.value = Math.min(normX, 1.0);
             }
 
             onResize({ screen, viewport } = {}) {
               if (screen) this.screen = screen;
               if (viewport) this.viewport = viewport;
-
-              const isMobile = this.screen.width < 768;
-              const cardScale = isMobile ? 0.80 : 0.62;
-
-              this.plane.scale.y = this.viewport.height * cardScale;
-              const aspect = this.naturalAspect || 0.74;
-              this.plane.scale.x = this.plane.scale.y * Math.min(Math.max(aspect, 0.58), 0.85);
-
-              this.program.uniforms.uPlaneSizes.value = [
-                this.plane.scale.x,
-                this.plane.scale.y,
-              ];
-              this.padding = isMobile ? 0.9 : 1.5;
-              this.width = this.plane.scale.x + this.padding;
-              this.widthTotal = this.width * this.length;
-              this.x = this.width * this.index;
+              this.recomputeScale();
             }
           }
 
@@ -2106,13 +2082,13 @@
               this.container = container;
               this.items = options.items || initialGalleryItems;
               this.scrollSpeed = options.scrollSpeed || 1.0;
-              this.scroll = { ease: options.scrollEase || 0.020, current: 0, target: 0, last: 0 };
+              this.scroll = { ease: options.scrollEase || 0.075, current: 0, target: 0, last: 0 };
               this.borderRadius = options.borderRadius || 0.05;
 
               this.isDown = false;
               this.start = 0;
               this.startY = 0;
-              this.onCheckDebounce = debounce(this.onCheck.bind(this), 180);
+              this.onCheckDebounce = debounce(this.onCheck.bind(this), 150);
 
               autoBind(this);
 
@@ -2122,7 +2098,16 @@
               this.onResize();
               this.createGeometry();
               this.createMedias();
-              this.update();
+              this.isVisible = false;
+              this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                  this.isVisible = entry.isIntersecting;
+                  if (this.isVisible && !this.raf) {
+                    this.update();
+                  }
+                });
+              }, { rootMargin: "250px" });
+              this.observer.observe(this.container);
               this.addEventListeners();
             }
 
@@ -2145,22 +2130,21 @@
 
             createScene() {
               this.scene = new Transform();
-              this.scene.position.y = 0.35;
             }
 
             createGeometry() {
               this.planeGeometry = new Plane(this.gl, {
-                heightSegments: 40,
-                widthSegments: 70,
+                heightSegments: 20,
+                widthSegments: 20,
               });
             }
 
             createMedias() {
-              // Duplicar items para loop infinito fluido
-              this.mediasImages = [...this.items, ...this.items];
-              const isMobile = window.innerWidth < 768;
-              const bend = isMobile ? 1.5 : 2.5;
-              this.scene.position.y = isMobile ? 0.45 : 0.35;
+              let repeated = [...this.items];
+              while (repeated.length < 12) {
+                repeated = [...repeated, ...this.items];
+              }
+              this.mediasImages = repeated;
 
               this.medias = this.mediasImages.map((data, index) => {
                 return new Media({
@@ -2175,7 +2159,6 @@
                   location: data.location,
                   title: data.title,
                   viewport: this.viewport,
-                  bend,
                   borderRadius: this.borderRadius,
                 });
               });
@@ -2188,6 +2171,11 @@
               this.startY = "touches" in e ? e.touches[0].clientY : e.clientY;
               this.startTime = Date.now();
               this.hasMoved = false;
+
+              window.addEventListener("mousemove", this.onTouchMove);
+              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
+              window.addEventListener("mouseup", this.onTouchUp);
+              window.addEventListener("touchend", this.onTouchUp, { passive: true });
             }
 
             onTouchMove(e) {
@@ -2205,13 +2193,19 @@
                 e.preventDefault();
               }
 
-              const distance = dx * (this.scrollSpeed * 0.018);
+              const isMobile = window.innerWidth < 768;
+              const distance = dx * (this.scrollSpeed * (isMobile ? 0.024 : 0.020));
               this.scroll.target = this.scroll.position + distance;
             }
 
             onTouchUp(e) {
               if (!this.isDown) return;
               this.isDown = false;
+
+              window.removeEventListener("mousemove", this.onTouchMove);
+              window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
+              window.removeEventListener("touchend", this.onTouchUp);
 
               const endX =
                 e && e.changedTouches && e.changedTouches.length > 0
@@ -2223,33 +2217,38 @@
               const dx = this.start - endX;
               const elapsed = Math.max(1, Date.now() - (this.startTime || Date.now()));
               const velocity = dx / elapsed;
+              const width = this.medias[0].width;
 
-              // 1. Tocar con el táctil para adelantar o volver hacia atrás (Tap)
-              if (!this.hasMoved || Math.abs(dx) < 12) {
-                const rect = this.container.getBoundingClientRect();
-                const tapX = endX - rect.left;
-                const ratioX = tapX / Math.max(rect.width, 1);
-
-                if (ratioX > 0.58) {
-                  this.next();
-                  return;
-                } else if (ratioX < 0.42) {
-                  this.prev();
-                  return;
-                }
-              }
-
-              // 2. Gesto de deslizamiento rápido táctil (Swipe / Flick)
-              if (Math.abs(dx) > 30 || Math.abs(velocity) > 0.20) {
+              if (Math.abs(velocity) > 0.22 || Math.abs(dx) > 35) {
+                let targetIndex;
                 if (dx > 0) {
-                  this.next();
+                  targetIndex = Math.ceil(this.scroll.position / width);
+                  if (targetIndex * width <= this.scroll.position + 0.1 * width) {
+                    targetIndex++;
+                  }
                 } else {
-                  this.prev();
+                  targetIndex = Math.floor(this.scroll.position / width);
+                  if (targetIndex * width >= this.scroll.position - 0.1 * width) {
+                    targetIndex--;
+                  }
                 }
+                this.scroll.target = targetIndex * width;
                 return;
               }
 
-              // 3. Ajuste al soltar arrastre manual
+              if (!this.hasMoved || Math.abs(dx) < 10) {
+                const rect = this.container.getBoundingClientRect();
+                const tapX = endX - rect.left;
+                const ratioX = tapX / Math.max(rect.width, 1);
+                if (ratioX > 0.62) {
+                  this.next();
+                  return;
+                } else if (ratioX < 0.38) {
+                  this.prev();
+                  return;
+                }
+              }
+
               this.onCheck();
             }
 
@@ -2258,28 +2257,28 @@
                 e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)
                   ? e.deltaX
                   : e.deltaY || (e.wheelDelta ? -e.wheelDelta : 0);
-              this.scroll.target += Math.sign(delta) * (this.scrollSpeed * 0.30);
+              this.scroll.target += Math.sign(delta) * (this.scrollSpeed * 0.35);
               this.onCheckDebounce();
             }
 
             onCheck() {
-              if (!this.medias || !this.medias[0]) return;
+              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
               const width = this.medias[0].width;
               const itemIndex = Math.round(this.scroll.target / width);
               this.scroll.target = itemIndex * width;
             }
 
             next() {
-              if (!this.medias || !this.medias[0]) return;
+              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
               const width = this.medias[0].width;
-              const currentIndex = Math.round(this.scroll.target / width);
+              const currentIndex = Math.round(this.scroll.current / width);
               this.scroll.target = (currentIndex + 1) * width;
             }
 
             prev() {
-              if (!this.medias || !this.medias[0]) return;
+              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
               const width = this.medias[0].width;
-              const currentIndex = Math.round(this.scroll.target / width);
+              const currentIndex = Math.round(this.scroll.current / width);
               this.scroll.target = (currentIndex - 1) * width;
             }
 
@@ -2298,30 +2297,25 @@
               const width = height * this.camera.aspect;
               this.viewport = { width, height };
 
-              const isMobile = window.innerWidth < 768;
-              const bend = isMobile ? 1.5 : 2.5;
-              this.scene.position.y = isMobile ? 0.45 : 0.35;
-
               if (this.medias) {
                 this.medias.forEach((media) => {
-                  media.bend = bend;
                   media.onResize({ screen: this.screen, viewport: this.viewport });
                 });
               }
             }
 
             update() {
+              if (!this.isVisible) {
+                this.raf = null;
+                return;
+              }
               this.scroll.current = lerp(
                 this.scroll.current,
                 this.scroll.target,
                 this.scroll.ease
               );
-              const direction =
-                this.scroll.current > this.scroll.last ? "right" : "left";
               if (this.medias) {
-                this.medias.forEach((media) =>
-                  media.update(this.scroll, direction)
-                );
+                this.medias.forEach((media) => media.update(this.scroll));
               }
               this.renderer.render({ scene: this.scene, camera: this.camera });
               this.scroll.last = this.scroll.current;
@@ -2332,22 +2326,20 @@
               window.addEventListener("resize", this.onResize);
               this.container.addEventListener("wheel", this.onWheel, { passive: true });
               this.container.addEventListener("mousedown", this.onTouchDown);
-              window.addEventListener("mousemove", this.onTouchMove);
-              window.addEventListener("mouseup", this.onTouchUp);
-              this.container.addEventListener("touchstart", this.onTouchDown, { passive: false });
-              window.addEventListener("touchmove", this.onTouchMove, { passive: false });
-              window.addEventListener("touchend", this.onTouchUp, { passive: true });
+              this.container.addEventListener("touchstart", this.onTouchDown, { passive: true });
             }
 
             destroy() {
-              window.cancelAnimationFrame(this.raf);
+              if (this.observer) this.observer.disconnect();
+              if (this.raf) window.cancelAnimationFrame(this.raf);
+              this.raf = null;
               window.removeEventListener("resize", this.onResize);
               this.container.removeEventListener("wheel", this.onWheel);
               this.container.removeEventListener("mousedown", this.onTouchDown);
-              window.removeEventListener("mousemove", this.onTouchMove);
-              window.removeEventListener("mouseup", this.onTouchUp);
               this.container.removeEventListener("touchstart", this.onTouchDown);
+              window.removeEventListener("mousemove", this.onTouchMove);
               window.removeEventListener("touchmove", this.onTouchMove);
+              window.removeEventListener("mouseup", this.onTouchUp);
               window.removeEventListener("touchend", this.onTouchUp);
 
               if (this.gl && this.gl.canvas && this.gl.canvas.parentNode) {
@@ -2367,7 +2359,7 @@
             try {
               galleryApp = new CircularGalleryApp(container, {
                 items: currentItems,
-                scrollEase: 0.020, // Deslizamiento cinemático más pausado, fluido y prémium
+                scrollEase: 0.075,
                 scrollSpeed: 1.0,
                 borderRadius: 0.05,
               });
@@ -2436,7 +2428,7 @@
                     galleryApp.destroy();
                     galleryApp = new CircularGalleryApp(container, {
                       items: dbItems,
-                      scrollEase: 0.020,
+                      scrollEase: 0.075,
                       scrollSpeed: 1.0,
                       borderRadius: 0.05,
                     });
