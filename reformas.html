@@ -1225,16 +1225,16 @@
   // Scroll listener for dynamic navbar and footer styling
   document.addEventListener('DOMContentLoaded', () => {
     const navElement = document.querySelector('nav');
+    let isScrolled = false;
 
     function handleScroll() {
-      // Header scroll logic
-      if (window.scrollY > 20) {
-        navElement.classList.add('scrolled');
-      } else {
-        navElement.classList.remove('scrolled');
+      const shouldBeScrolled = window.scrollY > 20;
+      if (shouldBeScrolled !== isScrolled) {
+        isScrolled = shouldBeScrolled;
+        if (navElement) {
+          navElement.classList.toggle('scrolled', isScrolled);
+        }
       }
-
-
     }
 
     // Touch-Guard: Prevent accidental logo clicks during iPhone edge swipe-back gesture
@@ -1269,7 +1269,7 @@
       });
     }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
   });
 </script>
