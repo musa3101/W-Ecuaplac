@@ -30,6 +30,10 @@
 - [x] **Solución y Estabilización Matemática de Galería 1 (WebGL 3D Carousel)**: Erradicación definitiva de colisiones/autodoblado de fotos y huecos vacíos mediante ranuras invariantes (`slotWidth`), UV object-cover en GLSL, frustum culling y depth testing en títulos (`index.html`, `index-en.html`, `index-de.html`).
 - [x] **Erradicación de Parpadeo Blanco y Demora en Galerías 1 y 2**: Preloads LCP (`IMG_2131.webp`, `IMG_2135.webp`), `uAlpha` progresivo en WebGL y diffing de registros en Supabase.
 - [x] **Optimización Extrema de Scrollytelling en el Hero (60/120 fps)**: Eliminación de reflow forzado (`offsetWidth`), calibración de ola de giro 3D a 0.55s / 0.02s, eliminación de sobrecarga de 220 capas GPU en iOS Safari y aceleración por hardware con `translateZ(0)`.
+- [x] **Reparación Definitiva de Galería 1 en iPhone (`uAlpha`)**: Declaración de `uniform float uAlpha;` en el fragment shader eliminando el crash WebGL de pantalla en blanco.
+- [x] **Restauración de Bordes Negros Sólidos Oficiales**: Estilo arquitectónico `border border-black` recuperado en los 4 servicios de Nuestra Experiencia, tarjeta de formulario y proyectos de Reformas.
+- [x] **Botón de Presupuesto por Email Bajo WhatsApp**: CTA directo en píldora con enlace `#formulario` en español, inglés y alemán.
+- [x] **Animación 21st.dev `TextEffect` por Carácter**: Integración cinemática con `blur(8px) -> blur(0)`, subida de `16px`, transición suave de `0.70s` y activación 1 por 1 al hacer scroll en 12 títulos de la web.
 
 ## Tareas en Progreso
 - Ninguna.
