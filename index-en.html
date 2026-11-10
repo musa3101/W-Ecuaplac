@@ -367,11 +367,11 @@
     .text-effect-char {
       display: inline-block;
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(16px);
       filter: blur(8px);
-      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.70s cubic-bezier(0.16, 1, 0.3, 1);
       transition-delay: var(--char-delay, 0s);
       will-change: opacity, transform, filter;
     }
@@ -1762,7 +1762,7 @@
 
         <div class="text-center mb-8 md:mb-12">
           <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] uppercase font-bold block mb-2">Our Work</span>
-          <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em]">
+          <h2 class="font-headline text-[28px] sm:text-[34px] md:text-[46px] font-semibold text-primary leading-tight tracking-[-0.02em] text-fade-in">
             High-End Projects & Finishes
           </h2>
           <p class="font-body text-sm md:text-base text-on-surface-variant/80 mt-2 max-w-xl mx-auto leading-relaxed">
@@ -2707,7 +2707,7 @@
         <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <div class="mb-14 border-b border-primary/20 pb-4 scroll-reveal">
             <span class="font-body text-[11px] md:text-xs tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] uppercase font-bold block mb-2">Before &amp; After</span>
-            <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[48px] font-semibold text-primary leading-tight tracking-[-0.02em]">Real Transformations</h2>
+            <h2 class="font-headline text-[30px] sm:text-[38px] md:text-[48px] font-semibold text-primary leading-tight tracking-[-0.02em] text-fade-in">Real Transformations</h2>
           </div>
           <!-- Interactive Slider (Reveal1 21st.dev luxury style - Limestone) -->
           <div class="transform-card-wrapper group">
@@ -3001,7 +3001,7 @@
               class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">SHALL
               WE TALK ABOUT YOUR SPACE?</span>
             <h2
-              class="font-headline text-[2.75rem] md:text-[3.75rem] font-semibold text-primary leading-none mb-10 tracking-[-0.03em]">
+              class="font-headline text-[2.75rem] md:text-[3.75rem] font-semibold text-primary leading-none mb-10 tracking-[-0.03em] text-fade-in">
               Contact.
             </h2>
 
@@ -3204,7 +3204,7 @@
           class="mb-16 border-b border-primary pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 scroll-reveal">
           <div class="max-w-xl">
             <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold mb-3 block">Questions &amp; Answers</span>
-            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em]">
+            <h2 class="font-headline text-[30px] sm:text-[36px] md:text-[46px] font-semibold text-primary leading-[1.12] tracking-[-0.02em] text-fade-in">
               Frequently Asked Questions
             </h2>
           </div>
@@ -4190,7 +4190,7 @@
               const charsHtml = segment
                 .split('')
                 .map((char) => {
-                  const delay = (globalCharIndex * 0.025).toFixed(3);
+                  const delay = (globalCharIndex * 0.028).toFixed(3);
                   globalCharIndex++;
                   return `<span class="text-effect-char" style="--char-delay: ${delay}s;" aria-hidden="true">${char}</span>`;
                 })

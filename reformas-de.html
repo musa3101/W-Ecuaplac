@@ -481,6 +481,35 @@
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
 }
+
+/* 21st.dev TextEffect (per="char", preset="blur/fade") - motion-primitives */
+.text-fade-in {
+  display: block;
+}
+.text-effect-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(8px);
+  transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--char-delay, 0s);
+  will-change: opacity, transform, filter;
+}
+.text-fade-in.is-visible .text-effect-char {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-effect-char {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
 </style>
 
     <!-- Microsoft Clarity -->
@@ -537,7 +566,7 @@
   <section class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop mb-16">
     <div class="border-b border-primary/20 pb-6">
       <span class="font-body text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] font-bold block mb-2">Vollständige Galerie</span>
-      <h1 class="font-headline text-[32px] sm:text-[40px] md:text-[54px] font-semibold text-primary leading-tight tracking-[-0.025em]">Vorher und Nachher</h1>
+      <h1 class="font-headline text-[32px] sm:text-[40px] md:text-[54px] font-semibold text-primary leading-tight tracking-[-0.025em] text-fade-in">Vorher und Nachher</h1>
       <p class="font-body text-base md:text-lg text-on-surface-variant mt-4 max-w-2xl leading-relaxed">
         Entdecken Sie die ganzheitliche Transformation unserer Projekte. Vom ursprünglichen Zustand bis hin zu vollendeten architektonischen Lösungen mit edlen Oberflächen.
       </p>
@@ -553,7 +582,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Projekt I</span>
-            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Umfassende Badsanierung</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em] text-fade-in">Umfassende Badsanierung</h2>
           </div>
           <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Komplette Erneuerung der Wand- und Bodenbeläge mit texturiertem Feinsteinzeug in Beige, bodengleicher Dusche, mattschwarzen Unterputzarmaturen und maßgefertigtem Natur-Eichenmöbel mit hintergrundbeleuchtetem Spiegel.
@@ -600,7 +629,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Projekt II</span>
-            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Freischwebender Waschtisch nach Maß</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em] text-fade-in">Freischwebender Waschtisch nach Maß</h2>
           </div>
           <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Konzeption und Montage eines freischwebenden Waschtischs aus Hightech-Stein in neutralen Naturtönen mit Aufsatzwaschbecken aus schwarzer Keramik, Unterputz-Wandarmatur und vollständig verdeckten Installationen.
@@ -647,7 +676,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Projekt III</span>
-            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Ankleidezimmer aus Trockenbau und Eiche</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em] text-fade-in">Ankleidezimmer aus Trockenbau und Eiche</h2>
           </div>
           <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Maßgefertigtes Ankleidezimmer und integrierte Regalsysteme im Trockenbau mit seidenmattem Weißfinish, schwebenden Schubladenelementen aus natürlicher Eiche und leichtgängigen Metallauszügen, akzentuiert durch stimmungsvolle indirekte LED-Beleuchtung.
@@ -694,7 +723,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
           <div>
             <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">Projekt IV</span>
-            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">Treppe und Flur aus massiver Eiche</h2>
+            <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em] text-fade-in">Treppe und Flur aus massiver Eiche</h2>
           </div>
           <p class="font-body text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
             Verkleidung der Treppenstufen mit massivem Natureichenholz, eingefasst von glatt gespachtelten weißen Wänden mit wandbündigen zargenlosen Türen und integrierter linearer LED-Stufenbeleuchtung.
@@ -1573,7 +1602,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   <div class="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-12 gap-3 md:gap-4">
                     <div>
                       <span class="font-body text-[11px] md:text-xs text-[#8C6D53] dark:text-[#D49B0B] uppercase tracking-[0.25em] block mb-2 font-bold">${item.category_en || ('Project ' + indexRoman)}</span>
-                      <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em]">${item.title_en}</h2>
+                      <h2 class="font-headline text-[26px] sm:text-[34px] md:text-[44px] leading-tight font-semibold text-primary tracking-[-0.02em] text-fade-in">${item.title_en}</h2>
                     </div>
                     <p class="font-body text-sm md:text-base text-on-surface-variant max-w-xl md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#8C6D53] pl-3.5 md:pr-4 md:pl-0 mt-2 md:mt-8 leading-relaxed">
                       ${item.description_en || ''}
@@ -1616,6 +1645,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
               `;
             }).join('');
+            initTextEffects();
           }
         }
       } catch (err) {
@@ -1852,6 +1882,56 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSliderMetrics();
   });
 </script>
+
+  <!-- 21st.dev TextEffect (per="char", preset="blur/fade", individual scroll trigger) -->
+  <script>
+    function initTextEffects() {
+      const fadeElements = document.querySelectorAll('.text-fade-in');
+      if (fadeElements.length) {
+        fadeElements.forEach((el) => {
+          if (el.dataset.textEffectInit) return;
+          el.dataset.textEffectInit = 'true';
+          const rawText = el.textContent.trim().replace(/\s+/g, ' ');
+          el.setAttribute('aria-label', rawText);
+
+          const segments = rawText.split(/(\s+)/);
+          let globalCharIndex = 0;
+
+          el.innerHTML = segments
+            .map((segment) => {
+              if (/^\s+$/.test(segment)) {
+                return `<span class="inline-block whitespace-pre" aria-hidden="true">${segment}</span>`;
+              }
+              const charsHtml = segment
+                .split('')
+                .map((char) => {
+                  const delay = (globalCharIndex * 0.028).toFixed(3);
+                  globalCharIndex++;
+                  return `<span class="text-effect-char" style="--char-delay: ${delay}s;" aria-hidden="true">${char}</span>`;
+                })
+                .join('');
+
+              return `<span class="inline-block whitespace-pre" aria-hidden="true">${charsHtml}</span>`;
+            })
+            .join('');
+
+          const titleObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  el.classList.add('is-visible');
+                  titleObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -15% 0px' }
+          );
+          titleObserver.observe(el);
+        });
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initTextEffects);
+  </script>
 
   <!-- Dithered Footer JS -->
   <script src="./assets/js/dithered-footer.js" defer></script>
