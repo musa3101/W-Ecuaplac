@@ -25,6 +25,8 @@
 - [x] **Banda de Marca Dithered en el Footer (Estilo 21st)**: Banda interactiva con efecto dithered dorado para ECUAPLAC.
 - [x] **Alineación Perfecta del Logo en Header Móvil**: Corrección del padding transparente en `LogoHedder.webp`, alineación estricta a la izquierda y preservación íntegra de la animación fade/reveal.
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
+- [x] **Recuadros Negros y Optimización Móvil en "Antes y Después"**: Tarjetas con bordes negros sólidos (`border border-black bg-white rounded-2xl`), proporción adaptativa `aspect-[16/10]` en móviles reduciendo el scroll en más del 50% sin recortar fotos, y sincronización total en Supabase (`reformas.html`, `reformas-en.html`, `reformas-de.html`).
+- [x] **Restauración de Iconos de Footer**: Icono oficial de Google Maps e Instagram unificado en todas las páginas.
 
 ## Tareas en Progreso
 - Ninguna.
