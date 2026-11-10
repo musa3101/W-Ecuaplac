@@ -360,28 +360,28 @@
       transform: translateY(0);
     }
 
-    /* 21st.dev Text Fade-In & Word Pull-Up Effect (Luxury Staggered Reveal) */
+    /* 21st.dev TextEffect (per="char", preset="blur/fade") - motion-primitives */
     .text-fade-in {
       display: block;
     }
-    .text-fade-in-word {
+    .text-effect-char {
       display: inline-block;
       opacity: 0;
-      transform: translateY(14px);
-      filter: blur(4px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                  color 0.3s ease;
+      transform: translateY(10px);
+      filter: blur(8px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--char-delay, 0s);
       will-change: opacity, transform, filter;
     }
-    .text-fade-in.is-visible .text-fade-in-word {
+    .text-fade-in.is-visible .text-effect-char {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
     }
     @media (prefers-reduced-motion: reduce) {
-      .text-fade-in-word {
+      .text-effect-char {
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
@@ -4166,32 +4166,48 @@
         revealEls.forEach(el => revealObserver.observe(el));
       }
 
-      // 21st.dev Text Fade-In Effect (word by word) for Servicios / Nuestra Experiencia cards
+      // 21st.dev TextEffect (per='char', preset='blur/fade', individual scroll trigger)
       const fadeElements = document.querySelectorAll('.text-fade-in');
       if (fadeElements.length) {
         fadeElements.forEach((el) => {
-          const text = el.textContent.trim().replace(/\s+/g, ' ');
-          const words = text.split(' ');
-          el.innerHTML = words
-            .map((word, index) => {
-              const delay = (0.04 + index * 0.10).toFixed(2);
-              return `<span class="text-fade-in-word" style="transition-delay: ${delay}s;">${word}</span>`;
-            })
-            .join(' ');
+          const rawText = el.textContent.trim().replace(/\s+/g, ' ');
+          el.setAttribute('aria-label', rawText);
 
-          const card = el.closest('.group') || el;
-          const cardObserver = new IntersectionObserver(
+          // Split into words and whitespace segments to guarantee responsive line breaks without breaking words
+          const segments = rawText.split(/(\s+)/);
+          let globalCharIndex = 0;
+
+          el.innerHTML = segments
+            .map((segment) => {
+              if (/^\s+$/.test(segment)) {
+                return `<span class="inline-block whitespace-pre" aria-hidden="true">${segment}</span>`;
+              }
+              const charsHtml = segment
+                .split('')
+                .map((char) => {
+                  const delay = (globalCharIndex * 0.025).toFixed(3);
+                  globalCharIndex++;
+                  return `<span class="text-effect-char" style="--char-delay: ${delay}s;" aria-hidden="true">${char}</span>`;
+                })
+                .join('');
+
+              return `<span class="inline-block whitespace-pre" aria-hidden="true">${charsHtml}</span>`;
+            })
+            .join('');
+
+          // Observe the title directly so each card triggers strictly 1 by 1 as the user scrolls into its area
+          const titleObserver = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                   el.classList.add('is-visible');
-                  cardObserver.unobserve(entry.target);
+                  titleObserver.unobserve(entry.target);
                 }
               });
             },
-            { threshold: 0.10, rootMargin: '0px 0px -20px 0px' }
+            { threshold: 0.1, rootMargin: '0px 0px -15% 0px' }
           );
-          cardObserver.observe(card);
+          titleObserver.observe(el);
         });
       }
 
