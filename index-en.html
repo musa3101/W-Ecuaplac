@@ -1863,7 +1863,7 @@
                 `,
                 uniforms: { tMap: { value: texture } },
                 transparent: true,
-                depthTest: false,
+                depthTest: true,
                 depthWrite: false,
               });
 
@@ -1871,7 +1871,7 @@
               const capHeightRatio = 0.20;
               this.mesh.scale.set(1.0, capHeightRatio, 1.0);
               this.mesh.position.y = -0.5 + capHeightRatio * 0.5;
-              this.mesh.position.z = 0.04;
+              this.mesh.position.z = 0.05;
               this.mesh.setParent(this.plane);
             }
           }
@@ -1905,15 +1905,14 @@
               this.borderRadius = borderRadius;
 
               this.widthTotal = 0;
-              this.width = 0;
+              this.slotWidth = 0;
+              this.cardWidth = 0;
+              this.cardHeight = 0;
               this.x = 0;
-              this.baseWidth = 0;
-              this.baseHeight = 0;
 
               this.createShader();
               this.createMesh();
               this.createCaption();
-              this.onResize();
             }
 
             createShader() {
@@ -1987,12 +1986,10 @@
               img.src = this.image;
               img.onload = () => {
                 texture.image = img;
-                this.naturalAspect = (img.naturalWidth || img.width) / (img.naturalHeight || img.height);
                 this.program.uniforms.uImageSizes.value = [
                   img.naturalWidth || img.width,
                   img.naturalHeight || img.height,
                 ];
-                this.recomputeScale();
               };
             }
 
@@ -2013,30 +2010,23 @@
               });
             }
 
-            recomputeScale() {
-              if (!this.plane || !this.viewport) return;
-              const isMobile = (this.screen?.width || window.innerWidth) < 768;
-              const cardScale = isMobile ? 0.76 : 0.65;
-              this.baseHeight = this.viewport.height * cardScale;
-              const aspect = this.naturalAspect || 0.72;
-              this.baseWidth = this.baseHeight * Math.min(Math.max(aspect, 0.60), 0.82);
+            onResize({ cardWidth, cardHeight, slotWidth, widthTotal, viewport, screen } = {}) {
+              if (viewport) this.viewport = viewport;
+              if (screen) this.screen = screen;
+              if (cardWidth) this.cardWidth = cardWidth;
+              if (cardHeight) this.cardHeight = cardHeight;
+              if (slotWidth) this.slotWidth = slotWidth;
+              if (widthTotal) this.widthTotal = widthTotal;
 
-              this.plane.scale.y = this.baseHeight;
-              this.plane.scale.x = this.baseWidth;
-
-              this.program.uniforms.uPlaneSizes.value = [
-                this.baseWidth,
-                this.baseHeight,
-              ];
-              this.padding = isMobile ? 0.9 : 1.6;
-              this.width = this.baseWidth + this.padding;
-              this.widthTotal = this.width * this.length;
-              this.x = this.width * this.index;
+              this.x = this.slotWidth * this.index;
+              this.plane.scale.x = this.cardWidth;
+              this.plane.scale.y = this.cardHeight;
+              this.program.uniforms.uPlaneSizes.value = [this.cardWidth, this.cardHeight];
             }
 
             update(scroll) {
               const W = this.widthTotal;
-              if (!W) return;
+              if (!W || !this.viewport) return;
 
               // Modular wrap determinista alrededor de 0: rango [-W/2, W/2]
               let relX = (this.x - scroll.current) % W;
@@ -2044,6 +2034,12 @@
               if (relX > W / 2) relX -= W;
 
               this.plane.position.x = relX;
+
+              // Visibility culling: ocultar si está fuera de pantalla para ahorrar rendimiento y evitar glitches
+              const visibleRange = this.viewport.width * 0.5 + this.cardWidth * 1.2;
+              const isVisible = Math.abs(relX) < visibleRange;
+              this.plane.visible = isVisible;
+              if (!isVisible) return;
 
               const isMobile = (this.screen?.width || window.innerWidth) < 768;
               const H = Math.max(this.viewport.width * 0.5, 1);
@@ -2054,23 +2050,17 @@
               this.plane.position.y = 0;
 
               // 2. Curvatura cilíndrica prémium en profundidad (Z y rotación sutil en Y)
-              const depthCurve = Math.pow(Math.min(normX, 1.4), 1.4);
-              this.plane.position.z = -depthCurve * (isMobile ? 1.6 : 2.4);
-              this.plane.rotation.y = -Math.sign(relX) * Math.min(normX, 1.0) * (isMobile ? 0.20 : 0.28);
+              const depthCurve = Math.pow(Math.min(normX, 1.3), 1.3);
+              this.plane.position.z = -depthCurve * (isMobile ? 1.5 : 2.2);
+              this.plane.rotation.y = -Math.sign(relX) * Math.min(normX, 1.0) * (isMobile ? 0.16 : 0.22);
 
-              // 3. Enfoque de escala suave: activa 100%, adyacentes 90-92%
-              const scaleMod = 1.0 - Math.min(normX, 1.2) * (isMobile ? 0.08 : 0.12);
-              this.plane.scale.x = this.baseWidth * scaleMod;
-              this.plane.scale.y = this.baseHeight * scaleMod;
+              // 3. Enfoque de escala suave: activa 100%, adyacentes 93%
+              const scaleMod = 1.0 - Math.min(normX, 1.0) * (isMobile ? 0.07 : 0.10);
+              this.plane.scale.x = this.cardWidth * scaleMod;
+              this.plane.scale.y = this.cardHeight * scaleMod;
 
               // 4. Atenuación sutil en laterales
               this.program.uniforms.uDarken.value = Math.min(normX, 1.0);
-            }
-
-            onResize({ screen, viewport } = {}) {
-              if (screen) this.screen = screen;
-              if (viewport) this.viewport = viewport;
-              this.recomputeScale();
             }
           }
 
@@ -2092,9 +2082,10 @@
               this.createRenderer();
               this.createCamera();
               this.createScene();
-              this.onResize();
               this.createGeometry();
               this.createMedias();
+              this.onResize();
+
               this.isVisible = false;
               this.observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2138,7 +2129,7 @@
 
             createMedias() {
               let repeated = [...this.items];
-              while (repeated.length < 12) {
+              while (repeated.length < 14) {
                 repeated = [...repeated, ...this.items];
               }
               this.mediasImages = repeated;
@@ -2214,22 +2205,22 @@
               const dx = this.start - endX;
               const elapsed = Math.max(1, Date.now() - (this.startTime || Date.now()));
               const velocity = dx / elapsed;
-              const width = this.medias[0].width;
+              const slot = this.slotWidth || (this.cardWidth ? this.cardWidth + this.cardGap : 8.5);
 
-              if (Math.abs(velocity) > 0.22 || Math.abs(dx) > 35) {
+              if (Math.abs(velocity) > 0.20 || Math.abs(dx) > 30) {
                 let targetIndex;
                 if (dx > 0) {
-                  targetIndex = Math.ceil(this.scroll.position / width);
-                  if (targetIndex * width <= this.scroll.position + 0.1 * width) {
+                  targetIndex = Math.ceil(this.scroll.position / slot);
+                  if (targetIndex * slot <= this.scroll.position + 0.15 * slot) {
                     targetIndex++;
                   }
                 } else {
-                  targetIndex = Math.floor(this.scroll.position / width);
-                  if (targetIndex * width >= this.scroll.position - 0.1 * width) {
+                  targetIndex = Math.floor(this.scroll.position / slot);
+                  if (targetIndex * slot >= this.scroll.position - 0.15 * slot) {
                     targetIndex--;
                   }
                 }
-                this.scroll.target = targetIndex * width;
+                this.scroll.target = targetIndex * slot;
                 return;
               }
 
@@ -2237,10 +2228,10 @@
                 const rect = this.container.getBoundingClientRect();
                 const tapX = endX - rect.left;
                 const ratioX = tapX / Math.max(rect.width, 1);
-                if (ratioX > 0.62) {
+                if (ratioX > 0.65) {
                   this.next();
                   return;
-                } else if (ratioX < 0.38) {
+                } else if (ratioX < 0.35) {
                   this.prev();
                   return;
                 }
@@ -2259,24 +2250,21 @@
             }
 
             onCheck() {
-              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
-              const width = this.medias[0].width;
-              const itemIndex = Math.round(this.scroll.target / width);
-              this.scroll.target = itemIndex * width;
+              if (!this.slotWidth) return;
+              const itemIndex = Math.round(this.scroll.target / this.slotWidth);
+              this.scroll.target = itemIndex * this.slotWidth;
             }
 
             next() {
-              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
-              const width = this.medias[0].width;
-              const currentIndex = Math.round(this.scroll.current / width);
-              this.scroll.target = (currentIndex + 1) * width;
+              if (!this.slotWidth) return;
+              const currentIndex = Math.round(this.scroll.current / this.slotWidth);
+              this.scroll.target = (currentIndex + 1) * this.slotWidth;
             }
 
             prev() {
-              if (!this.medias || !this.medias[0] || !this.medias[0].width) return;
-              const width = this.medias[0].width;
-              const currentIndex = Math.round(this.scroll.current / width);
-              this.scroll.target = (currentIndex - 1) * width;
+              if (!this.slotWidth) return;
+              const currentIndex = Math.round(this.scroll.current / this.slotWidth);
+              this.scroll.target = (currentIndex - 1) * this.slotWidth;
             }
 
             onResize() {
@@ -2294,10 +2282,26 @@
               const width = height * this.camera.aspect;
               this.viewport = { width, height };
 
+              const isMobile = this.screen.width < 768;
+              this.cardHeight = this.viewport.height * (isMobile ? 0.78 : 0.66);
+              this.cardWidth = this.cardHeight * (isMobile ? 0.72 : 0.68);
+              this.cardGap = isMobile ? 0.70 : 1.25;
+              this.slotWidth = this.cardWidth + this.cardGap;
+              this.widthTotal = this.slotWidth * (this.medias ? this.medias.length : 1);
+
               if (this.medias) {
                 this.medias.forEach((media) => {
-                  media.onResize({ screen: this.screen, viewport: this.viewport });
+                  media.onResize({
+                    cardWidth: this.cardWidth,
+                    cardHeight: this.cardHeight,
+                    slotWidth: this.slotWidth,
+                    widthTotal: this.widthTotal,
+                    viewport: this.viewport,
+                    screen: this.screen,
+                  });
+                  media.update(this.scroll);
                 });
+                this.renderer.render({ scene: this.scene, camera: this.camera });
               }
             }
 
@@ -2360,6 +2364,7 @@
                 scrollSpeed: 1.0,
                 borderRadius: 0.05,
               });
+              window.galleryApp = galleryApp;
 
               // Controles de navegación
               const btnPrev = document.getElementById("cg-btn-prev");
@@ -2399,6 +2404,7 @@
                       scrollSpeed: 1.0,
                       borderRadius: 0.05,
                     });
+                    window.galleryApp = galleryApp;
                     const btnPrev = document.getElementById("cg-btn-prev");
                     const btnNext = document.getElementById("cg-btn-next");
                     if (btnPrev) btnPrev.onclick = () => galleryApp.prev();
