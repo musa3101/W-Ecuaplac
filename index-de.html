@@ -3911,21 +3911,33 @@
         const p2 = Math.min(Math.max((progress - 0.5) / 0.5, 0), 1);
 
         if (layer1) {
-          layer1.style.transform = `translate3d(0, ${(-p1 * 12).toFixed(2)}%, 0)`;
+          const t1 = (-p1 * 12).toFixed(2) + '%';
+          if (t1 !== lastY1) {
+            lastY1 = t1;
+            layer1.style.transform = `translate3d(0, ${t1}, 0)`;
+          }
         }
 
         if (layer2) {
           const y2 = (1 - p1) * 100 - (p2 * 12);
-          layer2.style.transform = `translate3d(0, ${y2.toFixed(2)}%, 0)`;
+          const t2 = y2.toFixed(2) + '%';
+          if (t2 !== lastY2) {
+            lastY2 = t2;
+            layer2.style.transform = `translate3d(0, ${t2}, 0)`;
+          }
         }
 
         if (layer3) {
           const y3 = (1 - p2) * 100;
-          layer3.style.transform = `translate3d(0, ${y3.toFixed(2)}%, 0)`;
+          const t3 = y3.toFixed(2) + '%';
+          if (t3 !== lastY3) {
+            lastY3 = t3;
+            layer3.style.transform = `translate3d(0, ${t3}, 0)`;
+          }
         }
 
-        // Active stage indicator and 3D TextRoll trigger
-        const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
+        // Active stage indicator and 3D TextRoll trigger (synchronized with image arrival)
+        const activeIdx = progress < 0.45 ? 0 : (progress < 0.80 ? 1 : 2);
         if (activeIdx !== currentActiveHeroIndex) {
           currentActiveHeroIndex = activeIdx;
           triggerHeroTextRoll(activeIdx);
@@ -3936,64 +3948,63 @@
           }
         }
 
-        // Typography cross-fades (immediate, GPU-composited, no CSS transition delay)
-        // Text 1: active 0.0 -> 0.20, fades out smoothly 0.20 -> 0.38
+        // Typography cross-fades (immediate, GPU-composited, zero redundant DOM writes)
+        // Text 1: active 0.0 -> 0.25, fades out smoothly 0.25 -> 0.42
         if (text1) {
-          if (progress <= 0.20) {
-            text1.style.opacity = '1';
-            text1.style.transform = 'translate3d(0, 0, 0)';
-            text1.style.pointerEvents = 'auto';
-          } else if (progress <= 0.38) {
-            const f = (progress - 0.20) / 0.18;
-            text1.style.opacity = (1 - f).toFixed(2);
-            text1.style.transform = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
-            text1.style.pointerEvents = 'none';
+          let o1, tr1, pe1;
+          if (progress <= 0.25) {
+            o1 = '1'; tr1 = 'translate3d(0, 0, 0)'; pe1 = 'auto';
+          } else if (progress <= 0.42) {
+            const f = (progress - 0.25) / 0.17;
+            o1 = (1 - f).toFixed(2);
+            tr1 = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
+            pe1 = 'none';
           } else {
-            text1.style.opacity = '0';
-            text1.style.pointerEvents = 'none';
+            o1 = '0'; tr1 = 'translate3d(0, -14px, 0)'; pe1 = 'none';
           }
+          if (o1 !== lastO1) { lastO1 = o1; text1.style.opacity = o1; text1.style.pointerEvents = pe1; }
+          if (tr1 !== lastTr1) { lastTr1 = tr1; text1.style.transform = tr1; }
         }
 
-        // Text 2: fades in 0.38 -> 0.50, active until 0.70, fades out 0.70 -> 0.85
+        // Text 2: fades in 0.40 -> 0.52, active until 0.72, fades out 0.72 -> 0.85
         if (text2) {
-          if (progress < 0.38) {
-            text2.style.opacity = '0';
-            text2.style.pointerEvents = 'none';
-          } else if (progress <= 0.50) {
-            const f = (progress - 0.38) / 0.12;
-            text2.style.opacity = f.toFixed(2);
-            text2.style.transform = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
-            text2.style.pointerEvents = 'auto';
-          } else if (progress <= 0.70) {
-            text2.style.opacity = '1';
-            text2.style.transform = 'translate3d(0, 0, 0)';
-            text2.style.pointerEvents = 'auto';
+          let o2, tr2, pe2;
+          if (progress < 0.40) {
+            o2 = '0'; tr2 = 'translate3d(0, 14px, 0)'; pe2 = 'none';
+          } else if (progress <= 0.52) {
+            const f = (progress - 0.40) / 0.12;
+            o2 = f.toFixed(2);
+            tr2 = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
+            pe2 = 'auto';
+          } else if (progress <= 0.72) {
+            o2 = '1'; tr2 = 'translate3d(0, 0, 0)'; pe2 = 'auto';
           } else if (progress <= 0.85) {
-            const f = (progress - 0.70) / 0.15;
-            text2.style.opacity = (1 - f).toFixed(2);
-            text2.style.transform = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
-            text2.style.pointerEvents = 'none';
+            const f = (progress - 0.72) / 0.13;
+            o2 = (1 - f).toFixed(2);
+            tr2 = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
+            pe2 = 'none';
           } else {
-            text2.style.opacity = '0';
-            text2.style.pointerEvents = 'none';
+            o2 = '0'; tr2 = 'translate3d(0, -14px, 0)'; pe2 = 'none';
           }
+          if (o2 !== lastO2) { lastO2 = o2; text2.style.opacity = o2; text2.style.pointerEvents = pe2; }
+          if (tr2 !== lastTr2) { lastTr2 = tr2; text2.style.transform = tr2; }
         }
 
         // Text 3: fades in 0.78 -> 0.90, active until 1.0
         if (text3) {
+          let o3, tr3, pe3;
           if (progress < 0.78) {
-            text3.style.opacity = '0';
-            text3.style.pointerEvents = 'none';
+            o3 = '0'; tr3 = 'translate3d(0, 14px, 0)'; pe3 = 'none';
           } else if (progress <= 0.90) {
             const f = (progress - 0.78) / 0.12;
-            text3.style.opacity = f.toFixed(2);
-            text3.style.transform = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
-            text3.style.pointerEvents = 'auto';
+            o3 = f.toFixed(2);
+            tr3 = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
+            pe3 = 'auto';
           } else {
-            text3.style.opacity = '1';
-            text3.style.transform = 'translate3d(0, 0, 0)';
-            text3.style.pointerEvents = 'auto';
+            o3 = '1'; tr3 = 'translate3d(0, 0, 0)'; pe3 = 'auto';
           }
+          if (o3 !== lastO3) { lastO3 = o3; text3.style.opacity = o3; text3.style.pointerEvents = pe3; }
+          if (tr3 !== lastTr3) { lastTr3 = tr3; text3.style.transform = tr3; }
         }
       }
 
@@ -4170,7 +4181,7 @@
               newHtml += '<span class="text-roll-word" style="display: inline-block; white-space: nowrap;">';
               for (let i = 0; i < word.length; i++) {
                 const char = word[i];
-                const delay = (charGlobalIndex * 0.045).toFixed(3);
+                const delay = (charGlobalIndex * 0.020).toFixed(3);
                 newHtml += `
                   <span class="text-roll-char">
                     <span class="text-roll-top" style="transition-delay: ${delay}s">${char}</span>
