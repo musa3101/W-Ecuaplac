@@ -81,6 +81,8 @@
     "email": "ecuaplac.jyg.sl@gmail.com",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Calle Lledoner 36, piso 2, puerta 3",
+      "postalCode": "07008",
       "addressLocality": "Palma de Mallorca",
       "addressRegion": "Illes Balears",
       "addressCountry": "ES"
@@ -113,10 +115,12 @@
   </script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-  <!-- Preload Critical Hero Images for Instant GPU Decode & Zero Scroll Jank -->
+  <!-- Preload Critical Hero & LCP Gallery Images for Instant Decode & Zero Blank State -->
   <link rel="preload" as="image" href="./assets/img/hero/1.webp" type="image/webp">
   <link rel="preload" as="image" href="./assets/img/hero/2.webp" type="image/webp">
   <link rel="preload" as="image" href="./assets/img/hero/3.webp" type="image/webp">
+  <link rel="preload" as="image" href="./assets/img/portfolio/IMG_2131.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/img/portfolio/IMG_2135.webp" type="image/webp">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <!-- Fontshare High-Speed CDN: Clash Display, Satoshi & Boska -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;f[]=boska@500,700&amp;display=swap" rel="stylesheet">
@@ -326,6 +330,26 @@
       transform: translateY(0);
     }
 
+    /* 21st.dev Text Fade-In Effect (Word by word) */
+    .text-fade-in {
+      display: block;
+    }
+    .text-fade-in-word {
+      display: inline-block;
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+      will-change: opacity;
+    }
+    .text-fade-in.is-visible .text-fade-in-word {
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .text-fade-in-word {
+        opacity: 1 !important;
+        transition: none !important;
+      }
+    }
+
     /* Circular Gallery 1 Fallback Dimensions (Resilience guarantee against CDN lag) */
     #circular-gallery-canvas {
       height: 550px;
@@ -510,6 +534,68 @@
 
     .logo-header {
       animation: reveal 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    /* 21st.dev Text Roll Precision Engine for Hero Titles */
+    .hero-text-roll {
+      display: inline-block;
+      cursor: default;
+    }
+
+    .hero-text-roll .text-roll-char {
+      position: relative;
+      display: inline-block;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      vertical-align: baseline;
+    }
+
+    .hero-text-roll .text-roll-space {
+      display: inline-block;
+      width: 0.28em;
+    }
+
+    .hero-text-roll .text-roll-ghost {
+      visibility: hidden;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .hero-text-roll .text-roll-top,
+    .hero-text-roll .text-roll-bottom {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform, opacity;
+      transition-property: transform, opacity;
+      transition-duration: 0.82s;
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-text-roll .text-roll-top {
+      transform-origin: 50% 20%;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+
+    .hero-text-roll .text-roll-bottom {
+      transform-origin: 50% 90%;
+      transform: rotateX(90deg);
+      opacity: 0;
+    }
+
+    .hero-text-roll.text-rolled .text-roll-top {
+      transform: rotateX(-90deg);
+      opacity: 0;
+    }
+
+    .hero-text-roll.text-rolled .text-roll-bottom {
+      transform: rotateX(0deg);
+      opacity: 1;
     }
 
     @keyframes reveal {
@@ -1520,7 +1606,7 @@
           <div id="hero-text-1"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-0 opacity-100 pointer-events-auto">
             <h1
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="hero-text-roll font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               Arquitectura de<br>espacios limpios.
             </h1>
             <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-2xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
@@ -1533,7 +1619,7 @@
           <div id="hero-text-2"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="hero-text-roll font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               Diseño integral &<br>precisión en cada detalle.
             </h2>
             <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
@@ -1545,7 +1631,7 @@
           <div id="hero-text-3"
             class="absolute bottom-8 md:bottom-16 left-5 right-5 md:left-12 md:right-12 transform translate-y-4 opacity-0 pointer-events-none">
             <h2
-              class="font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
+              class="hero-text-roll font-headline text-[32px] sm:text-[40px] md:text-[54px] lg:text-[64px] font-semibold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.85)] max-w-3xl">
               El resultado que<br>siempre imaginaste.
             </h2>
             <p class="font-body text-sm sm:text-base md:text-lg text-white/95 font-medium leading-relaxed mt-3 max-w-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
@@ -1656,11 +1742,13 @@
           </button>
 
           <!-- Interactive Swipe Hint -->
-          <div class="flex items-center justify-center gap-2 mt-4 text-xs tracking-wider text-[#8C6D53] uppercase font-semibold">
-            <svg class="w-4 h-4 text-[#8C6D53] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-            </svg>
-            <span>Desliza para explorar obras</span>
+          <div class="flex items-center justify-center mt-5">
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-black/10 shadow-[0_2px_10px_rgba(0,0,0,0.04)] backdrop-blur-md select-none transition-all duration-300 hover:border-[#795746]/40 hover:shadow-md">
+              <svg class="w-4 h-4 text-[#8C6D53]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+              </svg>
+              <span class="font-headline text-xs sm:text-[13px] font-semibold tracking-[0.12em] text-[#161413] uppercase">Desliza para explorar obras</span>
+            </div>
           </div>
         </div>
 
@@ -1746,11 +1834,11 @@
             });
           }
 
-          // Generador de textura 2D nítida con leyenda editorial de lujo: ubicación arriba y título abajo
+          // Generador de textura 2D nítida con plinto ébano de lujo, bisel hairline y tipografía arquitectónica Clash Display
           function createCardCaptionTexture(gl, location, title) {
             const dpr = 2; // 2x DPR para nitidez perfecta en WebGL
             const w = 560;
-            const h = 160;
+            const h = 106;
             const canvas = document.createElement("canvas");
             canvas.width = w * dpr;
             canvas.height = h * dpr;
@@ -1758,15 +1846,8 @@
             ctx.scale(dpr, dpr);
             ctx.clearRect(0, 0, w, h);
 
-            // 1. Fondo atmosférico degradado de lujo (viñeta suave sin tapar la arquitectura)
-            const grad = ctx.createLinearGradient(0, 0, 0, h);
-            grad.addColorStop(0, "rgba(10, 9, 8, 0.0)");
-            grad.addColorStop(0.25, "rgba(10, 9, 8, 0.22)");
-            grad.addColorStop(0.60, "rgba(10, 9, 8, 0.68)");
-            grad.addColorStop(1.0, "rgba(10, 9, 8, 0.88)");
-
-            // Borde inferior redondeado ajustado a la curvatura de la tarjeta para no sobresalir
-            const radius = 28;
+            // 1. Plinto negro ébano sólido con esquinas inferiores redondeadas sincronizadas con la tarjeta
+            const radius = 26;
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(w, 0);
@@ -1775,32 +1856,47 @@
             ctx.lineTo(radius, h);
             ctx.arcTo(0, h, 0, h - radius, radius);
             ctx.closePath();
-            ctx.fillStyle = grad;
+            ctx.fillStyle = "#0C0B0A"; // Ébano de lujo profundo y 100% opaco
             ctx.fill();
 
-            // 2. Ubicación (Arriba): Micro-etiqueta arquitectónica sutil y refinada
+            // 2. Bisel superior hairline (reflejo arquitectónico especular de precisión)
+            const hairlineGrad = ctx.createLinearGradient(0, 0, w, 0);
+            hairlineGrad.addColorStop(0, "rgba(255, 255, 255, 0.0)");
+            hairlineGrad.addColorStop(0.15, "rgba(255, 255, 255, 0.08)");
+            hairlineGrad.addColorStop(0.5, "rgba(229, 184, 105, 0.40)");
+            hairlineGrad.addColorStop(0.85, "rgba(255, 255, 255, 0.08)");
+            hairlineGrad.addColorStop(1, "rgba(255, 255, 255, 0.0)");
+
+            ctx.beginPath();
+            ctx.moveTo(0, 0.5);
+            ctx.lineTo(w, 0.5);
+            ctx.strokeStyle = hairlineGrad;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // 3. Ubicación (Arriba): Micro-cápsula dorada con Clash Display
             if (location) {
               const locText = location.toUpperCase();
               ctx.save();
-              ctx.font = "bold 11px 'Montserrat', sans-serif";
+              ctx.font = "600 11px 'Clash Display', 'Montserrat', sans-serif";
               if ("letterSpacing" in ctx) {
-                ctx.letterSpacing = "2.5px";
+                ctx.letterSpacing = "2.8px";
               }
               const metrics = ctx.measureText(locText);
-              const pillPad = 16;
-              const pillH = 24;
-              const pillW = Math.max(metrics.width + pillPad * 2, 86);
+              const pillPad = 14;
+              const pillH = 20;
+              const pillW = Math.max(metrics.width + pillPad * 2, 84);
               const pillX = (w - pillW) / 2;
-              const pillY = 18;
-              const pillR = 12;
+              const pillY = 11;
+              const pillR = 10;
 
-              // Micro-cápsula ahumada translúcida con hairline dorado champán
+              // Micro-cápsula con fondo ahumado y borde champagne nítido
               ctx.beginPath();
               ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
-              ctx.fillStyle = "rgba(255, 255, 255, 0.10)";
+              ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
               ctx.fill();
               ctx.lineWidth = 1;
-              ctx.strokeStyle = "rgba(229, 184, 105, 0.40)";
+              ctx.strokeStyle = "rgba(229, 184, 105, 0.55)";
               ctx.stroke();
 
               // Texto en tono champagne dorado luminoso
@@ -1811,18 +1907,15 @@
               ctx.restore();
             }
 
-            // 3. Título de la obra (Abajo): Tipografía blanca nítida, equilibrada y centrada
+            // 4. Título de la obra (Abajo): Tipografía de autor Clash Display de alta gama
             if (title) {
               ctx.save();
-              ctx.font = "bold 19px 'Montserrat', sans-serif";
-              ctx.fillStyle = "#FFFFFF";
+              ctx.font = "600 18.5px 'Clash Display', 'Montserrat', sans-serif";
+              ctx.fillStyle = "#FAFAF8";
               ctx.textAlign = "center";
               ctx.textBaseline = "top";
-              ctx.shadowColor = "rgba(0, 0, 0, 0.85)";
-              ctx.shadowBlur = 5;
-              ctx.shadowOffsetY = 1.5;
 
-              const maxLineW = w - 50; // Margen de seguridad generoso de 25px a cada lado
+              const maxLineW = w - 60; // Margen de seguridad generoso de 30px a cada lado
               const words = title.split(" ");
               let line = "";
               const lines = [];
@@ -1837,8 +1930,8 @@
               }
               lines.push(line.trim());
 
-              const startY = location ? 52 : 32;
-              const lineH = 25;
+              const startY = location ? 40 : 22;
+              const lineH = 24;
               const displayLines = lines.slice(0, 2);
               if (lines.length > 2) {
                 displayLines[1] = displayLines[1].replace(/[,.]?$/, "...");
@@ -1900,7 +1993,7 @@
               });
 
               this.mesh = new Mesh(this.gl, { geometry, program });
-              const capHeightRatio = 0.20;
+              const capHeightRatio = 0.14;
               this.mesh.scale.set(1.0, capHeightRatio, 1.0);
               this.mesh.position.y = -0.5 + capHeightRatio * 0.5;
               this.mesh.position.z = 0.05;
@@ -2000,15 +2093,16 @@
 
                     // Atenuación suave para tarjetas no centradas, enfoque heroico en la activa
                     vec3 rgb = color.rgb * (1.0 - uDarken * 0.25);
-                    gl_FragColor = vec4(rgb, color.a * alpha);
+                    gl_FragColor = vec4(rgb, color.a * alpha * uAlpha);
                   }
                 `,
                 uniforms: {
                   tMap: { value: texture },
                   uPlaneSizes: { value: [0, 0] },
-                  uImageSizes: { value: [0, 0] },
+                  uImageSizes: { value: [3, 4] },
                   uBorderRadius: { value: this.borderRadius },
                   uDarken: { value: 0 },
+                  uAlpha: { value: 0.0 },
                 },
                 transparent: true,
               });
@@ -2016,13 +2110,20 @@
               const img = new Image();
               img.crossOrigin = "anonymous";
               img.src = this.image;
-              img.onload = () => {
+              if (img.complete && img.naturalWidth) {
                 texture.image = img;
-                this.program.uniforms.uImageSizes.value = [
-                  img.naturalWidth || img.width,
-                  img.naturalHeight || img.height,
-                ];
-              };
+                this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+                this.program.uniforms.uAlpha.value = 1.0;
+              } else {
+                img.onload = () => {
+                  texture.image = img;
+                  this.program.uniforms.uImageSizes.value = [
+                    img.naturalWidth || img.width,
+                    img.naturalHeight || img.height,
+                  ];
+                  this.program.uniforms.uAlpha.value = 1.0;
+                };
+              }
             }
 
             createMesh() {
@@ -2103,6 +2204,10 @@
               this.scrollSpeed = options.scrollSpeed || 1.0;
               this.scroll = { ease: options.scrollEase || 0.075, current: 0, target: 0, last: 0 };
               this.borderRadius = options.borderRadius || 0.05;
+              this.autoPlaySpeed = options.autoPlaySpeed || 0.35; // Desplazamiento cinemático continuo y ultrasuave
+              this.isHovered = false;
+              this.lastTime = performance.now();
+              this.idleTimer = 0;
 
               this.isDown = false;
               this.start = 0;
@@ -2342,11 +2447,34 @@
                 this.raf = null;
                 return;
               }
-              this.scroll.current = lerp(
-                this.scroll.current,
-                this.scroll.target,
-                this.scroll.ease
-              );
+
+              const now = performance.now();
+              const dt = Math.min((now - (this.lastTime || now)) / 1000, 0.05);
+              this.lastTime = now;
+
+              const isInteracting = this.isDown || this.isHovered;
+              const snapDiff = Math.abs(this.scroll.target - this.scroll.current);
+              const isSettling = snapDiff > 0.005;
+
+              if (isInteracting || isSettling) {
+                this.idleTimer = now;
+              }
+
+              // Autoplay cinemático ultrasuave y continuo (micro-drift sin tensión elástica)
+              const canAutoPlay = !isInteracting && (now - this.idleTimer > 1000);
+
+              if (canAutoPlay) {
+                const drift = this.autoPlaySpeed * dt;
+                this.scroll.target += drift;
+                this.scroll.current += drift;
+              } else {
+                this.scroll.current = lerp(
+                  this.scroll.current,
+                  this.scroll.target,
+                  this.scroll.ease
+                );
+              }
+
               if (this.medias) {
                 this.medias.forEach((media) => media.update(this.scroll));
               }
@@ -2360,6 +2488,11 @@
               this.container.addEventListener("wheel", this.onWheel, { passive: true });
               this.container.addEventListener("mousedown", this.onTouchDown);
               this.container.addEventListener("touchstart", this.onTouchDown, { passive: true });
+
+              this.onMouseEnter = () => { this.isHovered = true; };
+              this.onMouseLeave = () => { this.isHovered = false; };
+              this.container.addEventListener("mouseenter", this.onMouseEnter);
+              this.container.addEventListener("mouseleave", this.onMouseLeave);
             }
 
             destroy() {
@@ -2370,6 +2503,8 @@
               this.container.removeEventListener("wheel", this.onWheel);
               this.container.removeEventListener("mousedown", this.onTouchDown);
               this.container.removeEventListener("touchstart", this.onTouchDown);
+              if (this.onMouseEnter) this.container.removeEventListener("mouseenter", this.onMouseEnter);
+              if (this.onMouseLeave) this.container.removeEventListener("mouseleave", this.onMouseLeave);
               window.removeEventListener("mousemove", this.onTouchMove);
               window.removeEventListener("touchmove", this.onTouchMove);
               window.removeEventListener("mouseup", this.onTouchUp);
@@ -2385,6 +2520,12 @@
           document.addEventListener("DOMContentLoaded", async () => {
             const container = document.getElementById("circular-gallery-canvas");
             if (!container) return;
+
+            if (document.fonts) {
+              try {
+                await document.fonts.ready;
+              } catch (_) {}
+            }
 
             let currentItems = initialGalleryItems;
             let galleryApp = null;
@@ -2428,7 +2569,14 @@
                     title: item.title_es || "Proyecto de Reforma",
                   }));
 
-                  if (galleryApp) {
+                  // Diffing inteligente: solo recrear WebGL si el catálogo de Supabase difiere del inicial
+                  const hasChanged = dbItems.length !== currentItems.length || dbItems.some((dbItem, idx) => {
+                    const cur = currentItems[idx];
+                    return !cur || dbItem.image !== cur.image || dbItem.title !== cur.title || dbItem.location !== cur.location;
+                  });
+
+                  if (hasChanged && galleryApp) {
+                    currentItems = dbItems;
                     galleryApp.destroy();
                     galleryApp = new CircularGalleryApp(container, {
                       items: dbItems,
@@ -2456,7 +2604,12 @@
                   const addressEl = document.getElementById("contact-address");
                   const addressItem = contactData.find((item) => item.key === "address");
                   if (addressItem && addressEl) {
-                    addressEl.textContent = addressItem.value_es;
+                    const val = addressItem.value_es;
+                    if (val && !val.toLowerCase().includes("lledoner")) {
+                      addressEl.innerHTML = `Calle Lledoner 36, piso 2, puerta 3<br><span class="text-on-surface-variant font-normal">07008 ${val}</span>`;
+                    } else if (val) {
+                      addressEl.textContent = val;
+                    }
                   }
                   const listItems = contactData.filter((item) => item.key !== "address");
                   if (listItems.length > 0 && listContainer) {
@@ -2519,22 +2672,26 @@
                 </p>
               </div>
 
-              <!-- Slider Container (Calibrated Aspect: Portrait Rectangular on Mobile & Spacious on Desktop) -->
+              <!-- Slider Container (Calibrated Aspect: Vertical Rectangular 4/5 on Mobile & Spacious 16/10 on Desktop) -->
               <div id="before-after-slider"
                 class="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 select-none cursor-ew-resize group bg-[#111] touch-none">
 
-                <!-- After Image (Base Layer - Full) -->
-                <img src="./assets/img/portfolio/despues3.webp"
-                  alt="Vestidor terminado e iluminado con LEDs con acabados premium" loading="lazy"
-                  class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
+                <!-- After Image (Right Layer - Clipped from left) -->
+                <div id="slider-after-layer"
+                  class="absolute inset-0 pointer-events-none select-none z-10"
+                  style="clip-path: inset(0 0 0 50%);">
+                  <img src="./assets/img/portfolio/despues3.webp"
+                    alt="Vestidor terminado e iluminado con LEDs con acabados premium" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
 
-                <!-- Label After -->
-                <div id="label-after"
-                  class="absolute top-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
-                  RESULTADO FINAL
+                  <!-- Label After -->
+                  <div id="label-after"
+                    class="absolute top-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none transition-opacity duration-150">
+                    RESULTADO FINAL
+                  </div>
                 </div>
 
-                <!-- Before Image (Top Layer - Clipped) -->
+                <!-- Before Image (Left Layer - Clipped from right) -->
                 <div id="slider-before-layer"
                   class="absolute inset-0 pointer-events-none select-none z-10"
                   style="clip-path: inset(0 50% 0 0);">
@@ -2543,7 +2700,7 @@
                   
                   <!-- Label Before -->
                   <div id="label-before"
-                    class="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none">
+                    class="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 text-white text-[11px] md:text-xs font-semibold backdrop-blur-md border border-white/10 tracking-widest uppercase shadow-md pointer-events-none transition-opacity duration-150">
                     ESTADO INICIAL
                   </div>
                 </div>
@@ -2653,7 +2810,7 @@
               </div>
               <div>
                 <h3
-                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight text-fade-in">
                   Reformas Integrales
                 </h3>
               </div>
@@ -2689,7 +2846,7 @@
               </div>
               <div>
                 <h3
-                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight text-fade-in">
                   Sistemas de Pladur y Aislamiento
                 </h3>
               </div>
@@ -2725,7 +2882,7 @@
               </div>
               <div>
                 <h3
-                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight text-fade-in">
                   Revestimientos y Acabados
                 </h3>
               </div>
@@ -2762,7 +2919,7 @@
               </div>
               <div>
                 <h3
-                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight">
+                  class="font-headline text-[22px] md:text-[24px] text-primary transition-colors duration-300 group-hover:text-[#8C6D53] font-semibold leading-tight text-fade-in">
                   Pavimentos y Alicatados
                 </h3>
               </div>
@@ -2797,7 +2954,10 @@
                 <span
                   class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-2 font-bold">DIRECCIÓN
                   DE PROYECTOS</span>
-                <p id="contact-address" class="text-lg text-primary">Palma de Mallorca, Islas Baleares</p>
+                <p id="contact-address" class="text-base sm:text-lg text-primary font-medium leading-relaxed">
+                  Calle Lledoner 36, piso 2, puerta 3<br>
+                  <span class="text-on-surface-variant font-normal">07008 Palma de Mallorca, Islas Baleares</span>
+                </p>
               </div>
               <div class="w-full">
                 <span
@@ -2893,7 +3053,17 @@
 
           <!-- Contact Form (Right) -->
           <div id="formulario"
-            class="md:col-span-8 mt-12 md:mt-0 bg-white p-8 md:p-12 border border-[#E5DFD5] rounded-2xl shadow-[0_12px_40px_rgba(121,87,70,0.06)] scroll-mt-24 md:scroll-mt-28">
+            class="md:col-span-8 mt-12 md:mt-0 bg-white p-7 sm:p-10 md:p-12 border-2 border-[#141414] rounded-2xl shadow-[0_16px_40px_rgba(20,20,20,0.06)] scroll-mt-24 md:scroll-mt-28">
+            <!-- Form Header -->
+            <div class="mb-8 border-b border-[#E5DFD5] pb-6">
+              <span class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">PRESUPUESTO SIN COMPROMISO</span>
+              <h3 class="font-headline text-2xl sm:text-3xl font-semibold text-primary tracking-[-0.02em] mb-2.5">
+                Envíenos los detalles de su proyecto
+              </h3>
+              <p class="font-body text-sm sm:text-[15px] text-on-surface-variant leading-relaxed">
+                Describa brevemente su reforma o intervención técnica y nuestro equipo le responderá con una propuesta personalizada en menos de 24 horas.
+              </p>
+            </div>
             <form id="contactForm" onsubmit="event.preventDefault(); handleFormSubmit('contactForm');"
               class="flex flex-col gap-8 scroll-mt-24 md:scroll-mt-28">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -3819,11 +3989,12 @@
           }
         }
 
-        // Active pagination dot indicator (only updates if dot actually changes)
-        if (paginationDots.length === 3 && window.innerWidth >= 768) {
-          const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
-          if (activeIdx !== currentDotIndex) {
-            currentDotIndex = activeIdx;
+        // Active stage indicator and 3D TextRoll trigger
+        const activeIdx = progress < 0.35 ? 0 : (progress < 0.75 ? 1 : 2);
+        if (activeIdx !== currentActiveHeroIndex) {
+          currentActiveHeroIndex = activeIdx;
+          triggerHeroTextRoll(activeIdx);
+          if (paginationDots.length === 3 && window.innerWidth >= 768) {
             paginationDots.forEach((dot, idx) => {
               dot.classList.toggle('active', idx === activeIdx);
             });
@@ -3935,9 +4106,41 @@
         revealEls.forEach(el => revealObserver.observe(el));
       }
 
+      // 21st.dev Text Fade-In Effect (word by word) for Servicios / Nuestra Experiencia cards
+      const fadeElements = document.querySelectorAll('.text-fade-in');
+      if (fadeElements.length) {
+        fadeElements.forEach((el) => {
+          const text = el.textContent.trim().replace(/\s+/g, ' ');
+          const words = text.split(' ');
+          el.innerHTML = words
+            .map((word, index) => {
+              const delay = (0.05 + index * 0.08).toFixed(2);
+              return `<span class="text-fade-in-word" style="transition-delay: ${delay}s;">${word}</span>`;
+            })
+            .join(' ');
+
+          const card = el.closest('.group') || el;
+          const cardObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  el.classList.add('is-visible');
+                  cardObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+          );
+          cardObserver.observe(card);
+        });
+      }
+
       // Image Comparison Slider Logic (Reveal1 21st.dev style)
       const slider = document.getElementById('before-after-slider');
       const beforeLayer = document.getElementById('slider-before-layer');
+      const afterLayer = document.getElementById('slider-after-layer');
+      const labelBefore = document.getElementById('label-before');
+      const labelAfter = document.getElementById('label-after');
       const divider = document.getElementById('slider-divider');
       const handleBtn = document.getElementById('slider-handle-btn');
       const overlay = document.getElementById('slider-interaction-overlay');
@@ -3950,7 +4153,18 @@
           const x = clientX - rect.left;
           const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
           beforeLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+          if (afterLayer) {
+            afterLayer.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+          }
           divider.style.left = `${percentage}%`;
+
+          // Clean fade out of labels near extreme edges so handle never collides and labels never get stuck
+          if (labelBefore) {
+            labelBefore.style.opacity = percentage < 12 ? (percentage / 12) : 1;
+          }
+          if (labelAfter) {
+            labelAfter.style.opacity = percentage > 88 ? ((100 - percentage) / 12) : 1;
+          }
         };
 
         const handleStart = (e) => {
@@ -3985,6 +4199,68 @@
         overlay.addEventListener('mousedown', handleStart);
         overlay.addEventListener('touchstart', handleStart, { passive: true });
       }
+      // 21st.dev Text Roll Precision Engine for Hero Headlines
+      let currentActiveHeroIndex = -1;
+
+      function triggerHeroTextRoll(index) {
+        const target = document.querySelector(`#hero-text-${index + 1} .hero-text-roll`);
+        if (!target) return;
+        target.classList.remove('text-rolled');
+        void target.offsetWidth; // Force reflow
+        target.classList.add('text-rolled');
+      }
+
+      function initHeroTextRoll() {
+        const rollEls = document.querySelectorAll('.hero-text-roll');
+        rollEls.forEach((el) => {
+          const rawHtml = el.innerHTML;
+          const lines = rawHtml.split(/<br\s*\/?>/i);
+          let newHtml = '';
+          let charGlobalIndex = 0;
+
+          lines.forEach((line, lineIdx) => {
+            if (lineIdx > 0) newHtml += '<br>';
+            const temp = document.createElement('div');
+            temp.innerHTML = line;
+            const text = (temp.textContent || temp.innerText || '').trim();
+            const words = text.split(/\s+/);
+
+            words.forEach((word, wordIdx) => {
+              if (wordIdx > 0) newHtml += '<span class="text-roll-space">&nbsp;</span>';
+              newHtml += '<span class="text-roll-word" style="display: inline-block; white-space: nowrap;">';
+              for (let i = 0; i < word.length; i++) {
+                const char = word[i];
+                const delay = (charGlobalIndex * 0.045).toFixed(3);
+                newHtml += `
+                  <span class="text-roll-char">
+                    <span class="text-roll-top" style="transition-delay: ${delay}s">${char}</span>
+                    <span class="text-roll-bottom" style="transition-delay: ${delay}s">${char}</span>
+                    <span class="text-roll-ghost">${char}</span>
+                  </span>
+                `.trim();
+                charGlobalIndex++;
+              }
+              newHtml += '</span>';
+            });
+          });
+
+          el.innerHTML = newHtml;
+
+          // Interactive desktop hover triggers the 3D roll wave
+          el.addEventListener('mouseenter', () => {
+            el.classList.toggle('text-rolled');
+          });
+        });
+
+        // Trigger entrance wave for Slide 1 on load
+        setTimeout(() => {
+          triggerHeroTextRoll(0);
+          currentActiveHeroIndex = 0;
+        }, 300);
+      }
+
+      initHeroTextRoll();
+
       const initialScrollY = window.pageYOffset || window.scrollY || 0;
       handleHeroScroll(initialScrollY);
       handleScroll(initialScrollY);
