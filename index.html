@@ -360,22 +360,31 @@
       transform: translateY(0);
     }
 
-    /* 21st.dev Text Fade-In Effect (Word by word) */
+    /* 21st.dev Text Fade-In & Word Pull-Up Effect (Luxury Staggered Reveal) */
     .text-fade-in {
       display: block;
     }
     .text-fade-in-word {
       display: inline-block;
       opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
-      will-change: opacity;
+      transform: translateY(14px);
+      filter: blur(4px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.3s ease;
+      will-change: opacity, transform, filter;
     }
     .text-fade-in.is-visible .text-fade-in-word {
       opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
     }
     @media (prefers-reduced-motion: reduce) {
       .text-fade-in-word {
         opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
         transition: none !important;
       }
     }
@@ -4155,7 +4164,7 @@
           const words = text.split(' ');
           el.innerHTML = words
             .map((word, index) => {
-              const delay = (0.05 + index * 0.08).toFixed(2);
+              const delay = (0.04 + index * 0.10).toFixed(2);
               return `<span class="text-fade-in-word" style="transition-delay: ${delay}s;">${word}</span>`;
             })
             .join(' ');
@@ -4170,7 +4179,7 @@
                 }
               });
             },
-            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            { threshold: 0.10, rootMargin: '0px 0px -20px 0px' }
           );
           cardObserver.observe(card);
         });
