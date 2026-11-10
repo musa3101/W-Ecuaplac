@@ -27,6 +27,7 @@
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
 - [x] **Recuadros Negros y Optimización Móvil en "Antes y Después"**: Tarjetas con bordes negros sólidos (`border border-black bg-white rounded-2xl`), proporción adaptativa `aspect-[16/10]` en móviles reduciendo el scroll en más del 50% sin recortar fotos, y sincronización total en Supabase (`reformas.html`, `reformas-en.html`, `reformas-de.html`).
 - [x] **Restauración de Iconos de Footer**: Icono oficial de Google Maps e Instagram unificado en todas las páginas.
+- [x] **Solución y Estabilización Matemática de Galería 1 (WebGL 3D Carousel)**: Erradicación definitiva de colisiones/autodoblado de fotos y huecos vacíos mediante ranuras invariantes (`slotWidth`), UV object-cover en GLSL, frustum culling y depth testing en títulos (`index.html`, `index-en.html`, `index-de.html`).
 
 ## Tareas en Progreso
 - Ninguna.
