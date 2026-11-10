@@ -436,52 +436,98 @@ async function handleFormSubmit(formId) {
         class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md cursor-pointer active:scale-95">
         Akzeptieren
       </button>
-      <a href="impressum.html#cookies"
-        class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95 inline-flex items-center justify-center">
-        Konfigurieren
-      </a>
+      <button onclick="rejectCookies()"
+        class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95">
+        Ablehnen
+      </button>
     </div>
   </div>
 </div>
 
 <script>
-  function saveCookieConsent(status) {
-    try {
-      localStorage.setItem('ecuaplac_cookies', status);
-    } catch (e) {}
-    document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax';
-    const banner = document.getElementById('cookie-banner');
-    if (banner) banner.classList.add('translate-y-full');
-  }
-
-  function acceptCookies() {
-    saveCookieConsent('accepted');
-  }
-
-  function rejectCookies() {
-    saveCookieConsent('rejected');
-  }
+  let bannerShown = false;
+  let bannerDismissed = false;
 
   function hasCookieConsent() {
     try {
       const ls = localStorage.getItem('ecuaplac_cookies');
-      if (ls === 'accepted' || ls === 'rejected') return true;
+      if (ls === 'accepted') return true;
+      if (ls === 'rejected') {
+        localStorage.removeItem('ecuaplac_cookies');
+      }
     } catch (e) {}
     const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
-    if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
-      try { localStorage.setItem('ecuaplac_cookies', match[1]); } catch (e) {}
-      return true;
+    if (match) {
+      if (match[1] === 'accepted') {
+        try { localStorage.setItem('ecuaplac_cookies', 'accepted'); } catch (e) {}
+        return true;
+      } else if (match[1] === 'rejected') {
+        document.cookie = 'ecuaplac_cookies=; path=/; max-age=0; SameSite=Lax';
+      }
     }
     return false;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!hasCookieConsent()) {
-      setTimeout(() => {
-        const banner = document.getElementById('cookie-banner');
-        if (banner) banner.classList.remove('translate-y-full');
-      }, 1000);
+  function acceptCookies() {
+    try {
+      localStorage.setItem('ecuaplac_cookies', 'accepted');
+    } catch (e) {}
+    document.cookie = 'ecuaplac_cookies=accepted; path=/; max-age=31536000; SameSite=Lax';
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.classList.add('translate-y-full');
+    bannerDismissed = true;
+  }
+
+  function rejectCookies() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.classList.add('translate-y-full');
+    bannerDismissed = true;
+  }
+
+  function showCookieBanner() {
+    if (bannerShown || bannerDismissed || hasCookieConsent()) return;
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.remove('translate-y-full');
+      bannerShown = true;
     }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (hasCookieConsent()) return;
+
+    const allSections = document.querySelectorAll('main > section, section');
+    const targetSection = allSections.length >= 3 ? allSections[2] : null;
+
+    if (targetSection && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
+            showCookieBanner();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(targetSection);
+    }
+
+    const onScroll = () => {
+      if (targetSection) {
+        const rect = targetSection.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.85) {
+          showCookieBanner();
+          window.removeEventListener('scroll', onScroll);
+        }
+      } else if (window.scrollY > 400) {
+        showCookieBanner();
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    setTimeout(() => {
+      showCookieBanner();
+    }, 8000);
   });
 </script>
 <script>

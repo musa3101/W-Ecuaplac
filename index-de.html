@@ -263,15 +263,32 @@
     }
 
     /* GPU-accelerated scrollytelling layers — Compositor-only, zero zIndex churn (motion-design & modern-web-guidance) */
+    #hero-sticky-element {
+      contain: paint;
+      isolation: isolate;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+
     #hero-sticky-element>div[id^="hero-layer-"] {
       will-change: transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     #hero-sticky-element img {
       transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    #hero-text-1,
+    #hero-text-2,
+    #hero-text-3 {
+      will-change: transform, opacity;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
@@ -573,9 +590,8 @@
       height: 100%;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      will-change: transform, opacity;
       transition-property: transform, opacity;
-      transition-duration: 0.82s;
+      transition-duration: 0.55s;
       transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -1279,13 +1295,20 @@
       max-width: 64rem;
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 6rem;
+      margin-bottom: 3.5rem;
       border-radius: 24px;
       z-index: 10;
       overflow: hidden;
       border: 1px solid #E5E0D6;
       box-shadow: 0 20px 45px -12px rgba(60, 48, 36, 0.08), 0 4px 16px -4px rgba(60, 48, 36, 0.04);
       background: #F7F5F0;
+    }
+
+    @media (min-width: 1024px) {
+      .transform-card-wrapper {
+        max-width: 76rem;
+        margin-bottom: 3rem;
+      }
     }
 
     .dark .transform-card-wrapper {
@@ -2702,9 +2725,9 @@
                 </p>
               </div>
 
-              <!-- Slider Container (Calibrated Aspect: Vertical Rectangular 4/5 on Mobile & Spacious 16/10 on Desktop) -->
+              <!-- Slider Container (Calibrated Aspect: Vertical Rectangular 4/5 on Mobile, 4/3 on Tablet & Spacious 16/10 on Desktop) -->
               <div id="before-after-slider"
-                class="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 select-none cursor-ew-resize group bg-[#111] touch-none">
+                class="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[4/3] lg:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 select-none cursor-ew-resize group bg-[#111] touch-none">
 
                 <!-- After Image (Right Layer - Clipped from left) -->
                 <div id="slider-after-layer"
@@ -2768,7 +2791,7 @@
           </div>
 
           <!-- View All Button Area -->
-          <div class="flex justify-center mt-20 mb-8 pb-12 w-full clear-both">
+          <div class="flex justify-center mt-10 md:mt-12 mb-6 pb-6 w-full clear-both">
             <div class="relative">
 
 
@@ -2811,11 +2834,11 @@
       </div>
 
       <!-- Services Grid (2x2 on Desktop) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 lg:max-w-6xl xl:max-w-7xl mx-auto">
 
         <!-- Service Item 1 -->
         <div
-          class="relative bg-white rounded-2xl border border-black p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+          class="relative bg-white rounded-2xl border border-[#E5DFD5] hover:border-[#8C6D53]/40 p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
           
           <!-- Subtle Top Accent Glow on Hover -->
           <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -2852,7 +2875,7 @@
 
         <!-- Service Item 2 -->
         <div
-          class="relative bg-white rounded-2xl border border-black p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+          class="relative bg-white rounded-2xl border border-[#E5DFD5] hover:border-[#8C6D53]/40 p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
           
           <!-- Subtle Top Accent Glow on Hover -->
           <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -2887,7 +2910,7 @@
 
         <!-- Service Item 3 -->
         <div
-          class="relative bg-white rounded-2xl border border-black p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+          class="relative bg-white rounded-2xl border border-[#E5DFD5] hover:border-[#8C6D53]/40 p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
           
           <!-- Subtle Top Accent Glow on Hover -->
           <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -2922,7 +2945,7 @@
 
         <!-- Service Item 4 -->
         <div
-          class="relative bg-white rounded-2xl border border-black p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
+          class="relative bg-white rounded-2xl border border-[#E5DFD5] hover:border-[#8C6D53]/40 p-7 md:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col overflow-hidden">
           
           <!-- Subtle Top Accent Glow on Hover -->
           <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#8C6D53] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -2963,9 +2986,9 @@
     <div class="ecuador-divider"></div>
     <section id="contacto" class="py-24 bg-[#F4EFE6] scroll-mt-20">
       <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-gutter">
           <!-- Contact Info (Left) -->
-          <div class="md:col-span-4 flex flex-col justify-start scroll-reveal">
+          <div class="col-span-1 lg:col-span-5 xl:col-span-4 flex flex-col justify-start scroll-reveal">
             <span
               class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">SPRECHEN WIR ÜBER IHR PROJEKT?</span>
             <h2
@@ -2987,7 +3010,7 @@
                   class="font-label-caps text-[11px] uppercase tracking-widest text-primary block mb-4 font-bold">KUNDENBETREUUNG</span>
                 <a href="https://wa.me/34678159878?text=Guten%20Tag%20Team%20von%20Ecuaplac%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Projekt%20auf%20Mallorca%20und%20m%C3%B6chte%20weitere%20Informationen%20erhalten."
                   target="_blank" rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center w-full md:w-max bg-[#25D366] text-monolith-white px-8 py-3.5 text-sm rounded-full font-bold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-1 hover:shadow-lg active:scale-95 group">
+                  class="inline-flex items-center justify-center w-full lg:w-max bg-[#25D366] text-monolith-white px-8 py-3.5 text-sm rounded-full font-bold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-1 hover:shadow-lg active:scale-95 group">
                   <svg class="w-5 h-5 mr-3 fill-current transition-transform duration-300 group-hover:scale-110"
                     viewBox="0 0 24 24">
                     <path
@@ -3071,7 +3094,7 @@
 
           <!-- Contact Form (Right) -->
           <div id="formulario"
-            class="md:col-span-8 mt-12 md:mt-0 bg-white p-7 sm:p-10 md:p-12 border-2 border-[#141414] rounded-2xl shadow-[0_16px_40px_rgba(20,20,20,0.06)] scroll-mt-24 md:scroll-mt-28">
+            class="col-span-1 lg:col-span-7 xl:col-span-8 mt-10 lg:mt-0 bg-white p-7 sm:p-10 md:p-8 lg:p-12 border border-[#E5DFD5] rounded-2xl shadow-[0_16px_40px_rgba(20,20,20,0.06)] hover:border-[#8C6D53]/40 transition-colors duration-300 scroll-mt-24 md:scroll-mt-28">
             <!-- Form Header -->
             <div class="mb-8 border-b border-[#E5DFD5] pb-6">
               <span class="font-body text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#8C6D53] dark:text-[#D49B0B] mb-2 block">UNVERBINDLICHES ANGEBOT</span>
@@ -3084,7 +3107,7 @@
             </div>
             <form id="contactForm" onsubmit="event.preventDefault(); handleFormSubmit('contactForm');"
               class="flex flex-col gap-8 scroll-mt-24 md:scroll-mt-28">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                 <!-- Nombre -->
                 <div class="relative">
                   <label for="c_nombre"
@@ -3103,7 +3126,7 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                 <!-- Phone -->
                 <div class="relative">
                   <label for="c_telefono"
@@ -3134,7 +3157,7 @@
               <!-- Submit -->
               <div class="flex justify-end mt-2">
                 <button type="submit"
-                  class="inline-flex items-center justify-center w-full md:w-max bg-primary text-monolith-white px-12 py-4 text-[12px] rounded-full font-bold uppercase tracking-widest transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-xl active:scale-95">
+                  class="inline-flex items-center justify-center w-full lg:w-max bg-primary text-monolith-white px-12 py-4 text-[12px] rounded-full font-bold uppercase tracking-widest transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-xl active:scale-95">
                   NACHRICHT SENDEN
                 </button>
               </div>
@@ -3838,6 +3861,8 @@
       let heroScrollable = 0;
       let isHeroActive = true;
       let currentDotIndex = -1;
+      let lastY1 = '', lastY2 = '', lastY3 = '';
+      let lastO1 = '', lastTr1 = '', lastO2 = '', lastTr2 = '', lastO3 = '', lastTr3 = '';
 
       function measureHero() {
         if (!heroContainer) return;
@@ -3911,17 +3936,17 @@
           }
         }
 
-        // Typography cross-fades (immediate, no CSS transition delay)
+        // Typography cross-fades (immediate, GPU-composited, no CSS transition delay)
         // Text 1: active 0.0 -> 0.20, fades out smoothly 0.20 -> 0.38
         if (text1) {
           if (progress <= 0.20) {
             text1.style.opacity = '1';
-            text1.style.transform = 'translateY(0)';
+            text1.style.transform = 'translate3d(0, 0, 0)';
             text1.style.pointerEvents = 'auto';
           } else if (progress <= 0.38) {
             const f = (progress - 0.20) / 0.18;
             text1.style.opacity = (1 - f).toFixed(2);
-            text1.style.transform = `translateY(${(-f * 14).toFixed(1)}px)`;
+            text1.style.transform = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
             text1.style.pointerEvents = 'none';
           } else {
             text1.style.opacity = '0';
@@ -3937,16 +3962,16 @@
           } else if (progress <= 0.50) {
             const f = (progress - 0.38) / 0.12;
             text2.style.opacity = f.toFixed(2);
-            text2.style.transform = `translateY(${((1 - f) * 14).toFixed(1)}px)`;
+            text2.style.transform = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
             text2.style.pointerEvents = 'auto';
           } else if (progress <= 0.70) {
             text2.style.opacity = '1';
-            text2.style.transform = 'translateY(0)';
+            text2.style.transform = 'translate3d(0, 0, 0)';
             text2.style.pointerEvents = 'auto';
           } else if (progress <= 0.85) {
             const f = (progress - 0.70) / 0.15;
             text2.style.opacity = (1 - f).toFixed(2);
-            text2.style.transform = `translateY(${(-f * 14).toFixed(1)}px)`;
+            text2.style.transform = `translate3d(0, ${(-f * 14).toFixed(1)}px, 0)`;
             text2.style.pointerEvents = 'none';
           } else {
             text2.style.opacity = '0';
@@ -3962,11 +3987,11 @@
           } else if (progress <= 0.90) {
             const f = (progress - 0.78) / 0.12;
             text3.style.opacity = f.toFixed(2);
-            text3.style.transform = `translateY(${((1 - f) * 14).toFixed(1)}px)`;
+            text3.style.transform = `translate3d(0, ${((1 - f) * 14).toFixed(1)}px, 0)`;
             text3.style.pointerEvents = 'auto';
           } else {
             text3.style.opacity = '1';
-            text3.style.transform = 'translateY(0)';
+            text3.style.transform = 'translate3d(0, 0, 0)';
             text3.style.pointerEvents = 'auto';
           }
         }
@@ -4115,9 +4140,14 @@
       function triggerHeroTextRoll(index) {
         const target = document.querySelector(`#hero-text-${index + 1} .hero-text-roll`);
         if (!target) return;
-        target.classList.remove('text-rolled');
-        void target.offsetWidth; // Force reflow
         target.classList.add('text-rolled');
+        // Cleanly reset non-active roll targets without forcing synchronous reflows
+        for (let i = 0; i < 3; i++) {
+          if (i !== index) {
+            const other = document.querySelector(`#hero-text-${i + 1} .hero-text-roll`);
+            if (other) other.classList.remove('text-rolled');
+          }
+        }
       }
 
       function initHeroTextRoll() {
@@ -4301,51 +4331,97 @@
           class="flex-1 md:flex-none uppercase font-bold text-[11px] tracking-[0.2em] text-primary bg-white hover:bg-secondary hover:text-white transition-all duration-300 rounded-full px-8 py-3.5 shadow-md cursor-pointer active:scale-95">
           Akzeptieren
         </button>
-        <a href="impressum.html#cookies"
-          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95 inline-flex items-center justify-center">
-          Konfigurieren
-        </a>
+        <button onclick="rejectCookies()"
+          class="flex-1 md:flex-none text-center uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full px-8 py-3.5 cursor-pointer active:scale-95">
+          Ablehnen
+        </button>
       </div>
     </div>
   </div>
   <script>
-    function saveCookieConsent(status) {
-      try {
-        localStorage.setItem('ecuaplac_cookies', status);
-      } catch (e) {}
-      document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax';
-      const banner = document.getElementById('cookie-banner');
-      if (banner) banner.classList.add('translate-y-full');
-    }
-
-    function acceptCookies() {
-      saveCookieConsent('accepted');
-    }
-
-    function rejectCookies() {
-      saveCookieConsent('rejected');
-    }
+    let bannerShown = false;
+    let bannerDismissed = false;
 
     function hasCookieConsent() {
       try {
         const ls = localStorage.getItem('ecuaplac_cookies');
-        if (ls === 'accepted' || ls === 'rejected') return true;
+        if (ls === 'accepted') return true;
+        if (ls === 'rejected') {
+          localStorage.removeItem('ecuaplac_cookies');
+        }
       } catch (e) {}
       const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
-      if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
-        try { localStorage.setItem('ecuaplac_cookies', match[1]); } catch (e) {}
-        return true;
+      if (match) {
+        if (match[1] === 'accepted') {
+          try { localStorage.setItem('ecuaplac_cookies', 'accepted'); } catch (e) {}
+          return true;
+        } else if (match[1] === 'rejected') {
+          document.cookie = 'ecuaplac_cookies=; path=/; max-age=0; SameSite=Lax';
+        }
       }
       return false;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!hasCookieConsent()) {
-        setTimeout(() => {
-          const banner = document.getElementById('cookie-banner');
-          if (banner) banner.classList.remove('translate-y-full');
-        }, 1000);
+    function acceptCookies() {
+      try {
+        localStorage.setItem('ecuaplac_cookies', 'accepted');
+      } catch (e) {}
+      document.cookie = 'ecuaplac_cookies=accepted; path=/; max-age=31536000; SameSite=Lax';
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.add('translate-y-full');
+      bannerDismissed = true;
+    }
+
+    function rejectCookies() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.add('translate-y-full');
+      bannerDismissed = true;
+    }
+
+    function showCookieBanner() {
+      if (bannerShown || bannerDismissed || hasCookieConsent()) return;
+      const banner = document.getElementById('cookie-banner');
+      if (banner) {
+        banner.classList.remove('translate-y-full');
+        bannerShown = true;
       }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (hasCookieConsent()) return;
+
+      const allSections = document.querySelectorAll('main > section, section');
+      const targetSection = allSections.length >= 3 ? allSections[2] : null;
+
+      if (targetSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
+              showCookieBanner();
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.1 });
+        observer.observe(targetSection);
+      }
+
+      const onScroll = () => {
+        if (targetSection) {
+          const rect = targetSection.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.85) {
+            showCookieBanner();
+            window.removeEventListener('scroll', onScroll);
+          }
+        } else if (window.scrollY > 400) {
+          showCookieBanner();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      setTimeout(() => {
+        showCookieBanner();
+      }, 8000);
     });
   </script>
 
