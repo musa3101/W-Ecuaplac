@@ -28,6 +28,8 @@
 - [x] **Recuadros Negros y Optimización Móvil en "Antes y Después"**: Tarjetas con bordes negros sólidos (`border border-black bg-white rounded-2xl`), proporción adaptativa `aspect-[16/10]` en móviles reduciendo el scroll en más del 50% sin recortar fotos, y sincronización total en Supabase (`reformas.html`, `reformas-en.html`, `reformas-de.html`).
 - [x] **Restauración de Iconos de Footer**: Icono oficial de Google Maps e Instagram unificado en todas las páginas.
 - [x] **Solución y Estabilización Matemática de Galería 1 (WebGL 3D Carousel)**: Erradicación definitiva de colisiones/autodoblado de fotos y huecos vacíos mediante ranuras invariantes (`slotWidth`), UV object-cover en GLSL, frustum culling y depth testing en títulos (`index.html`, `index-en.html`, `index-de.html`).
+- [x] **Erradicación de Parpadeo Blanco y Demora en Galerías 1 y 2**: Preloads LCP (`IMG_2131.webp`, `IMG_2135.webp`), `uAlpha` progresivo en WebGL y diffing de registros en Supabase.
+- [x] **Optimización Extrema de Scrollytelling en el Hero (60/120 fps)**: Eliminación de reflow forzado (`offsetWidth`), calibración de ola de giro 3D a 0.55s / 0.02s, eliminación de sobrecarga de 220 capas GPU en iOS Safari y aceleración por hardware con `translateZ(0)`.
 
 ## Tareas en Progreso
 - Ninguna.
