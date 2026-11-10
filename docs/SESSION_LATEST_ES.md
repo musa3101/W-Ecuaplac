@@ -1,50 +1,79 @@
 # Resumen de Sesión - 10 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
-
-### ¿Qué se ha hecho hoy?
-1. **Optimización y Estabilización Scrollytelling en el Hero (`index.html`, `index-en.html`, `index-de.html`):**
-   - **Erradicación del Reflow Síncrono Forzado:** Diagnóstico exacto del "mini-lagazo / tironcito" al cambiar entre las 3 fotos del Hero. Eliminación de `void target.offsetWidth` en `triggerHeroTextRoll()`, evitando que el navegador congele el renderizado durante el desplazamiento.
-   - **Liberación de Memoria GPU en iPhone (WebKit iOS):** Eliminación de `will-change: transform, opacity` en los más de 220 `<span>` de letras individuales. Se previene la saturación del búfer VRAM del móvil sin perder aceleración gráfica.
-   - **Aceleración por Hardware Dedicada:** Inyección de `contain: paint; isolation: isolate;` en `#hero-sticky-element` y `transform: translateZ(0)` en las imágenes `<img>`, asegurando que las texturas queden cacheadas en GPU.
-   - **Giro Tipográfico Ágil (Estilo Apple / 21st):** Calibración de la ola del giro a `0.020s` por letra y duración de transición a `0.55s`. La animación ahora se completa en apenas ~0.6s de forma enérgica y nítida.
-   - **Sincronización Milimétrica de Disparos:** Activación del giro y cambio de texto sincronizado al 45% y 80% (justo cuando la foto correspondiente entra en pantalla), con filtros de estado para evitar mutaciones redundantes al DOM.
-
-2. **Solución al Parpadeo Blanco y Latencia en Galerías 1 y 2 (`index*.html` y `reformas*.html`):**
-   - **Eliminación de División por Cero en WebGL:** Prevención del error `0.0 / 0.0 = NaN` en el fragment shader con aspect ratio seguro `[3, 4]` y desvanecimiento progresivo con uniforme `uAlpha`.
-   - **Diffing Inteligente con Supabase:** Las galerías ya no destruyen ni recrean el canvas WebGL ni el DOM si los datos remotos coinciden con los locales.
-   - **Preloads Críticos de Alta Prioridad:** Inyección de `<link rel="preload" as="image" fetchpriority="high">` para las imágenes LCP (`IMG_2131.webp`, `IMG_2135.webp`).
-
-3. **Ajustes Responsive y Tarjetas de "Antes y Después" (`reformas*.html`):**
-   - Calibración de bordes y proporciones de tarjetas en tablet y desktop, preservando la optimización móvil completa.
-
-4. **Mini-Merges Ejecutados en la Sesión:**
-   - `2026-11-10T15:39:51 | merge completo | all | push=1` (Merge completo de `dev` a `main`, push a GitHub y despliegue a Cloudflare verificado en directo en `https://ecuaplac.com`).
+*Estado de Sesión: ABIERTA (Trabajando en rama `dev`)*
 
 ---
 
-### Archivos Modificados
-- `index.html`, `index-en.html`, `index-de.html` (Hero scrollytelling fluido, WebGL alpha fade, preloads LCP).
-- `reformas.html`, `reformas-en.html`, `reformas-de.html` (Antes y después responsive, diffing Supabase en galería 2).
-- `aviso-legal.html`, `impressum.html`, `legal-notice.html` (Consistencia responsive).
-- `assets/img/portfolio/antes3.webp` (Foto de portfolio actualizada).
-- `.musa/merges.log` & `.musa/session.json` (Registro de merges y sesión cerrada).
-- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación oficial del proyecto).
+### Memoria Técnica de la Jornada (Recuperación y Perfeccionamiento de la Web Oficial)
+
+1. **Reparación Definitiva del Crash de Galería 1 en iPhone / WebGL (`index*.html`):**
+   - **Diagnóstico:** En dispositivos móviles reales (iPhone / Safari WebKit), la Galería 1 (carrusel 3D WebGL) se quedaba congelada en blanco. El compilador GLSL arrojaba un error fatal de fragment shader: `undeclared identifier uAlpha`.
+   - **Solución:** Se declaró `uniform float uAlpha;` en la cabecera del shader en `index.html`, `index-en.html` y `index-de.html`. El canvas 3D ahora inicializa inmediatamente sin errores de consola (`ERRORS: []`) y renderiza las 10 obras con rotación suave y sombras atmosféricas.
+
+2. **Restauración de Bordes Negros Sólidos Oficiales (`border border-black`):**
+   - Durante auditorías de diseño automatizadas previas, los bordes habían sido suavizados a `#E5DFD5`. Se restauraron los bordes negros arquitectónicos originales solicitados por Musa:
+     - En las **4 tarjetas de servicios** de «Nuestra Experiencia» (`border border-black`).
+     - En la **tarjeta del formulario de contacto** (`border-2 border-[#141414]`).
+     - En todos los recuadros de **Estado Inicial** y **Resultado Final** de los proyectos comparativos en `reformas.html`, `reformas-en.html` y `reformas-de.html` (tanto en el HTML estático como en la inyección de Supabase).
+
+3. **Integración del Botón de Presupuesto por Email Bajo WhatsApp:**
+   - Incorporado debajo del botón verde de WhatsApp un botón tipo píldora (`border border-black bg-white text-primary`) con icono de sobre/email de Google.
+   - Al pulsarlo, ejecuta un scroll suave inmediato hacia `#formulario`.
+   - Implementado en los 3 idiomas:
+     - ES: *«Pedir Presupuesto por Email»*
+     - EN: *«Request Quote via Email»*
+     - DE: *«Angebot per E-Mail anfordern»*
+
+4. **Animación 21st.dev `TextEffect` (Letra a Letra con Blur & Fade Cinemático):**
+   - Adaptación fiel del componente oficial de 21st.dev / *motion-primitives* (`TextEffect` por carácter):
+     - **Curva y ritmo:** Elevación inicial de `16px` (`translateY(16px) -> translateY(0)`), transición pausada y sedosa de `0.70s` con `cubic-bezier(0.16, 1, 0.3, 1)` y retardo escalonado de `0.028s` por carácter con desenfoque dinámico (`filter: blur(8px) -> blur(0)`).
+     - **Activación 1 por 1 al hacer scroll:** Cada título dispone de su propio `IntersectionObserver` dedicado (`rootMargin: '0px 0px -15% 0px'`). La animación se activa individualmente a medida que el usuario hace scroll y entra en la zona de lectura, evitando que se disparen todos en bloque.
+     - **Protección tipográfica y responsive:** Mantiene al 100% las fuentes corporativas (`font-headline`), tamaños, pesos y colores. Las palabras se agrupan en contenedores `inline-block whitespace-pre` para garantizar que los saltos de línea en iPhone/móvil se realicen limpiamente sin partir ninguna palabra por la mitad.
+     - **Títulos con el efecto activo:**
+       - Home (`index*.html`): *Proyectos y Acabados de Alta Gama* (Galería 1), *Transformaciones Reales* (Antes y Después), *4 Servicios* (*Reformas Integrales*, *Sistemas de Pladur y Aislamiento*, *Revestimientos y Acabados*, *Pavimentos y Alicatados*), *Contacto.* y *Preguntas Frecuentes*.
+       - Reformas (`reformas*.html`): *Antes y Después* (Cabecera `h1`), *Lavabo Flotante a Medida* (Proyecto II), *Vestidor de Pladur y Roble* (Proyecto III), *Escalera y Distribuidor de Roble* (Proyecto IV).
+
+5. **Excepción solicitada en Proyecto I de Reformas:**
+   - A petición expresa de Musa, el título **«Reforma Integral de Baño»** en `reformas*.html` se mantuvo estático y fijo, sin retardo ni efecto de fade.
+
+6. **Merge y Despliegue en Producción Verificado (`main` -> Cloudflare):**
+   - Ejecutado mediante `scripts/mini-merge.sh --all --confirmed --push` tras la autorización oficial exacta de Musa (*"Tienes mi OK, haz el merge"*).
+   - Commit en `main`: `0e222af`.
+   - **Comprobación móvil exitosa:** Musa verificó directamente en su iPhone la versión desplegada en `https://ecuaplac.com`, confirmando que el nuevo estado de producción es 100% óptimo y fiel al diseño requerido.
 
 ---
 
-### Problemas Solucionados
-- **Tironcito / lag en el Hero:** Erradicado el reflow forzado de 30ms en pleno scroll y sincronizado el giro con la entrada de cada imagen.
-- **Saturación gráfica en iPhone:** Eliminadas más de 220 capas GPU simultáneas en los textos.
-- **Parpadeo blanco en recarga de galerías:** Resuelto con desvanecimiento alfa en WebGL y diffing de registros Supabase.
-- **Verificación de producción:** Despliegue en Cloudflare confirmado en vivo vía HTTP (`transition-duration: 0.55s` y `charGlobalIndex * 0.020` activos).
+7. **Solución del Salto No Deseado a "Reformas" al Recargar o Entrar (`index*.html`):**
+   - **Diagnóstico:** Existía una variable residual en `sessionStorage` (`ecuaplac_return_section`) y llamadas a `history.replaceState` con `#reformas` que provocaban que al recargar la web o entrar en la URL principal el navegador se desplazara automáticamente hacia la Galería 1 en lugar de la primera foto del Hero.
+   - **Solución:**
+     - Activado `history.scrollRestoration = 'manual'`.
+     - Añadida detección de recarga (`performance.getEntriesByType('navigation')[0].type === 'reload'`) que resetea la posición en `(0, 0)` y limpia cualquier hash espurio.
+     - Implementada la función global `scrollToHeroTop(event)` en los logos del header, footer y enlace Inicio para garantizar retorno suave e instantáneo a la primera foto del Hero.
+
+8. **Sustitución de Iconos de Material Symbols por Hugeicons Menu 02 (21st.dev):**
+   - **Diagnóstico:** Los botones móviles dependían de la fuente web de Google Icons, generando lag de red y mostrando texto crudo (`"menu"` o `"close"`) antes de renderizar el icono.
+   - **Solución:**
+     - Sustituidos todos los iconos por **SVG inline puros** de la librería Hugeicons / 21st.dev (**Menu 02** con 3 barras y animación elástica CSS con efecto hover/active).
+     - Tanto el botón de apertura en el header como el botón de cierre dentro del menú móvil utilizan el **mismo icono animado Menu 02**, eliminando por completo cualquier cruz o parpadeo.
+     - En los modales de presupuesto se integró un SVG vectorial de cruz (X) limpio de 0 ms de carga.
+     - Aplicado en las 6 páginas (`index*.html` y `reformas*.html` en ES, EN y DE).
+
+9. **Auditoría Automatizada con Playwright:**
+   - Verificado en emulador móvil iPhone (`390x844`):
+     - Scroll inicial y tras recarga fijado en `0` (Hero Slide 1).
+     - Menú móvil abre y cierra sin parpadeo de texto ni lag.
+     - Clic en logos superior e inferior hace scroll suave a `(0, 0)` y limpia el hash.
+     - Todos los tests automatizados completados con éxito (`100% PASSED`).
 
 ---
 
-### Qué queda pendiente
-- Conectar la pestaña de **Leads** en la PWA gestor (`appweb/`) con la tabla `ecuaplac_leads` de Supabase.
-- Añadir selector de estados de presupuestos (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*) en la app gestor.
+### Archivos Modificados en la Sesión
+- `index.html`, `index-en.html`, `index-de.html`
+- `reformas.html`, `reformas-en.html`, `reformas-de.html`
+- `docs/SESSION_LATEST_ES.md` (Memoria técnica actualizada)
+- `docs/ROADMAP.md` (Roadmap actualizado)
 
 ---
 
-### Qué se recomienda hacer en la próxima sesión
-1. **Conexión de Leads en la App Gestor (`appweb/`):**
-   - Conectar la tabla `ecuaplac_leads` de Supabase en la interfaz móvil para que Musa pueda recibir, consultar y llamar/contactar a clientes que piden presupuesto directamente desde la app gestor.
+### Estado del Espacio de Trabajo
+- **Rama activa:** `dev` (sincronizada con `origin/dev`).
+- **Próximo paso:** Merge a `main` y despliegue a producción en Cloudflare tras confirmación oficial de Musa.
