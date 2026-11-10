@@ -34,6 +34,8 @@
 - [x] **Restauración de Bordes Negros Sólidos Oficiales**: Estilo arquitectónico `border border-black` recuperado en los 4 servicios de Nuestra Experiencia, tarjeta de formulario y proyectos de Reformas.
 - [x] **Botón de Presupuesto por Email Bajo WhatsApp**: CTA directo en píldora con enlace `#formulario` en español, inglés y alemán.
 - [x] **Animación 21st.dev `TextEffect` por Carácter**: Integración cinemática con `blur(8px) -> blur(0)`, subida de `16px`, transición suave de `0.70s` y activación 1 por 1 al hacer scroll en 12 títulos de la web.
+- [x] **Fijación de Inicio Limpio en el Hero (Slide 1)**: Scroll manual en el navegador, reseteo a `(0, 0)` en recargas y eliminación de variables residuales en `sessionStorage` que causaban saltos accidentales a Reformas.
+- [x] **Sustitución Integral de Iconos por SVG Hugeicons Menu 02 (21st.dev)**: Cero lag y eliminación total del texto `"menu"` / `"close"` con SVG animado de 3 barras tanto para abrir como para cerrar el menú móvil en las 6 páginas.
 
 ## Tareas en Progreso
 - Ninguna.

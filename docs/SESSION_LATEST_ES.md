@@ -42,16 +42,38 @@
 
 ---
 
+7. **Solución del Salto No Deseado a "Reformas" al Recargar o Entrar (`index*.html`):**
+   - **Diagnóstico:** Existía una variable residual en `sessionStorage` (`ecuaplac_return_section`) y llamadas a `history.replaceState` con `#reformas` que provocaban que al recargar la web o entrar en la URL principal el navegador se desplazara automáticamente hacia la Galería 1 en lugar de la primera foto del Hero.
+   - **Solución:**
+     - Activado `history.scrollRestoration = 'manual'`.
+     - Añadida detección de recarga (`performance.getEntriesByType('navigation')[0].type === 'reload'`) que resetea la posición en `(0, 0)` y limpia cualquier hash espurio.
+     - Implementada la función global `scrollToHeroTop(event)` en los logos del header, footer y enlace Inicio para garantizar retorno suave e instantáneo a la primera foto del Hero.
+
+8. **Sustitución de Iconos de Material Symbols por Hugeicons Menu 02 (21st.dev):**
+   - **Diagnóstico:** Los botones móviles dependían de la fuente web de Google Icons, generando lag de red y mostrando texto crudo (`"menu"` o `"close"`) antes de renderizar el icono.
+   - **Solución:**
+     - Sustituidos todos los iconos por **SVG inline puros** de la librería Hugeicons / 21st.dev (**Menu 02** con 3 barras y animación elástica CSS con efecto hover/active).
+     - Tanto el botón de apertura en el header como el botón de cierre dentro del menú móvil utilizan el **mismo icono animado Menu 02**, eliminando por completo cualquier cruz o parpadeo.
+     - En los modales de presupuesto se integró un SVG vectorial de cruz (X) limpio de 0 ms de carga.
+     - Aplicado en las 6 páginas (`index*.html` y `reformas*.html` en ES, EN y DE).
+
+9. **Auditoría Automatizada con Playwright:**
+   - Verificado en emulador móvil iPhone (`390x844`):
+     - Scroll inicial y tras recarga fijado en `0` (Hero Slide 1).
+     - Menú móvil abre y cierra sin parpadeo de texto ni lag.
+     - Clic en logos superior e inferior hace scroll suave a `(0, 0)` y limpia el hash.
+     - Todos los tests automatizados completados con éxito (`100% PASSED`).
+
+---
+
 ### Archivos Modificados en la Sesión
 - `index.html`, `index-en.html`, `index-de.html`
 - `reformas.html`, `reformas-en.html`, `reformas-de.html`
-- `.musa/merges.log` (Registro de despliegues)
 - `docs/SESSION_LATEST_ES.md` (Memoria técnica actualizada)
 - `docs/ROADMAP.md` (Roadmap actualizado)
 
 ---
 
 ### Estado del Espacio de Trabajo
-- **Rama activa:** `dev` (limpia, sincronizada con `origin/dev`).
-- **Sesión de Musa:** **ABIERTA** (lista para las nuevas mejoras que Musa indique).
-- **Servidor local:** Activo en `http://localhost:8080`.
+- **Rama activa:** `dev` (sincronizada con `origin/dev`).
+- **Próximo paso:** Merge a `main` y despliegue a producción en Cloudflare tras confirmación oficial de Musa.
