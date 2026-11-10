@@ -1,5 +1,11 @@
 # Resumen de Sesión - 10 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
-*Estado de Sesión: ABIERTA (Trabajando en rama `dev`)*
+*Estado de Sesión: CERRADA*
+
+---
+
+### Mini-Merges Completados y Desplegados a Producción (`main`)
+- `2026-11-10T18:45:00`: Merge general (reparación WebGL `uAlpha`, bordes negros sólidos, botón email bajo WhatsApp y animaciones 21st.dev `TextEffect`). Commit `0e222af`.
+- `2026-11-10T19:18:11`: Merge general (solución salto de recarga a Hero, e integración de Hugeicons Menu 02 tanto al abrir como al cerrar el menú móvil en las 6 páginas). Commit `6d74698`.
 
 ---
 
@@ -75,5 +81,18 @@
 ---
 
 ### Estado del Espacio de Trabajo
-- **Rama activa:** `dev` (sincronizada con `origin/dev`).
-- **Próximo paso:** Merge a `main` y despliegue a producción en Cloudflare tras confirmación oficial de Musa.
+- **Rama activa:** `dev` (limpia y sincronizada).
+- **Producción:** Desplegada en `main` (`6d74698`) hacia Cloudflare.
+- **Sesión de Musa:** **CERRADA** formalmente (`.musa/session.json`).
+
+---
+
+### Tareas Pendientes y Recomendaciones para la Próxima Sesión
+1. **Conexión de la App Web Gestor con `ecuaplac_leads`:**
+   - Vincular en la PWA móvil (`appweb/`) la recepción en tiempo real de presupuestos guardados desde los formularios.
+2. **Acciones Rápidas de Cliente en App Web:**
+   - Incorporar botones de marcado rápido (llamada y WhatsApp con un toque) en las fichas de presupuestos.
+3. **Selector de Estados de Presupuesto:**
+   - Permitir cambiar el estado de cada lead (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
+4. **Google Search Console:**
+   - Enviar `sitemap.xml` a Google para indexación prioritaria.
