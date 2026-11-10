@@ -2106,6 +2106,7 @@
                   uniform sampler2D tMap;
                   uniform float uBorderRadius;
                   uniform float uDarken;
+                  uniform float uAlpha;
                   varying vec2 vUv;
 
                   float roundedBoxSDF(vec2 p, vec2 b, float r) {
@@ -4245,9 +4246,14 @@
       function triggerHeroTextRoll(index) {
         const target = document.querySelector(`#hero-text-${index + 1} .hero-text-roll`);
         if (!target) return;
-        target.classList.remove('text-rolled');
-        void target.offsetWidth; // Force reflow
         target.classList.add('text-rolled');
+        // Cleanly reset non-active roll targets without forcing synchronous reflows
+        for (let i = 0; i < 3; i++) {
+          if (i !== index) {
+            const other = document.querySelector(`#hero-text-${i + 1} .hero-text-roll`);
+            if (other) other.classList.remove('text-rolled');
+          }
+        }
       }
 
       function initHeroTextRoll() {
