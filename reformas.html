@@ -62,6 +62,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
+        /* 21st.dev / Hugeicons Menu 02 Animated Icon */
+        .menu-icon-svg path {
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform-origin: right center;
+        }
+        .group:hover .menu-line-top,
+        .group:active .menu-line-top {
+          transform: translateX(4px);
+        }
+        .group:hover .menu-line-mid,
+        .group:active .menu-line-mid {
+          transform: translateX(7px);
+        }
+        .group:hover .menu-line-bot,
+        .group:active .menu-line-bot {
+          transform: translateX(4px);
+        }
+
         .material-symbols-outlined {
           font-variation-settings:
           'FILL' 0,
@@ -554,10 +572,14 @@
 <div class="hidden lg:block">
 <a role="button" tabindex="0" class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block" onclick="openPresupuestoModal()">PRESUPUESTO</a>
 </div>
-<!-- Mobile Menu Icon (Functional) -->
-<div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()" aria-label="Abrir menú" role="button" tabindex="0">
-<span class="material-symbols-outlined text-white">menu</span>
-</div>
+<!-- Mobile Menu Icon (21st.dev / Hugeicons Menu 02 Animated) -->
+<button class="lg:hidden flex items-center justify-center p-2 rounded-lg text-white hover:text-[#FFB81C] transition-colors cursor-pointer group focus:outline-none" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación">
+  <svg class="w-6 h-6 menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path class="menu-line-top" d="M20 5L4 5" />
+    <path class="menu-line-mid" d="M20 12L10 12" />
+    <path class="menu-line-bot" d="M20 19L4 19" />
+  </svg>
+</button>
 </div>
 </nav>
 
@@ -1096,8 +1118,11 @@
 <div id="presupuestoModal" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-margin-mobile">
   <div class="bg-[#0C0C0C] w-full max-w-3xl border border-white/20 p-8 md:p-12 animate-fade-in relative max-h-[90dvh] overflow-y-auto">
     <!-- Close Button -->
-    <button class="absolute top-6 right-6 text-white hover:opacity-75 transition-opacity w-12 h-12 flex items-center justify-center" onclick="closePresupuestoModal()">
-      <span class="material-symbols-outlined text-3xl">close</span>
+    <button class="absolute top-6 right-6 text-white hover:text-[#888888] cursor-pointer w-12 h-12 flex items-center justify-center transition-colors group" onclick="closePresupuestoModal()" aria-label="Cerrar modal">
+      <svg class="w-7 h-7 transition-transform duration-200 group-hover:rotate-90 group-active:scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
     </button>
     
     <!-- Modal Content -->
@@ -1180,8 +1205,11 @@
 <div id="mobileMenu" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end" onclick="if(event.target === this) toggleMobileMenu()">
   <div class="bg-black w-[280px] h-full p-8 flex flex-col justify-between border-l border-white/10 animate-slide-up relative">
     <div class="ecuador-divider absolute top-0 left-0 w-full"></div>
-    <button class="absolute top-6 right-6 text-white" aria-label="Cerrar menú" onclick="toggleMobileMenu()">
-      <span class="material-symbols-outlined text-3xl">close</span>
+    <button class="absolute top-6 right-6 text-white hover:text-[#FFB81C] cursor-pointer p-2 rounded-lg transition-colors group focus:outline-none" aria-label="Cerrar menú" onclick="toggleMobileMenu()">
+      <svg class="w-7 h-7 transition-transform duration-200 group-hover:rotate-90 group-active:scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
     </button>
     <div class="mt-12 flex flex-col gap-6 font-headline text-2xl font-semibold uppercase tracking-wider">
       <a class="pb-2 border-b border-white/10 text-white hover:text-secondary block py-2 transition-colors" onclick="toggleMobileMenu()" href="index.html">INICIO</a>

@@ -390,6 +390,24 @@
       }
     }
 
+    /* 21st.dev / Hugeicons Menu 02 Animated Icon */
+    .menu-icon-svg path {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: right center;
+    }
+    .group:hover .menu-line-top,
+    .group:active .menu-line-top {
+      transform: translateX(4px);
+    }
+    .group:hover .menu-line-mid,
+    .group:active .menu-line-mid {
+      transform: translateX(7px);
+    }
+    .group:hover .menu-line-bot,
+    .group:active .menu-line-bot {
+      transform: translateX(4px);
+    }
+
     /* Circular Gallery 1 Fallback Dimensions (Resilience guarantee against CDN lag) */
     #circular-gallery-canvas {
       height: 550px;
@@ -1592,7 +1610,7 @@
     <div
       class="flex justify-between items-center h-[72px] px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
       <!-- Brand -->
-      <a class="flex items-center ml-0" href="#">
+      <a class="flex items-center ml-0" href="./index-de.html" onclick="scrollToHeroTop(event)" aria-label="Ecuaplac Startseite">
         <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
           class="logo-header h-10 md:h-11 w-auto object-contain select-none" loading="eager">
       </a>
@@ -1619,10 +1637,14 @@
         <a class="uppercase font-bold text-[11px] tracking-[0.2em] text-white border border-white/40 rounded-full px-6 py-2.5 hover:bg-white hover:text-primary hover:border-white transition-all duration-300 cursor-pointer active:scale-95 shadow-sm hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 inline-block"
           onclick="openPresupuestoModal()">ANGEBOT</a>
       </div>
-      <!-- Mobile Menu Icon (Functional) -->
-      <div class="lg:hidden flex items-center cursor-pointer" onclick="toggleMobileMenu()">
-        <span class="material-symbols-outlined text-white">menu</span>
-      </div>
+      <!-- Mobile Menu Icon (21st.dev / Hugeicons Menu 02 Animated) -->
+      <button class="lg:hidden flex items-center justify-center p-2 rounded-lg text-white hover:text-[#FFB81C] transition-colors cursor-pointer group focus:outline-none" onclick="toggleMobileMenu()" aria-label="Navigationsmenü öffnen">
+        <svg class="w-6 h-6 menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path class="menu-line-top" d="M20 5L4 5" />
+          <path class="menu-line-mid" d="M20 12L10 12" />
+          <path class="menu-line-bot" d="M20 19L4 19" />
+        </svg>
+      </button>
     </div>
   </nav>
   <main>
@@ -3344,7 +3366,7 @@
 
         <!-- Column 1 (Mobile: Top Full Width / Desktop: Center) -->
         <div class="col-span-2 md:col-span-1 order-1 md:order-2 flex flex-col items-center justify-center text-center pb-8 md:pb-0 border-b border-[#1C1C1E]/60 md:border-b-0">
-          <a href="#" class="block cursor-pointer inline-flex">
+          <a href="./index-de.html" onclick="scrollToHeroTop(event)" class="block cursor-pointer inline-flex" aria-label="Zurück zur Startseite">
             <div
               class="w-28 h-28 md:w-36 md:h-36 mb-6 md:mb-8 group rounded-full border-[3px] border-[#FFB81C] bg-white flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 shadow-md">
               <img src="./assets/img/logos/Logofotter.svg" alt="ECUAPLAC Logo"
@@ -3470,9 +3492,12 @@
       class="relative w-full max-w-2xl bg-[#0C0C0C] border border-white/20 p-8 md:p-12 z-10 transition-transform duration-300 transform scale-95 shadow-xl max-h-[90dvh] overflow-y-auto">
       <!-- Close Button -->
       <button
-        class="absolute top-6 right-6 text-white hover:text-[#888888] cursor-pointer w-12 h-12 flex items-center justify-center"
-        onclick="closePresupuestoModal()">
-        <span class="material-symbols-outlined text-3xl">close</span>
+        class="absolute top-6 right-6 text-white hover:text-[#888888] cursor-pointer w-12 h-12 flex items-center justify-center transition-colors group"
+        onclick="closePresupuestoModal()" aria-label="Modal schließen">
+        <svg class="w-7 h-7 transition-transform duration-200 group-hover:rotate-90 group-active:scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
 
       <div class="mb-8">
@@ -3579,12 +3604,15 @@
     <!-- Top Bar inside Mobile Menu (Mini Header) -->
     <div class="absolute top-0 left-0 w-full bg-black z-10">
       <div class="flex justify-between items-center h-24 px-8">
-        <a class="flex items-center ml-0" href="#" onclick="toggleMobileMenu()">
+        <a class="flex items-center ml-0 cursor-pointer" href="./index-de.html" onclick="scrollToHeroTop(event)" aria-label="Ecuaplac Startseite">
           <img src="./assets/img/logos/LogoHedder.webp" alt="ECUAPLAC Logo"
             class="h-10 w-auto object-contain select-none" loading="lazy">
         </a>
-        <button class="text-white cursor-pointer" onclick="toggleMobileMenu()">
-          <span class="material-symbols-outlined text-3xl">close</span>
+        <button class="text-white hover:text-[#FFB81C] cursor-pointer p-2 rounded-lg transition-colors group focus:outline-none" onclick="toggleMobileMenu()" aria-label="Menü schließen">
+          <svg class="w-7 h-7 transition-transform duration-200 group-hover:rotate-90 group-active:scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
       <div class="ecuador-divider w-full"></div>
@@ -3592,8 +3620,8 @@
 
     <!-- Navigation Links -->
     <ul class="flex flex-col gap-8 font-headline text-2xl font-semibold uppercase tracking-wider text-center mt-12">
-      <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#hero-scroll-container"
-          onclick="toggleMobileMenu()">STARTSEITE</a></li>
+      <li><a class="text-white hover:text-secondary block py-2 transition-colors cursor-pointer" href="./index-de.html"
+          onclick="scrollToHeroTop(event)">STARTSEITE</a></li>
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#reformas"
           onclick="toggleMobileMenu()">RENOVIERUNGEN</a></li>
       <li><a class="text-white hover:text-secondary block py-2 transition-colors" href="#servicios"
@@ -3632,6 +3660,30 @@
   </div>
 
   <script>
+    // Scroll cleanly to top of Hero (Slide 1 / First photo) & reset URL hash
+    function scrollToHeroTop(event) {
+      if (event) {
+        event.preventDefault();
+      }
+      try {
+        sessionStorage.removeItem('ecuaplac_return_section');
+        if (window.location.hash) {
+          history.replaceState(null, null, window.location.pathname);
+        }
+      } catch (e) {}
+
+      // Close mobile menu if open
+      const menu = document.getElementById('mobileMenu');
+      if (menu && !menu.classList.contains('invisible')) {
+        menu.classList.remove('visible', 'opacity-100');
+        menu.classList.add('invisible', 'opacity-0');
+        document.body.style.overflow = '';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.scrollToHeroTop = scrollToHeroTop;
+
     // Mobile Menu state toggle
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
@@ -3804,6 +3856,34 @@
           }
         });
       });
+
+      // Scroll restoration: Ensure reloads start at top of Hero (Slide 1)
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      const navEntries = performance.getEntriesByType('navigation');
+      const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
+
+      if (isReload) {
+        try {
+          sessionStorage.removeItem('ecuaplac_return_section');
+          if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname);
+          }
+        } catch (e) {}
+        window.scrollTo(0, 0);
+      } else {
+        const returnSection = window.location.hash;
+        if (returnSection && returnSection !== '#') {
+          setTimeout(() => {
+            const target = document.querySelector(returnSection);
+            if (target) {
+              const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 72;
+              smoothScrollTo(offsetTop, 400);
+            }
+          }, 200);
+        }
+      }
 
       // 1. Off-thread Pre-warming & GPU Texture Decode for Hero Images
       ['./assets/img/hero/1.webp', './assets/img/hero/2.webp', './assets/img/hero/3.webp'].forEach(src => {
