@@ -1285,26 +1285,43 @@
 
     // 1. Guardar copia del Lead en Supabase (ecuaplac_leads)
     try {
+      const nameVal = formData.get('nombre') || formData.get('name') || '';
+      const phoneVal = formData.get('telefono') || formData.get('phone') || '';
+      const emailVal = formData.get('email') || '';
+      const projectTypeVal = formData.get('tipo_proyecto') || formData.get('project_type') || 'Renovation';
+      const metros = formData.get('metros') ? `${formData.get('metros')} m²` : '-';
+      const presupuesto = formData.get('presupuesto') || '-';
+      const ubicacion = formData.get('ubicacion') || '-';
+      const mensaje = formData.get('mensaje') || '-';
+      const messageVal = `Service: ${projectTypeVal} | Surface: ${metros} | Estimated Budget: ${presupuesto} | Location: ${ubicacion} | Details: ${mensaje}`;
+
+      const leadPayload = {
+        name: String(nameVal || 'Contacto Reformas EN'),
+        phone: phoneVal ? String(phoneVal) : null,
+        email: emailVal ? String(emailVal) : null,
+        project_type: String(projectTypeVal),
+        message: String(messageVal),
+        source_page: 'reformas-en.html',
+        status: 'nuevo'
+      };
+
+      const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+      const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+
       if (window.supabase && typeof window.supabase.createClient === 'function') {
-        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
-        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
         const sbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-        const nameVal = formData.get('nombre') || '';
-        const phoneVal = formData.get('telefono') || '';
-        const emailVal = formData.get('email') || '';
-        const projectTypeVal = formData.get('tipo_proyecto') || '';
-        const messageVal = `Surface: ${formData.get('metros') || '-'} m² | Budget: ${formData.get('presupuesto') || '-'} | Location: ${formData.get('ubicacion') || '-'} | Message: ${formData.get('mensaje') || '-'}`;
-
-        await sbClient.from('ecuaplac_leads').insert([{
-          name: String(nameVal),
-          phone: String(phoneVal),
-          email: String(emailVal),
-          project_type: String(projectTypeVal),
-          message: String(messageVal),
-          source_page: 'reformas-en.html',
-          status: 'nuevo'
-        }]);
+        await sbClient.from('ecuaplac_leads').insert([leadPayload]);
+      } else {
+        await fetch(`${supabaseUrl}/rest/v1/ecuaplac_leads`, {
+          method: 'POST',
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify([leadPayload])
+        });
       }
     } catch (sbErr) {
       console.warn('Supabase Lead insert notice:', sbErr);
