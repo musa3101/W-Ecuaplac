@@ -1521,37 +1521,45 @@ async function handleFormSubmit(formId) {
     function hasCookieConsent() {
       try {
         const ls = localStorage.getItem('ecuaplac_cookies');
-        if (ls === 'accepted') return true;
-        if (ls === 'rejected') {
-          localStorage.removeItem('ecuaplac_cookies');
-        }
+        if (ls === 'accepted' || ls === 'rejected') return true;
+      } catch (e) {}
+      try {
+        const ss = sessionStorage.getItem('ecuaplac_cookies');
+        if (ss === 'accepted' || ss === 'rejected') return true;
       } catch (e) {}
       const match = document.cookie.match(/(?:^|;\s*)ecuaplac_cookies=([^;]+)/);
-      if (match) {
-        if (match[1] === 'accepted') {
-          try { localStorage.setItem('ecuaplac_cookies', 'accepted'); } catch (e) {}
-          return true;
-        } else if (match[1] === 'rejected') {
-          document.cookie = 'ecuaplac_cookies=; path=/; max-age=0; SameSite=Lax';
-        }
+      if (match && (match[1] === 'accepted' || match[1] === 'rejected')) {
+        return true;
       }
       return false;
     }
 
-    function acceptCookies() {
-      try {
-        localStorage.setItem('ecuaplac_cookies', 'accepted');
-      } catch (e) {}
-      document.cookie = 'ecuaplac_cookies=accepted; path=/; max-age=31536000; SameSite=Lax';
+    function saveCookieConsent(status) {
+      try { localStorage.setItem('ecuaplac_cookies', status); } catch (e) {}
+      try { sessionStorage.setItem('ecuaplac_cookies', status); } catch (e) {}
+      document.cookie = 'ecuaplac_cookies=' + status + '; path=/; max-age=31536000; SameSite=Lax; Secure';
+    }
+
+    function hideBannerCompletely() {
       const banner = document.getElementById('cookie-banner');
-      if (banner) banner.classList.add('translate-y-full');
+      if (banner) {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 700);
+      }
       bannerDismissed = true;
+      bannerShown = true;
+    }
+
+    function acceptCookies() {
+      saveCookieConsent('accepted');
+      hideBannerCompletely();
     }
 
     function rejectCookies() {
-      const banner = document.getElementById('cookie-banner');
-      if (banner) banner.classList.add('translate-y-full');
-      bannerDismissed = true;
+      saveCookieConsent('rejected');
+      hideBannerCompletely();
     }
 
     function showCookieBanner() {
@@ -1564,7 +1572,11 @@ async function handleFormSubmit(formId) {
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if (hasCookieConsent()) return;
+      if (hasCookieConsent()) {
+        const banner = document.getElementById('cookie-banner');
+        if (banner) banner.style.display = 'none';
+        return;
+      }
 
       const allSections = document.querySelectorAll('main > section, section');
       const targetSection = allSections.length >= 3 ? allSections[2] : null;
