@@ -4444,26 +4444,55 @@
 
       // 1. Guardar copia del Lead en Supabase (ecuaplac_leads)
       try {
+        const nameVal = formData.get('c_nombre') || formData.get('p_nombre') || formData.get('name') || formData.get('nombre') || '';
+        const phoneVal = formData.get('c_telefono') || formData.get('p_telefono') || formData.get('phone') || formData.get('telefono') || '';
+        const emailVal = formData.get('c_email') || formData.get('p_email') || formData.get('email') || '';
+
+        let projectTypeVal = '';
+        let messageVal = '';
+
+        if (formId === 'contactForm') {
+          projectTypeVal = formData.get('c_asunto') || 'Presupuesto por Email (Web EN)';
+          messageVal = formData.get('c_mensaje') || '';
+        } else if (formId === 'presupuestoForm') {
+          projectTypeVal = formData.get('p_tipo') || formData.get('tipo_proyecto') || 'Solicitud de Presupuesto (Web EN)';
+          const metros = formData.get('p_metros') || formData.get('metros') ? `${formData.get('p_metros') || formData.get('metros')} m²` : '-';
+          const presupuesto = formData.get('p_presupuesto') || formData.get('presupuesto') || '-';
+          const ubicacion = formData.get('p_ubicacion') || formData.get('ubicacion') || '-';
+          const desc = formData.get('p_descripcion') || formData.get('mensaje') || '-';
+          messageVal = `Servicio: ${projectTypeVal} | Metros: ${metros} | Rango Presupuesto: ${presupuesto} | Ubicación: ${ubicacion} | Detalles: ${desc}`;
+        } else {
+          projectTypeVal = formData.get('project_type') || formData.get('tipo_proyecto') || formData.get('service') || 'Web Form';
+          messageVal = formData.get('message') || formData.get('mensaje') || '';
+        }
+
+        const leadPayload = {
+          name: String(nameVal || 'Contacto Web EN'),
+          phone: phoneVal ? String(phoneVal) : null,
+          email: emailVal ? String(emailVal) : null,
+          project_type: String(projectTypeVal),
+          message: String(messageVal),
+          source_page: window.location.pathname.split('/').pop() || 'index-en.html',
+          status: 'nuevo'
+        };
+
+        const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
+        const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
+
         if (window.supabase && typeof window.supabase.createClient === 'function') {
-          const supabaseUrl = 'https://wkfddccsantywcrsxpox.supabase.co';
-          const supabaseKey = 'sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI';
           const sbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-          const nameVal = formData.get('name') || formData.get('nombre') || '';
-          const phoneVal = formData.get('phone') || formData.get('telefono') || '';
-          const emailVal = formData.get('email') || '';
-          const projectTypeVal = formData.get('project_type') || formData.get('tipo_proyecto') || formData.get('service') || '';
-          const messageVal = formData.get('message') || formData.get('mensaje') || formData.get('comments') || '';
-
-          await sbClient.from('ecuaplac_leads').insert([{
-            name: String(nameVal),
-            phone: String(phoneVal),
-            email: String(emailVal),
-            project_type: String(projectTypeVal),
-            message: String(messageVal),
-            source_page: window.location.pathname.split('/').pop() || 'index-en.html',
-            status: 'nuevo'
-          }]);
+          await sbClient.from('ecuaplac_leads').insert([leadPayload]);
+        } else {
+          await fetch(`${supabaseUrl}/rest/v1/ecuaplac_leads`, {
+            method: 'POST',
+            headers: {
+              'apikey': supabaseKey,
+              'Authorization': `Bearer ${supabaseKey}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify([leadPayload])
+          });
         }
       } catch (sbErr) {
         console.warn('Supabase Lead insert notice:', sbErr);
