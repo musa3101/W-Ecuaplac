@@ -67,19 +67,36 @@ export async function onRequestPost(context) {
       const label = (field.label || "").trim();
       const val = field.value;
 
-      // Formatear valor legible (soporte para arrays, subida de archivos/fotos y textos)
+      // 1. Mapear opciones de Tally (Dropdowns, Selección Múltiple, Checkboxes)
+      // Tally envía en 'value' los IDs (ej: "4a9aaaa0-cbd6...") y en 'options' la lista [{ id, text }]
+      let resolvedVal = val;
+      if (Array.isArray(field.options) && field.options.length > 0) {
+        const optMap = new Map();
+        for (const opt of field.options) {
+          if (opt && opt.id) {
+            optMap.set(String(opt.id), opt.text || opt.label || String(opt.id));
+          }
+        }
+        if (Array.isArray(val)) {
+          resolvedVal = val.map(v => (typeof v === "string" && optMap.has(v) ? optMap.get(v) : v));
+        } else if (typeof val === "string" && optMap.has(val)) {
+          resolvedVal = optMap.get(val);
+        }
+      }
+
+      // 2. Formatear valor legible (soporte para arrays, subida de archivos/fotos y textos)
       let strVal = "";
-      if (Array.isArray(val)) {
-        strVal = val.map(item => {
+      if (Array.isArray(resolvedVal)) {
+        strVal = resolvedVal.map(item => {
           if (typeof item === "object" && item !== null) {
             return item.url || item.name || JSON.stringify(item);
           }
           return String(item);
         }).join(", ");
-      } else if (typeof val === "object" && val !== null) {
-        strVal = val.url || val.name || JSON.stringify(val);
+      } else if (typeof resolvedVal === "object" && resolvedVal !== null) {
+        strVal = resolvedVal.url || resolvedVal.name || JSON.stringify(resolvedVal);
       } else {
-        strVal = val !== undefined && val !== null ? String(val).trim() : "";
+        strVal = resolvedVal !== undefined && resolvedVal !== null ? String(resolvedVal).trim() : "";
       }
 
       if (!strVal) continue;
