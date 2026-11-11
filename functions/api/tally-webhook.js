@@ -6,27 +6,50 @@
 const SUPABASE_URL = "https://wkfddccsantywcrsxpox.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI";
 
-// Manejo de Preflight CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, tally-signature",
+  "Content-Type": "application/json",
+};
+
+// 1. Manejo de Preflight CORS
 export async function onRequestOptions() {
   return new Response(null, {
     status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization, tally-signature",
-    },
+    headers: corsHeaders,
   });
 }
 
-// Manejo de Recepción de Webhook
-export async function onRequestPost(context) {
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  };
+// 2. Manejo de Verificación GET / Ping de Tally
+export async function onRequestGet() {
+  return new Response(JSON.stringify({ status: "active", message: "Ecuaplac Tally Webhook está listo y activo" }), {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
+// 3. Manejo de Recepción de Webhook (POST)
+export async function onRequestPost(context) {
   try {
-    const rawBody = await context.request.json();
+    let rawBody;
+    try {
+      rawBody = await context.request.json();
+    } catch (parseErr) {
+      // Si Tally envía un ping de verificación o cuerpo vacío, respondemos 200 OK inmediatamente
+      return new Response(JSON.stringify({ success: true, message: "Webhook ping OK" }), {
+        status: 200,
+        headers: corsHeaders,
+      });
+    }
+
+    if (!rawBody || Object.keys(rawBody).length === 0) {
+      return new Response(JSON.stringify({ success: true, message: "Webhook ping vacío recibido" }), {
+        status: 200,
+        headers: corsHeaders,
+      });
+    }
+
     console.log("Tally Webhook payload recibido:", JSON.stringify(rawBody));
 
     // Estructura Tally: { eventType: "FORM_RESPONSE", data: { fields: [...], ... } }
@@ -64,22 +87,22 @@ export async function onRequestPost(context) {
       const lowerLabel = label.toLowerCase();
       const type = (field.type || "").toUpperCase();
 
-      // 1. Detección estricta de Nombre
+      // Detección estricta de Nombre
       if (!name && (lowerLabel.includes("nombre") || lowerLabel.includes("name") || lowerLabel.includes("apellidos"))) {
         name = strVal;
       }
 
-      // 2. Detección estricta de Teléfono
+      // Detección estricta de Teléfono
       if (!phone && (type === "INPUT_PHONE_NUMBER" || lowerLabel.includes("tel") || lowerLabel.includes("móvil") || lowerLabel.includes("movil") || lowerLabel.includes("whatsapp") || lowerLabel.includes("phone"))) {
         phone = strVal;
       }
 
-      // 3. Detección estricta de Email
+      // Detección estricta de Email
       if (!email && (type === "INPUT_EMAIL" || lowerLabel.includes("email") || lowerLabel.includes("correo"))) {
         email = strVal;
       }
 
-      // 4. Detección estricta de Tipo de Servicio (evitando el campo largo de descripción/detalles)
+      // Detección estricta de Servicio / Tipo de Proyecto
       if (
         (lowerLabel.includes("servicio") || lowerLabel.includes("tipo de reforma") || lowerLabel.includes("tipo de proyecto") || type === "DROPDOWN") &&
         !lowerLabel.includes("detalles") &&
@@ -137,7 +160,7 @@ export async function onRequestPost(context) {
 
     console.log("Lead de Tally insertado con éxito en Supabase ecuaplac_leads");
 
-    // Respuesta inmediata (< 50ms) a Tally para evitar cualquier timeout de webhook
+    // Respuesta inmediata (< 40ms) a Tally para evitar cualquier timeout
     return new Response(JSON.stringify({ success: true, message: "Lead recibido y guardado en Supabase" }), {
       status: 200,
       headers: corsHeaders,
