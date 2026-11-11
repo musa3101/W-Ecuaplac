@@ -71,11 +71,9 @@
 ---
 
 ### Tareas Pendientes y Recomendaciones para la Próxima Sesión
-1. **Conectar Webhook en Tally:**
-   - Pegar `https://ecuapv2.pages.dev/api/tally-webhook` en la pestaña **Integrations > Webhooks** del formulario `Z9E6AV` en Tally.so si no se ha guardado ya.
-2. **Conexión de la App Web Gestor con `ecuaplac_leads`:**
-   - Vincular en la PWA móvil (`appweb/`) la pestaña de **Leads** para consultar en tiempo real los presupuestos que entren desde la web y desde Tally.
-3. **Acciones Rápidas en App Web:**
-   - Añadir botones de llamada y WhatsApp con un toque desde cada ficha de cliente.
-4. **Google Search Console:**
-   - Enviar `sitemap.xml` para indexación actualizada.
+1. **Verificación de Leads en Supabase:**
+   - Comprobar que las nuevas entradas de Tally y del formulario web se visualicen correctamente en la tabla `ecuaplac_leads`.
+2. **Integración con Nextool (Gestor en Next.js):**
+   - La antigua `appweb/` queda deshabilitada. La gestión administrativa y visualización de leads se centraliza en **Nextool**, la aplicación independiente en Next.js.
+3. **Google Search Console:**
+   - Enviar `sitemap.xml` para indexación actualizada si se desea acelerar el rastreo de Google.

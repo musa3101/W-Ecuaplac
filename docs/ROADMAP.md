@@ -21,7 +21,7 @@
 - [x] **Creación y despliegue del Favicon Oficial**: Paquete multiformato (ICO, SVG, PNG 48x48, Apple Touch Icon, Manifest) generado desde `Logofotter.svg`.
 - [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
 - [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
-- [x] **Desarrollo de la App Web Gestor (`appweb/`)**: PWA móvil con diseño Bento Luxury, login con email y contraseña, conversión client-side a WebP, bloqueo de zoom en iOS, header Deep Navy y logo sin fondo oficial.
+- [x] **App Web Gestor Deshabilitada**: Reemplazada por la nueva suite independiente **Nextool** (aplicación dedicada en Next.js para administración y gestión de contenidos).
 - [x] **Banda de Marca Dithered en el Footer (Estilo 21st)**: Banda interactiva con efecto dithered dorado para ECUAPLAC.
 - [x] **Alineación Perfecta del Logo en Header Móvil**: Corrección del padding transparente en `LogoHedder.webp`, alineación estricta a la izquierda y preservación íntegra de la animación fade/reveal.
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
@@ -47,8 +47,6 @@
 - Ninguna.
 
 ## Próximas Mejoras Prioritarias
-- [ ] Conectar la pestaña de **Leads** en la app web con la tabla `ecuaplac_leads` de Supabase para visualización en tiempo real de presupuestos.
-- [ ] Implementar botones de llamada telefónica y chat de WhatsApp con un toque desde las fichas de los clientes en la app web.
-- [ ] Añadir selector de estados de gestión a cada presupuesto (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
+- [ ] Centralización de la gestión de **Leads** en **Nextool** (Next.js) conectado a la tabla `ecuaplac_leads` de Supabase.
 - [ ] Ejecución de scripts SQL en el panel de Supabase para activar las tablas auxiliares si no se han cargado previamente.
 - [ ] Envío del sitemap y solicitud de indexación en Google Search Console para refresco del buscador.
