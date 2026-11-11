@@ -36,6 +36,12 @@
 - [x] **Animación 21st.dev `TextEffect` por Carácter**: Integración cinemática con `blur(8px) -> blur(0)`, subida de `16px`, transición suave de `0.70s` y activación 1 por 1 al hacer scroll en 12 títulos de la web.
 - [x] **Fijación de Inicio Limpio en el Hero (Slide 1)**: Scroll manual en el navegador, reseteo a `(0, 0)` en recargas y eliminación de variables residuales en `sessionStorage` que causaban saltos accidentales a Reformas.
 - [x] **Sustitución Integral de Iconos por SVG Hugeicons Menu 02 (21st.dev)**: Cero lag y eliminación total del texto `"menu"` / `"close"` con SVG animado de 3 barras tanto para abrir como para cerrar el menú móvil en las 6 páginas.
+- [x] **Blindaje Definitivo de Galería 2 en iOS**: Corrección del diffing contra clones en el carrusel infinito, cálculo métrico estricto y soporte completo en accesibilidad reducida sin colapsos de columna.
+- [x] **Solución SSL en Google Maps**: Eliminación de las 3 Ws en Google Business apuntando a `https://ecuaplac.com` seguro.
+- [x] **Memoria Permanente de Triple Capa en Banner de Cookies**: Persistencia mediante `localStorage` + `sessionStorage` + Cookie HTTP (`max-age=31536000; SameSite=Lax; Secure`) con desmontaje físico del DOM en 9 archivos.
+- [x] **Integración de Tally.so ("Presupuesto Online")**: Botón directo en header de escritorio y píldora blanca minimalista con icono verde de portapapeles en la sección de contacto junto a Gmail.
+- [x] **Alineación de Navegación en Menú Móvil**: Botón "PRESUPUESTO" redirigido directamente a `#contacto` para visibilidad inmediata de ambos canales de presupuesto.
+- [x] **Backend Serverless Webhook Tally -> Supabase**: Función en Cloudflare Pages (`functions/api/tally-webhook.js`) en `https://ecuapv2.pages.dev/api/tally-webhook` que parsea los envíos de Tally, los almacena en `ecuaplac_leads` de Supabase y notifica a Gmail.
 
 ## Tareas en Progreso
 - Ninguna.
