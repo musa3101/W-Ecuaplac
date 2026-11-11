@@ -16,12 +16,13 @@
 - [x] Implementación de guardado dual de Leads en la tabla `ecuaplac_leads` de Supabase + envío por email (FormSubmit.co).
 - [x] Configuración del token MCP de Supabase para operaciones futuras.
 - [x] **Seguridad Supabase RLS**: Blindaje de inserción y protección de privacidad para la tabla `ecuaplac_leads`.
+- [x] **Políticas RLS en Supabase para NexTool**: Habilitación de permisos de lectura (`SELECT`), actualización de estado (`UPDATE`) y descarte (`DELETE`) en `ecuaplac_leads`.
 - [x] **Erradicación Definitiva de `#hand-loader`**: Supresión de todo el código de precarga y CSS residual en los 6 archivos HTML.
 - [x] **Optimización de Recursos del Hero**: Sustitución de dependencias externas por WebP locales de alta resolución (`1.webp`, `2.webp`, `3.webp`).
 - [x] **Creación y despliegue del Favicon Oficial**: Paquete multiformato (ICO, SVG, PNG 48x48, Apple Touch Icon, Manifest) generado desde `Logofotter.svg`.
 - [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
 - [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
-- [x] **App Web Gestor Deshabilitada**: Reemplazada por la nueva suite independiente **Nextool** (aplicación dedicada en Next.js para administración y gestión de contenidos).
+- [x] **Suite de Gestión NexTool**: Integración operativa completa de la suite independiente **Nextool** conectada al backend de Supabase para la administración de clientes y presupuestos en tiempo real.
 - [x] **Banda de Marca Dithered en el Footer (Estilo 21st)**: Banda interactiva con efecto dithered dorado para ECUAPLAC.
 - [x] **Alineación Perfecta del Logo en Header Móvil**: Corrección del padding transparente en `LogoHedder.webp`, alineación estricta a la izquierda y preservación íntegra de la animación fade/reveal.
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
@@ -41,12 +42,13 @@
 - [x] **Memoria Permanente de Triple Capa en Banner de Cookies**: Persistencia mediante `localStorage` + `sessionStorage` + Cookie HTTP (`max-age=31536000; SameSite=Lax; Secure`) con desmontaje físico del DOM en 9 archivos.
 - [x] **Integración de Tally.so ("Presupuesto Online")**: Botón directo en header de escritorio y píldora blanca minimalista con icono verde de portapapeles en la sección de contacto junto a Gmail.
 - [x] **Alineación de Navegación en Menú Móvil**: Botón "PRESUPUESTO" redirigido directamente a `#contacto` para visibilidad inmediata de ambos canales de presupuesto.
-- [x] **Backend Serverless Webhook Tally -> Supabase**: Función en Cloudflare Pages (`functions/api/tally-webhook.js`) en `https://ecuapv2.pages.dev/api/tally-webhook` que parsea los envíos de Tally, los almacena en `ecuaplac_leads` de Supabase y notifica a Gmail.
+- [x] **Backend Serverless Webhook Tally -> Supabase**: Función en Cloudflare Pages (`functions/api/tally-webhook.js`) en `https://ecuapv2.pages.dev/api/tally-webhook` que parsea los envíos de Tally, los almacena en `ecuaplac_leads` de Supabase y notifica a Gmail con respuesta ultra rápida (<40ms).
+- [x] **Traductor de Opciones en Tally Webhook**: Conversión automática de IDs técnicos UUID a nombres legibles en español de servicios y municipios.
+- [x] **Sincronización Dual de Formularios Web**: Envío de presupuesto por email web vinculado directamente con inserción en `ecuaplac_leads` (con nombre, email, teléfono, asunto y descripción técnica).
+- [x] **Biblioteca de Referencia Técnica Local**: Desacoplamiento de `App/` del despliegue público y protección en `.gitignore` para consulta local permanente.
 
 ## Tareas en Progreso
 - Ninguna.
 
 ## Próximas Mejoras Prioritarias
-- [ ] Centralización de la gestión de **Leads** en **Nextool** (Next.js) conectado a la tabla `ecuaplac_leads` de Supabase.
-- [ ] Ejecución de scripts SQL en el panel de Supabase para activar las tablas auxiliares si no se han cargado previamente.
-- [ ] Envío del sitemap y solicitud de indexación en Google Search Console para refresco del buscador.
+- [ ] Enviar el `sitemap.xml` en Google Search Console para refrescar el rastreo de Google con la nueva estructura.

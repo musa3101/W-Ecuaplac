@@ -4,76 +4,55 @@
 ---
 
 ### Mini-Merges Completados y Desplegados a Producción (`main`)
-- `2026-11-11T16:48:49`: Merge general (reparación y blindaje de Galería 2 en iOS y ajuste SSL). Commit `d2e6040`.
-- `2026-11-11T16:56:38`: Merge de cookies (memoria permanente de triple capa en banner de cookies en 9 archivos). Commit `2719573`.
-- `2026-11-11T17:18:20`: Merge de Tally y navegación móvil (botón blanco minimalista de Presupuesto Online y redirección de menú hamburguesa a `#contacto`). Commit `fbd6631`.
-- `2026-11-11T17:24:57`: Merge de API Serverless (endpoint Cloudflare Pages Functions para webhook de Tally a Supabase). Commit `85f7a9f`.
+- `2026-11-11T20:26:39`: Integración y verificación del Webhook de Tally con respuesta instantánea.
+- `2026-11-11T20:43:12`: Desbloqueo y saneamiento de Cloudflare Pages (eliminación de symlinks rotos e inclusión de `App/` en `.gitignore` como referencia técnica local). Commit `a423dc9`.
+- `2026-11-11T20:52:08`: Traductor de opciones de Tally (dropdowns y municipios) a nombres reales legibles en español. Commit `c7ea5ec`.
+- `2026-11-11T21:04:49`: Sincronización del formulario web "Pedir Presupuesto por Email" con guardado dual en Supabase (`ecuaplac_leads`) y notificación a Gmail. Commit `310cfbf`.
 
 ---
 
 ### Memoria Técnica de la Jornada
 
-1. **Blindaje Definitivo de Galería 2 en iPhone (`reformas*.html`):**
-   - **Diagnóstico:** En iPhone / Safari iOS, la Galería 2 aparecía negra o con las tarjetas desplazadas horizontalmente. Existían 2 causas críticas:
-     - El diffing con Supabase comparaba la longitud de tarjetas en el DOM (`22` por el bucle infinito) contra las filas de la base de datos (`11`), destruyendo y recreando el carrusel en cada ciclo.
-     - En dispositivos con reducción de movimiento activa (`prefers-reduced-motion`), el carrusel colapsaba a una sola columna vertical.
-   - **Solución:**
-     - Diffing seguro comparando contra `Math.floor(allCards.length / 2)`.
-     - Ancho geométrico estricto en `updateSliderMetrics()`: `cards.length / 2 * (cardWidth + gap)` garantizando que `sliderHalfWidth` nunca colapse a 0.
-     - Regla CSS `prefers-reduced-motion` fijada con `width: max-content !important` y velocidad normal en `0`.
+1. **Sincronización Total con NexTool y Supabase RLS:**
+   - **Diagnóstico:** NexTool no podía mostrar ni actualizar los presupuestos de Ecuaplac porque la tabla `ecuaplac_leads` de Supabase solo permitía inserciones anónimas, bloqueando lecturas (`SELECT`) y modificaciones (`UPDATE`/`DELETE`).
+   - **Solución:** Se aplicaron las políticas RLS oficiales en Supabase para `anon` y `authenticated`. NexTool (`https://a-nextool.pages.dev`) ahora lee leads en tiempo real, permite cambiar estados (`nuevo` -> `contactado` -> `aprobado`) y gestiona llamadas o WhatsApps con un clic.
 
-2. **Solución del Error SSL en Google Maps:**
-   - La ficha de Google Business apuntaba a `www.ecuaplac.com`, provocando `NET::ERR_CERT_COMMON_NAME_INVALID` por el certificado estático de GitHub Pages.
-   - Musa actualizó la ficha de Google a `https://ecuaplac.com` (sin las 3 Ws), dejando el acceso directo y seguro sin advertencias.
+2. **Diagnóstico y Reparación del Error de Build en Cloudflare Pages:**
+   - **Diagnóstico extraído vía Cloudflare API:** `Failed: build output directory contains links to files that can't be accessed`. La carpeta archivada `App/appweb v1` contenía 28 enlaces simbólicos rotos tras la reorganización de carpetas.
+   - **Solución:** Se eliminaron los symlinks rotos de la app antigua. Además, se configuró `App/` en `.gitignore` (`git rm --cached`) para mantenerla intacta en el Mac de Musa como libro de referencia técnica local, logrando un despliegue estático ultra limpio y 100% en verde.
 
-3. **Memoria Permanente de Triple Capa en el Banner de Cookies:**
-   - **Diagnóstico:** El banner de cookies reaparecía insistentemente cada pocos segundos o tras recargar aunque el usuario aceptara o rechazara.
-   - **Solución:**
-     - Persistencia de triple capa blindada: `localStorage` + `sessionStorage` + Cookie HTTP (`max-age=31536000; SameSite=Lax; Secure`).
-     - Corregido el bug donde `rejectCookies()` no guardaba y `hasCookieConsent()` eliminaba el registro.
-     - Añadida retirada física inmediata del DOM con `display = 'none'` tras la animación.
-     - Aplicado en los 9 archivos HTML del proyecto (`index*.html`, `reformas*.html`, `aviso-legal.html`, `legal-notice.html`, `impressum.html`).
+3. **Traducción Automática de Opciones en el Webhook de Tally:**
+   - **Diagnóstico:** Tally enviaba los campos desplegables (como "¿Qué servicio necesitas?" y "Municipio de Mallorca") como identificadores técnicos UUID (ej. `4a9aaaa0-cbd6...`).
+   - **Solución:** Se actualizó `functions/api/tally-webhook.js` para consultar el array `field.options` y traducir automáticamente cada código a su texto real en español (*"Reformas Integrales"*, *"Marratxí"*, etc.).
 
-4. **Integración del Nuevo Sistema de Presupuesto Online con Tally.so:**
-   - **Header de Escritorio:** El botón "PRESUPUESTO" abre directamente el formulario interactivo de Tally (`https://tally.so/r/Z9E6AV`) en una pestaña nueva (`target="_blank"`).
-   - **Sección de Contacto (Atención al Cliente):**
-     - Botón superior: **Presupuesto Online** con estética minimalista idéntica a Gmail (píldora blanca `bg-white border border-black text-primary`), con icono vectorial esmeralda (`#059669`) de portapapeles y verificación. Abre Tally en nueva pestaña.
-     - Botón inferior: **Pedir Presupuesto por Email** con sobre rojo de Gmail que hace scroll suave inmediato hacia el formulario `#formulario`.
-     - Retirada del botón de WhatsApp en esta sección para dar prioridad a los dos canales formales de presupuesto.
+4. **Sincronización Dual del Formulario de Contacto / Email Web:**
+   - **Diagnóstico:** El botón "Pedir Presupuesto por Email" (`contactForm` y `presupuestoForm`) enviaba correo vía FormSubmit pero no guardaba los datos en Supabase porque los nombres de los inputs (`c_nombre`, `c_email`, etc.) no coincidían con el handler genérico.
+   - **Solución:** Se estandarizó el handler en `index.html`, `index-en.html`, `reformas.html` y `reformas-en.html` con extractor universal y guardado dual robusto (cliente Supabase + fallback HTTP REST directo). Cualquier solicitud por email web ahora se guarda en `ecuaplac_leads` y llega a Gmail.
 
-5. **Alineación de la Navegación en el Menú Hamburguesa Móvil:**
-   - El botón inferior **"PRESUPUESTO"** del menú lateral móvil ahora salta limpiamente a `#contacto` en lugar del formulario de texto abajo, dejando ambos botones accesibles al instante.
-   - Implementado en las 6 páginas en español, inglés y alemán.
-
-6. **Backend Serverless: Webhook de Tally a Supabase (`functions/api/tally-webhook.js`):**
-   - Desarrollada y desplegada una Cloudflare Pages Function en `https://ecuapv2.pages.dev/api/tally-webhook`.
-   - Procesa los eventos `FORM_RESPONSE` de Tally en tiempo real, parsea campos dinámicos (Nombre, Teléfono, Email, Tipo de reforma, Presupuesto, Comentarios) y realiza el insert directo en **`ecuaplac_leads`** de Supabase (`Prefer: return=minimal`).
-   - Envía notificación por email a `ecuaplac.jyg.sl@gmail.com` vía FormSubmit.
-   - Probado en vivo con respuesta HTTP 200 e inserción confirmada en Supabase.
+5. **Conservación de la Carpeta `App/` como Referencia Técnica:**
+   - La carpeta `App/` (`App/v2/nextool` y `App/appweb v1`) permanece localmente en el espacio de trabajo para consultar la arquitectura, tipos y conectores de NexTool en cualquier momento, protegida de Git.
 
 ---
 
 ### Archivos Modificados en la Sesión
-- `index.html`, `index-en.html`, `index-de.html`
-- `reformas.html`, `reformas-en.html`, `reformas-de.html`
-- `aviso-legal.html`, `legal-notice.html`, `impressum.html`
-- `functions/api/tally-webhook.js` (Nuevo endpoint serverless)
-- `docs/SESSION_LATEST_ES.md` (Memoria técnica actualizada)
-- `docs/ROADMAP.md` (Roadmap actualizado)
+- `functions/api/tally-webhook.js` (Webhook Cloudflare Pages Function optimizado con traductor de opciones).
+- `index.html` y `index-en.html` (Formularios de contacto y presupuesto sincronizados con Supabase).
+- `reformas.html` y `reformas-en.html` (Formularios de estudio de reformas sincronizados con Supabase).
+- `.gitignore` (Protección de carpeta `App/` como referencia local).
+- `docs/SESSION_LATEST_ES.md` (Documentación actualizada).
+- `docs/ROADMAP.md` (Roadmap actualizado).
 
 ---
 
 ### Estado del Espacio de Trabajo
 - **Rama activa:** `dev` (limpia, sincronizada con origin).
-- **Producción:** Desplegada en `main` (`85f7a9f`) hacia Cloudflare Pages y GitHub Pages.
+- **Producción:** Desplegada en `main` (`310cfbf`) hacia Cloudflare Pages y GitHub Pages en VERDE (`status: active`).
 - **Sesión de Musa:** **CERRADA** formalmente (`.musa/session.json`).
 
 ---
 
 ### Tareas Pendientes y Recomendaciones para la Próxima Sesión
-1. **Verificación de Leads en Supabase:**
-   - Comprobar que las nuevas entradas de Tally y del formulario web se visualicen correctamente en la tabla `ecuaplac_leads`.
-2. **Integración con Nextool (Gestor en Next.js):**
-   - La antigua `appweb/` queda deshabilitada. La gestión administrativa y visualización de leads se centraliza en **Nextool**, la aplicación independiente en Next.js.
-3. **Google Search Console:**
-   - Enviar `sitemap.xml` para indexación actualizada si se desea acelerar el rastreo de Google.
+1. **Revisión Periódica de Leads en NexTool:**
+   - Comprobar periódicamente en `https://a-nextool.pages.dev` la llegada de solicitudes entrantes tanto de Tally como del formulario web.
+2. **Google Search Console:**
+   - Enviar `sitemap.xml` para acelerar la reindexación de los últimos cambios de diseño y estructura.
