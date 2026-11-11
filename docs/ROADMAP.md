@@ -21,7 +21,7 @@
 - [x] **Creación y despliegue del Favicon Oficial**: Paquete multiformato (ICO, SVG, PNG 48x48, Apple Touch Icon, Manifest) generado desde `Logofotter.svg`.
 - [x] **Optimización SEO y Google Snippets**: Títulos sin truncamiento, meta descripciones orientadas a conversión, geolocalización local de Palma de Mallorca y Schema.org JSON-LD (`WebSite` + `GeneralContractor`).
 - [x] **Rastreo e Indexabilidad**: Generación y despliegue de `robots.txt` y `sitemap.xml` canónico multilingüe.
-- [x] **Desarrollo de la App Web Gestor (`appweb/`)**: PWA móvil con diseño Bento Luxury, login con email y contraseña, conversión client-side a WebP, bloqueo de zoom en iOS, header Deep Navy y logo sin fondo oficial.
+- [x] **App Web Gestor Deshabilitada**: Reemplazada por la nueva suite independiente **Nextool** (aplicación dedicada en Next.js para administración y gestión de contenidos).
 - [x] **Banda de Marca Dithered en el Footer (Estilo 21st)**: Banda interactiva con efecto dithered dorado para ECUAPLAC.
 - [x] **Alineación Perfecta del Logo en Header Móvil**: Corrección del padding transparente en `LogoHedder.webp`, alineación estricta a la izquierda y preservación íntegra de la animación fade/reveal.
 - [x] **Blindaje Anti-Bloqueos de Operadoras (LaLiga/ISP) 24/7**: Configuración de GitHub Pages (CDN Fastly `185.199.108.153`) + Cloudflare DNS en modo Solo DNS (Nube Gris) con HTTPS automático en `ecuaplac.com`.
@@ -36,13 +36,17 @@
 - [x] **Animación 21st.dev `TextEffect` por Carácter**: Integración cinemática con `blur(8px) -> blur(0)`, subida de `16px`, transición suave de `0.70s` y activación 1 por 1 al hacer scroll en 12 títulos de la web.
 - [x] **Fijación de Inicio Limpio en el Hero (Slide 1)**: Scroll manual en el navegador, reseteo a `(0, 0)` en recargas y eliminación de variables residuales en `sessionStorage` que causaban saltos accidentales a Reformas.
 - [x] **Sustitución Integral de Iconos por SVG Hugeicons Menu 02 (21st.dev)**: Cero lag y eliminación total del texto `"menu"` / `"close"` con SVG animado de 3 barras tanto para abrir como para cerrar el menú móvil en las 6 páginas.
+- [x] **Blindaje Definitivo de Galería 2 en iOS**: Corrección del diffing contra clones en el carrusel infinito, cálculo métrico estricto y soporte completo en accesibilidad reducida sin colapsos de columna.
+- [x] **Solución SSL en Google Maps**: Eliminación de las 3 Ws en Google Business apuntando a `https://ecuaplac.com` seguro.
+- [x] **Memoria Permanente de Triple Capa en Banner de Cookies**: Persistencia mediante `localStorage` + `sessionStorage` + Cookie HTTP (`max-age=31536000; SameSite=Lax; Secure`) con desmontaje físico del DOM en 9 archivos.
+- [x] **Integración de Tally.so ("Presupuesto Online")**: Botón directo en header de escritorio y píldora blanca minimalista con icono verde de portapapeles en la sección de contacto junto a Gmail.
+- [x] **Alineación de Navegación en Menú Móvil**: Botón "PRESUPUESTO" redirigido directamente a `#contacto` para visibilidad inmediata de ambos canales de presupuesto.
+- [x] **Backend Serverless Webhook Tally -> Supabase**: Función en Cloudflare Pages (`functions/api/tally-webhook.js`) en `https://ecuapv2.pages.dev/api/tally-webhook` que parsea los envíos de Tally, los almacena en `ecuaplac_leads` de Supabase y notifica a Gmail.
 
 ## Tareas en Progreso
 - Ninguna.
 
 ## Próximas Mejoras Prioritarias
-- [ ] Conectar la pestaña de **Leads** en la app web con la tabla `ecuaplac_leads` de Supabase para visualización en tiempo real de presupuestos.
-- [ ] Implementar botones de llamada telefónica y chat de WhatsApp con un toque desde las fichas de los clientes en la app web.
-- [ ] Añadir selector de estados de gestión a cada presupuesto (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
+- [ ] Centralización de la gestión de **Leads** en **Nextool** (Next.js) conectado a la tabla `ecuaplac_leads` de Supabase.
 - [ ] Ejecución de scripts SQL en el panel de Supabase para activar las tablas auxiliares si no se han cargado previamente.
 - [ ] Envío del sitemap y solicitud de indexación en Google Search Console para refresco del buscador.

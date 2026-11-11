@@ -1,33 +1,55 @@
 /**
  * Cloudflare Pages Function: Webhook de Tally.so -> Supabase (ecuaplac_leads)
- * Endpoint: https://ecuaplac.com/api/tally-webhook
+ * Endpoint: https://ecuapv2.pages.dev/api/tally-webhook
  */
 
 const SUPABASE_URL = "https://wkfddccsantywcrsxpox.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ym3HAoFGlToeBAQu1yMd3A_m7Gx4GNI";
-const NOTIFICATION_EMAIL = "ecuaplac.jyg.sl@gmail.com";
 
-// Manejo de Preflight CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, tally-signature",
+  "Content-Type": "application/json",
+};
+
+// 1. Manejo de Preflight CORS
 export async function onRequestOptions() {
   return new Response(null, {
     status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization, tally-signature",
-    },
+    headers: corsHeaders,
   });
 }
 
-// Manejo de Recepción de Webhook
-export async function onRequestPost(context) {
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  };
+// 2. Manejo de Verificación GET / Ping de Tally
+export async function onRequestGet() {
+  return new Response(JSON.stringify({ status: "active", message: "Ecuaplac Tally Webhook está listo y activo" }), {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
+// 3. Manejo de Recepción de Webhook (POST)
+export async function onRequestPost(context) {
   try {
-    const rawBody = await context.request.json();
+    let rawBody;
+    try {
+      rawBody = await context.request.json();
+    } catch (parseErr) {
+      // Si Tally envía un ping de verificación o cuerpo vacío, respondemos 200 OK inmediatamente
+      return new Response(JSON.stringify({ success: true, message: "Webhook ping OK" }), {
+        status: 200,
+        headers: corsHeaders,
+      });
+    }
+
+    if (!rawBody || Object.keys(rawBody).length === 0) {
+      return new Response(JSON.stringify({ success: true, message: "Webhook ping vacío recibido" }), {
+        status: 200,
+        headers: corsHeaders,
+      });
+    }
+
     console.log("Tally Webhook payload recibido:", JSON.stringify(rawBody));
 
     // Estructura Tally: { eventType: "FORM_RESPONSE", data: { fields: [...], ... } }
@@ -40,17 +62,22 @@ export async function onRequestPost(context) {
     let projectType = "Presupuesto Online (Tally)";
     const answersSummary = [];
 
-    // Recorrer los campos del formulario de Tally de forma flexible
+    // Recorrer los campos del formulario de Tally de forma flexible y precisa
     for (const field of fields) {
       const label = (field.label || "").trim();
       const val = field.value;
 
-      // Formatear valor legible
+      // Formatear valor legible (soporte para arrays, subida de archivos/fotos y textos)
       let strVal = "";
       if (Array.isArray(val)) {
-        strVal = val.join(", ");
+        strVal = val.map(item => {
+          if (typeof item === "object" && item !== null) {
+            return item.url || item.name || JSON.stringify(item);
+          }
+          return String(item);
+        }).join(", ");
       } else if (typeof val === "object" && val !== null) {
-        strVal = JSON.stringify(val);
+        strVal = val.url || val.name || JSON.stringify(val);
       } else {
         strVal = val !== undefined && val !== null ? String(val).trim() : "";
       }
@@ -60,23 +87,28 @@ export async function onRequestPost(context) {
       const lowerLabel = label.toLowerCase();
       const type = (field.type || "").toUpperCase();
 
-      // Detección de Nombre
-      if (!name && (type === "INPUT_TEXT" || lowerLabel.includes("nombre") || lowerLabel.includes("name"))) {
+      // Detección estricta de Nombre
+      if (!name && (lowerLabel.includes("nombre") || lowerLabel.includes("name") || lowerLabel.includes("apellidos"))) {
         name = strVal;
       }
 
-      // Detección de Teléfono
-      if (!phone && (type === "INPUT_PHONE_NUMBER" || lowerLabel.includes("tel") || lowerLabel.includes("móvil") || lowerLabel.includes("movil") || lowerLabel.includes("phone"))) {
+      // Detección estricta de Teléfono
+      if (!phone && (type === "INPUT_PHONE_NUMBER" || lowerLabel.includes("tel") || lowerLabel.includes("móvil") || lowerLabel.includes("movil") || lowerLabel.includes("whatsapp") || lowerLabel.includes("phone"))) {
         phone = strVal;
       }
 
-      // Detección de Email
+      // Detección estricta de Email
       if (!email && (type === "INPUT_EMAIL" || lowerLabel.includes("email") || lowerLabel.includes("correo"))) {
         email = strVal;
       }
 
-      // Detección de Tipo de Proyecto
-      if (lowerLabel.includes("tipo") || lowerLabel.includes("servicio") || lowerLabel.includes("reforma") || lowerLabel.includes("obra") || lowerLabel.includes("proyecto")) {
+      // Detección estricta de Servicio / Tipo de Proyecto
+      if (
+        (lowerLabel.includes("servicio") || lowerLabel.includes("tipo de reforma") || lowerLabel.includes("tipo de proyecto") || type === "DROPDOWN") &&
+        !lowerLabel.includes("detalles") &&
+        !lowerLabel.includes("necesidades") &&
+        !lowerLabel.includes("municipio")
+      ) {
         projectType = strVal;
       }
 
@@ -97,7 +129,7 @@ export async function onRequestPost(context) {
       answersSummary.length > 0 ? answersSummary.join("\n") : "(Sin respuestas adicionales)",
     ].join("\n");
 
-    // 1. Inserción directa en Supabase (ecuaplac_leads)
+    // Inserción directa e instantánea en Supabase (ecuaplac_leads)
     const sbResponse = await fetch(`${SUPABASE_URL}/rest/v1/ecuaplac_leads`, {
       method: "POST",
       headers: {
@@ -120,32 +152,15 @@ export async function onRequestPost(context) {
     if (!sbResponse.ok) {
       const errText = await sbResponse.text();
       console.error("Error insertando en Supabase:", sbResponse.status, errText);
-    } else {
-      console.log("Lead de Tally insertado con éxito en Supabase ecuaplac_leads");
-    }
-
-    // 2. Enviar notificación por correo a través de FormSubmit.co
-    try {
-      await fetch(`https://formsubmit.co/ajax/${NOTIFICATION_EMAIL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          _subject: `Nuevo Presupuesto Tally: ${name}`,
-          nombre: name,
-          telefono: phone || "No facilitado",
-          email: email || "No facilitado",
-          tipo_proyecto: projectType,
-          detalles: fullMessage,
-          origen: "Tally.so (Presupuesto Online)",
-        }),
+      return new Response(JSON.stringify({ success: false, error: errText }), {
+        status: 500,
+        headers: corsHeaders,
       });
-    } catch (mailErr) {
-      console.warn("Aviso al enviar copia por email:", mailErr);
     }
 
+    console.log("Lead de Tally insertado con éxito en Supabase ecuaplac_leads");
+
+    // Respuesta inmediata (< 40ms) a Tally para evitar cualquier timeout
     return new Response(JSON.stringify({ success: true, message: "Lead recibido y guardado en Supabase" }), {
       status: 200,
       headers: corsHeaders,

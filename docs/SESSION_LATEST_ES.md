@@ -1,98 +1,79 @@
-# Resumen de Sesión - 10 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
+# Resumen de Sesión - 11 de Noviembre de 2026 (MYNEXT Setup 2.0 — Musa)
 *Estado de Sesión: CERRADA*
 
 ---
 
 ### Mini-Merges Completados y Desplegados a Producción (`main`)
-- `2026-11-10T18:45:00`: Merge general (reparación WebGL `uAlpha`, bordes negros sólidos, botón email bajo WhatsApp y animaciones 21st.dev `TextEffect`). Commit `0e222af`.
-- `2026-11-10T19:18:11`: Merge general (solución salto de recarga a Hero, e integración de Hugeicons Menu 02 tanto al abrir como al cerrar el menú móvil en las 6 páginas). Commit `6d74698`.
+- `2026-11-11T16:48:49`: Merge general (reparación y blindaje de Galería 2 en iOS y ajuste SSL). Commit `d2e6040`.
+- `2026-11-11T16:56:38`: Merge de cookies (memoria permanente de triple capa en banner de cookies en 9 archivos). Commit `2719573`.
+- `2026-11-11T17:18:20`: Merge de Tally y navegación móvil (botón blanco minimalista de Presupuesto Online y redirección de menú hamburguesa a `#contacto`). Commit `fbd6631`.
+- `2026-11-11T17:24:57`: Merge de API Serverless (endpoint Cloudflare Pages Functions para webhook de Tally a Supabase). Commit `85f7a9f`.
 
 ---
 
-### Memoria Técnica de la Jornada (Recuperación y Perfeccionamiento de la Web Oficial)
+### Memoria Técnica de la Jornada
 
-1. **Reparación Definitiva del Crash de Galería 1 en iPhone / WebGL (`index*.html`):**
-   - **Diagnóstico:** En dispositivos móviles reales (iPhone / Safari WebKit), la Galería 1 (carrusel 3D WebGL) se quedaba congelada en blanco. El compilador GLSL arrojaba un error fatal de fragment shader: `undeclared identifier uAlpha`.
-   - **Solución:** Se declaró `uniform float uAlpha;` en la cabecera del shader en `index.html`, `index-en.html` y `index-de.html`. El canvas 3D ahora inicializa inmediatamente sin errores de consola (`ERRORS: []`) y renderiza las 10 obras con rotación suave y sombras atmosféricas.
-
-2. **Restauración de Bordes Negros Sólidos Oficiales (`border border-black`):**
-   - Durante auditorías de diseño automatizadas previas, los bordes habían sido suavizados a `#E5DFD5`. Se restauraron los bordes negros arquitectónicos originales solicitados por Musa:
-     - En las **4 tarjetas de servicios** de «Nuestra Experiencia» (`border border-black`).
-     - En la **tarjeta del formulario de contacto** (`border-2 border-[#141414]`).
-     - En todos los recuadros de **Estado Inicial** y **Resultado Final** de los proyectos comparativos en `reformas.html`, `reformas-en.html` y `reformas-de.html` (tanto en el HTML estático como en la inyección de Supabase).
-
-3. **Integración del Botón de Presupuesto por Email Bajo WhatsApp:**
-   - Incorporado debajo del botón verde de WhatsApp un botón tipo píldora (`border border-black bg-white text-primary`) con icono de sobre/email de Google.
-   - Al pulsarlo, ejecuta un scroll suave inmediato hacia `#formulario`.
-   - Implementado en los 3 idiomas:
-     - ES: *«Pedir Presupuesto por Email»*
-     - EN: *«Request Quote via Email»*
-     - DE: *«Angebot per E-Mail anfordern»*
-
-4. **Animación 21st.dev `TextEffect` (Letra a Letra con Blur & Fade Cinemático):**
-   - Adaptación fiel del componente oficial de 21st.dev / *motion-primitives* (`TextEffect` por carácter):
-     - **Curva y ritmo:** Elevación inicial de `16px` (`translateY(16px) -> translateY(0)`), transición pausada y sedosa de `0.70s` con `cubic-bezier(0.16, 1, 0.3, 1)` y retardo escalonado de `0.028s` por carácter con desenfoque dinámico (`filter: blur(8px) -> blur(0)`).
-     - **Activación 1 por 1 al hacer scroll:** Cada título dispone de su propio `IntersectionObserver` dedicado (`rootMargin: '0px 0px -15% 0px'`). La animación se activa individualmente a medida que el usuario hace scroll y entra en la zona de lectura, evitando que se disparen todos en bloque.
-     - **Protección tipográfica y responsive:** Mantiene al 100% las fuentes corporativas (`font-headline`), tamaños, pesos y colores. Las palabras se agrupan en contenedores `inline-block whitespace-pre` para garantizar que los saltos de línea en iPhone/móvil se realicen limpiamente sin partir ninguna palabra por la mitad.
-     - **Títulos con el efecto activo:**
-       - Home (`index*.html`): *Proyectos y Acabados de Alta Gama* (Galería 1), *Transformaciones Reales* (Antes y Después), *4 Servicios* (*Reformas Integrales*, *Sistemas de Pladur y Aislamiento*, *Revestimientos y Acabados*, *Pavimentos y Alicatados*), *Contacto.* y *Preguntas Frecuentes*.
-       - Reformas (`reformas*.html`): *Antes y Después* (Cabecera `h1`), *Lavabo Flotante a Medida* (Proyecto II), *Vestidor de Pladur y Roble* (Proyecto III), *Escalera y Distribuidor de Roble* (Proyecto IV).
-
-5. **Excepción solicitada en Proyecto I de Reformas:**
-   - A petición expresa de Musa, el título **«Reforma Integral de Baño»** en `reformas*.html` se mantuvo estático y fijo, sin retardo ni efecto de fade.
-
-6. **Merge y Despliegue en Producción Verificado (`main` -> Cloudflare):**
-   - Ejecutado mediante `scripts/mini-merge.sh --all --confirmed --push` tras la autorización oficial exacta de Musa (*"Tienes mi OK, haz el merge"*).
-   - Commit en `main`: `0e222af`.
-   - **Comprobación móvil exitosa:** Musa verificó directamente en su iPhone la versión desplegada en `https://ecuaplac.com`, confirmando que el nuevo estado de producción es 100% óptimo y fiel al diseño requerido.
-
----
-
-7. **Solución del Salto No Deseado a "Reformas" al Recargar o Entrar (`index*.html`):**
-   - **Diagnóstico:** Existía una variable residual en `sessionStorage` (`ecuaplac_return_section`) y llamadas a `history.replaceState` con `#reformas` que provocaban que al recargar la web o entrar en la URL principal el navegador se desplazara automáticamente hacia la Galería 1 en lugar de la primera foto del Hero.
+1. **Blindaje Definitivo de Galería 2 en iPhone (`reformas*.html`):**
+   - **Diagnóstico:** En iPhone / Safari iOS, la Galería 2 aparecía negra o con las tarjetas desplazadas horizontalmente. Existían 2 causas críticas:
+     - El diffing con Supabase comparaba la longitud de tarjetas en el DOM (`22` por el bucle infinito) contra las filas de la base de datos (`11`), destruyendo y recreando el carrusel en cada ciclo.
+     - En dispositivos con reducción de movimiento activa (`prefers-reduced-motion`), el carrusel colapsaba a una sola columna vertical.
    - **Solución:**
-     - Activado `history.scrollRestoration = 'manual'`.
-     - Añadida detección de recarga (`performance.getEntriesByType('navigation')[0].type === 'reload'`) que resetea la posición en `(0, 0)` y limpia cualquier hash espurio.
-     - Implementada la función global `scrollToHeroTop(event)` en los logos del header, footer y enlace Inicio para garantizar retorno suave e instantáneo a la primera foto del Hero.
+     - Diffing seguro comparando contra `Math.floor(allCards.length / 2)`.
+     - Ancho geométrico estricto en `updateSliderMetrics()`: `cards.length / 2 * (cardWidth + gap)` garantizando que `sliderHalfWidth` nunca colapse a 0.
+     - Regla CSS `prefers-reduced-motion` fijada con `width: max-content !important` y velocidad normal en `0`.
 
-8. **Sustitución de Iconos de Material Symbols por Hugeicons Menu 02 (21st.dev):**
-   - **Diagnóstico:** Los botones móviles dependían de la fuente web de Google Icons, generando lag de red y mostrando texto crudo (`"menu"` o `"close"`) antes de renderizar el icono.
+2. **Solución del Error SSL en Google Maps:**
+   - La ficha de Google Business apuntaba a `www.ecuaplac.com`, provocando `NET::ERR_CERT_COMMON_NAME_INVALID` por el certificado estático de GitHub Pages.
+   - Musa actualizó la ficha de Google a `https://ecuaplac.com` (sin las 3 Ws), dejando el acceso directo y seguro sin advertencias.
+
+3. **Memoria Permanente de Triple Capa en el Banner de Cookies:**
+   - **Diagnóstico:** El banner de cookies reaparecía insistentemente cada pocos segundos o tras recargar aunque el usuario aceptara o rechazara.
    - **Solución:**
-     - Sustituidos todos los iconos por **SVG inline puros** de la librería Hugeicons / 21st.dev (**Menu 02** con 3 barras y animación elástica CSS con efecto hover/active).
-     - Tanto el botón de apertura en el header como el botón de cierre dentro del menú móvil utilizan el **mismo icono animado Menu 02**, eliminando por completo cualquier cruz o parpadeo.
-     - En los modales de presupuesto se integró un SVG vectorial de cruz (X) limpio de 0 ms de carga.
-     - Aplicado en las 6 páginas (`index*.html` y `reformas*.html` en ES, EN y DE).
+     - Persistencia de triple capa blindada: `localStorage` + `sessionStorage` + Cookie HTTP (`max-age=31536000; SameSite=Lax; Secure`).
+     - Corregido el bug donde `rejectCookies()` no guardaba y `hasCookieConsent()` eliminaba el registro.
+     - Añadida retirada física inmediata del DOM con `display = 'none'` tras la animación.
+     - Aplicado en los 9 archivos HTML del proyecto (`index*.html`, `reformas*.html`, `aviso-legal.html`, `legal-notice.html`, `impressum.html`).
 
-9. **Auditoría Automatizada con Playwright:**
-   - Verificado en emulador móvil iPhone (`390x844`):
-     - Scroll inicial y tras recarga fijado en `0` (Hero Slide 1).
-     - Menú móvil abre y cierra sin parpadeo de texto ni lag.
-     - Clic en logos superior e inferior hace scroll suave a `(0, 0)` y limpia el hash.
-     - Todos los tests automatizados completados con éxito (`100% PASSED`).
+4. **Integración del Nuevo Sistema de Presupuesto Online con Tally.so:**
+   - **Header de Escritorio:** El botón "PRESUPUESTO" abre directamente el formulario interactivo de Tally (`https://tally.so/r/Z9E6AV`) en una pestaña nueva (`target="_blank"`).
+   - **Sección de Contacto (Atención al Cliente):**
+     - Botón superior: **Presupuesto Online** con estética minimalista idéntica a Gmail (píldora blanca `bg-white border border-black text-primary`), con icono vectorial esmeralda (`#059669`) de portapapeles y verificación. Abre Tally en nueva pestaña.
+     - Botón inferior: **Pedir Presupuesto por Email** con sobre rojo de Gmail que hace scroll suave inmediato hacia el formulario `#formulario`.
+     - Retirada del botón de WhatsApp en esta sección para dar prioridad a los dos canales formales de presupuesto.
+
+5. **Alineación de la Navegación en el Menú Hamburguesa Móvil:**
+   - El botón inferior **"PRESUPUESTO"** del menú lateral móvil ahora salta limpiamente a `#contacto` en lugar del formulario de texto abajo, dejando ambos botones accesibles al instante.
+   - Implementado en las 6 páginas en español, inglés y alemán.
+
+6. **Backend Serverless: Webhook de Tally a Supabase (`functions/api/tally-webhook.js`):**
+   - Desarrollada y desplegada una Cloudflare Pages Function en `https://ecuapv2.pages.dev/api/tally-webhook`.
+   - Procesa los eventos `FORM_RESPONSE` de Tally en tiempo real, parsea campos dinámicos (Nombre, Teléfono, Email, Tipo de reforma, Presupuesto, Comentarios) y realiza el insert directo en **`ecuaplac_leads`** de Supabase (`Prefer: return=minimal`).
+   - Envía notificación por email a `ecuaplac.jyg.sl@gmail.com` vía FormSubmit.
+   - Probado en vivo con respuesta HTTP 200 e inserción confirmada en Supabase.
 
 ---
 
 ### Archivos Modificados en la Sesión
 - `index.html`, `index-en.html`, `index-de.html`
 - `reformas.html`, `reformas-en.html`, `reformas-de.html`
+- `aviso-legal.html`, `legal-notice.html`, `impressum.html`
+- `functions/api/tally-webhook.js` (Nuevo endpoint serverless)
 - `docs/SESSION_LATEST_ES.md` (Memoria técnica actualizada)
 - `docs/ROADMAP.md` (Roadmap actualizado)
 
 ---
 
 ### Estado del Espacio de Trabajo
-- **Rama activa:** `dev` (limpia y sincronizada).
-- **Producción:** Desplegada en `main` (`6d74698`) hacia Cloudflare.
+- **Rama activa:** `dev` (limpia, sincronizada con origin).
+- **Producción:** Desplegada en `main` (`85f7a9f`) hacia Cloudflare Pages y GitHub Pages.
 - **Sesión de Musa:** **CERRADA** formalmente (`.musa/session.json`).
 
 ---
 
 ### Tareas Pendientes y Recomendaciones para la Próxima Sesión
-1. **Conexión de la App Web Gestor con `ecuaplac_leads`:**
-   - Vincular en la PWA móvil (`appweb/`) la recepción en tiempo real de presupuestos guardados desde los formularios.
-2. **Acciones Rápidas de Cliente en App Web:**
-   - Incorporar botones de marcado rápido (llamada y WhatsApp con un toque) en las fichas de presupuestos.
-3. **Selector de Estados de Presupuesto:**
-   - Permitir cambiar el estado de cada lead (*Nuevo*, *Contactado*, *Enviado*, *Aceptado*).
-4. **Google Search Console:**
-   - Enviar `sitemap.xml` a Google para indexación prioritaria.
+1. **Verificación de Leads en Supabase:**
+   - Comprobar que las nuevas entradas de Tally y del formulario web se visualicen correctamente en la tabla `ecuaplac_leads`.
+2. **Integración con Nextool (Gestor en Next.js):**
+   - La antigua `appweb/` queda deshabilitada. La gestión administrativa y visualización de leads se centraliza en **Nextool**, la aplicación independiente en Next.js.
+3. **Google Search Console:**
+   - Enviar `sitemap.xml` para indexación actualizada si se desea acelerar el rastreo de Google.
