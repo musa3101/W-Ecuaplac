@@ -457,9 +457,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .infinite-slider-track {
-    animation: none !important;
-    overflow-x: auto;
-    width: 100%;
+    width: max-content !important;
   }
 }
 
@@ -1735,12 +1733,14 @@ document.addEventListener('DOMContentLoaded', function() {
           const autoSliderTrack = document.getElementById('auto-slider-track');
           if (autoSliderTrack) {
             // Diffing: only update DOM if Supabase items differ from static HTML
-            const currentImgs = Array.from(autoSliderTrack.querySelectorAll('.auto-slider-card:not([aria-hidden="true"]) img'));
+            const allCards = Array.from(autoSliderTrack.querySelectorAll('.auto-slider-card img'));
+            const baseCount = Math.floor(allCards.length / 2) || allCards.length;
+            const currentImgs = allCards.slice(0, baseCount);
             const hasMoreChanged = currentImgs.length !== moreProjData.length || moreProjData.some((item, idx) => {
               const cur = currentImgs[idx];
               if (!cur) return true;
-              const curSrc = cur.getAttribute('src');
-              const targetSrc = item.image_url;
+              const curSrc = cur.getAttribute('src') || '';
+              const targetSrc = item.image_url || '';
               return curSrc !== targetSrc && !curSrc.endsWith(targetSrc.replace(/^\.\//, ''));
             });
 
@@ -1781,12 +1781,24 @@ document.addEventListener('DOMContentLoaded', function() {
   let sliderVelocityX = 0;
   let sliderIsScrollingY = null;
   let sliderIsHovered = false;
-  const sliderNormalSpeed = 0.85;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sliderNormalSpeed = prefersReduced ? 0 : 0.85;
 
   function updateSliderMetrics() {
     const track = document.getElementById('auto-slider-track');
-    if (track && track.scrollWidth > 0) {
-      sliderHalfWidth = track.scrollWidth / 2;
+    if (!track) return;
+    const cards = track.querySelectorAll('.auto-slider-card');
+    if (cards.length > 0) {
+      const firstCard = cards[0];
+      const cardWidth = firstCard.offsetWidth || (window.innerWidth < 640 ? 275 : (window.innerWidth < 1024 ? 310 : 350));
+      const gap = window.innerWidth >= 768 ? 28 : 20;
+      const calculatedHalf = (cards.length / 2) * (cardWidth + gap);
+      const domScrollWidth = track.scrollWidth;
+      if (domScrollWidth > (cards.length / 2) * cardWidth) {
+        sliderHalfWidth = domScrollWidth / 2;
+      } else {
+        sliderHalfWidth = calculatedHalf;
+      }
     }
   }
 
@@ -1923,6 +1935,8 @@ document.addEventListener('DOMContentLoaded', function() {
       section.style.marginBottom = '0';
       arrow.style.transform = 'rotate(180deg)';
       text.textContent = 'HIDE GALLERY';
+      setTimeout(updateSliderMetrics, 150);
+      setTimeout(updateSliderMetrics, 400);
       setTimeout(() => {
         if (galleryOpen) {
           section.style.maxHeight = 'none';
