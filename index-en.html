@@ -311,11 +311,18 @@
     #hero-sticky-element {
       height: calc(100vh - 72px);
       height: calc(100svh - 72px);
+      touch-action: pan-y;
     }
 
     #hero-scroll-container {
-      height: 230vh;
-      height: 230svh;
+      height: calc(100vh - 72px);
+      height: calc(100svh - 72px);
+    }
+
+    @media (max-width: 767px) {
+      #hero-layer-1 { z-index: 20; transform: translate3d(0%, 0, 0); }
+      #hero-layer-2 { z-index: 20; transform: translate3d(100%, 0, 0); }
+      #hero-layer-3 { z-index: 10; transform: translate3d(-100%, 0, 0); }
     }
 
     @media (min-width: 768px) {
@@ -323,17 +330,15 @@
         height: 260vh !important;
         height: 260svh !important;
       }
-    }
-
-    /* Accessibility: Respect reduced motion (modern-web-guidance) */
-    @media (prefers-reduced-motion: reduce) {
-      #hero-sticky-element>div[id^="hero-layer-"] {
-        will-change: auto;
-        transform: none !important;
-      }
-      #hero-layer-2,
-      #hero-layer-3 {
-        display: none !important;
+      @media (prefers-reduced-motion: reduce) {
+        #hero-sticky-element>div[id^="hero-layer-"] {
+          will-change: auto;
+          transform: none !important;
+        }
+        #hero-layer-2,
+        #hero-layer-3 {
+          display: none !important;
+        }
       }
     }
 
@@ -652,6 +657,11 @@
     .hero-text-roll.text-rolled .text-roll-bottom {
       transform: rotateX(0deg);
       opacity: 1;
+    }
+
+    .hero-text-roll.no-roll-transition .text-roll-top,
+    .hero-text-roll.no-roll-transition .text-roll-bottom {
+      transition: none !important;
     }
 
     @keyframes reveal {
@@ -1651,17 +1661,17 @@
       <div id="hero-sticky-element" class="sticky top-[72px] w-full overflow-hidden">
         <!-- Image Layers with Fixed Stacking & Pre-decoded GPU Textures -->
         <!-- Image 1: Minimalist Villa -->
-        <div id="hero-layer-1" class="absolute inset-0 opacity-100" style="transform: translate3d(0, 0%, 0);">
+        <div id="hero-layer-1" class="absolute inset-0 opacity-100">
           <img alt="Luxury minimalist villa in Palma de Mallorca" class="w-full h-full object-cover object-center"
             src="./assets/img/hero/1.webp" loading="eager" decoding="async">
         </div>
         <!-- Image 2: High-end custom kitchen -->
-        <div id="hero-layer-2" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
+        <div id="hero-layer-2" class="absolute inset-0">
           <img alt="Custom high-end kitchen" class="w-full h-full object-cover object-center" loading="eager" decoding="async"
             src="./assets/img/hero/2.webp">
         </div>
         <!-- Image 3: Final Result of Comprehensive Renovation -->
-        <div id="hero-layer-3" class="absolute inset-0" style="transform: translate3d(0, 100%, 0);">
+        <div id="hero-layer-3" class="absolute inset-0">
           <img alt="Final Result of Ecuaplac Comprehensive Renovation"
             class="w-full h-full object-cover object-center" loading="eager" decoding="async" src="./assets/img/hero/3.webp">
         </div>
@@ -4064,14 +4074,19 @@
         // Only re-measure if viewport width changes (orientation/screen resize).
         // Prevents dynamic mobile browser toolbars (Chrome/Safari iOS) from causing layout jumps.
         if (window.innerWidth !== lastWindowWidth) {
+          const wasMobile = lastWindowWidth < 768;
+          const isNowMobile = window.innerWidth < 768;
           lastWindowWidth = window.innerWidth;
           measureHero();
           measureSections();
+          if (wasMobile !== isNowMobile) {
+            syncHeroViewportMode();
+          }
         }
       }, { passive: true });
 
       function handleHeroScroll(scrollY) {
-        if (!heroContainer) return;
+        if (!heroContainer || window.innerWidth < 768) return;
 
         // If user is scrolled well past the hero section, lock state and exit immediately
         if (scrollY > heroScrollable + 80) {
@@ -4414,8 +4429,248 @@
 
       initHeroTextRoll();
 
+      // Mobile Horizontal Touch & Autoplay Hero Carousel (< 768px only; Tablet & Desktop untouched)
+      const heroStickyEl = document.getElementById('hero-sticky-element');
+      const heroLayers = [layer1, layer2, layer3];
+      const heroTexts = [text1, text2, text3];
+      let mobileSlideIndex = 0;
+      let mobileAutoplayTimer = null;
+      const MOBILE_AUTOPLAY_MS = 4500;
+
+      function positionMobileSlidesStatic(activeIndex) {
+        const rightIdx = (activeIndex + 1) % 3;
+        const leftIdx = (activeIndex + 2) % 3;
+        if (heroLayers[activeIndex]) {
+          heroLayers[activeIndex].style.transition = 'none';
+          heroLayers[activeIndex].style.zIndex = '20';
+          heroLayers[activeIndex].style.transform = 'translate3d(0%, 0, 0)';
+        }
+        if (heroLayers[rightIdx]) {
+          heroLayers[rightIdx].style.transition = 'none';
+          heroLayers[rightIdx].style.zIndex = '20';
+          heroLayers[rightIdx].style.transform = 'translate3d(100%, 0, 0)';
+        }
+        if (heroLayers[leftIdx]) {
+          heroLayers[leftIdx].style.transition = 'none';
+          heroLayers[leftIdx].style.zIndex = '10';
+          heroLayers[leftIdx].style.transform = 'translate3d(-100%, 0, 0)';
+        }
+        heroTexts.forEach((t, idx) => {
+          if (!t) return;
+          t.style.transition = 'none';
+          if (idx === activeIndex) {
+            t.style.opacity = '1';
+            t.style.transform = 'translate3d(0, 0, 0)';
+            t.style.pointerEvents = 'auto';
+          } else {
+            t.style.opacity = '0';
+            t.style.transform = 'translate3d(0, 14px, 0)';
+            t.style.pointerEvents = 'none';
+          }
+        });
+      }
+
+      function transitionMobileSlide(targetIndex, direction, wasDragging = false) {
+        if (window.innerWidth >= 768 || targetIndex === mobileSlideIndex) return;
+        const prevIndex = mobileSlideIndex;
+        const thirdIndex = (targetIndex + (direction === 1 ? 1 : 2)) % 3;
+
+        if (!wasDragging && heroLayers[targetIndex]) {
+          heroLayers[targetIndex].style.transition = 'none';
+          heroLayers[targetIndex].style.transform = direction === 1 ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
+          void heroLayers[targetIndex].offsetWidth;
+        }
+
+        if (heroLayers[thirdIndex]) {
+          heroLayers[thirdIndex].style.transition = 'none';
+          heroLayers[thirdIndex].style.zIndex = '10';
+          heroLayers[thirdIndex].style.transform = direction === 1 ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
+        }
+
+        const slideTransition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+        if (heroLayers[prevIndex]) {
+          heroLayers[prevIndex].style.zIndex = '20';
+          heroLayers[prevIndex].style.transition = slideTransition;
+          heroLayers[prevIndex].style.transform = direction === 1 ? 'translate3d(-100%, 0, 0)' : 'translate3d(100%, 0, 0)';
+        }
+        if (heroLayers[targetIndex]) {
+          heroLayers[targetIndex].style.zIndex = '30';
+          heroLayers[targetIndex].style.transition = slideTransition;
+          heroLayers[targetIndex].style.transform = 'translate3d(0%, 0, 0)';
+        }
+
+        mobileSlideIndex = targetIndex;
+        currentActiveHeroIndex = targetIndex;
+
+        heroTexts.forEach((t, idx) => {
+          if (!t) return;
+          if (idx === targetIndex) {
+            t.style.transition = 'opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
+            t.style.opacity = '1';
+            t.style.transform = 'translate3d(0, 0, 0)';
+            t.style.pointerEvents = 'auto';
+          } else {
+            t.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+            t.style.opacity = '0';
+            t.style.transform = 'translate3d(0, 14px, 0)';
+            t.style.pointerEvents = 'none';
+          }
+        });
+
+        const rollTarget = document.querySelector(`#hero-text-${targetIndex + 1} .hero-text-roll`);
+        if (rollTarget) {
+          rollTarget.classList.add('no-roll-transition');
+          rollTarget.classList.remove('text-rolled');
+          void rollTarget.offsetWidth;
+          rollTarget.classList.remove('no-roll-transition');
+          requestAnimationFrame(() => {
+            triggerHeroTextRoll(targetIndex);
+          });
+        }
+      }
+
+      function stopMobileAutoplay() {
+        if (mobileAutoplayTimer) {
+          clearInterval(mobileAutoplayTimer);
+          mobileAutoplayTimer = null;
+        }
+      }
+
+      function startMobileAutoplay() {
+        stopMobileAutoplay();
+        if (window.innerWidth >= 768) return;
+        mobileAutoplayTimer = setInterval(() => {
+          if (window.innerWidth >= 768 || document.hidden) return;
+          const nextIdx = (mobileSlideIndex + 1) % 3;
+          transitionMobileSlide(nextIdx, 1, false);
+        }, MOBILE_AUTOPLAY_MS);
+      }
+
+      function syncHeroViewportMode() {
+        if (window.innerWidth < 768) {
+          mobileSlideIndex = 0;
+          currentActiveHeroIndex = 0;
+          positionMobileSlidesStatic(0);
+          triggerHeroTextRoll(0);
+          startMobileAutoplay();
+        } else {
+          stopMobileAutoplay();
+          heroLayers.forEach((l, idx) => {
+            if (!l) return;
+            l.style.transition = '';
+            l.style.zIndex = String((idx + 1) * 10);
+          });
+          heroTexts.forEach((t) => {
+            if (!t) return;
+            t.style.transition = '';
+          });
+          lastY1 = lastY2 = lastY3 = '';
+          lastO1 = lastTr1 = lastO2 = lastTr2 = lastO3 = lastTr3 = '';
+          isHeroActive = true;
+          handleHeroScroll(window.pageYOffset || window.scrollY || 0);
+        }
+      }
+
+      if (heroStickyEl) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchDeltaX = 0;
+        let isHorizontalDrag = null;
+
+        heroStickyEl.addEventListener('touchstart', (e) => {
+          if (window.innerWidth >= 768 || !e.touches || e.touches.length !== 1) return;
+          stopMobileAutoplay();
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchDeltaX = 0;
+          isHorizontalDrag = null;
+
+          const rightIdx = (mobileSlideIndex + 1) % 3;
+          const leftIdx = (mobileSlideIndex + 2) % 3;
+          if (heroLayers[mobileSlideIndex]) {
+            heroLayers[mobileSlideIndex].style.transition = 'none';
+            heroLayers[mobileSlideIndex].style.zIndex = '20';
+            heroLayers[mobileSlideIndex].style.transform = 'translate3d(0%, 0, 0)';
+          }
+          if (heroLayers[rightIdx]) {
+            heroLayers[rightIdx].style.transition = 'none';
+            heroLayers[rightIdx].style.zIndex = '25';
+            heroLayers[rightIdx].style.transform = 'translate3d(100%, 0, 0)';
+          }
+          if (heroLayers[leftIdx]) {
+            heroLayers[leftIdx].style.transition = 'none';
+            heroLayers[leftIdx].style.zIndex = '25';
+            heroLayers[leftIdx].style.transform = 'translate3d(-100%, 0, 0)';
+          }
+        }, { passive: true });
+
+        heroStickyEl.addEventListener('touchmove', (e) => {
+          if (window.innerWidth >= 768 || !e.touches || e.touches.length !== 1) return;
+          const dx = e.touches[0].clientX - touchStartX;
+          const dy = e.touches[0].clientY - touchStartY;
+
+          if (isHorizontalDrag === null) {
+            if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+            isHorizontalDrag = Math.abs(dx) > Math.abs(dy);
+          }
+          if (!isHorizontalDrag) return;
+
+          touchDeltaX = dx;
+          const rightIdx = (mobileSlideIndex + 1) % 3;
+          const leftIdx = (mobileSlideIndex + 2) % 3;
+
+          if (heroLayers[mobileSlideIndex]) {
+            heroLayers[mobileSlideIndex].style.transform = `translate3d(${dx}px, 0, 0)`;
+          }
+          if (heroLayers[rightIdx]) {
+            heroLayers[rightIdx].style.transform = `translate3d(calc(100% + ${dx}px), 0, 0)`;
+          }
+          if (heroLayers[leftIdx]) {
+            heroLayers[leftIdx].style.transform = `translate3d(calc(-100% + ${dx}px), 0, 0)`;
+          }
+        }, { passive: true });
+
+        const finishMobileTouch = () => {
+          if (window.innerWidth >= 768) return;
+          if (isHorizontalDrag) {
+            if (touchDeltaX < -40) {
+              transitionMobileSlide((mobileSlideIndex + 1) % 3, 1, true);
+            } else if (touchDeltaX > 40) {
+              transitionMobileSlide((mobileSlideIndex + 2) % 3, -1, true);
+            } else {
+              const snapTransition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+              const rightIdx = (mobileSlideIndex + 1) % 3;
+              const leftIdx = (mobileSlideIndex + 2) % 3;
+              if (heroLayers[mobileSlideIndex]) {
+                heroLayers[mobileSlideIndex].style.transition = snapTransition;
+                heroLayers[mobileSlideIndex].style.transform = 'translate3d(0%, 0, 0)';
+              }
+              if (heroLayers[rightIdx]) {
+                heroLayers[rightIdx].style.transition = snapTransition;
+                heroLayers[rightIdx].style.transform = 'translate3d(100%, 0, 0)';
+              }
+              if (heroLayers[leftIdx]) {
+                heroLayers[leftIdx].style.transition = snapTransition;
+                heroLayers[leftIdx].style.transform = 'translate3d(-100%, 0, 0)';
+              }
+            }
+          }
+          isHorizontalDrag = null;
+          touchDeltaX = 0;
+          startMobileAutoplay();
+        };
+
+        heroStickyEl.addEventListener('touchend', finishMobileTouch, { passive: true });
+        heroStickyEl.addEventListener('touchcancel', finishMobileTouch, { passive: true });
+      }
+
       const initialScrollY = window.pageYOffset || window.scrollY || 0;
-      handleHeroScroll(initialScrollY);
+      if (window.innerWidth < 768) {
+        positionMobileSlidesStatic(0);
+        startMobileAutoplay();
+      } else {
+        handleHeroScroll(initialScrollY);
+      }
       handleScroll(initialScrollY);
       updateActiveNavLink(initialScrollY);
     });
